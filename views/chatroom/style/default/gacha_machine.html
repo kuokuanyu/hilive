@@ -1,0 +1,302 @@
+<body>
+    <div class="content-header-skin-md">
+        <button class="back">
+            <i class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+            </i>
+            <span>返回選單</span>
+        </button>
+    </div>
+    <div class="info-skin">
+        <div class="page-title-block">
+            <div class="page-title">3D扭蛋機場次資訊</div>
+        </div>
+        <div class="page-block"></div>
+        <div id="history-prize-review" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">獲獎紀錄</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template id="no-game">
+        <div class="nodata-block">
+            <div class="info-nodata">尚未設置遊戲場次</div>
+        </div>
+    </template>
+    <template id="game-info">
+        <div class="info-block">
+            <div class="info-title"></div>
+            <div class="game-info-content">
+                <div class="d-flex flex-row gap-3">
+                    <div class="status-block">
+                        <div class="status-title">場次狀態</div>
+                        <div class="status-label"></div>
+                    </div>
+                    <div class="round-block">
+                        <div class="round-title">目前輪次</div>
+                        <div class="round-value"></div>
+                    </div>
+                </div>
+                <div class="d-flex flex-row gap-3">
+                    <button class="btn button button-blue view-prize" type="button" data-bs-toggle="modal" data-bs-target="#history-prize-review">獲獎紀錄</button>
+                    <a class="btn button button-green enter-game" target="_self" role="button">進入遊戲</a>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="no-prize">
+        <div class="nodata-block">
+            <div class="info-nodata text-center" style="color: #666;">尚無獲獎訊息</div>
+        </div>
+    </template>
+    <template id="prize-info">
+        <div class="prize-card">
+            <div class="d-flex flex-row gap-1">
+                <div class="avatar-block">
+                    <img class="avatar" src=''>
+                </div>
+                <div class="prize-info-block">
+                    <div class="info-box">
+                        <div class="icon-box">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path class="a" d="M28.75,28.75h-7.5A13.76,13.76,0,0,0,7.5,42.5,2.5,2.5,0,0,0,10,45H40a2.5,2.5,0,0,0,2.5-2.5A13.76,13.76,0,0,0,28.75,28.75ZM11.33,41.25a10,10,0,0,1,9.92-8.75h7.5a10,10,0,0,1,9.92,8.75ZM25,25A10,10,0,1,0,15,15,10,10,0,0,0,25,25ZM25,8.75A6.25,6.25,0,1,1,18.75,15,6.25,6.25,0,0,1,25,8.75Z"/></svg>
+                        </div>
+                        <div class="text" data-name="name"></div>
+                    </div>
+                    <div class="info-box">
+                        <div class="icon-box">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path class="a" d="M7.5,41.25A3.75,3.75,0,0,0,11.25,45H22.5V27.5H7.5Zm4-9.79h7.08V41H11.46Z"/><path class="a" d="M27.5,45H38.75a3.75,3.75,0,0,0,3.75-3.75V27.5h-15Zm4-13.54h7.08V41H31.46Z"/><path class="a" d="M42.5,15H39.25A7.06,7.06,0,0,0,40,11.88,6.88,6.88,0,0,0,33.13,5H33a7.06,7.06,0,0,0-6.07,3.47L25,11.68,23.12,8.47A7.06,7.06,0,0,0,17.05,5h-.18A6.88,6.88,0,0,0,10,11.88,7.06,7.06,0,0,0,10.75,15H7.5A2.5,2.5,0,0,0,5,17.5v5A2.5,2.5,0,0,0,7.5,25h35A2.5,2.5,0,0,0,45,22.5v-5A2.5,2.5,0,0,0,42.5,15ZM30.12,10.37A3.3,3.3,0,0,1,33,8.75h.18a3.13,3.13,0,0,1,0,6.25H27.4ZM16.87,8.75h.18a3.3,3.3,0,0,1,2.83,1.62L22.6,15H16.87a3.13,3.13,0,0,1,0-6.25ZM25.31,19H41V21H9V19H25.31Z"/></svg>
+                        </div>
+                        <div class="text" data-name="prizeName"></div>
+                    </div>
+                    <div class="info-box">
+                        <div class="icon-box">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path class="a" d="M23.12,14.38a1.88,1.88,0,1,1,3.76,0V24l6.66,4.44A1.81,1.81,0,0,1,34,31a1.72,1.72,0,0,1-2.53.45l-7.5-5a1.72,1.72,0,0,1-.84-1.56ZM25,5A20,20,0,1,1,5,25,20,20,0,0,1,25,5ZM8.75,25A16.25,16.25,0,1,0,25,8.75,16.24,16.24,0,0,0,8.75,25Z"/></svg>
+                        </div>
+                        <div class="text" data-name="time"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="prize-body">
+        <div style="padding: 0.625rem; background-color: #f9f9f9;">
+            <div class="icon-tip-block">
+                <div class="icon-tip-box">
+                    <div class="icon-box">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path class="a" d="M28.75,28.75h-7.5A13.76,13.76,0,0,0,7.5,42.5,2.5,2.5,0,0,0,10,45H40a2.5,2.5,0,0,0,2.5-2.5A13.76,13.76,0,0,0,28.75,28.75ZM11.33,41.25a10,10,0,0,1,9.92-8.75h7.5a10,10,0,0,1,9.92,8.75ZM25,25A10,10,0,1,0,15,15,10,10,0,0,0,25,25ZM25,8.75A6.25,6.25,0,1,1,18.75,15,6.25,6.25,0,0,1,25,8.75Z"/></svg>
+                    </div>
+                    <div class="text">獲獎人姓名</div>
+                </div>
+                <div class="icon-tip-box">
+                    <div class="icon-box">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path class="a" d="M7.5,41.25A3.75,3.75,0,0,0,11.25,45H22.5V27.5H7.5Zm4-9.79h7.08V41H11.46Z"/><path class="a" d="M27.5,45H38.75a3.75,3.75,0,0,0,3.75-3.75V27.5h-15Zm4-13.54h7.08V41H31.46Z"/><path class="a" d="M42.5,15H39.25A7.06,7.06,0,0,0,40,11.88,6.88,6.88,0,0,0,33.13,5H33a7.06,7.06,0,0,0-6.07,3.47L25,11.68,23.12,8.47A7.06,7.06,0,0,0,17.05,5h-.18A6.88,6.88,0,0,0,10,11.88,7.06,7.06,0,0,0,10.75,15H7.5A2.5,2.5,0,0,0,5,17.5v5A2.5,2.5,0,0,0,7.5,25h35A2.5,2.5,0,0,0,45,22.5v-5A2.5,2.5,0,0,0,42.5,15ZM30.12,10.37A3.3,3.3,0,0,1,33,8.75h.18a3.13,3.13,0,0,1,0,6.25H27.4ZM16.87,8.75h.18a3.3,3.3,0,0,1,2.83,1.62L22.6,15H16.87a3.13,3.13,0,0,1,0-6.25ZM25.31,19H41V21H9V19H25.31Z"/></svg>
+                    </div>
+                    <div class="text">獲獎名稱</div>
+                </div>
+                <div class="icon-tip-box">
+                    <div class="icon-box">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path class="a" d="M23.12,14.38a1.88,1.88,0,1,1,3.76,0V24l6.66,4.44A1.81,1.81,0,0,1,34,31a1.72,1.72,0,0,1-2.53.45l-7.5-5a1.72,1.72,0,0,1-.84-1.56ZM25,5A20,20,0,1,1,5,25,20,20,0,0,1,25,5ZM8.75,25A16.25,16.25,0,1,0,25,8.75,16.24,16.24,0,0,0,8.75,25Z"/></svg>
+                    </div>
+                    <div class="text">獲獎時間</div>
+                </div>
+            </div>
+            <div class="prize-list"></div>
+    </template>
+</body>
+<script>
+
+    loadListData()
+
+    function loadListData(){
+        let gameID = []
+        let dataURL = "https://"+ getAPIDomainFromURL() +"/v1/interact/game?activity_id="+ getKeyFromURL("activity_id") +"&game=3DGachaMachine"
+
+        fetch(dataURL)
+        .then((res) => res.json())
+        .then((res) => {
+            
+            const gameData = res.data
+
+            if(gameData.length == 0){
+                const template = $("#no-game").html()
+                $(".page-block").append(template)
+            }else {
+                $(gameData).each(function(i, data){
+                    const template = $("#game-info").html()
+                    const item = $(template)
+
+                    const gameId = data.game_id
+                    const title = data.title
+
+                    gameID.push(gameId)
+            
+                    item.attr("data-id", gameId)
+                    item.find(".info-title").text(title)
+                    item.find(".view-prize").attr("data-bs-name", title).attr("data-id", gameId)
+                    item.find(".enter-game").attr("data-id", gameId)
+            
+                    $(".page-block").append(item)
+                }).promise().done(function(){
+                    websocketByGame(gameID)
+                    viewPrize()
+                    enterGame()
+                })
+            }
+            
+        }).catch(function(error){
+            console.log(error)
+        })
+    }
+
+    $(".modal").bind("show.bs.modal", function(e){
+        const name = e.relatedTarget.getAttribute("data-bs-name")
+        $(".modal-title").text(name + " 的獲獎紀錄")
+    })
+
+    function enterGame() {
+        $(".enter-game").off("click").on("click", function(e){
+            const gameId = e.currentTarget.dataset.id
+            const gameUrl = "{{.Route.Game}}" + gameId
+            $(this).attr("href", gameUrl)
+        })
+    }
+
+    function viewPrize(){
+        $(".view-prize").off("click").on("click", function(e){
+            $("#history-prize-review").find("iframe").remove()
+            const gameId = e.currentTarget.dataset.id
+            loadPrizeData(gameId)
+        })
+    }
+
+    function loadPrizeData(gameId){
+        let dataURL = "https://"+ getAPIDomainFromURL() +"/v1/staffmanage/winning?activity_id="+ getKeyFromURL("activity_id") +"&game=3DGachaMachine&game_id="+ gameId
+        fetch(dataURL)
+        .then((res) => res.json())
+        .then((res) => {  
+            $(".modal-body").empty()
+
+            const template = $("#prize-body").html()
+            $("#history-prize-review").find(".modal-body").append(template)
+
+            return res
+        }).then((res) => {
+            const prizeStaffData = res.data
+            
+            if(prizeStaffData.length == 0){
+                const template = $("#no-prize").html()
+                $(".prize-list").append(template)
+            } else {
+                $(prizeStaffData).each(function(i, data){
+                    const template = $("#prize-info").html()
+                    const item = $(template)
+
+                    const avatar = data.avatar
+                    const name = data.name
+                    const prizeName = data.prize_name
+                    const time = data.win_time
+
+                    item.find(".avatar").attr("src", avatar)
+                    item.find("[data-name=name]").text(name)
+                    item.find("[data-name=prizeName]").text(prizeName)
+                    item.find("[data-name=time]").text(time)
+
+                    $(".prize-list").append(item)
+                })
+            }
+        }).catch(function(error){
+            console.log(error)
+        })
+        
+    }
+
+    function websocketByGame(gameID){
+        let ws
+        let wsReconnect = false
+        game(gameID)
+
+        function reconnectWebsocket(){
+            if(wsReconnect){ return }
+            wsReconnect = true
+            setTimeout(function(){
+                websocketHeartbeat()
+                wsReconnect = false
+            }, 2000)
+        }
+
+        function websocketHeartbeat(){
+            try{
+                if("WebSocket" in window){
+                    game()
+                }else{
+                    alert("很抱歉，您的裝置無法支援WebSocket相關功能。")
+                }
+            }catch(e){
+                reconnectWebsocket()
+                alert("活動資料連線發生異常，請重新整理網頁，如無法排除問題，請聯絡技術專員。")
+            }
+        }
+
+        function game(gameID){
+            const gameIDs = gameID.toString()
+            const url = "wss://"+ getAPIDomainFromURL() +"/ws/v1/game?activity_id="+ getKeyFromURL("activity_id") + "&game=3DGachaMachine"
+            
+            let send
+
+            ws = new WebSocket(url)
+
+            ws.onopen = function(){
+                const ids = { gameIDs: gameIDs }
+                ws.send(JSON.stringify(ids))
+                send = setInterval(function(){
+                    ws.send(JSON.stringify(ids))
+                }, 1000)
+            }
+
+            ws.onerror = function(error){
+                clearInterval(send)
+                // alert("ws發生錯誤，代碼: " + error.code, error.reason)
+            }
+
+            ws.onclose = function(error){
+                clearInterval(send)
+                if(error.code == 1006){
+                    location.href
+                }else if(error.code !== 1000){
+                    reconnectWebsocket()
+                    alert("ws被不正常關閉，正在重連中")
+                }
+            }
+
+            ws.onmessage = function(e){
+                const data = JSON.parse(e.data)
+                $(data.Games).each(function(i){
+                    $(".info-block[data-id="+ $(data.Games).get(i).game_id +"]").find(".round-value").text("第 "+ $(data.Games).get(i).game_round +" 輪")
+                    if($(data.Games).get(i).game_status === "close"){
+                        $(".info-block[data-id="+ $(data.Games).get(i).game_id +"]").find(".status-label").removeClass("status-open").addClass("status-close").text("已關閉")
+                        $(".info-block[data-id="+ $(data.Games).get(i).game_id +"]").find(".enter-game").prop("disabled", true).css("pointer-events", "none").text("無法進入")
+                    }else{
+                        $(".info-block[data-id="+ $(data.Games).get(i).game_id +"]").find(".status-label").removeClass("status-close").addClass("status-open").text("開放中")
+                        $(".info-block[data-id="+ $(data.Games).get(i).game_id +"]").find(".enter-game").prop("disabled", false).css("pointer-events", "auto").text("進入遊戲")
+                    }
+                })
+            }
+
+            $(".content-header-skin-md").find(".back").bind("click", function(){
+                ws.close(1000)
+                clearInterval(send)
+            })
+        }
+
+    }
+
+</script>

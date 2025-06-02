@@ -1,0 +1,256 @@
+<div class="options-skin">
+    <h1 class="container-title">搖紅包 - 獎品設置</h1>
+    <details class="container-box" open>
+        <summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>獎品資訊</h2>
+        </summary>
+        <div class="main-content mb-2">
+
+            <div class="toolbox">
+                <div class="d-flex flex-row flex-wrap align-items-center gap-2">
+                    <button class="btn btn-light-blue" data-name="add-data" data-bs-toggle="modal" data-bs-target="#prize-form">
+                        <i class="bi bi-plus-lg"></i>
+                        <p>新增遊戲獎品</p>
+                    </button>
+                    <label class="btn btn-noborder" for="upload-data">
+                        <i class="bi bi-download"></i>
+                        <p>資料匯入</p>
+                    </label>
+                    <input class="d-none" id="upload-data" type="file" name="excel" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                    <a class="btn btn-noborder" id="download-example-data" href="/admin/uploads/system/excel/prize.xlsx" download="遊戲獎品資料匯入範本.xlsx">
+                        <i class="bi bi-file-earmark-spreadsheet"></i>
+                        <p>下載匯入範本</p>
+                    </a>
+                </div>
+                <div class="d-flex flex-row flex-wrap align-items-center gap-2">
+                    <button class="btn btn-noborder" data-name="download-data">
+                        <i class="bi bi-upload"></i>
+                        <p>資料匯出</p>
+                    </button>
+                    <button class="btn btn-noborder" data-name="delete-select-data">
+                        <i class="bi bi-trash"></i>
+                        <p>刪除選取資料</p>
+                    </button>
+                </div>
+            </div>
+            <div class="data-view">
+                <div class="table" style="max-height: 37.5rem;">
+                    <div class="thead">
+                        <div class="tr">
+                            <div class="th check-th">
+                                <input class="form-check-input" type="checkbox" data-name="select-tr">
+                            </div>
+                            <div class="th title-th full"><p>獎品名稱</p></div>
+                            <div class="th type-th"><p>獎項類型</p></div>
+                            <div class="th number-th"><p>獎品價值(元)</p></div>
+                            <div class="th number-th"><p>總共數量(份)</p></div>
+                            <div class="th number-th"><p>剩餘數量(份)</p></div>
+                            <div class="th type-th"><p>獎品發送方式</p></div>
+                            <div class="th text-th"><p>兌獎密碼</p></div>
+                            <div class="th control-th pin right-pin pin-sm sm-container"><p>操作</p></div>
+                        </div>
+                    </div>
+                    <div class="tbody"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer">
+            <a class="btn btn-gray" href="#redpack">
+                <i class="bi bi-arrow-return-left"></i>
+                <p>返回場次資訊</p>
+            </a>
+        </div>
+    </details>
+</div>
+
+<form class="modal fade modal-form" id="prize-form" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-modal="true" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content form-modal">
+            <div class="modal-header form-modal-header">
+                <h5 class="modal-title form-modal-title">獎品設置</h5>
+                <button type="button" class="btn-close button-x" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body form-modal-body p-4">
+                <div class="d-flex flex-column gap-2 w-100">
+
+                    <input type="hidden" name="prize_id">
+                    <div class="form-group">
+                        <label class="form-label" for="prize_picture">獎品圖片
+                            <span><i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="檔案僅支援jpg, gif, png，且不得超過10MB"></i></span>
+                        </label>
+                        <div class="d-flex align-items-end gap-3">
+                            <label class="upload-avatar-box" for="prize_picture">
+                                <div class="view-img">
+                                    <img src="/admin/uploads/system/img-prize-pic.png" alt="獎品圖片" style="object-fit: cover;">
+                                </div>
+                                <div class="filter-bg"></div>
+                                <div class="btn-upload-avatar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                    </svg>
+                                </div>
+                                <input class="d-none" id="prize_picture" name="prize_picture" type="file" accept="image/jpeg,image/png,image/gif">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="prize_name">獎品名稱</label>
+                        <input class="form-control" id="prize_name" type="text" name="prize_name" placeholder="必填，請填寫獎品名稱，上限為20個字元" maxlength="20" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">獎項類型</label>
+                        <div class="radio-button-box">
+                            <div class="radio-button">
+                                <input type="radio" id="prize_type_first" name="prize_type" value="first" checked>
+                                <label for="prize_type_first">頭獎</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="prize_type_second" name="prize_type" value="second">
+                                <label for="prize_type_second">貳獎</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="prize_type_third" name="prize_type" value="third">
+                                <label for="prize_type_third">參獎</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="prize_type_general" name="prize_type" value="general">
+                                <label for="prize_type_general">普通獎</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="prize_price">獎品價值</label>
+                        <p>如不清楚獎品價值資訊，可填寫0，資料將顯示「無價值資訊」</p>
+                        <input class="form-control" id="prize_price" type="number" name="prize_price" placeholder="必填，請輸入此獎品的大概金額(台幣)" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="prize_amount">獎品數量</label>
+                        <input class="form-control" id="prize_amount" type="number" name="prize_amount" placeholder="必填，請輸入此獎品的數量" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">獎品發送方式</label>
+                        <div class="radio-button-box">
+                            <div class="radio-button">
+                                <input type="radio" id="prize_method_site" name="prize_method" value="site" checked>
+                                <label for="prize_method_site">現場發放</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="prize_method_mail" name="prize_method" value="mail">
+                                <label for="prize_method_mail">宅配郵寄</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="prize_password">兌換密碼</label>
+                        <p>當兌換獎品時，需要輸入的密碼</p>
+                        <input class="form-control" id="prize_password" type="text" name="prize_password" placeholder="請填寫兌獎密碼，上限為8個字元" maxlength="8" required>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer form-modal-footer">
+                <button class="button button-blue" data-name="save-add-data" type="button">確定新增</button>
+                <button class="button button-blue d-none" data-name="save-edit-data" type="button">確定修改</button>
+                <button class="button button-gray" type="button" data-bs-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="modal fade" id="prizeDataModal" tabindex="-1" aria-labelledby="prizeDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="prizeDataModalLabel">遊戲獎品詳細資料</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-none">
+                    <h6>ID</h6><p data-name="id">無填寫</p>
+                    <h6>Prize ID</h6><p data-name="prizeId">無填寫</p>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="fs-5 fw-bold title">獎品名稱</div>
+                        <div class="fs-6 content text-black-50" data-name="prizeName">無填寫</div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="fs-5 fw-bold title">獎項類型</div>
+                        <div class="fs-6 content text-black-50" data-name="prizeType">無填寫</div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="fs-5 fw-bold title">獎品價值(元)</div>
+                        <div class="fs-6 content text-black-50" data-name="prizePrice">無填寫</div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="fs-5 fw-bold title">總共數量(份)</div>
+                        <div class="fs-6 content text-black-50" data-name="prizeAmount">無填寫</div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="fs-5 fw-bold title">剩餘數量(份)</div>
+                        <div class="fs-6 content text-black-50" data-name="prizeRemain">無填寫</div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="fs-5 fw-bold title">獎品發送方式</div>
+                        <div class="fs-6 content text-black-50" data-name="prizeMethod">無填寫</div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="fs-5 fw-bold title">兌獎密碼</div>
+                        <div class="fs-6 content text-black-50" data-name="prizePassword">無填寫</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-border-gray" data-name="edit-data" data-bs-toggle="modal" data-bs-target="#prize-form">
+                    <i class="bi bi-pencil"></i>
+                    <p>編輯</p>
+                </button>
+                <button class="btn btn-border-gray" data-name="delete-data">
+                    <i class="bi bi-trash"></i>
+                    <p>刪除</p>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<template id="tr">
+    <div class="tr">
+        <div class="td check-td">
+            <input class="form-check-input" type="checkbox" data-name="select-tr">
+        </div>
+        <div class="td title-td full">
+            <div class="group">
+                <div class="sm-square-image">
+                    <img src="/admin/uploads/system/img-user-pic.png" data-name="avatar">
+                </div>
+                <p data-name="prizeName"></p>
+            </div>
+        </div>
+        <div class="td type-td" data-name="prizeType"></div>
+        <div class="td number-td" data-name="prizePrice"></div>
+        <div class="td number-td" data-name="prizeAmount"></div>
+        <div class="td number-td" data-name="prizeRemain"></div>
+        <div class="td type-td" data-name="prizeMethod"></div>
+        <div class="td text-td" data-name="prizePassword"></div>
+        <div class="td control-td pin right-pin pin-sm sm-container">
+            <ul>
+                <li title="編輯" data-name="edit-data" data-bs-toggle="modal" data-bs-target="#prize-form"><i class="bi bi-pencil"></i></li>
+                <li title="刪除" data-name="delete-data"><i class="bi bi-trash"></i></li>
+            </ul>
+        </div>
+    </div>
+</template>
+    
+<var class="variable d-none">
+    <var class="userID">{{.User.UserID}}</var>
+    <var class="token">{{.Token}}</var>
+    <var class="gameID">{{.GameID}}</var>
+    <var class="route-post">{{.Route.POST}}</var>
+    <var class="route-put">{{.Route.PUT}}</var>
+    <var class="route-delete">{{.Route.DELETE}}</var>
+</var>

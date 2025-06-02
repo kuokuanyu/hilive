@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="application-name" content="HiLives" />
+		<title>HiLives</title>
+
+		<link rel="icon" type="image/x-icon" href="/admin/assets/dist/favicon.svg" />
+
+		<!-- Bootstrap 5 -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+		<!-- GoEasy -->
+		<script src="https://cdn.goeasy.io/goeasy-2.2.2.min.js"></script>
+
+		<!-- Jquery -->
+		<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+		<!-- LIFF SDK -->
+		<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+		<script>
+
+		</script>
+		<!-- User Info Parameter -->
+		<script>
+			//取得API的網域
+			function getAPIDomainFromURL() {
+				if (location.host.startsWith("dev")) {
+					return "apidev.hilives.net";
+				} else {
+					return "api.hilives.net";
+				}
+			}
+
+			//取得網址的關鍵值
+			function getKeyFromURL(key) {
+				var query = window.location.search.substring(1);
+				var vars = query.split("&");
+				for (var i = 0; i < vars.length; i++) {
+					var pair = vars[i].split("=");
+					if (pair[0] == key) {
+						return pair[1];
+					}
+				}
+				return "";
+			}
+
+			// const goEasy = GoEasy.getInstance({
+			// 	host: "singapore.goeasy.io",
+			// 	appkey: "BC-64f4ade695d54cdcbcd9c4413fd94e1f",
+			// 	modules: ["pubsub"],
+			// });
+
+			//活動設置參數
+			const partySetting = {
+				partyID: getKeyFromURL("activity_id"),
+				partyName: "{{.ApplysignModel.ActivityName}}",
+				userID: "{{.User.UserID}}",
+				userName: "{{.User.Name}}",
+				userAvatar: "{{.User.Avatar}}",
+				chatroomPost: "{{.Route.POST}}",
+				pageInfo: [
+					{
+						name: "introduce",
+						enName: "introduce",
+						zhName: "活動介紹",
+						pageType: "info",
+						url: "{{.Route.Introduce}}",
+						svg: "M16.59,1.2H3.39a2.21,2.21,0,0,0-2.2,2.2v9.9a2.21,2.21,0,0,0,2.2,2.2h3.3v2.89a.41.41,0,0,0,.41.41.39.39,0,0,0,.25-.08l4.29-3.22h4.95a2.21,2.21,0,0,0,2.2-2.2V3.4A2.21,2.21,0,0,0,16.59,1.2Zm.55,12.1a.55.55,0,0,1-.55.55h-5.5l-.44.33L8.34,15.91V13.85H3.39a.55.55,0,0,1-.55-.55V3.4a.55.55,0,0,1,.55-.55h13.2a.55.55,0,0,1,.55.55Z",
+					},
+					{
+						name: "schedule",
+						enName: "schedule",
+						zhName: "活動行程",
+						pageType: "info",
+						url: "{{.Route.Schedule}}",
+						svg: "M7.38,11.1H6a.42.42,0,0,1-.41-.41V9.31A.42.42,0,0,1,6,8.9H7.38a.41.41,0,0,1,.41.41v1.38A.41.41,0,0,1,7.38,11.1Zm3.71-.41V9.31a.41.41,0,0,0-.41-.41H9.3a.42.42,0,0,0-.41.41v1.38a.42.42,0,0,0,.41.41h1.38A.41.41,0,0,0,11.09,10.69Zm3.3,0V9.31A.41.41,0,0,0,14,8.9H12.6a.42.42,0,0,0-.41.41v1.38a.42.42,0,0,0,.41.41H14A.41.41,0,0,0,14.39,10.69ZM11.09,14V12.61a.41.41,0,0,0-.41-.41H9.3a.42.42,0,0,0-.41.41V14a.42.42,0,0,0,.41.41h1.38A.41.41,0,0,0,11.09,14Zm-3.3,0V12.61a.41.41,0,0,0-.41-.41H6a.42.42,0,0,0-.41.41V14A.42.42,0,0,0,6,14.4H7.38A.41.41,0,0,0,7.79,14Zm6.6,0V12.61A.41.41,0,0,0,14,12.2H12.6a.42.42,0,0,0-.41.41V14a.42.42,0,0,0,.41.41H14A.41.41,0,0,0,14.39,14Zm3.3-8.94v12.1A1.65,1.65,0,0,1,16,18.8H3.94a1.65,1.65,0,0,1-1.65-1.65V5.05A1.65,1.65,0,0,1,3.94,3.4H5.59V1.61A.42.42,0,0,1,6,1.2H7.38a.41.41,0,0,1,.41.41V3.4h4.4V1.61a.42.42,0,0,1,.41-.41H14a.41.41,0,0,1,.41.41V3.4H16A1.65,1.65,0,0,1,17.69,5.05ZM16,16.94V6.7H3.94V16.94a.21.21,0,0,0,.21.21H15.84A.2.2,0,0,0,16,16.94Z",
+					},
+					{
+						name: "guest",
+						enName: "guest",
+						zhName: "活動嘉賓",
+						pageType: "info",
+						url: "{{.Route.Guest}}",
+						svg: "M13.07,11.65c-1,0-1.46.55-3.08.55s-2.09-.55-3.08-.55a4.62,4.62,0,0,0-4.62,4.62v.88A1.65,1.65,0,0,0,3.94,18.8H16a1.65,1.65,0,0,0,1.65-1.65v-.88A4.62,4.62,0,0,0,13.07,11.65Zm3,5.5H3.94v-.88a3,3,0,0,1,3-3,13.48,13.48,0,0,0,3.08.55,13.23,13.23,0,0,0,3.08-.55,3,3,0,0,1,3,3Zm-6-6A5,5,0,1,0,5,6.15,5,5,0,0,0,10,11.1Zm0-8.25a3.3,3.3,0,1,1-3.3,3.3A3.3,3.3,0,0,1,10,2.85Z",
+					},
+					{
+						name: "material",
+						enName: "material",
+						zhName: "活動資料",
+						pageType: "info",
+						url: "{{.Route.Material}}",
+						svg: "M13.29,9.73v1a.41.41,0,0,1-.41.41H7.11a.42.42,0,0,1-.42-.41v-1a.42.42,0,0,1,.42-.42h5.77A.41.41,0,0,1,13.29,9.73Zm-.41,2.47H7.11a.42.42,0,0,0-.42.41v1a.42.42,0,0,0,.42.41h5.77a.41.41,0,0,0,.41-.41v-1A.41.41,0,0,0,12.88,12.2Zm3.71-6.47V17.15a1.65,1.65,0,0,1-1.65,1.65H5a1.65,1.65,0,0,1-1.65-1.65V2.85A1.65,1.65,0,0,1,5,1.2h7a1.67,1.67,0,0,1,1.16.48l2.89,2.89A1.63,1.63,0,0,1,16.59,5.73ZM12.19,3V5.6h2.62Zm2.75,14.17V7.25H11.37a.83.83,0,0,1-.83-.83V2.85H5v14.3Z",
+					},
+					{
+						name: "redpack",
+						enName: "shakeredpack",
+						zhName: "搖紅包",
+						icon: "event-shakeredpack",
+						status: "{{.ApplysignModel.OverviewRedpack}}",
+						pageType: "game",
+						url: "{{.Route.Redpack}}",
+					},
+					{
+						name: "ropepack",
+						enName: "clickredpack",
+						zhName: "套紅包",
+						icon: "event-clickredpack",
+						status: "{{.ApplysignModel.OverviewRopepack}}",
+						pageType: "game",
+						url: "{{.Route.Ropepack}}",
+					},
+					{
+						name: "whack_mole",
+						enName: "whackamole",
+						zhName: "敲敲樂",
+						icon: "event-whackmole",
+						status: "{{.ApplysignModel.OverviewWhackMole}}",
+						pageType: "game",
+						url: "{{.Route.WhackMole}}",
+					},
+					{
+						name: "lottery",
+						enName: "lottery",
+						zhName: "遊戲抽獎",
+						icon: "event-rouletteraffle",
+						status: "{{.ApplysignModel.OverviewLottery}}",
+						pageType: "game",
+						url: "{{.Route.Lottery}}",
+					},
+					{
+						name: "bingo",
+						enName: "bingo",
+						zhName: "賓果遊戲",
+						icon: "event-bingo",
+						status: "{{.ApplysignModel.OverviewBingo}}",
+						pageType: "game",
+						url: "{{.Route.Bingo}}",
+					},
+					{
+						name: "monopoly",
+						enName: "monopoly",
+						zhName: "鑑定師",
+						icon: "event-monopoly",
+						status: "{{.ApplysignModel.OverviewMonopoly}}",
+						pageType: "game",
+						url: "{{.Route.Monopoly}}",
+					},
+					{
+						name: "QA",
+						enName: "QandA",
+						zhName: "快問快答",
+						icon: "event-QA",
+						status: "{{.ApplysignModel.OverviewQA}}",
+						pageType: "game",
+						url: "{{.Route.QA}}",
+					},
+					{
+						name: "tugofwar",
+						enName: "tugofwar",
+						zhName: "拔河遊戲",
+						icon: "event-tugofwar",
+						status: "{{.ApplysignModel.OverviewTugofwar}}",
+						pageType: "game",
+						url: "{{.Route.Tugofwar}}",
+					},
+					{
+						name: "question",
+						enName: "question",
+						zhName: "提問頁",
+						icon: "event-question",
+						status: "{{.ApplysignModel.OverviewQuestion}}",
+						pageType: "game",
+						url: "{{.Route.Question}}",
+					},
+					{
+						name: "specialdanmu",
+						zhName: "特殊彈幕",
+						status: "{{.ApplysignModel.OverviewSpecialDanmu}}",
+						pageType: "chat",
+						url: "/admin/interact/wall/specialdanmu",
+					},
+					{
+						name: "holdscreen",
+						zhName: "霸佔彈幕",
+						status: "{{.ApplysignModel.OverviewHoldscreen}}",
+						pageType: "chat",
+						url: "/admin/interact/wall/holdscreen",
+					},
+                    {
+						name: "scan",
+                        enName: "scan",
+						pageType: "scan",
+						url: "{{.Route.QRcode}}",
+                    },
+					{
+						name: "signname",
+						enName: "signname",
+						zhName: "簽名牆",
+						icon: "event-signname",
+						status: "{{.ApplysignModel.OverviewSignname}}",
+						pageType: "game",
+						url: "{{.Route.Signname}}",
+					}
+				],
+				chatroomSettings: {
+					speech: "{{.ApplysignModel.MessageBan}}",
+					bansecond: "{{.ApplysignModel.MessageBanSecond}}",
+				}
+			};
+
+			$(document).ready(function(){
+				const goVar = $("var.variable")
+				const variable = {
+					userJSON: goVar.find("var.userJSON").text(),
+				}
+				const userJSON = JSON.parse(variable.userJSON)
+				const pagePath = userJSON["activity_menus"][partySetting.partyID]
+
+				fetch("https://"+ getAPIDomainFromURL() +"/v1/admin/overview").then(function(res){
+					return res.json()
+				}).then(function(res){
+					overviewStatus(res.data)
+				})
+
+				function overviewStatus(data){
+					const item = []
+					const url = "/admin/interact/wall/"
+					$(partySetting.pageInfo).each(function(o){
+						$(pagePath).each(function(e){
+							if(pagePath[e].substr(url.length) === partySetting.pageInfo[o].name){
+								item.push({ "name": partySetting.pageInfo[o].name, "status": partySetting.pageInfo[o].status})
+							}
+						}).promise().done(function(){
+							$(pagePath).each(function(e){
+								if(pagePath[e] === "*" || pagePath[e] === "admin"){
+
+								}else{
+									partySetting.pageInfo[o].status = "close"
+								}
+							})
+						}).promise().done(function(){
+							$(item).each(function(i){
+								$(partySetting.pageInfo).each(function(o){
+									if(item[i].name === partySetting.pageInfo[o].name){
+										partySetting.pageInfo[o].status = item[i].status
+									}
+								})
+							})
+						})
+					})
+				}
+			})
+
+		</script>
+
+		<!-- chatroom JS -->
+		<!-- <script src="/admin/assets/chatroom/activity-room.js?ver=20220825"></script> -->
+
+		<!-- Style CSS -->
+		<link href="/admin/assets/chatroom/style/default/css/activity-room.css?ver=20230314" rel="stylesheet" />
+
+		<script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="pragma" content="no-cache">
+
+	</head>
+	<body>
+		<div class="main-content">
+			<!-- <div class="loading-content" data-name="home" style="z-index: 1002;">
+				<div class="d-flex justify-content-center">
+					<div class="spinner-border" role="status"></div>
+				</div>
+				<h6>wsPartyBlack連線中...</h6>
+			</div> -->
+			<div id="content-header-skin">
+				<div class="pt-2 pb-2 d-flex flex-row justify-content-evenly">
+					<div class="button-box focus" data-page="home">
+						<div class="d-flex flex-column">
+							<div class="icon">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+									<path d="M8.16,16.36v4.79c0,.94,.77,1.71,1.71,1.71h10.26c.94,0,1.71-.77,1.71-1.71v-4.79l-6.84-6.84-6.84,6.84Zm15.22-1.31l-2.68-2.68v-3.75c0-.31-.26-.57-.57-.57h-1.14c-.31,0-.57,.26-.57,.57v1.47l-2.61-2.61c-.44-.44-1.17-.44-1.61,0l-7.57,7.57c-.22,.22-.22,.58,0,.81s.58,.22,.81,0l7.57-7.57,7.57,7.57c.22,.22,.58,.22,.81,0s.22-.58,0-.81Z" />
+								</svg>
+							</div>
+							<div class="text">首頁</div>
+						</div>
+					</div>
+					<div class="button-box" data-page="chat">
+						<div class="d-flex flex-column">
+							<div class="icon">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+									<path d="M7,9.33c0-1.1,.9-2,2-2h12c1.1,0,2,.9,2,2v8c0,1.1-.9,2-2,2h-2.5c-.31,0-.61,.15-.8,.4l-1.9,2.53c-.33,.44-.96,.53-1.4,.2-.08-.06-.14-.12-.2-.2l-1.9-2.53c-.19-.25-.49-.4-.8-.4h-2.5c-1.1,0-2-.9-2-2V9.33Zm5,4c0-.55-.45-1-1-1s-1,.45-1,1,.45,1,1,1,1-.45,1-1Zm4,0c0-.55-.45-1-1-1s-1,.45-1,1,.45,1,1,1,1-.45,1-1Zm3,1c.55,0,1-.45,1-1s-.45-1-1-1-1,.45-1,1,.45,1,1,1Z" />
+								</svg>
+							</div>
+							<div class="text">聊天室</div>
+						</div>
+					</div>
+					<div class="button-box" data-page="game">
+						<div class="d-flex flex-column">
+							<div class="icon">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+									<path d="M12.5,12.69h-1v1h-1v1h1v1h1v-1h1v-1h-1v-1Zm4.5,1c-.28,0-.5,.22-.5,.5s.22,.5,.5,.5,.5-.22,.5-.5-.22-.5-.5-.5Zm1,0c.28,0,.5-.22,.5-.5s-.22-.5-.5-.5-.5,.22-.5,.5,.22,.5,.5,.5Zm0,1c-.28,0-.5,.22-.5,.5s.22,.5,.5,.5,.5-.22,.5-.5-.22-.5-.5-.5Zm4.25,.38c-.21-.88-.49-1.73-.81-2.47-.32-.72-.69-1.36-1.09-1.77-.11-.11-.23-.21-.37-.3,.02-.04,.04-.08,.05-.12,.07-.27-.09-.54-.35-.61l-1.93-.52s-.03,0-.05,0c-.27-.05-.53,.14-.58,.41-.68-.09-1.4-.13-2.12-.13s-1.39,.04-2.04,.12c0-.01,0-.02,0-.04-.07-.27-.35-.43-.61-.35l-1.93,.52s0,0,0,0c-.27,.07-.42,.35-.35,.61h0s.02,.05,.03,.08c-.16,.09-.3,.21-.43,.34-.41,.41-.78,1.05-1.09,1.77-.32,.73-.6,1.59-.8,2.47-.2,.88-.34,1.78-.36,2.61-.02,.82,.06,1.6,.33,2.21,.25,.56,.83,.89,1.45,.83,.64-.07,1.12-.39,1.51-.77,.24-.23,.5-.53,.74-.81,.13-.15,.25-.29,.37-.42,.73-.8,1.6-1.53,3.22-1.53s2.5,.72,3.22,1.53c.12,.13,.24,.27,.37,.42,.24,.28,.49,.58,.74,.81,.4,.38,.88,.71,1.51,.77,.61,.06,1.19-.27,1.44-.83,.27-.61,.35-1.39,.33-2.21-.02-.83-.16-1.73-.36-2.61Zm-.88,4.41c-.08,.16-.25,.26-.43,.24-.33-.04-.61-.2-.93-.5-.21-.2-.4-.42-.61-.67-.13-.16-.28-.32-.44-.5-.83-.91-1.94-1.85-3.97-1.85s-3.14,.94-3.96,1.85c-.16,.18-.31,.35-.44,.5-.22,.25-.4,.47-.61,.67-.32,.3-.6,.47-.93,.5-.18,.02-.35-.08-.43-.24-.18-.41-.26-1.02-.24-1.78,.03-.81,.15-1.62,.34-2.41,.18-.79,.43-1.55,.75-2.29,.3-.68,.61-1.19,.88-1.47,.26-.26,.86-.52,1.73-.71,.85-.18,1.88-.27,2.91-.27s2.06,.09,2.91,.27c.88,.18,1.47,.44,1.73,.71,.28,.28,.59,.78,.89,1.47,.32,.74,.57,1.51,.75,2.29,.19,.79,.31,1.59,.34,2.41,.02,.76-.06,1.37-.24,1.78Zm-2.38-5.79c-.28,0-.5,.22-.5,.5s.22,.5,.5,.5,.5-.22,.5-.5-.22-.5-.5-.5Z" />
+								</svg>
+							</div>
+							<div class="text">遊戲互動</div>
+						</div>
+					</div>
+					<div class="button-box" data-page="info">
+						<div class="d-flex flex-column">
+							<div class="icon">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+									<path d="M22.97,9.42c-.98-.45-2.56-.98-4.13-1.14-1.34-.14-2.82,0-3.84,.87-1.02-.88-2.49-1.01-3.84-.87-1.57,.16-3.14,.69-4.13,1.14-.18,.08-.3,.27-.3,.47v11.37c0,.29,.23,.52,.52,.52,.07,0,.15-.02,.21-.05,.91-.41,2.38-.91,3.8-1.05,1.46-.15,2.68,.09,3.33,.91,.18,.22,.5,.26,.73,.08,.03-.02,.06-.05,.08-.08,.65-.82,1.88-1.05,3.33-.91,1.42,.14,2.89,.64,3.8,1.05,.26,.12,.57,0,.68-.26,.03-.07,.05-.14,.05-.21V9.89c0-.2-.12-.39-.3-.47Zm-7.53,8.98c.17,0,.44-.06,.62-.22l-.08,.37c-.26,.31-.83,.54-1.31,.54-.63,0-.9-.38-.72-1.18l.66-3.11c.06-.26,0-.36-.26-.42l-.4-.07,.07-.34,2.05-.26-.9,4.22c-.06,.31,.03,.48,.27,.48Zm-.21-5.68c-.5,0-.9-.4-.9-.9s.4-.9,.9-.9,.9,.4,.9,.9-.4,.9-.9,.9Z" />
+								</svg>
+							</div>
+							<div class="text">活動資訊</div>
+						</div>
+					</div>
+					<div class="button-box" data-page="qrscan">
+						<div class="d-flex flex-column">
+							<div class="icon">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+									<path d="M11,19h1v-1h-1v1Zm10-10h-5v5h5v-5Zm-1,4h-3v-3h3v3Zm-11,8h5v-5h-5v5Zm1-4h3v3h-3v-3Zm.5,5h-2.5v-2.5c0-.28-.22-.5-.5-.5s-.5,.22-.5,.5v3c0,.28,.22,.5,.5,.5h3c.28,0,.5-.22,.5-.5s-.22-.5-.5-.5Zm10.5-6v-1h-2v1h2ZM7.5,11c.28,0,.5-.22,.5-.5v-2.5h2.5c.28,0,.5-.22,.5-.5s-.22-.5-.5-.5h-3c-.28,0-.5,.22-.5,.5v3c0,.28,.22,.5,.5,.5Zm11.5,0h-1v1h1v-1Zm3.5,8c-.28,0-.5,.22-.5,.5v2.5h-2.5c-.28,0-.5,.22-.5,.5s.22,.5,.5,.5h3c.28,0,.5-.22,.5-.5v-3c0-.28-.22-.5-.5-.5Zm-4.5-4h-3v2h1v-1h1v1h1v-2Zm3,4h-1v1h-2v1h3v-2Zm-2,0v-1h2v-1h-3v2h1Zm3.5-12h-3c-.28,0-.5,.22-.5,.5s.22,.5,.5,.5h2.5v2.5c0,.28,.22,.5,.5,.5s.5-.22,.5-.5v-3c0-.28-.22-.5-.5-.5Zm-7.5,14h2v-1h-2v1Zm-6-7h5v-5h-5v5Zm1-4h3v3h-3v-3Zm1,2h1v-1h-1v1Zm5,6h-1v1h2v-2h-1v1Z" />
+								</svg>
+							</div>
+							<div class="text">QR碼掃描</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content-body">
+				<div id="home-page" class="content-page" data-page="home">
+					<div class="d-flex flex-column">
+						<div class="p-3 d-flex flex-column align-items-center gap-3 profile-wall" >
+							<div class="avatar-block">
+								<div class="avatar-box">
+									<img src="{{.User.Avatar}}" />
+								</div>
+							</div>
+							<div class="user-name">{{.User.Name}}</div>
+							<button id="my-prize-history" class="btn base-button icon-button button-md button-main-color" type="button">
+								<i class="bi bi-gift"></i>個人獲獎紀錄
+							</button>
+						</div>
+						<div class="container d-flex flex-column align-items-center gap-3 mt-3 mb-3" style="max-width: 540px">
+							<div class="container border-bottom">
+								<h5>目前參加的活動名稱</h5>
+								<p class="name">{{.ApplysignModel.ActivityName}}</p>
+							</div>
+							<div class="container border-bottom">
+								<h5>活動開始時間</h5>
+								<p class="time">{{.ApplysignModel.StartTime}}</p>
+							</div>
+							<div class="container border-bottom">
+								<h5>活動結束時間</h5>
+								<p class="time">{{.ApplysignModel.EndTime}}</p>
+							</div>
+							<div class="container">
+								<h5>您的抽獎號碼</h5>
+								<p class="number">{{.ApplysignModel.Number}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="chatroom-page" class="content-page" data-page="chat"></div>
+				<div id="app-page" class="content-page" data-page="game">
+					<div class="content-body-page"></div>
+				</div>
+				<div id="info-page" class="content-page" data-page="info">
+					<div class="content-body-page"></div>
+				</div>
+                <div id="scan-page" class="content-page" data-page="qrscan"></div>
+			</div>
+		</div>
+		<var class="variable d-none">
+			<var class="userJSON">{{.UserJSON}}</var>
+		</var>
+	</body>
+	<script>
+		// if(liff.isInClient()){
+			$("#my-prize-history").click(function () {
+				location.href = "{{.Route.Winning}}"
+			})
+
+			if(location.host === "dev.hilives.net"){
+				// const vConsole = new window.VConsole()
+			}
+		// }else{
+			// alert("請使用LINE APP開啟")
+			// $("body").empty()
+		// }
+	</script>
+	<!-- Style JS -->
+	<script src="/admin/assets/chatroom/style/default/js/activity-room-ui.js?ver=HILIVES-1.0.646867-20240424"></script>
+</html>

@@ -1,0 +1,129 @@
+<main id="main-container" style="width: 100%;">
+    <div class="options-skin mx-auto" style="width: 65rem; max-width: 100%;">
+        <h1 class="container-title">個人資訊</h1>
+        <details class="container-box" open>
+            <summary class="toggle-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                </svg>
+                <h2>基本資料</h2>
+            </summary>
+            <div class="main-content">
+                <div class="d-flex flex-wrap gap-3 w-100">
+
+                    <div class="form-group">
+                        <label class="form-label">平台頭像</label>
+                        <div class="d-flex align-items-end gap-3">
+                            <label class="upload-avatar-box" for="user-avatar" data-name="user-avatar">
+                                <div class="view-img">
+                                    <img src="{{.User.Avatar}}" alt="平台頭像">
+                                </div>
+                                <div class="filter-bg"></div>
+                                <div class="btn-upload-avatar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                    </svg>
+                                </div>
+                                <input class="d-none" id="user-avatar" type="file" name="avatar" accept="image/jpeg,image/png,image/gif,image/svg+xml">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="activity_name">平台暱稱</label>
+                        <p>最多為20個字元</p>
+                        <input id="user-name" class="form-control user-name" name="name" type="text" maxlength="20" placeholder="請輸入您的平台暱稱">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="activity_name">手機號碼</label>
+                        <p>已認證過的電話號碼已無法再更改，如有需要請聯絡專員</p>
+                        <input id="user-phone" class="form-control user-phone" name="phone" type="text" maxlength="10" placeholder="請輸入您常用的手機號碼" aria-label="readonly" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="activity_name">電子信箱</label>
+                        <p>請在電子郵件地址中包含「@」</p>
+                        <input id="user-email" class="form-control user-email" name="email" type="email" placeholder="請輸入您常用的電子信箱">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="activity_name">登入密碼</label>
+                        <p>此欄位非必填，如您沒有要更改密碼，則不需要填寫密碼相關欄位</p>
+                        <input id="user-password" class="form-control" name="password" type="password" placeholder="請輸入新的登入密碼，密碼格式必須為英文或數字" autocomplete="new-password">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="activity_name">確認密碼</label>
+                        <p>此欄位非必填，如您需要更改登入密碼，請再次輸入剛剛設置的密碼</p>
+                        <input id="user-password-again" class="form-control" name="password_again" type="password" placeholder="再次確認剛剛輸入的新密碼" autocomplete="new-password">
+                    </div>
+
+                </div>
+            </div>
+        </details>
+        <details class="container-box">
+            <summary class="toggle-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                </svg>
+                <h2>LINE官方帳號設置(如需設置，請與我們聯絡)</h2>
+            </summary>
+            <div class="main-content">
+
+                <div class="alert w-100">
+                    <p>這部分可以為空，如果需要綁定的話，每個欄位皆需填寫</p>
+                    <p>需提供LINE官方帳號相關資訊並在官方帳號頁面中設置callback url、webhook url才能正確執行報名簽到流程</p>
+                    <p class="callback-url">callback URL: <strong></strong></p>
+                    <p class="webhook-url">webhook URL: <strong></strong></p>
+                </div>
+                <div id="line-form" class="d-flex flex-wrap gap-3 w-100">
+
+                    <div class="form-group">
+                        <label class="form-label" for="line_id">Line ID</label>
+                        <p>請提供LINE LOGIN中Linked OA的ID資訊或是LINE官方號的專屬ID，值必須包含@</p>
+                        <input id="line_id" class="form-control line-input" type="text" name="line_id" placeholder="請輸入Line的 Line ID">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="channel_id">Channel ID</label>
+                        <input id="channel_id" class="form-control line-input" type="text" name="channel_id" placeholder="請輸入Line的 Channel ID">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="channel_secret">Channel Secret</label>
+                        <input id="channel_secret" class="form-control line-input" type="text" name="channel_secret" placeholder="請輸入Line的 Channel Secret">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="chatbot_secret">Chatbot Secret</label>
+                        <input id="chatbot_secret" class="form-control line-input" type="text" name="chatbot_secret" placeholder="請輸入Line的 Chatbot Secret">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="chatbot_token">Chatbot Token</label>
+                        <input id="chatbot_token" class="form-control line-input" type="text" name="chatbot_token" placeholder="請輸入Line的 Chatbot Token">
+                    </div>
+                    <input type="hidden" name="push_message" value="close" disabled data-title="官方帳號傳送報名簽到審核訊息">
+
+                </div>
+
+            </div>
+        </details>
+        <div class="footer">
+            <button id="save-profile-info" class="btn btn-blue" data-name="saveProfileInfo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save2" viewBox="0 0 16 16">
+                    <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v4.5h2a.5.5 0 0 1 .354.854l-2.5 2.5a.5.5 0 0 1-.708 0l-2.5-2.5A.5.5 0 0 1 5.5 6.5h2V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+                </svg>
+                <p>儲存設置</p>
+            </button>
+            {{if eq .User.Bind "no"}}
+                <a id="bind-line-app" class="btn btn-green" href="{{.Route.Bind}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-line" viewBox="0 0 16 16">
+                        <path d="M8 0c4.411 0 8 2.912 8 6.492 0 1.433-.555 2.723-1.715 3.994-1.678 1.932-5.431 4.285-6.285 4.645-.83.35-.734-.197-.696-.413l.003-.018.114-.685c.027-.204.055-.521-.026-.723-.09-.223-.444-.339-.704-.395C2.846 12.39 0 9.701 0 6.492 0 2.912 3.59 0 8 0M5.022 7.686H3.497V4.918a.156.156 0 0 0-.155-.156H2.78a.156.156 0 0 0-.156.156v3.486c0 .041.017.08.044.107v.001l.002.002.002.002a.154.154 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157Zm.791-2.924a.156.156 0 0 0-.156.156v3.486c0 .086.07.155.156.155h.562c.086 0 .155-.07.155-.155V4.918a.156.156 0 0 0-.155-.156h-.562m3.863 0a.156.156 0 0 0-.156.156v2.07L7.923 4.832a.17.17 0 0 0-.013-.015v-.001a.139.139 0 0 0-.01-.01l-.003-.003a.092.092 0 0 0-.011-.009h-.001L7.88 4.79l-.003-.002a.029.029 0 0 0-.005-.003l-.008-.005h-.002l-.003-.002-.01-.004-.004-.002a.093.093 0 0 0-.01-.003h-.002l-.003-.001-.009-.002h-.006l-.003-.001h-.004l-.002-.001h-.574a.156.156 0 0 0-.156.155v3.486c0 .086.07.155.156.155h.56c.087 0 .157-.07.157-.155v-2.07l1.6 2.16a.154.154 0 0 0 .039.038l.001.001.01.006.004.002a.066.066 0 0 0 .008.004l.007.003.005.002a.168.168 0 0 0 .01.003h.003a.155.155 0 0 0 .04.006h.56c.087 0 .157-.07.157-.155V4.918a.156.156 0 0 0-.156-.156h-.561Zm3.815.717v-.56a.156.156 0 0 0-.155-.157h-2.242a.155.155 0 0 0-.108.044h-.001l-.001.002-.002.003a.155.155 0 0 0-.044.107v3.486c0 .041.017.08.044.107l.002.003.002.002a.155.155 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156Z"/>
+                    </svg>
+                    <p>綁定LINE App</p>
+                </a>
+            {{end}}
+        </div>
+    </div>
+</main>
+
+<var class="variable d-none">
+    <var class="userID">{{.User.UserID}}</var>
+    <var class="token">{{.Token}}</var>
+    <var class="route-put">{{.Route.PUT}}</var>
+    <var class="userPhone">{{.User.Phone}}</var>
+    <var class="userEmail">{{.User.Email}}</var>
+</var>

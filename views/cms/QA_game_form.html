@@ -1,0 +1,292 @@
+<div class="options-skin">
+    <h1 class="container-title">快問快答 - 場次設置</h1>
+    <details class="container-box" open>
+        <summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>遊戲規則設置</h2>
+        </summary>
+        <div class="main-content">
+            <div class="d-flex flex-wrap gap-3">
+                <div class="form-group">
+                    <label class="form-label" for="scene-name">場次名稱</label>
+                    <input id="scene-name" class="form-control string" name="title" type="text" maxlength="20" placeholder="名稱最多為20個字元">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">限制遊戲時間</label>
+                    <p>如果開啟此選項，請填入答題時間的秒數，至少5秒。</p>
+                    <div class="radio-button-box">
+                        <div class="radio-button">
+                            <input type="radio" id="limit_time_open" name="limit_time" value="open" checked>
+                            <label for="limit_time_open">開啟</label>
+                        </div>
+                        <div class="radio-button">
+                            <input type="radio" id="limit_time_close" name="limit_time" value="close">
+                            <label for="limit_time_close">關閉</label>
+                        </div>
+                    </div>
+                    <div class="input-group string">
+                        <input id="second" class="form-control" name="second" type="number" value="30" maxlength="2" min="5" max="60" placeholder="最多為60秒">
+                        <span class="input-group-text">秒</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="qa_second">題目顯示時間</label>
+                    <div class="input-group string">
+                        <input id="qa_second" class="form-control" name="qa_second" type="number" value="10" maxlength="2" min="5" max="60" placeholder="請填入題目顯示時間，最多為60，至少5秒">
+                        <span class="input-group-text">秒</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="people">參加人數上限</label>
+                    <div class="input-group string">
+                        <input id="people" class="form-control" name="people" type="number" maxlength="5" min="0" max="{{.People}}" placeholder="名額上限為{{.People}}人">
+                        <span class="input-group-text">人</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="first_prize">頭獎名額</label>
+                    <div class="input-group string">
+                        <input id="first_prize" class="form-control" name="first_prize" type="number" maxlength="2" min="0" max="50" placeholder="名額上限為50人">
+                        <span class="input-group-text">人</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="second_prize">二獎名額</label>
+                    <div class="input-group string">
+                        <input id="second_prize" class="form-control" name="second_prize" type="number" maxlength="2" min="0" max="50" placeholder="名額上限為50人">
+                        <span class="input-group-text">人</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="third_prize">三獎名額</label>
+                    <div class="input-group string">
+                        <input id="third_prize" class="form-control" name="third_prize" type="number" maxlength="3" min="0" max="100" placeholder="名額上限為100人">
+                        <span class="input-group-text">人</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="general_prize">普通獎名額</label>
+                    <div class="input-group string">
+                        <input id="general_prize" class="form-control" name="general_prize" type="number" maxlength="3" min="0" max="800" placeholder="名額上限為800人">
+                        <span class="input-group-text">人</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">重複中獎</label>
+                    <p>如選擇允許，表示參加者可以在這個場次一直獲得獎品。</p>
+                    <div class="radio-button-box">
+                        <div class="radio-button">
+                            <input type="radio" id="allow_open" name="allow" value="open" checked>
+                            <label for="allow_open">允許</label>
+                        </div>
+                        <div class="radio-button">
+                            <input type="radio" id="allow_close" name="allow" value="close">
+                            <label for="allow_close">拒絕</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </details>
+    <details class="container-box" open>
+        <summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>題目與答案設置</h2>
+        </summary>
+        <div class="main-content">
+            <div class="mb-2 d-flex align-items-center justify-content-between w-100">
+                <h5 class="fieldset-title me-auto">快問快答題目設置(最多設置20題)</h5>
+                <div class="d-flex flex-row gap-1">
+                    <a class="btn btn-border-gray" href="/admin/uploads/system/excel/qa.xlsx" download="快問快答題目範本.xlsx">
+                        <i class="bi bi-file-earmark-arrow-down"></i>
+                        <p>下載Excel範本</p>
+                    </a>
+                    <div>
+                        <label class="btn btn-border-gray" for="input-file-excel">
+                            <i class="bi bi-file-earmark-spreadsheet"></i>
+                            <p>匯入Excel</p>
+                        </label>
+                        <input class="d-none" id="input-file-excel" type="file" name="excel" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                    </div>
+                    <button class="button-style-square button-navy-color add-question-data" type="button" data-bs-toggle="modal" data-bs-target="#add-question-modal">增加題目</button>
+                </div>
+            </div>
+            <div class="table-responsive w-100">
+                <table class="table table-bordered align-middle w-100">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">題數</th>
+                            <th class="w-50" scope="col">題目</th>
+                            <th scope="col">題目答案</th>
+                            <th scope="col">加權分數</th>
+                            <th scope="col">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+    <div class="footer">
+        <button id="save-game-data" class="btn btn-blue" data-name="saveGameData">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save2" viewBox="0 0 16 16">
+                <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v4.5h2a.5.5 0 0 1 .354.854l-2.5 2.5a.5.5 0 0 1-.708 0l-2.5-2.5A.5.5 0 0 1 5.5 6.5h2V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+            </svg>
+            <p>儲存設置</p>
+        </button>
+        <a class="btn btn-gray" href="#QA">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+            <p>返回</p>
+        </a>
+    </div>
+</div>
+
+<div class="modal fade" id="add-question-modal" tabindex="-1" aria-labelledby="add-question-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-simple-skin">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h3 class="skin-title">增加快問快答題目</h3>
+            <p>遊戲最多只能有<b>20道題目</b>，所有欄位皆為必填，一個問題只能有<b>4個選項</b>、<b>1個正確解答</b>。</p>
+            <div class="mb-3">
+                <label class="form-label" for="qa-question">題目</label>
+                <textarea class="form-control" id="qa-question" rows="2"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="qa-option-A">選項A</label>
+                <input type="text" class="form-control" id="qa-option-A" name="option">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="qa-option-B">選項B</label>
+                <input type="text" class="form-control" id="qa-option-B" name="option">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="qa-option-C">選項C</label>
+                <input type="text" class="form-control" id="qa-option-C" name="option">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="qa-option-D">選項D</label>
+                <input type="text" class="form-control" id="qa-option-D" name="option">
+            </div>
+            <div class="mt-3">
+                <fieldset>
+                    <legend class="form-label">正確解答</legend>
+                    <div class="d-flex justify-content-around">
+                        <div class="form-check form-check-inline me-0">
+                            <input class="form-check-input" type="radio" id="ans-option-A" name="answer" value="0" checked>
+                            <label class="form-check-label" for="ans-option-A">選項A</label>
+                        </div>
+                        <div class="form-check form-check-inline me-0">
+                            <input class="form-check-input" type="radio" id="ans-option-B" name="answer" value="1">
+                            <label class="form-check-label" for="ans-option-B">選項B</label>
+                        </div>
+                        <div class="form-check form-check-inline me-0">
+                            <input class="form-check-input" type="radio" id="ans-option-C" name="answer" value="2">
+                            <label class="form-check-label" for="ans-option-C">選項C</label>
+                        </div>
+                        <div class="form-check form-check-inline me-0">
+                            <input class="form-check-input" type="radio" id="ans-option-D" name="answer" value="3">
+                            <label class="form-check-label" for="ans-option-D">選項D</label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="mt-3 mb-2">
+                <label class="form-label" for="qa-option-D">加權分數</label>
+                <input type="number" class="form-control qa-score" id="qa-score" name="score" min="1" placeholder="請填入大於0的數字">
+            </div>
+            <p class="error-text"></p>
+            <div class="control-box">
+                <button class="button-style-square button-navy-color save-add-question-data">繼續新增</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="edit-question-modal" tabindex="-1" aria-labelledby="edit-question-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-simple-skin">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h3 class="skin-title">編輯快問快答題目</h3>
+            <div class="mb-3">
+                <label class="form-label" for="edit-qa-question">題目</label>
+                <textarea class="form-control" id="edit-qa-question" rows="2"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="edit-qa-option-A">選項A</label>
+                <input type="text" class="form-control" id="edit-qa-option-A" name="option">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="edit-qa-option-B">選項B</label>
+                <input type="text" class="form-control" id="edit-qa-option-B" name="option">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="edit-qa-option-C">選項C</label>
+                <input type="text" class="form-control" id="edit-qa-option-C" name="option">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="edit-qa-option-D">選項D</label>
+                <input type="text" class="form-control" id="edit-qa-option-D" name="option">
+            </div>
+            <div class="mt-3">
+                <fieldset>
+                    <legend class="form-label">正確解答</legend>
+                    <div class="d-flex justify-content-around">
+                        <div class="form-check form-check-inline me-0">
+                            <input class="form-check-input" type="radio" id="edit-ans-option-A" name="answer" value="0">
+                            <label class="form-check-label" for="edit-ans-option-A">選項A</label>
+                        </div>
+                        <div class="form-check form-check-inline me-0">
+                            <input class="form-check-input" type="radio" id="edit-ans-option-B" name="answer" value="1">
+                            <label class="form-check-label" for="edit-ans-option-B">選項B</label>
+                        </div>
+                        <div class="form-check form-check-inline me-0">
+                            <input class="form-check-input" type="radio" id="edit-ans-option-C" name="answer" value="2">
+                            <label class="form-check-label" for="edit-ans-option-C">選項C</label>
+                        </div>
+                        <div class="form-check form-check-inline me-0">
+                            <input class="form-check-input" type="radio" id="edit-ans-option-D" name="answer" value="3">
+                            <label class="form-check-label" for="edit-ans-option-D">選項D</label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="mt-3 mb-2">
+                <label class="form-label" for="qa-option-D">加權分數</label>
+                <input type="number" class="form-control qa-score" id="edit-qa-score" name="edit-score" min="1" placeholder="請填入大於0的數字">
+            </div>
+            <input type="hidden" name="question-index">
+            <p class="error-text"></p>
+            <div class="control-box">
+                <button class="button-style-square button-navy-color save-edit-question-data" data-bs-dismiss="modal">確定修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<template id="question-table-tr">
+    <tr>
+        <th class="index" scope="row"></th>
+        <td class="question"></td>
+        <td class="ans"></td>
+        <td class="score"></td>
+        <td>
+            <button class="button-style-square sm button-navy-color edit-question-data" type="button" data-bs-toggle="modal" data-bs-target="#edit-question-modal">編輯</button>
+            <button class="button-style-square sm button-cherry-color delete-question-data">刪除</button>
+        </td>
+    </tr>
+</template>
+
+<var class="variable d-none">
+    <var class="gameID">{{.GameID}}</var>
+    <var class="userID">{{.User.UserID}}</var>
+    <var class="token">{{.Token}}</var>
+    <var class="method">{{.Route.Method}}</var>
+    <var class="route-post">{{.Route.POST}}</var>
+    <var class="route-put">{{.Route.PUT}}</var>
+    <var class="max-people">{{.People}}</var>
+</var>

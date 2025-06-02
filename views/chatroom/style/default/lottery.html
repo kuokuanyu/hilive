@@ -1,0 +1,177 @@
+<body>
+    <div class="content-header-skin-md">
+        <button class="back">
+            <i class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+            </i>
+            <span>返回選單</span>
+        </button>
+    </div>
+    <div class="info-skin">
+        <div class="page-title-block">
+            <div class="page-title">遊戲抽獎場次資訊</div>
+        </div>
+        <div class="page-block">
+
+            {{if eq (len .PanelInfo.InfoList) 0}}
+
+                <div class="nodata-block">
+                    <div class="info-nodata">尚未設置遊戲場次</div>
+                </div>
+
+            {{else}}
+
+                {{range $key, $info := .PanelInfo.InfoList}}
+            
+                    <div class="info-block" data-id='{{(index $info "game_id").Content}}'>
+                        <div class="info-title">{{(index $info "title").Content}}</div>
+                        <div class="game-info-content">
+                            <div class="d-flex flex-row gap-3">
+                                <div class="status-block">
+                                    <div class="status-title">場次狀態</div>
+                                    <div class="status-label"></div>
+                                </div>
+                                <div class="round-block">
+                                    <div class="round-title">遊戲模式</div>
+                                    <div class="round-value"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row gap-3">
+                                <button class="btn button button-blue view-prize" type="button" data-bs-toggle="modal" data-bs-target="#history-prize-review" data-bs-name='{{(index $info "title").Content}}' data-id='{{(index $info "game_id").Content}}'>獲獎紀錄</button>
+                                <a class="btn button button-green enter-game" target="_self" role="button" data-id='{{(index $info "game_id").Content}}'>進入遊戲</a>
+                            </div>
+                        </div>
+                    </div>
+
+                {{end}}
+
+            {{end}}
+
+        </div>
+        <div id="history-prize-review" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">獲獎紀錄</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+    $(".enter-game").bind("click", function(e){
+        const gameId = e.currentTarget.dataset.id
+        const gameUrl = "{{.Route.Game}}" + gameId
+        $(this).attr("href", gameUrl)
+    })
+
+    $(".modal").bind("show.bs.modal", function(e){
+        const name = e.relatedTarget.getAttribute('data-bs-name')
+        $('.modal-title').text(name + " 的獲獎紀錄")
+    })
+
+    $(".view-prize").bind("click", function(e){
+        $("#history-prize-review").find("iframe").remove()
+        const gameId = e.currentTarget.dataset.id
+        const prizeUrl = "{{.Route.Winning}}" + gameId
+        $.get(prizeUrl, function(data){
+            $("#history-prize-review").find(".modal-body").html(data)
+        })
+    })
+
+    websocketByLottery()
+
+    function websocketByLottery(){
+        let ws
+        let wsReconnect = false
+        lottery()
+
+        function reconnectWebsocket(){
+            if(wsReconnect){ return }
+            wsReconnect = true
+            setTimeout(function(){
+                websocketHeartbeat()
+                wsReconnect = false
+            }, 2000)
+        }
+
+        function websocketHeartbeat(){
+            try{
+                if("WebSocket" in window){
+                    lottery()
+                }else{
+                    alert("很抱歉，您的裝置無法支援WebSocket相關功能。")
+                }
+            }catch(e){
+                reconnectWebsocket()
+                alert("活動資料連線發生異常，請重新整理網頁，如無法排除問題，請聯絡技術專員。")
+            }
+        }
+
+        function lottery(){
+            const lotteryGameID = [
+                {{range $key, $info := .PanelInfo.InfoList}}
+                    "{{(index $info "game_id").Content}}", 
+                {{end}}
+            ]
+            const gameIDs = lotteryGameID.toString()
+            const url = "wss://"+ getAPIDomainFromURL() +"/ws/v1/game?activity_id="+ getKeyFromURL("activity_id") + "&game=lottery"
+
+            let send
+
+            ws = new WebSocket(url)
+
+            ws.onopen = function(){
+                const ids = { gameIDs: gameIDs }
+                ws.send(JSON.stringify(ids))
+                send = setInterval(function(){
+                    ws.send(JSON.stringify(ids))
+                }, 1000)
+            }
+
+            ws.onerror = function(error){
+                clearInterval(send)
+                // alert("ws發生錯誤，代碼: " + error.code, error.reason)
+            }
+
+            ws.onclose = function(error){
+                clearInterval(send)
+                if(error.code == 1006){
+                    location.href
+                }else if(error.code !== 1000){
+                    reconnectWebsocket()
+                    alert("ws被不正常關閉，正在重連中")
+                }
+            }
+
+            ws.onmessage = function(e){
+                const data = JSON.parse(e.data)
+                $(data.Games).each(function(i){
+                    if($(data.Games).get(i).game_status === "order"){
+                        $(".info-block[data-id="+ $(data.Games).get(i).game_id +"]").find(".round-value").text("依序抽獎")
+                        $(".info-block[data-id="+ $(data.Games).get(i).game_id +"]").find(".status-label").removeClass("status-open").addClass("status-close").text("已關閉")
+                        $(".info-block[data-id="+ $(data.Games).get(i).game_id +"]").find(".enter-game").prop("disabled", true).css("pointer-events", "none").text("無法進入")
+                    }else{
+                        $(".info-block[data-id="+ $(data.Games).get(i).game_id +"]").find(".round-value").text("同時抽獎")
+                        $(".info-block[data-id="+ $(data.Games).get(i).game_id +"]").find(".status-label").removeClass("status-close").addClass("status-open").text("開啟中")
+                        $(".info-block[data-id="+ $(data.Games).get(i).game_id +"]").find(".enter-game").prop("disabled", false).css("pointer-events", "auto").text("進入遊戲")
+                    }
+                })
+            }
+
+            $(".content-header-skin-md").find(".back").bind("click", function(){
+                ws.close(1000)
+                clearInterval(send)
+            })
+        }
+    }
+    
+</script>

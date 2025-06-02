@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>請填寫表單資料</title>
+
+        <!-- Jquery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        
+        <!-- sweetalert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <!-- Main style -->
+        <link href="/admin/assets/dist/css/main.css?ver=20230321" rel="stylesheet">
+        
+    </head>
+    <body>
+        <form id="guest-require" class="p-20 d-flex flex-column gap-20">
+            <div class="p-20 d-flex flex-column gap-10 input-card">
+                <h5 class="title"><strong class="required">＊</strong>聯絡人</h5>
+                <input class="input" type="text" name="name" maxlength="20" placeholder="上限為20個字元" required>
+                <h5 class="title"><strong class="required">＊</strong>連絡電話</h5>
+                <input class="input" type="tel" name="phone" maxlength="10" placeholder="0912345678，共10碼" pattern="09[0-9]{8}" required>
+                <h5 class="title"><strong class="required">＊</strong>聯絡信箱</h5>
+                <input class="input" type="email" name="email" placeholder="name@example.com" required>
+                <h5 class="title"><strong class="required">＊</strong>公司名稱</h5>
+                <input class="input" type="text" name="company_name" maxlength="20" placeholder="上限為20個字元" required>
+                <h5 class="title"><strong class="required">＊</strong>活動開始時間</h5>
+                <input class="input" type="datetime-local" name="start_time" required>
+                <h5 class="title"><strong class="required">＊</strong>活動結束時間</h5>
+                <input class="input" type="datetime-local" name="end_time" required>
+                <h5 class="title"><strong class="required">＊</strong>活動類型</h5>
+                <select class="input form-select" name="activity_type" required>
+                    <option value="婚禮">婚禮</option>
+                    <option value="年會">年會</option>
+                    <option value="商業活動">商業活動</option>
+                    <option value="企業會議">企業會議</option>
+                    <option value="論壇會議">論壇會議</option>
+                    <option value="校園活動">校園活動</option>
+                    <option value="競技賽事">競技賽事</option>
+                    <option value="培訓/教育">培訓/教育</option>
+                    <option value="酒吧/餐飲娛樂">酒吧/餐飲娛樂</option>
+                    <option value="電視/媒體">電視/媒體</option>
+                    <option value="其他">其他</option>
+                </select>
+                <h5 class="title"><strong class="required">＊</strong>活動人數</h5>
+                <input class="input" type="number" name="people" required>
+                <h5 class="title">需求內容</h5>
+                <textarea class="input" name="needs" cols="100" rows="5" placeholder="(例如: 想使用hilives哪些功能?)"></textarea>
+                <h5 class="title">其他</h5>
+                <textarea class="input" name="other" cols="100" rows="5"></textarea>
+            </div>
+            <button id="save" class="btn btn-green-color" type="button">確定送出</button>
+        </form>
+    </body>
+    <script>
+        
+        $("#save").bind("click", function(){
+            let formDataBox = new FormData()
+
+            formDataBox.append("user_id", getQueryVariable("user_id"))
+            formDataBox.append("name", $("[name='name']").val())
+            formDataBox.append("phone", $("[name='phone']").val())
+            formDataBox.append("email", $("[name='email']").val())
+            formDataBox.append("company_name", $("[name='company_name']").val())
+            formDataBox.append("activity_type", $("[name='activity_type']").val())
+            formDataBox.append("people", $("[name='people']").val())
+            formDataBox.append("start_time", $("[name='start_time']").val())
+            formDataBox.append("end_time", $("[name='end_time']").val())
+            formDataBox.append("needs", $("[name='needs']").val())
+            formDataBox.append("other", $("[name='other']").val())
+
+            let allRequired = false
+            $(":required").each(function(i){
+                if($(this).val() === ""){
+                    allRequired = true
+                }
+            }).promise().done(function(){
+                if(allRequired){
+                    Swal.fire({
+                        title: "注意",
+                        text: "有＊字號的地方為必填欄位，您尚未填寫",
+                        icon: "warning",
+                        confirmButtonText: "確定"
+                    })
+                }else{
+                    let settings = {
+                        "url": "{{.Route.POST}}",
+                        "method": "POST",
+                        "timeout": 0,
+                        "processData": false,
+                        "mimeType": "multipart/form-data",
+                        "contentType": false,
+                        "data": formDataBox,
+                        "dataType": "json",
+                        "success": function(data){
+                            Swal.fire({
+                                title: "填寫成功",
+                                text: "已成功填寫，請關閉視窗",
+                                icon: "success",
+                                confirmButtonText: "確定"
+                            }).then(function(result){
+                                Swal.fire({
+                                    title: "請留意手機訊息",
+                                    text: "客服專員會盡速與您聯絡",
+                                    icon: "success",
+                                    confirmButtonText: "確定"
+                                })
+                            })
+                            document.getElementById("guest-require").reset()
+                        },
+                        "error": function(result){
+                            Swal.fire({
+                                title: "錯誤",
+                                text: result.responseJSON.message,
+                                icon: "error",
+                                confirmButtonText: "確定"
+                            })
+                        }
+                    }
+
+                    $.ajax(settings).done(function(){})
+                }
+            })
+
+        })
+
+        function getQueryVariable(variable){
+			var query = window.location.search.substring(1)
+			var vars = query.split("&")
+			for(var i = 0; i < vars.length; i++){
+				var pair = vars[i].split("=")
+				if(pair[0] == variable){
+					return pair[1]
+				}
+			}
+			return("")
+		}
+
+    </script>
+</html>

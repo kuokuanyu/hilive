@@ -1,0 +1,700 @@
+<div class="options-skin">
+    <h1 class="container-title">自訂義欄位設置</h1>
+    <details class="container-box" open>
+		<summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>基本設置</h2>
+        </summary>
+		<div class="main-content">
+
+            <div class="d-flex flex-wrap gap-3">
+
+                <div class="form-group">
+                    <label class="form-label">電子信箱</label>
+                    <div class="radio-button-box">
+                        <div class="radio-button">
+                            <input type="radio" id="ext_email_required_true" name="ext_email_required" value="true" checked>
+                            <label for="ext_email_required_true">必填</label>
+                        </div>
+                        <div class="radio-button">
+                            <input type="radio" id="ext_email_required_false" name="ext_email_required" value="false">
+                            <label for="ext_email_required_false">選填</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">手機號碼</label>
+                    <div class="radio-button-box">
+                        <div class="radio-button">
+                            <input type="radio" id="ext_phone_required_true" name="ext_phone_required" value="true" checked>
+                            <label for="ext_phone_required_true">必填</label>
+                        </div>
+                        <div class="radio-button">
+                            <input type="radio" id="ext_phone_required_false" name="ext_phone_required" value="false">
+                            <label for="ext_phone_required_false">選填</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">表單資訊圖</label>
+                    <p>如果想在表單添加資訊圖，請上傳圖片(限png、jpg或gif檔)，檔案大小3MB以內，尺寸最多為2500*2500</p>
+                    <div class="d-grid d-md-flex gap-2">
+                        <input class="d-none image-file" id="ext-banner" type="file" name="info_picture" accept="image/png, image/jpeg, image/gif">
+                        <label class="btn base-button button-md icon-button button-kakitsubata-color" for="ext-banner"><i class="bi bi-image"></i>上傳圖片</label>
+                        <input type="hidden" name="info_picture__default_flag" value="0">
+                        <button class="btn base-button button-md button-callalily-color default-image-button">清空圖片</button>
+                    </div>
+                    <p class="file-name"></p>
+                </div>
+
+            </div>
+
+        </div>
+	</details>
+    <details class="container-box" open>
+		<summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>自訂義欄位設置</h2>
+        </summary>
+        <div class="main-content">
+
+            <div class="alert w-100">
+                <p>※ 自定義欄位目前最多為10個</p>
+            </div>
+            <div class="custom-form-box w-100">
+                <form>
+                    <fieldset class="field-group">
+                        <legend class="fs-6">自訂義欄位-1</legend>
+                        <input type="hidden" name="field" value="ext_1">
+                        <div class="custom-input-block row">
+                            <label class="input-box input-box-title col-lg">欄位顯示名稱
+                                <input class="form-control" type="text" name="name">
+                            </label>
+                            <label class="input-box input-box-title col-lg">欄位類型
+                                <select class="form-select" name="type">
+                                    <option>請選擇欄位類型</option>
+                                    <option value="text">文字類型</option>
+                                    <option value="radio">單選框類型</option>
+                                    <option value="select">下拉單選框類型</option>
+                                    <option value="checkbox">複選框類型</option>
+                                    <option value="textarea">多行文字類型</option>
+                                    <option value="date">日期類型</option>
+                                    <option value="time">時間類型</option>
+                                </select>
+                            </label>
+                            <div class="input-box col-lg">
+                                <label class="input-box-title">必填欄位</label>
+                                <div class="d-flex align-items-center h-100">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="true" checked>開啟
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="false">關閉
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset class="custom-input-value-block hide">
+                            <legend class="fs-6">自訂義選項</legend>
+                            <button class="add-input-value button button-sm button-green" type="button">新增選擇內容</button>
+                            <div class="input-value-block">
+                                <div class="custom-input-value-box">
+                                    <input class="custom-input-value" type="text">
+                                    <button class="delete-custom-input-value" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="container-fluid">
+                            <div class="control-box row">
+                                <button class="save-input button button-blue col-lg-2" type="button">儲存這個欄位</button>
+                                <button class="delete-input button button-gray col-lg-2" type="button">清空設置</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="custom-form-box w-100">
+                <form>
+                    <fieldset class="field-group">
+                        <legend class="fs-6">自訂義欄位-2</legend>
+                        <input type="hidden" name="field" value="ext_2">
+                        <div class="custom-input-block row">
+                            <label class="input-box input-box-title col-lg">欄位顯示名稱
+                                <input class="form-control" type="text" name="name">
+                            </label>
+                            <label class="input-box input-box-title col-lg">欄位類型
+                                <select class="form-select" name="type">
+                                    <option>請選擇欄位類型</option>
+                                    <option value="text">文字類型</option>
+                                    <option value="radio">單選框類型</option>
+                                    <option value="select">下拉單選框類型</option>
+                                    <option value="checkbox">複選框類型</option>
+                                    <option value="textarea">多行文字類型</option>
+                                    <option value="date">日期類型</option>
+                                    <option value="time">時間類型</option>
+                                </select>
+                            </label>
+                            <div class="input-box col-lg">
+                                <label class="input-box-title">必填欄位</label>
+                                <div class="d-flex align-items-center h-100">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="true" checked>開啟
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="false">關閉
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset class="custom-input-value-block hide">
+                            <legend class="fs-6">自訂義選項</legend>
+                            <button class="add-input-value button button-sm button-green" type="button">新增選擇內容</button>
+                            <div class="input-value-block">
+                                <div class="custom-input-value-box">
+                                    <input class="custom-input-value" type="text">
+                                    <button class="delete-custom-input-value" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="container-fluid">
+                            <div class="control-box row">
+                                <button class="save-input button button-blue col-lg-2" type="button">儲存這個欄位</button>
+                                <button class="delete-input button button-gray col-lg-2" type="button">清空設置</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="custom-form-box w-100">
+                <form>
+                    <fieldset class="field-group">
+                        <legend class="fs-6">自訂義欄位-3</legend>
+                        <input type="hidden" name="field" value="ext_3">
+                        <div class="custom-input-block row">
+                            <label class="input-box input-box-title col-lg">欄位顯示名稱
+                                <input class="form-control" type="text" name="name">
+                            </label>
+                            <label class="input-box input-box-title col-lg">欄位類型
+                                <select class="form-select" name="type">
+                                    <option>請選擇欄位類型</option>
+                                    <option value="text">文字類型</option>
+                                    <option value="radio">單選框類型</option>
+                                    <option value="select">下拉單選框類型</option>
+                                    <option value="checkbox">複選框類型</option>
+                                    <option value="textarea">多行文字類型</option>
+                                    <option value="date">日期類型</option>
+                                    <option value="time">時間類型</option>
+                                </select>
+                            </label>
+                            <div class="input-box col-lg">
+                                <label class="input-box-title">必填欄位</label>
+                                <div class="d-flex align-items-center h-100">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="true" checked>開啟
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="false">關閉
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset class="custom-input-value-block hide">
+                            <legend class="fs-6">自訂義選項</legend>
+                            <button class="add-input-value button button-sm button-green" type="button">新增選擇內容</button>
+                            <div class="input-value-block">
+                                <div class="custom-input-value-box">
+                                    <input class="custom-input-value" type="text">
+                                    <button class="delete-custom-input-value" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="container-fluid">
+                            <div class="control-box row">
+                                <button class="save-input button button-blue col-lg-2" type="button">儲存這個欄位</button>
+                                <button class="delete-input button button-gray col-lg-2" type="button">清空設置</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="custom-form-box w-100">
+                <form>
+                    <fieldset class="field-group">
+                        <legend class="fs-6">自訂義欄位-4</legend>
+                        <input type="hidden" name="field" value="ext_4">
+                        <div class="custom-input-block row">
+                            <label class="input-box input-box-title col-lg">欄位顯示名稱
+                                <input class="form-control" type="text" name="name">
+                            </label>
+                            <label class="input-box input-box-title col-lg">欄位類型
+                                <select class="form-select" name="type">
+                                    <option>請選擇欄位類型</option>
+                                    <option value="text">文字類型</option>
+                                    <option value="radio">單選框類型</option>
+                                    <option value="select">下拉單選框類型</option>
+                                    <option value="checkbox">複選框類型</option>
+                                    <option value="textarea">多行文字類型</option>
+                                    <option value="date">日期類型</option>
+                                    <option value="time">時間類型</option>
+                                </select>
+                            </label>
+                            <div class="input-box col-lg">
+                                <label class="input-box-title">必填欄位</label>
+                                <div class="d-flex align-items-center h-100">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="true" checked>開啟
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="false">關閉
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset class="custom-input-value-block hide">
+                            <legend class="fs-6">自訂義選項</legend>
+                            <button class="add-input-value button button-sm button-green" type="button">新增選擇內容</button>
+                            <div class="input-value-block">
+                                <div class="custom-input-value-box">
+                                    <input class="custom-input-value" type="text">
+                                    <button class="delete-custom-input-value" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="container-fluid">
+                            <div class="control-box row">
+                                <button class="save-input button button-blue col-lg-2" type="button">儲存這個欄位</button>
+                                <button class="delete-input button button-gray col-lg-2" type="button">清空設置</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="custom-form-box w-100">
+                <form>
+                    <fieldset class="field-group">
+                        <legend class="fs-6">自訂義欄位-5</legend>
+                        <input type="hidden" name="field" value="ext_5">
+                        <div class="custom-input-block row">
+                            <label class="input-box input-box-title col-lg">欄位顯示名稱
+                                <input class="form-control" type="text" name="name" required>
+                            </label>
+                            <label class="input-box input-box-title col-lg">欄位類型
+                                <select class="form-select" name="type">
+                                    <option>請選擇欄位類型</option>
+                                    <option value="text">文字類型</option>
+                                    <option value="radio">單選框類型</option>
+                                    <option value="select">下拉單選框類型</option>
+                                    <option value="checkbox">複選框類型</option>
+                                    <option value="textarea">多行文字類型</option>
+                                    <option value="date">日期類型</option>
+                                    <option value="time">時間類型</option>
+                                </select>
+                            </label>
+                            <div class="input-box col-lg">
+                                <label class="input-box-title">必填欄位</label>
+                                <div class="d-flex align-items-center h-100">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="true" checked>開啟
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="false">關閉
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset class="custom-input-value-block hide">
+                            <legend class="fs-6">自訂義選項</legend>
+                            <button class="add-input-value button button-sm button-green" type="button">新增選擇內容</button>
+                            <div class="input-value-block">
+                                <div class="custom-input-value-box">
+                                    <input class="custom-input-value" type="text">
+                                    <button class="delete-custom-input-value" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="container-fluid">
+                            <div class="control-box row">
+                                <button class="save-input button button-blue col-lg-2" type="button">儲存這個欄位</button>
+                                <button class="delete-input button button-gray col-lg-2" type="button">清空設置</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="custom-form-box w-100">
+                <form>
+                    <fieldset class="field-group">
+                        <legend class="fs-6">自訂義欄位-6</legend>
+                        <input type="hidden" name="field" value="ext_6">
+                        <div class="custom-input-block row">
+                            <label class="input-box input-box-title col-lg">欄位顯示名稱
+                                <input class="form-control" type="text" name="name">
+                            </label>
+                            <label class="input-box input-box-title col-lg">欄位類型
+                                <select class="form-select" name="type">
+                                    <option>請選擇欄位類型</option>
+                                    <option value="text">文字類型</option>
+                                    <option value="radio">單選框類型</option>
+                                    <option value="select">下拉單選框類型</option>
+                                    <option value="checkbox">複選框類型</option>
+                                    <option value="textarea">多行文字類型</option>
+                                    <option value="date">日期類型</option>
+                                    <option value="time">時間類型</option>
+                                </select>
+                            </label>
+                            <div class="input-box col-lg">
+                                <label class="input-box-title">必填欄位</label>
+                                <div class="d-flex align-items-center h-100">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="true" checked>開啟
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="false">關閉
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset class="custom-input-value-block hide">
+                            <legend class="fs-6">自訂義選項</legend>
+                            <button class="add-input-value button button-sm button-green" type="button">新增選擇內容</button>
+                            <div class="input-value-block">
+                                <div class="custom-input-value-box">
+                                    <input class="custom-input-value" type="text">
+                                    <button class="delete-custom-input-value" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="container-fluid">
+                            <div class="control-box row">
+                                <button class="save-input button button-blue col-lg-2" type="button">儲存這個欄位</button>
+                                <button class="delete-input button button-gray col-lg-2" type="button">清空設置</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="custom-form-box w-100">
+                <form>
+                    <fieldset class="field-group">
+                        <legend class="fs-6">自訂義欄位-7</legend>
+                        <input type="hidden" name="field" value="ext_7">
+                        <div class="custom-input-block row">
+                            <label class="input-box input-box-title col-lg">欄位顯示名稱
+                                <input class="form-control" type="text" name="name">
+                            </label>
+                            <label class="input-box input-box-title col-lg">欄位類型
+                                <select class="form-select" name="type">
+                                    <option>請選擇欄位類型</option>
+                                    <option value="text">文字類型</option>
+                                    <option value="radio">單選框類型</option>
+                                    <option value="select">下拉單選框類型</option>
+                                    <option value="checkbox">複選框類型</option>
+                                    <option value="textarea">多行文字類型</option>
+                                    <option value="date">日期類型</option>
+                                    <option value="time">時間類型</option>
+                                </select>
+                            </label>
+                            <div class="input-box col-lg">
+                                <label class="input-box-title">必填欄位</label>
+                                <div class="d-flex align-items-center h-100">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="true" checked>開啟
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="false">關閉
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset class="custom-input-value-block hide">
+                            <legend class="fs-6">自訂義選項</legend>
+                            <button class="add-input-value button button-sm button-green" type="button">新增選擇內容</button>
+                            <div class="input-value-block">
+                                <div class="custom-input-value-box">
+                                    <input class="custom-input-value" type="text">
+                                    <button class="delete-custom-input-value" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="container-fluid">
+                            <div class="control-box row">
+                                <button class="save-input button button-blue col-lg-2" type="button">儲存這個欄位</button>
+                                <button class="delete-input button button-gray col-lg-2" type="button">清空設置</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="custom-form-box w-100">
+                <form>
+                    <fieldset class="field-group">
+                        <legend class="fs-6">自訂義欄位-8</legend>
+                        <input type="hidden" name="field" value="ext_8">
+                        <div class="custom-input-block row">
+                            <label class="input-box input-box-title col-lg">欄位顯示名稱
+                                <input class="form-control" type="text" name="name">
+                            </label>
+                            <label class="input-box input-box-title col-lg">欄位類型
+                                <select class="form-select" name="type">
+                                    <option>請選擇欄位類型</option>
+                                    <option value="text">文字類型</option>
+                                    <option value="radio">單選框類型</option>
+                                    <option value="select">下拉單選框類型</option>
+                                    <option value="checkbox">複選框類型</option>
+                                    <option value="textarea">多行文字類型</option>
+                                    <option value="date">日期類型</option>
+                                    <option value="time">時間類型</option>
+                                </select>
+                            </label>
+                            <div class="input-box col-lg">
+                                <label class="input-box-title">必填欄位</label>
+                                <div class="d-flex align-items-center h-100">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="true" checked>開啟
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="false">關閉
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset class="custom-input-value-block hide">
+                            <legend class="fs-6">自訂義選項</legend>
+                            <button class="add-input-value button button-sm button-green" type="button">新增選擇內容</button>
+                            <div class="input-value-block">
+                                <div class="custom-input-value-box">
+                                    <input class="custom-input-value" type="text">
+                                    <button class="delete-custom-input-value" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="container-fluid">
+                            <div class="control-box row">
+                                <button class="save-input button button-blue col-lg-2" type="button">儲存這個欄位</button>
+                                <button class="delete-input button button-gray col-lg-2" type="button">清空設置</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="custom-form-box w-100">
+                <form>
+                    <fieldset class="field-group">
+                        <legend class="fs-6">自訂義欄位-9</legend>
+                        <input type="hidden" name="field" value="ext_9">
+                        <div class="custom-input-block row">
+                            <label class="input-box input-box-title col-lg">欄位顯示名稱
+                                <input class="form-control" type="text" name="name">
+                            </label>
+                            <label class="input-box input-box-title col-lg">欄位類型
+                                <select class="form-select" name="type">
+                                    <option>請選擇欄位類型</option>
+                                    <option value="text">文字類型</option>
+                                    <option value="radio">單選框類型</option>
+                                    <option value="select">下拉單選框類型</option>
+                                    <option value="checkbox">複選框類型</option>
+                                    <option value="textarea">多行文字類型</option>
+                                    <option value="date">日期類型</option>
+                                    <option value="time">時間類型</option>
+                                </select>
+                            </label>
+                            <div class="input-box col-lg">
+                                <label class="input-box-title">必填欄位</label>
+                                <div class="d-flex align-items-center h-100">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="true" checked>開啟
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="false">關閉
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset class="custom-input-value-block hide">
+                            <legend class="fs-6">自訂義選項</legend>
+                            <button class="add-input-value button button-sm button-green" type="button">新增選擇內容</button>
+                            <div class="input-value-block">
+                                <div class="custom-input-value-box">
+                                    <input class="custom-input-value" type="text">
+                                    <button class="delete-custom-input-value" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="container-fluid">
+                            <div class="control-box row">
+                                <button class="save-input button button-blue col-lg-2" type="button">儲存這個欄位</button>
+                                <button class="delete-input button button-gray col-lg-2" type="button">清空設置</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="custom-form-box w-100 mb-3">
+                <form>
+                    <fieldset class="field-group">
+                        <legend class="fs-6">自訂義欄位-10</legend>
+                        <input type="hidden" name="field" value="ext_10">
+                        <div class="custom-input-block row">
+                            <label class="input-box input-box-title col-lg">欄位顯示名稱
+                                <input class="form-control" type="text" name="name">
+                            </label>
+                            <label class="input-box input-box-title col-lg">欄位類型
+                                <select class="form-select" name="type">
+                                    <option>請選擇欄位類型</option>
+                                    <option value="text">文字類型</option>
+                                    <option value="radio">單選框類型</option>
+                                    <option value="select">下拉單選框類型</option>
+                                    <option value="checkbox">複選框類型</option>
+                                    <option value="textarea">多行文字類型</option>
+                                    <option value="date">日期類型</option>
+                                    <option value="time">時間類型</option>
+                                </select>
+                            </label>
+                            <div class="input-box col-lg">
+                                <label class="input-box-title">必填欄位</label>
+                                <div class="d-flex align-items-center h-100">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="true" checked>開啟
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="required" value="false">關閉
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset class="custom-input-value-block hide">
+                            <legend class="fs-6">自訂義選項</legend>
+                            <button class="add-input-value button button-sm button-green" type="button">新增選擇內容</button>
+                            <div class="input-value-block">
+                                <div class="custom-input-value-box">
+                                    <input class="custom-input-value" type="text">
+                                    <button class="delete-custom-input-value" type="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="container-fluid">
+                            <div class="control-box row">
+                                <button class="save-input button button-blue col-lg-2" type="button">儲存這個欄位</button>
+                                <button class="delete-input button button-gray col-lg-2" type="button">清空設置</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+        </div>
+    </details>
+</div>
+
+<template id="custom-input-value-box">
+    <div class="custom-input-value-box">
+        <input class="custom-input-value" type="text">
+        <button class="delete-custom-input-value" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+        </button>
+    </div>
+</template>
+
+<var class="variable d-none">
+    <var class="userID">{{.User.UserID}}</var>
+    <var class="token">{{.Token}}</var>
+    <var class="route-patch">{{.Route.PATCH}}</var>
+    <var class="custom-data-json">{{.ApplysignCustomizeJSON}}</var>
+</var>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>客戶端畫面</title>
+        
+        <style>
+            @font-face {
+                font-family: "GenSenRounded-M";
+                src: url("/admin/assets/dist/fonts/GenSenRounded-M.ttc") format("truetype");
+            }
+
+            * {
+                font-family: "GenSenRounded-M";
+                -webkit-box-sizing: border-box;
+                        box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                overflow: hidden;
+            }
+
+            .error-container {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                        justify-content: center;
+                -webkit-box-align: center;
+                    -ms-flex-align: center;
+                        align-items: center;
+                width: 100%;
+                height: 100vh;
+                background-color: #f1f2f3;
+                background-image: url("/admin/assets/dist/img/hilives-text-background-1.png");
+            }
+
+            .error-container .message-skin {
+                padding: 2.5rem;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                    -ms-flex-direction: column;
+                        flex-direction: column;
+                -webkit-box-align: center;
+                    -ms-flex-align: center;
+                        align-items: center;
+                position: relative;
+                width: 80%;
+                max-width: 60vh;
+                border-radius: 0.625rem;
+                background-color: #fff;
+                -webkit-box-shadow: 0 0 0.313rem 0 rgba(191, 191, 191, 0.35);
+                        box-shadow: 0 0 0.313rem 0 rgba(191, 191, 191, 0.35);
+            }
+
+            .error-container .error-illustration-block {
+                margin-bottom: 1rem;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                        justify-content: center;
+                -webkit-box-align: center;
+                    -ms-flex-align: center;
+                        align-items: center;
+                width: 100%;
+            }
+
+            .error-container .error-illustration {
+                width: 70%;
+            }
+
+            .error-container .error-message-block {
+                padding: 2rem 0;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                        justify-content: center;
+                -webkit-box-align: center;
+                    -ms-flex-align: center;
+                        align-items: center;
+                width: 100%;
+            }
+
+            .error-container .error-message {
+                color: #1c2519;
+                font-size: 2.5vh;
+                text-align: center;
+            }
+
+            .error-container .control-block {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                        justify-content: center;
+                -webkit-box-align: center;
+                    -ms-flex-align: center;
+                        align-items: center;
+                width: 100%;
+            }
+
+            @media (max-width: 576px) {
+                .error-container .message-skin, .error-container .error-message-block {
+                    padding: 0.625rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="error-container">
+            <!-- <div class="gradient-background"></div> -->
+            <!-- <div class="text-background"></div> -->
+            <div class="message-skin">
+                <div class="error-illustration-block">
+                    <img class="error-illustration" src="/admin/assets/dist/img/error-img.svg">
+                </div>
+                <div class="error-message-block">
+                    <div class="error-message">{{.Error}}</div>
+                </div>
+                <!-- <div class="control-block">
+                    <div class="close-button">關閉</div>
+                </div> -->
+            </div>
+        </div>
+    </body>
+</html>

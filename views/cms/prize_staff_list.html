@@ -1,0 +1,92 @@
+<main>
+    <div class="page-container">
+        <div class="container main-skin h-100">
+            <h2 class="page-title">全部中獎人員列表</h2>
+            <div class="table-control-bar">
+                <div class="d-flex flex-row gap-2">
+                    <p class="title">操作</p>
+                    <a class="btn btn-success btn-sm download-staff-data" target="_blank" download="">資料匯出</a>
+                </div>
+            </div>
+            <div class="table-box">
+                <table id="prize-staff" class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th class="col-4">中獎用戶</th>
+                            <th class="col-2">兌獎狀況</th>
+                            <th class="col-4">中獎時間</th>
+                            <th class="col-4">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{if eq (len .PanelInfo.InfoList) 0}}
+                            <tr class="no-data">
+                                <td>尚無任何中獎資料</td>
+                            </tr>
+                        {{else}}
+                            {{range $key1, $info := .PanelInfo.InfoList}}
+                                <tr class="people-list" data-id="{{(index $info "id").Content}}" data-game-id="{{(index $info "game_id").Content}}">
+                                    <td class="col-4">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="img-avatar info-mode">
+                                                <img src="{{(index $info "line_users_join_avatar").Content}}">
+                                            </div>
+                                            <p>{{(index $info "line_users_join_name").Content}}</p>
+                                        </div>
+                                    </td>
+                                    {{if eq (index $info "status").Content "yes"}}
+                                        <td class="col-2"><span class="badge bg-main">已領獎</span></td>
+                                    {{else if eq (index $info "status").Content "no"}}
+                                        <td class="col-2"><span class="badge bg-alert">尚未領獎</span></td>
+                                    {{end}}
+                                    <td class="col-4">{{(index $info "win_time").Content}}</td>
+                                    <td class="col-4">
+                                        <div class="d-flex flex-xl-row flex-column gap-2">
+                                            <button class="button button-secondary-color button-sm toggle-prize-list">獎品明細</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="gift-list d-none">
+                                    <td class="d-flex flex-row justify-content-between gap-2">
+                                        <div class="img-avatar info-mode">
+                                            <img src="{{(index $info "activity_prize_join_prize_picture").Content}}">
+                                        </div>
+                                        <div class="group">
+                                            <h6 class="title">獎項名稱</h6>
+                                            <p class="value">{{(index $info "activity_prize_join_prize_name").Content}}</p>
+                                        </div>
+                                        <div class="group">
+                                            <h6 class="title">獎品價值</h6>
+                                            <p class="value">{{(index $info "activity_prize_join_prize_price").Content}} 元</p>
+                                        </div>
+                                        <div class="group">
+                                            <h6 class="title">兌獎方式</h6>               
+                                            {{if eq (index $info "activity_prize_join_prize_method").Content "site"}}
+                                                <p class="value">現場領取</p>
+                                            {{else if eq (index $info "activity_prize_join_prize_method").Content "mail"}}
+                                                <p class="value">郵寄</p>
+                                            {{end}}
+                                        </div>
+                                        <div class="group">
+                                            <h6 class="title">兌獎密碼</h6>
+                                            {{if eq (index $info "activity_prize_join_prize_password").Content ""}}
+                                                <p class="value">尚無設定密碼</p>
+                                            {{else}}
+                                                <p class="value">{{(index $info "activity_prize_join_prize_password").Content}}</p>
+                                            {{end}}
+                                        </div>
+                                    </td>
+                                </tr>
+                            {{end}}
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<var class="variable d-none">
+    <var class="activityID">{{.ActivityID}}</var>
+    <var class="route-export">{{.Route.Export}}</var>
+</var>

@@ -1,0 +1,46 @@
+<main>
+    <div class="page-container">
+        <div class="container main-skin h-100">
+            <h2 class="page-title">參加人員清單</h2>
+            <div class="table-control-bar">
+                <div class="d-flex flex-row align-items-center gap-2">
+                    <p class="title">操作</p>
+                    <a class="button button-secondary-color button-sm download-staff-data" target="_blank" download="">資料匯出</a>
+                </div>
+                <div class="d-flex flex-row align-items-center gap-2 round-button-box">
+                    <p class="title">輪次過濾</p>
+                    {{if eq .StaffManage.IsFilterPage true}}
+            
+                        <button class="button button-border-gray button-sm link-game-scenes">返回</button>
+            
+                    {{else if eq .StaffManage.IsFilterPage false}}
+            
+                    {{end}}
+                </div>
+            </div>
+            <div class="table-box">
+                <table id="game-history" class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th class="col-4">參加人員</th>
+                            <th class="col-2">遊戲總分</th>
+                            <th class="col-4">參加時間</th>
+                            <th class="col-2">遊戲輪次</th>
+                            <th class="col-4">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="no-data">
+                            <td>尚無任何中獎資料</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<var class="variable d-none">
+    <var class="route-export">{{.Route.Export}}</var>
+    <var class="route-staffmanage">{{.Route.StaffManage}}</var>
+</var>

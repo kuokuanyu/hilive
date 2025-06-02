@@ -1,0 +1,105 @@
+<div class="options-skin">
+    <h1 class="container-title">活動總覽</h1>
+    <div class="event-info-card">
+        <div class="group-v">
+            <div class="name">
+                <span class="name party-name"></span>
+                <span class="label status-label party-status"></span>
+            </div>
+            <div class="number-block">
+                <span class="title">參加人數 : </span>
+                <span class="party-now-people"></span>
+                <span>/</span>
+                <span class="party-all-people"></span>
+            </div>
+            <div class="date-block">
+                <span class="title">活動時間 : </span>
+                <span class="start-time party-start-time"></span>
+                <span>~</span>
+                <span class="end-time party-end-time"></span>
+            </div>
+        </div>
+        <div class="group-v flex-end">
+            <div class="control-box">
+                {{if eq .CanEdit true}}
+                    <a href="#edit-activity" data-href="{{.Route.Edit}}" id="edit-overview-party" class="button button-border-blue">修改活動資料</a>
+                {{end}}
+                <!-- {{if eq .CanDelete true}}
+                    <a id="delete-overview-party" class="button button-border-gray">刪除</a>
+                {{end}} -->
+            </div>
+        </div>
+    </div>
+    <details class="container-box" open>
+        <summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>話語時刻</h2>
+        </summary>
+        <div class="main-content">
+
+            <div class="wrap-block gap-2 item-card-box" data-type="聊天牆展示"></div>
+
+        </div>
+    </details>
+    <details class="container-box" open>
+        <summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>進場等候</h2>
+        </summary>
+        <div class="main-content">
+
+            <div class="wrap-block gap-2 item-card-box" data-type="暖場互動"></div>
+            
+        </div>
+    </details>
+    <details class="container-box" open>
+        <summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>驚喜時間</h2>
+        </summary>
+        <div class="main-content">
+
+            <div class="wrap-block gap-2 item-card-box" data-type="抽獎類型"></div>
+            
+        </div>
+    </details>
+    <details class="container-box" open>
+        <summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>互動時間</h2>
+        </summary>
+        <div class="main-content">
+
+            <div class="wrap-block gap-2 item-card-box" data-type="競技類型"></div>
+            
+        </div>
+    </details>
+</div>
+
+<var class="variable d-none">
+    <var class="userID">{{.User.UserID}}</var>
+    <var class="token">{{.Token}}</var>
+    <var class="route-patch">{{.Route.PATCH}}</var>
+    <var class="route-delete">{{.Route.DELETE}}</var>
+    <var class="canEdit">{{.CanEdit}}</var>
+</var>
+
+<!-- <article id="main-content" class="section-content">
+    <div class="event-content">
+        <div class="title-block title-block-sm">話語時刻</div>
+        <div class="title-block title-block-sm">進場等候</div>
+        <div class="content-block"></div>
+        <div class="title-block title-block-sm">驚喜時間</div>
+        <div class="content-block"></div>
+        <div class="title-block title-block-sm">互動時間</div>
+        <div class="content-block"></div>
+    </div>
+</article> -->

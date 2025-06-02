@@ -1,0 +1,128 @@
+<main id="main-container" class="w-100">
+    <div class="options-skin mx-auto" style="max-width: 80rem;">
+        <h1 class="container-title">活動資訊清單</h1>
+        <details class="container-box" open>
+            <summary class="toggle-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                </svg>
+                <h2>場次資訊</h2>
+            </summary>
+            <div class="main-content">
+
+                <div class="toolbox">
+                    <div class="d-flex flex-row flex-wrap align-items-center gap-2">
+
+                        {{if eq .CanAdd true}}
+                            <a id="btn-create-party" class="btn btn-light-blue" data-name="add-data" href="#create-activity">
+                                <i class="bi bi-plus-lg"></i>
+                                <p>新增活動場次</p>
+                            </a>
+                        {{end}}
+
+                    </div>
+                    <div class="d-flex flex-row flex-wrap align-items-center gap-2">
+                        
+                    </div>
+                </div>
+                <div class="data-view">
+                    <div class="table" style="max-height: 40rem;" data-type="all">
+                        <div class="thead">
+                            <div class="tr">
+                                <div class="th index-th"><p>筆數</p></div>
+                                <div class="th title-th full"><p>活動名稱</p></div>
+                                <div class="th type-th"><p>活動狀態</p></div>
+                                <div class="th partytime-th"><p>活動時間</p></div>
+                                <div class="th barchart-th"><p>參加人數 / 限制人數</p></div>
+                                <div class="th link-login-th"><p>連結登入</p></div>
+                                <div class="th control-th pin right-pin fit-container fixed-muti"><p class="fixed-muti">編輯設置</p><p class="fixed-muti">活動畫面</p><p class="fixed-muti">畫面控制</p></div>
+                            </div>
+                        </div>
+                        <div class="tbody"></div>
+                    </div>
+                </div>
+
+            </div>
+        </details>
+    </div>
+</main>
+
+<div class="modal fade" id="party-controller" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">主持端遙控器連結</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <div id="controller-qrcode" class="qrcode-box" style="width: 240px; height: 240px;"></div>
+                </div>
+                <p class="text-center">請用Line掃描QRcode</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<template id="tr">
+    <div class="tr" style="cursor: auto;">
+        <div class="td index-td" data-name="index"></div>
+        <div class="td title-td mutiline-td full">
+            <p class="title" data-name="name"></p>
+            <p class="tag">
+                <span data-name="city"></span>
+                <span> / </span>
+                <span data-name="town"></span>
+                <span> / </span>
+                <span data-name="type"></span>
+            </p>
+        </div>
+        <div class="td type-td" data-name="status">
+            <span class="label"></span>
+        </div>
+        <div class="td partytime-td">
+            <p>
+                <span data-name="startTime"></span>
+                <span> ~ </span>
+                <span data-name="endTime"></span>
+            </p>
+        </div>
+        <div class="td barchart-td">
+            <div class="bar-chart">
+                <div class="progress"></div>
+            </div>
+            <p>
+                <span data-name="currentPeople"></span>
+                <span> / </span>
+                <span data-name="limitPeople"></span>
+                <span> 人</span>
+            </p>
+        </div>
+        <div class="td link-login-td">
+            <p class="not-open">無設置連結登入</p>
+            <p>登入密碼: <span data-name="loginPassword"></span></p>
+            <p>登入連結: <span class="d-none" data-name="loginHref"></span><span data-name="copy-link">複製連結網址</span></p>
+        </div>
+        <div class="td control-td pin right-pin fit-container fixed-muti">
+            <ul class="fixed-muti">
+                <li title="編輯設置" data-name="edit-data"><i class="bi bi-gear"><a href="#activity-settings"></a></i></li>
+            </ul>
+            <ul class="fixed-muti">
+                <li title="活動畫面" data-name="link-party-screen"><i class="bi bi-person-video3"><a href="/" target="_blank"></a></i></li>
+            </ul>
+            <ul class="fixed-muti">
+                <li title="畫面控制" data-name="controller" data-bs-toggle="modal" data-bs-target="#party-controller"><i class="bi bi-toggles2"></i></li>
+            </ul>
+        </div>
+    </div>
+</template>
+
+<var class="variable d-none">
+    <var class="userID">{{.User.UserID}}</var>
+    <var class="token">{{.Token}}</var>
+    <var class="route-new">{{.Route.New}}</var>
+    <var class="route-edit">{{.Route.Edit}}</var>
+    <var class="route-delete">{{.Route.DELETE}}</var>
+    <var class="route-overview">{{.Route.Overview}}</var>
+    <var class="route-host">{{.Route.Host}}</var>
+</var>

@@ -1,0 +1,63 @@
+<main>
+    <div class="page-container">
+        <div class="container main-skin h-100">
+            <h2 class="page-title justify-content-between">
+                遊戲場次列表
+                <a class="btn btn-success btn-sm download-staff-data" target="_blank" download="">資料匯出</a>
+            </h2>
+            <div class="table-box">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th class="col-3">場次名稱</th>
+                            <th class="col-3">重複中獎</th>
+                            <th class="col-3">中獎機率</th>
+                            <th class="col-3">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{if eq (len .PanelInfo.InfoList) 0}}
+                            <tr class="no-data">
+                                <td>尚無任何場次資料</td>
+                            </tr>
+                        {{else}}
+                            {{$managehref := .Route.StaffManage}}
+                            {{range $key1, $info := .PanelInfo.InfoList}}
+                                <tr>
+                                    <td>{{(index $info "title").Content}}</td>
+                                    {{if eq (index $info "allow").Content "open"}}
+                                        <td><span class="badge bg-main">允許</span></td>
+                                    {{else if eq (index $info "allow").Content "close"}}
+                                        <td><span class="badge bg-delete">拒絕</span></td>
+                                    {{end}}
+                                    {{if eq (index $info "game").Content "lottery"}}
+                                        <td class="no-data">此遊戲無中獎機率</td>
+                                    {{else if eq (index $info "game").Content "whack_mole"}}
+                                        <td class="no-data">此遊戲無中獎機率</td>
+                                    {{else if eq (index $info "game").Content "monopoly"}}
+                                        <td class="no-data">此遊戲無中獎機率</td>
+                                    {{else if eq (index $info "game").Content "QA"}}
+                                        <td class="no-data">此遊戲無中獎機率</td>
+                                    {{else if eq (index $info "game").Content "draw_numbers"}}
+                                        <td class="no-data">此遊戲無中獎機率</td>
+                                    {{else}}
+                                        <td>{{(index $info "percent").Content}}%</td>
+                                    {{end}}
+                                    <td>
+                                        <a class="btn btn-primary link-winner-manage" href="#winner-{{(index $info "game").Content}}-list" data-id="{{(index $info "game_id").Content}}" data-href="{{$managehref}}">中獎人員管理</a>
+                                        <div class="d-none this-page-game">{{(index $info "game").Content}}</div>
+                                    </td>
+                                </tr>
+                            {{end}}
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<var class="variable d-none">
+    <var class="activityID">{{.ActivityID}}</var>
+    <var class="route-export">{{.Route.Export}}</var>
+</var>

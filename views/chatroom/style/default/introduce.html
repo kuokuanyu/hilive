@@ -1,0 +1,81 @@
+<div class="content-header-skin-md">
+    <button class="back">
+        <i class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+        </i>
+        <span>返回選單</span>
+    </button>
+</div>
+<div class="info-skin">
+    <div class="page-title-block">
+        <div class="page-title">{{.ActivityModel.IntroduceTitle}}</div>
+    </div>
+    <div class="page-block">
+
+        {{if eq (len .PanelInfo.InfoList) 0}}
+
+            <div class="nodata-block">
+                <div class="info-nodata">尚未設置介紹資訊</div>
+            </div>
+
+        {{end}}
+        
+    </div>
+</div>
+<template id="info-list-card">
+    <div class="info-block">
+        <div class="info-title"></div>
+        <div class="info-content">
+            <div class="info-describe"></div>
+            <div class="info-picture-box">
+                <a target="_blank">
+                    <img class="info-picture">
+                </a>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+
+    loadListData()
+
+    function loadListData(){
+        let dataURL = "https://"+ getAPIDomainFromURL() +"/v1/info/introduce?activity_id="+ getKeyFromURL("activity_id")
+        fetch(dataURL)
+        .then((res) => res.json())
+        .then((res) => {
+            
+            const infoData = res.data
+            $(infoData).each(function(i, data){
+                const template = $("#info-list-card").html()
+                const listCard = $(template)
+
+                const id = data.id
+                const title = data.title
+                const type = data.introduce_type
+                const content = data.content
+                const sort = data.introduce_order
+            
+                listCard.attr("data-id", id).attr("data-sort", sort)
+                listCard.find(".info-title").text(title)
+                if(type === "text"){
+                    listCard.find(".info-picture-box").remove()
+                    listCard.find(".info-describe").html(content)
+                }else if(type === "picture"){
+                    listCard.find(".info-describe").remove()
+                    listCard.find(".info-picture-box a").attr("href", content)
+                    listCard.find(".info-picture-box img").attr("src", content)
+                }
+                $(".info-skin").find(".page-block").append(listCard)
+            }).promise().done(function(){
+                
+            })
+
+        }).catch(function(error){
+            console.log(error)
+        })
+    }
+
+</script>

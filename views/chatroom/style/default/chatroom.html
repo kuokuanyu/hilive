@@ -1,0 +1,831 @@
+<!-- <div class="loading-content" data-name="chatroom" style="z-index: 2;">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status"></div>
+    </div>
+    <h6>聊天室載入中...</h6>
+</div> -->
+<div class="message-content">
+    <div class="title-block">歡迎來到聊天室!</div>
+    <div class="message-block"></div>
+</div>
+<div class="effect-select-box close">
+    <h6>請選擇特殊彈幕的效果</h6>
+    <ul>
+        <li>
+            <input id="normal-effect" type="radio" name="effect" value="normal" checked>
+            <label for="normal-effect">聚焦</label>
+        </li>
+        <li>
+            <input id="three-effect" type="radio" name="effect" value="three">
+            <label for="three-effect">重複</label>
+        </li>
+        <li>
+            <input id="huge-effect" type="radio" name="effect" value="huge">
+            <label for="huge-effect">放大</label>
+        </li>
+    </ul>
+</div>
+<div class="send-message-content">
+    <div class="send-message-block" data-type="normal-message">
+        <div class="toggle-type-button">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M18.57,7.86H12.14V1.43A1.43,1.43,0,0,0,10.71,0H9.29A1.43,1.43,0,0,0,7.86,1.43V7.86H1.43A1.43,1.43,0,0,0,0,9.29v1.42a1.43,1.43,0,0,0,1.43,1.43H7.86v6.43A1.43,1.43,0,0,0,9.29,20h1.42a1.43,1.43,0,0,0,1.43-1.43V12.14h6.43A1.43,1.43,0,0,0,20,10.71V9.29A1.43,1.43,0,0,0,18.57,7.86Z"/></svg>
+            </div>
+        </div>
+        <div class="send-message-bar">
+            <div class="type-block">
+                <label class="type-label">一般訊息</label>
+            </div>
+            <div class="textarea-block">
+                <textarea class="textarea" placeholder="請輸入20字內的訊息內容" data-type="normal-message" data-style="default"></textarea>
+                <textarea class="textarea" placeholder="請輸入20字內的訊息內容" data-type="normal-barrage" data-style="default"></textarea>
+                <textarea class="textarea" placeholder="請輸入20字內的訊息內容" data-type="special-barrage" data-style="default"></textarea>
+                <textarea class="textarea" placeholder="請輸入20字內的訊息內容" data-type="occupy-barrage" data-style="default"></textarea>
+            </div>
+            <div class="send-block">
+                <div class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M18.91,8.45,2.94.23A2,2,0,0,0,0,2H0A49,49,0,0,1,.61,9h6.1a1,1,0,1,1,0,1.91H.62A49.81,49.81,0,0,1,0,18H0A2,2,0,0,0,2.89,19.8l16-7.75A2,2,0,0,0,18.91,8.45Z"/></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="select-message-block">
+        <div class="select-type-block">
+            <div class="select-type-box green focus" data-type="normal-message">
+                <div class="type-name">一般訊息</div>
+            </div>
+            <div class="select-type-box blue" data-type="normal-barrage">
+                <div class="type-name">一般彈幕</div>
+            </div>
+            <div class="select-type-box orange" data-type="special-barrage">
+                <div class="type-name">特殊彈幕</div>
+            </div>
+            <div class="select-type-box red" data-type="occupy-barrage">
+                <div class="type-name">霸佔彈幕</div>
+            </div>
+        </div>
+        <div class="select-style-block open" data-type="normal-message">
+            <div class="select-style-box focus" data-type="normal-message" data-style="default">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/default-normalmessage.png" alt="預設樣式">
+                    </div>
+                </div>
+                <div class="style-name">預設樣式</div>
+            </div>
+        </div>
+        <div class="select-style-block" data-type="normal-barrage">
+            <div class="select-style-box focus" data-type="normal-barrage" data-style="default">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/default-normalbarrage.png" alt="預設樣式">
+                    </div>
+                </div>
+                <div class="style-name">預設樣式</div>
+            </div>
+        </div>
+        <div class="select-style-block" data-type="special-barrage">
+            <div class="select-style-box focus" data-type="special-barrage" data-style="default">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-default.png" alt="預設樣式">
+                    </div>
+                </div>
+                <div class="style-name">預設樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="santaclaus">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-santaclaus.png" alt="聖誕老人樣式">
+                    </div>
+                </div>
+                <div class="style-name">聖誕老人樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="scroll">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-scroll.png" alt="捲軸樣式">
+                    </div>
+                </div>
+                <div class="style-name">捲軸樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="hilives">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-hilives.png" alt="Hilives樣式">
+                    </div>
+                </div>
+                <div class="style-name">Hilives樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="beach">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-beach.png" alt="海灘樣式">
+                    </div>
+                </div>
+                <div class="style-name">海灘樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="halloween">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-halloween.png" alt="萬聖節樣式">
+                    </div>
+                </div>
+                <div class="style-name">萬聖節樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="zongzi">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-zongzi.png" alt="端午節樣式">
+                    </div>
+                </div>
+                <div class="style-name">端午節樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="fathersday">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-fathersday.png" alt="父親節樣式">
+                    </div>
+                </div>
+                <div class="style-name">父親節樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="tanabata">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-tanabata.png" alt="七夕樣式">
+                    </div>
+                </div>
+                <div class="style-name">七夕樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="bus">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-bus.png" alt="公車樣式">
+                    </div>
+                </div>
+                <div class="style-name">公車樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="carpstreamer">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-carpstreamer.png" alt="鯉魚旗樣式">
+                    </div>
+                </div>
+                <div class="style-name">鯉魚旗樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="dragonboat">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-dragonboat.png" alt="龍舟樣式">
+                    </div>
+                </div>
+                <div class="style-name">龍舟樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="crocodile">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-crocodile.png" alt="鱷魚樣式">
+                    </div>
+                </div>
+                <div class="style-name">鱷魚樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="mothersday">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-mothersday.png" alt="母親節樣式">
+                    </div>
+                </div>
+                <div class="style-name">母親節樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="eel">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-eel.png" alt="鰻魚樣式">
+                    </div>
+                </div>
+                <div class="style-name">鰻魚樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="pencil">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-pencil.png" alt="母親節樣式">
+                    </div>
+                </div>
+                <div class="style-name">鉛筆樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="maple">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-maple.png" alt="楓葉樣式">
+                    </div>
+                </div>
+                <div class="style-name">楓葉樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="general">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-general.png" alt="普通樣式">
+                    </div>
+                </div>
+                <div class="style-name">普通樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="luckyclover">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-luckyclover.png" alt="幸運草樣式">
+                    </div>
+                </div>
+                <div class="style-name">幸運草樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="wealthandtreasure">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-wealthandtreasure.png" alt="招財進寶樣式">
+                    </div>
+                </div>
+                <div class="style-name">招財進寶樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="steamtrain">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-steamtrain.png" alt="蒸汽火車樣式">
+                    </div>
+                </div>
+                <div class="style-name">蒸汽火車樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="highspeedrail">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-highspeedrail.png" alt="高鐵樣式">
+                    </div>
+                </div>
+                <div class="style-name">高鐵樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="goodluckradish">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-goodluckradish.png" alt="好彩頭樣式">
+                    </div>
+                </div>
+                <div class="style-name">好彩頭樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="rabbit">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-rabbit.png" alt="兔子樣式">
+                    </div>
+                </div>
+                <div class="style-name">兔子樣式</div>
+            </div>
+            <div class="select-style-box" data-type="special-barrage" data-style="celebrate">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/special-barrage-celebrate.png" alt="慶祝樣式">
+                    </div>
+                </div>
+                <div class="style-name">慶祝樣式</div>
+            </div>
+        </div>
+        <div class="select-style-block" data-type="occupy-barrage">
+            <div class="select-style-box focus" data-type="occupy-barrage" data-style="default">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/default-occupybarrage.png" alt="預設樣式">
+                    </div>
+                </div>
+                <div class="style-name">預設樣式</div>
+            </div>
+            <!-- <div class="select-style-box" data-type="occupy-barrage" data-style="happybirthday">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/happybirthday-occupybarrage.png" alt="生日快樂樣式">
+                    </div>
+                </div>
+                <div class="style-name">生日快樂樣式</div>
+            </div> -->
+            <div class="select-style-box" data-type="occupy-barrage" data-style="marrychristmas">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/marrychristmas-occupybarrage.png" alt="聖誕快樂樣式">
+                    </div>
+                </div>
+                <div class="style-name">聖誕快樂樣式</div>
+            </div>
+            <div class="select-style-box" data-type="occupy-barrage" data-style="gongxifacai">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/gongxifacai-occupybarrage.png" alt="恭喜發財樣式">
+                    </div>
+                </div>
+                <div class="style-name">恭喜發財樣式</div>
+            </div>
+            <div class="select-style-box" data-type="occupy-barrage" data-style="chinesenewyear">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/chinesenewyear-occupybarrage.png" alt="新年快樂樣式">
+                    </div>
+                </div>
+                <div class="style-name">新年快樂樣式</div>
+            </div>
+            <div class="select-style-box" data-type="occupy-barrage" data-style="celebratefireworks">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/celebratefireworks-occupybarrage.png" alt="瘋狂歡慶樣式">
+                    </div>
+                </div>
+                <div class="style-name">瘋狂歡慶樣式</div>
+            </div>
+            <div class="select-style-box" data-type="occupy-barrage" data-style="sweetLove">
+                <div class="preview-block">
+                    <div class="preview-box">
+                        <img src="/admin/assets/dist/img/style-small/sweetLove-occupybarrage.png" alt="甜蜜告白樣式">
+                    </div>
+                </div>
+                <div class="style-name">甜蜜告白樣式</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    // 黑名單即時判斷
+    // loadBlackData("message", "alert-black-chatroom")
+
+    // 權限判斷，如主辦方沒特殊彈幕、霸佔彈幕的權限，主辦方和使用者的頁面也不會出現，已有在首頁設置狀態參數，如果關閉就不會出現
+
+    // 訊息種類status為close則移除該按鈕，也移除該種類的樣式欄
+    function chatTypeClose(){
+        partySetting.pageInfo.forEach((item, index) => {
+            const typeName = item.name
+            const typeStatus = item.status
+            if(typeName === "specialdanmu" && typeStatus === "close"){
+                $(".select-type-box[data-type=special-barrage]").remove()
+                $(".select-style-block[data-type=special-barrage]").remove()
+            }else if(typeName === "holdscreen" && typeStatus === "close"){
+                $(".select-type-box[data-type=occupy-barrage]").remove()
+                $(".select-style-block[data-type=occupy-barrage]").remove()
+            }
+        })
+    }
+
+    // 訊息樣式status為close則關閉
+
+    //訊息選項開關操作
+    function toggleOptionControl(){
+        $("#chatroom-page").find(".toggle-type-button").unbind("click").bind("click", function(){
+            $(this).toggleClass("rotate")
+            $(".send-message-content").toggleClass("up")
+            $(".message-content").toggleClass("up")
+            $(".effect-select-box").toggleClass("up")
+            chatroomScrollBottom()
+        })
+    }
+
+    //選擇訊息種類
+    function selectChatTypeControl(){
+        $("#chatroom-page").find(".select-type-box").unbind("click").bind("click", function(e){
+            let type = $(this).data("type")
+
+            $("#chatroom-page").find(".select-type-box").removeClass("focus")
+            $(this).addClass("focus")
+        
+            $("#chatroom-page").find(".send-message-block").attr("data-type", type)
+            $("#chatroom-page").find(".type-label").text(e.currentTarget.innerText)
+
+            if($(this).data("type") === "special-barrage"){
+                $(".effect-select-box").removeClass("close")
+            }else{
+                $(".effect-select-box").addClass("close")
+            }
+        })
+    }
+
+    //選擇訊息樣式
+    function selectChatStyleControl(){
+        $("#chatroom-page").find(".select-style-box").unbind("click").bind("click", function(){
+            let type = $(this).data("type")
+
+            $("#chatroom-page").find(".select-style-box[data-type='"+ type +"']").removeClass("focus")
+            $(this).addClass("focus")
+
+            $("#chatroom-page").find("textarea[data-type='"+ type +"']").attr("data-style", $(this).attr("data-style"))
+        })
+    }
+
+    //訊息內容自動往下顯示到底
+    function chatroomScrollBottom(){
+        const chatroom = $("#chatroom-page").find(".message-content")
+        let roomHeight = chatroom.prop("scrollHeight")
+        chatroom.scrollTop(roomHeight)
+    }
+
+    chatTypeClose()
+
+    toggleOptionControl()
+    selectChatTypeControl()
+    selectChatStyleControl()
+
+</script>
+<script>
+
+    // 載入黑名單資料
+    var wsChatBlack
+    var wsChatBlackReconnect = false
+    chatBlackWebSocket()
+
+    function chatBlackWebSocket(){
+        const url = "wss://"+ getAPIDomainFromURL() +"/ws/v1/black/staff?activity_id="+ getKeyFromURL("activity_id") +"&user_id="+ partySetting.userID +"&game=message"
+        
+        wsChatBlack = new WebSocket(url)
+
+        wsChatBlack.onopen = function(){
+            $(".loading-content[data-name=chatroom]").addClass("d-none")
+            console.log("wsChatBlack開啟")
+        }
+
+        wsChatBlack.onerror = function(){
+            $(".loading-content[data-name=chatroom]").removeClass("d-none")
+            $(".loading-content[data-name=chatroom]").find("h6").text("wsChatBlack錯誤，代碼: " + error.code, error.reason)
+        }
+
+        wsChatBlack.onclose = function(error){
+            console.log("wsChatBlack關閉，代碼: " + error.code, error.reason)
+
+            if(error.code !== 1000){
+                $(".loading-content[data-name=chatroom]").removeClass("d-none")
+                $(".loading-content[data-name=chatroom]").find("h6").text("wsChatBlack重新啟動中...")
+                reconnectChatBlackWebsocket()
+            }else{
+                console.log("wsChatBlack已正常關閉")
+            }
+        }
+
+        wsChatBlack.onmessage = function(e){
+            let data = JSON.parse(e.data)
+            isItBlack("alert-black-chatroom", data["is_black"])
+        }
+
+    }
+
+    function reconnectChatBlackWebsocket(){
+        if(wsChatBlackReconnect){ return }
+        wsChatBlackReconnect = true
+        setTimeout(function(){
+            websocketChatBlackHeartbeat()
+            wsChatBlackReconnect = false
+        }, 2000)
+    }
+
+    function websocketChatHeartbeat(){
+        try{
+            if("WebSocket" in window){
+                chatBlackWebSocket()
+            }else{
+                alert("很抱歉，您的裝置無法支援WebSocket相關功能。")
+            }
+        }catch(e){
+            reconnectChatBlackWebsocket()
+            alert("訊息連線發生異常，請重新整理網頁，如無法排除問題，請聯絡技術專員。")
+            console.log(e)
+        }
+    }
+
+    // 初始化聊天室狀態和數據
+    var wsChat
+    var wsChatReconnect = false
+    
+    var loadChatHistoryFinish = true
+    var chatHistoryData = []
+    chatWebSocket()
+
+    // 初始化 聊天的WebSocket
+    function chatWebSocket(){
+        // 組合聊天室連接地址
+        const url = "wss://"+ getAPIDomainFromURL() +"/ws/v1/chatroom/record?activity_id="+ getKeyFromURL("activity_id") +"&user_id="+ partySetting.userID +"&role=guest"
+
+        // 建立 WebSocket 連接
+        wsChat = new WebSocket(url)
+
+        // 設定 WebSocket 連接事件處理函式
+        wsChat.onopen = function(e){
+            console.log("wsChat開啟")
+            // 隱藏加載中提示
+            $(".loading-content[data-name=chatroom]").addClass("d-none")
+            mainFunction()
+        }
+
+        wsChat.onerror = function(error){
+            console.log("wsChat錯誤，代碼: " + error.code, error.reason)
+            // 顯示加載中提示
+            $(".loading-content[data-name=chatroom]").removeClass("d-none")
+            $(".loading-content[data-name=chatroom]").find("h6").text("wsChat錯誤，代碼"+ error.code, error.reason)
+        }
+
+        wsChat.onclose = function(error){
+            console.log("wsChat關閉，代碼: " + error.code, error.reason)
+
+            // 如果聊天室關閉的原因不為 1000，則返回
+            if(error.code !== 1000 ){
+                // 顯示加載中提示
+                $(".loading-content[data-name=chatroom]").removeClass("d-none")
+                $(".loading-content[data-name=chatroom]").find("h6").text("wsChat重新啟動中...")
+                reconnectChatWebsocket()
+            }else{
+                // 否則輸出聊天室關閉信息
+                $(".loading-content[data-name=chatroom]").removeClass("d-none")
+                $(".loading-content[data-name=chatroom]").find("h6").text("wsChat已正常關閉，無法使用聊天室")
+            }
+        }
+
+        // 設定 WebSocket 消息事件處理函式
+        wsChat.onmessage = handleChatMessage
+    }
+    
+    // 處理聊天室訊息函式
+    function handleChatMessage(e){
+        // 將消息解析為 JSON 格式
+        let data = JSON.parse(e.data)
+        // 保存舊聊天數據
+        let oldChatData = chatHistoryData
+        // 更新聊天數據
+        chatHistoryData = data.ChatroomRecords
+        // 如果聊天數據已完全加載
+        if(loadChatHistoryFinish){
+            // 加載歷史聊天數據
+            loadHistoryChatData()
+            // 更新聊天數據加載狀態
+            loadChatHistoryFinish = false
+        }else{
+            // 如果聊天數據未完全加載，則比較新舊聊天數據差異
+            let newChatData = chatHistoryData
+            let newData = differenceArray(oldChatData, newChatData)
+            // 如果存在差異，則更新聊天狀態
+            if(newData.length !== 0){
+                $(newData).each(function(i){
+                    renderChatroom(newData[i])
+                })
+            }
+        }
+    }
+
+    // 比較數組差異函式
+    function differenceArray(arr1, arr2){
+        // 返回第二個數組中不在第一個數組中的元素
+        return arr2.filter(object1 => {
+            return !arr1.some(object2 => {
+                return JSON.stringify(object1) === JSON.stringify(object2)
+            })
+        })
+    }
+
+    function reconnectChatWebsocket(){
+        if(wsChatReconnect){ return }
+        wsChatReconnect = true
+        setTimeout(function(){
+            websocketChatHeartbeat()
+            wsChatReconnect = false
+        }, 2000)
+    }
+
+    function websocketChatHeartbeat(){
+        try{
+            if("WebSocket" in window){
+                chatWebSocket()
+            }else{
+                alert("很抱歉，您的裝置無法支援WebSocket相關功能。")
+            }
+        }catch(e){
+            reconnectChatWebsocket()
+            alert("訊息連線發生異常，請重新整理網頁，如無法排除問題，請聯絡技術專員。")
+            console.log(e)
+        }
+    }
+
+    var chatCheckOptions = []
+    var chatSensitivity = []
+
+    // 主要Function
+    function mainFunction(){
+        loadChatCheckData().then((res) => { chatCheckOptions = res })
+        loadSensitivityData().then((res) => { chatSensitivity = res })
+        loadHistoryChatData()
+        chatFinalCheck()
+    }
+
+    // 載入訊息審核參數
+    async function loadChatCheckData(){
+        let checkOptions = []
+        const url = "https://"+ getAPIDomainFromURL() +"/v1/activity?activity_id="+ getKeyFromURL("activity_id")
+        await fetch(url)
+        .then((res) => res.json())
+        .then((result) => {
+            let messageStatus = result.data.message_check_manual_check
+            let messageCheck = result.data.message_check_sensitivity
+            messageStatus === "open" ? messageStatus = "review" : messageStatus = "yes"
+            checkOptions.push({"status": messageStatus, "check": messageCheck})
+        })
+        .catch((error) => alertBox("無法讀取審核設置", "alert-black-chatroom"))
+        return checkOptions[0]
+    }
+
+    // 載入歷史聊天訊息
+    async function loadHistoryChatData(){
+        const chatbox = $("#chatroom-page").find(".message-block")
+        let start = Math.max(chatHistoryData.length - 30, 0)
+        let latestMessages = chatHistoryData.slice(start)
+        await latestMessages.forEach(function(e){
+            if(e.user_id === partySetting.userID){
+                const template = `
+                    <div class="message-box" data-id="${e.id}" data-type="${e.message_type}" data-status="${e.message_status}">
+                        ${e.message}
+                    </div>
+                `
+                chatbox.append(template)
+            }
+        })
+        chatroomScrollBottom()
+    }
+
+    // 載入敏感詞資料
+    async function loadSensitivityData(){
+        let words = []
+        const url = "https://"+ getAPIDomainFromURL() +"/v1/interact/wall/message_sensitivity?activity_id="+ getKeyFromURL("activity_id")
+        await fetch(url)
+        .then((res) => res.json())
+        .then((result) => {
+            words.push(result.data)
+        })
+        .catch((error) => alertBox("無法讀取敏感詞資料", "alert-black-chatroom"))
+        return words[0]
+    }
+
+</script>
+<script>
+
+    var chatSettings = {
+        type: "",
+        style: "",
+        effect: "",
+        content: ""
+    }
+
+    //訊息種類
+    function chatTypeData(){
+        chatSettings.type = $("#chatroom-page").find(".send-message-block").attr("data-type")
+    }
+
+    //訊息樣式
+    function chatStyleData(){
+        const type = $("#chatroom-page").find(".send-message-block").attr("data-type")
+        chatSettings.style = $("#chatroom-page").find(".textarea[data-type='"+ type +"']").attr("data-style")
+    }
+
+    //訊息效果
+    function chatEffectData(){
+        if($(".select-type-box.focus").data("type") === "special-barrage"){
+            chatSettings.effect = $("#chatroom-page").find(".effect-select-box").find("input:checked").val()
+        }
+    }
+
+    //取得訊息內容
+    function chatOriginContentData(){
+        const type = $("#chatroom-page").find(".send-message-block").attr("data-type")
+        chatSettings.content = $("#chatroom-page").find("textarea[data-type='"+ type +"']").val()
+        chatNewContentData()
+    }
+
+    //處理訊息內容
+    function chatNewContentData(){
+        return new Promise(function(resolve, reject){
+            $(chatSensitivity).each(function(i){
+                if(chatCheckOptions.check === "replace"){
+                    let newContent = chatSettings.content.replaceAll(chatSensitivity[i].sensitivity_word, chatSensitivity[i].replace_word)
+                    chatSettings.content = newContent
+                }else if(chatCheckOptions.check === "refuse"){
+                    if(chatSettings.content.includes(chatSensitivity[i].sensitivity_word)){
+                        alertBox("訊息內容有敏感字眼: " + chatSensitivity[i].sensitivity_word + "，請替換別的文字。", "alert-black-chatroom")
+                        chatSettings.content = ""
+                    }
+                }
+            }).promise().done(function(){
+                resolve(chatSettings.content)
+            })
+        })
+    }
+
+</script>
+<script>
+
+    //送出前的最後檢查
+    function chatFinalCheck(){
+        $("#chatroom-page").find(".send-message-block").find(".send-block").unbind("click").bind("click", function(){
+            chatTypeData()
+            chatStyleData()
+            chatEffectData()
+            chatOriginContentData()
+
+            if(chatSettings.content !== "" && chatSettings.content.length <= 20){
+                sendChat()
+            }else if(chatSettings.content.length > 20){
+                alertBox("訊息或替換字詞請小於20字數", "alert-black-chatroom", "alert-black-chatroom")
+                return
+            }
+        })
+    }
+
+    //送出訊息操作
+    function sendChat(){
+        if(chatCheckOptions.status === "review"){
+            sendChatToScreen("review")
+        }else{
+            sendChatToScreen("yes")
+        }
+    }
+
+</script>
+<script>
+
+    //傳送訊息
+    function sendChatToScreen(checkStatus){
+        let message = {
+            message: chatSettings.content,
+            message_effect: chatSettings.effect,
+            message_price: "0",
+            message_status: checkStatus,
+            message_style: chatSettings.style,
+            message_type: chatSettings.type,
+            user_id: partySetting.userID
+        }
+        wsChat.send(JSON.stringify(message))
+    }
+
+</script>
+<script>
+
+    // 推送訊息渲染至使用者聊天室網頁
+    function renderChatroom(msg){
+        const chat = `
+            <div class="message-box" data-id="${msg.id}" data-type="${msg.message_type}" data-status="${msg.message_status}">
+                ${msg.message}
+            </div>
+        `
+
+        $(".message-box").each(function(i){
+            if(msg.id === $(".message-box").eq(i).data("id")){
+                $(".message-box").eq(i).remove()
+            }
+        })
+        
+        $("#chatroom-page").find(".message-block").append(chat)
+
+        if(msg.message_type === "normal-message"){
+            normalMessageEvent()
+        }
+
+        chatroomScrollBottom()
+        $("#chatroom-page").find("textarea").val("")
+    }
+
+    // 一般訊息事件
+    function normalMessageEvent(){
+        let speech = partySetting.chatroomSettings.speech
+        let bansecond = partySetting.chatroomSettings.bansecond
+        const textarea = $("#chatroom-page").find(".textarea[data-type='normal-message']")
+        if(speech === "open"){
+            textarea.prop("disabled", true)
+            textarea.attr("placeholder", "請於"+ bansecond +"秒後再次操作")
+            setTimeout(function(){
+                textarea.prop("disabled", false)
+                textarea.attr("placeholder", "請輸入40字內的訊息內容")
+            }, 1000 * parseInt(bansecond))
+        }
+    }
+
+    // 沒用到的
+    //     onProgress: function(info){
+    //         $("#chatroom-page").find(".loading-content").css({"opacity":"1", "z-index":"2"})
+    //         $("#chatroom-page").find(".loading-content h6").text("連接聊天室中...")
+    //         if(info >= 2){
+    //             $("#chatroom-page").find(".loading-content h6").html("連接聊天室中...<br /><br />如一直處於連線中<br />有可能是網路異常<br />或預設瀏覽器的關係<br />請嘗試檢查網路狀態<br />或關掉LINE APP，再重新打開程式")
+    //         }
+    //     }
+    //
+
+    // 訊息審核事件
+    // function changeChatStatus(arr){
+    //     let thisChat, thisChatStatus
+    //     $(arr).each(function(i){
+    //         $(".message-box").each(function(ii){
+    //             if($(arr)[i].id === Number($(".message-box")[ii].dataset.id)){
+    //                 thisChatStatus = $(".message-box")[ii].dataset.status = $(arr)[i].message_status
+    //                 thisChat = $(".message-box")[ii]
+    //             }
+    //         })
+    //         thisChat.remove()
+    //         $("#chatroom-page").find(".message-block").append(thisChat)
+    //     }).promise().done(function(){
+    //         chatroomScrollBottom()
+    //     })
+    // }
+
+</script>

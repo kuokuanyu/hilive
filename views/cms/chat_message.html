@@ -1,0 +1,137 @@
+<div class="options-skin">
+    <h1 class="container-title">訊息區</h1>
+    <details class="container-box" open>
+        <summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>基本設置</h2>
+        </summary>
+        <div class="main-content">
+
+            <div class="d-flex flex-wrap gap-3">
+
+                <div class="form-group">
+                    <label class="form-label">禁止連續傳送訊息</label>
+                    <p>如選擇開啟此功能，請輸入禁止傳送訊息時間的秒數。</p>
+                    <div class="radio-button-box">
+                        <div class="radio-button">
+                            <input type="radio" id="message_ban_open" name="message_ban" value="open">
+                            <label for="message_ban_open">開啟</label>
+                        </div>
+                        <div class="radio-button">
+                            <input type="radio" id="message_ban_close" name="message_ban" value="close" checked>
+                            <label for="message_ban_close">關閉</label>
+                        </div>
+                    </div>
+                    <div class="input-group string">
+                        <input id="message_ban_second" class="form-control" name="message_ban_second" type="number" value="1" maxlength="10" min="1" max="9999999999" placeholder="至少為1秒">
+                        <span class="input-group-text">秒</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">訊息展示秒數</label>
+                    <p>每則訊息的展示時間至少為3秒，如超過3則訊息才會自動開啟此功能。</p>
+                    <div class="input-group string">
+                        <input id="message_refresh_second" class="form-control" name="message_refresh_second" type="number" value="30" maxlength="10" min="1" max="9999999999" placeholder="至少為3秒">
+                        <span class="input-group-text">秒</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">活動名稱顏色</label>
+                    <input class="form-control color-input" id="message_screen_title_color" type="color" name="message_screen_title_color" value="#ffffff">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">活動名稱外框顏色</label>
+                    <input class="form-control color-input" id="message_screen_title_frame_color" type="color" name="message_screen_title_frame_color" value="#81869b">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">訊息文字顏色</label>
+                    <input class="form-control color-input" id="message_text_color" type="color" name="message_text_color" value="#404b79">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">訊息文字外框顏色</label>
+                    <input class="form-control color-input" id="message_text_frame_color" type="color" name="message_text_frame_color" value="#81869b">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">訊息框顏色</label>
+                    <input class="form-control color-input" id="message_frame_color" type="color" name="message_frame_color" value="#e7eaf4">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">背景圖片</label>
+                    <p>檔案大小不可超過10MB</p>
+                    <div class="d-flex flex-sm-row flex-column align-items-start gap-2">
+                        <div class="background-view-img">
+                            <img src="/admin/uploads/system/img-topic-bg.jpg" alt="背景圖片">
+                        </div>
+                        <div class="d-flex flex-sm-column align-items-end gap-2">
+                            <label class="btn btn-green btn-sm" data-name="upload-background" for="message_background">
+                                <i class="bi bi-image"></i>
+                                <p>上傳圖片</p>
+                            </label>
+                            <input class="d-none" id="message_background" type="file" name="message_background" accept="image/jpeg,image/png,image/gif,image/svg+xml">
+                            <input type="hidden" name="message_background__default_flag" value="0">
+                            <button class="btn btn-border-gray btn-sm" data-name="default-image" data-image="/admin/uploads/system/img-topic-bg.jpg">
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                                <p>預設背景</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </details>
+    <details class="container-box" open>
+        <summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>跑馬燈設置</h2>
+        </summary>
+        <div class="main-content">
+
+            <div class="d-flex flex-wrap gap-3 w-100">
+
+                <div class="form-group">
+                    <label class="form-label">跑馬燈訊息設置</label>
+                    <p>請一行設置一個跑馬燈訊息，若要輸入下一則訊息請換行。</p>
+                    <textarea class="input form-control" id="message" name="message" value="歡迎來到活動聊天室!" placeholder="請輸入跑馬燈訊息，換行請按Enter" autocomplete="off">歡迎來到活動聊天室!</textarea>
+                </div>
+
+            </div>
+
+        </div>
+    </details>
+    <div class="footer">
+        <button id="save-game-data" class="btn btn-blue" data-name="saveGameData">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save2" viewBox="0 0 16 16">
+                <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v4.5h2a.5.5 0 0 1 .354.854l-2.5 2.5a.5.5 0 0 1-.708 0l-2.5-2.5A.5.5 0 0 1 5.5 6.5h2V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+            </svg>
+            <p>儲存設置</p>
+        </button>
+    </div>
+</div>
+
+<var class="variable d-none">
+    <var class="userID">{{.User.UserID}}</var>
+    <var class="token">{{.Token}}</var>
+    <var class="route-patch">{{.Route.PATCH}}</var>
+</var>
+
+<!-- <fieldset class="input-group-1 form-check form-switch disabled">
+    <label class="input-title" for="picture_message">訊息區可以上傳圖片</label>
+    <input class="input form-check-input" id="picture_message" type="checkbox" name="message_picture" value="">
+    <input type="hidden" name="message_picture" value="close">
+</fieldset>
+<fieldset class="input-group-1 form-check form-switch disabled">
+    <label class="input-title" for="auto">圖片自動放大顯示</label>
+    <input class="input form-check-input" id="auto" type="checkbox" name="message_auto" value="">
+    <input type="hidden" name="message_auto" value="close">
+</fieldset>
+<fieldset class="input-group-1 form-check form-switch disabled">
+    <label class="input-title" for="message_open">跑馬燈開啟</label>
+    <input class="input form-check-input" id="message_open" type="checkbox" name="message_open" value="{{(index .SettingFormInfo.FieldList 4).Value}}" {{if eq (index .SettingFormInfo.FieldList 4).Value "open"}} checked {{end}} disabled>
+    <input type="hidden" name="message_open" value="close">
+</fieldset> -->

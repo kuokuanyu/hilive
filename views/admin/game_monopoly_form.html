@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>進階管理設置</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="/admin/assets/dist/js/all.js"></script>
+
+    <link rel="stylesheet" href="/admin/assets/dist/css/all.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="main-header">
+            <a class="logo" href="/admin">
+                <div class="logo-mini">
+                    <img src="/admin/assets/dist/favicon.svg" alt="Hi" />
+                </div>
+                <div class="logo-lg">
+                    <img src="/admin/assets/dist/logo.svg" alt="HiLives" />
+                </div>
+            </a>
+            <nav class="navbar">
+                <div id="headernav">
+                    <div class="navbar-menu">
+                        <ul class="navbar-nav">
+                            <li>
+                                <a href="https://hilives.net/" target="_blank">
+                                    <i class="bi bi-briefcase"></i>
+                                    <span>宣傳網站</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/activity?header=true">
+                                    <i class="bi bi-balloon"></i>
+                                    <span>活動管理平台</span>
+                                </a>
+                            </li>
+                            <li class="dropdown user user-menu">
+                                <a class="dropdown-toggle" href="#">
+                                    <div class="avatar-box">
+                                        <img src="{{.User.Avatar}}" alt="User Image" />
+                                    </div>
+                                    <span>{{.User.Name}}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="user-header">
+                                        <div class="avatar-box">
+                                            <img src="{{.User.Avatar}}" alt="User Image" />
+                                        </div>
+                                        <p>
+                                            {{.User.Name}}
+                                            <small>開發人員</small>
+                                        </p>
+                                    </li>
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a class="btn-flat" href="">設定</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a class="btn-flat" href="{{.Route.Logout}}">登出</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="not-open">
+                        <a href="/admin/dashboard">
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                            <span> Hilives數據表</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                    <li class="treeview active">
+                        <a href="#">
+                            <i class="bi bi-gear-fill"></i>
+                            <span> 用戶權限管理</span>
+                            <span class="pull-right-container">
+                                <i class="bi bi-chevron-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu menu-open">
+                            <li class="active">
+                                <a href="/admin/manager">
+                                    <i class="bi bi-people-fill"></i>
+                                    用戶管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/permission">
+                                    <i class="bi bi-shield-lock-fill"></i>
+                                    權限管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/menu">
+                                    <i class="bi bi-menu-button-wide-fill"></i>
+                                    側邊選單管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/overview">
+                                    <i class="bi bi-layout-wtf"></i>
+                                    活動總覽管理
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/log">
+                            <i class="bi bi-clipboard2-data-fill"></i>
+                            <span> Log日誌紀錄</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                    <li class="not-open">
+                        <a href="/admin/file">
+                            <i class="bi bi-file-earmark-medical-fill"></i>
+                            <span> 檔案管理</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+        <div class="content-wrapper">
+            <section class="content-header">
+                <div>
+                    <ol class="breadcrumb">
+                        <li>首頁</li>
+                        <li>用戶權限管理</li>
+                        <li>HiLives用戶</li>
+                        <li>用戶活動列表</li>
+                        <li>用戶遊戲列表</li>
+                    </ol>
+                </div>
+                <h4>
+                    用戶遊戲管理
+                    <small>用戶遊戲管理</small>
+                </h4>
+            </section>
+            <section class="content">
+                <div class="main-container-content">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">鑑定師表單</h3>
+                            <div class="btn-group pull-right">
+                                <a class="back-page" href="{{.Route.Back}}">返回</a>
+                            </div>
+                        </div>
+                        <form class="box-body p-3">
+                            <div class="box-body p-3">
+                                <div class="box-body p-3">
+                                    <div class="fields-group d-flex flex-column gap-3">
+                                        <div class="form-group">
+                                            <label class="form-label" for="">場次名稱</label>
+                                            <input class="form-control" type="text" name="title" maxlength="20">
+                                            <div class="form-text">最多為20個字元</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="d-flex flex-row justify-content-between gap-2">
+                                                <div class="w-100">
+                                                    <label class="form-label">參加人數上限</label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" type="number" name="people">
+                                                        <span class="input-group-text">人</span>
+                                                    </div>
+                                                </div>
+                                                <div class="w-100">
+                                                    <label class="form-label">用戶人數上限</label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" type="number" name="max_people">
+                                                        <span class="input-group-text">人</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-text">參加人數上限 <strong>不能大於</strong> 用戶人數上限</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="checkbox-allowagain" type="checkbox" name="allow" value="open">
+                                                <label class="form-check-label" for="checkbox-allowagain">重複中獎</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="checkbox-limittime" type="checkbox" name="limit_time" value="open">
+                                                <label class="form-check-label" for="checkbox-limittime">限制時間</label>
+                                            </div>
+                                            <div class="input-group">
+                                                <input class="form-control" type="number" name="second" value="0">
+                                                <span class="input-group-text">秒</span>
+                                            </div>
+                                            <div class="form-text">如選擇開啟限制時間，請輸入限時秒數</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">頭獎名額</label>
+                                            <div class="input-group">
+                                                <input class="form-control" type="number" name="first_prize">
+                                                <span class="input-group-text">人</span>
+                                            </div>
+                                            <div class="form-text">名額上限為 <strong>50</strong> 人</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">二獎名額</label>
+                                            <div class="input-group">
+                                                <input class="form-control" type="number" name="second_prize">
+                                                <span class="input-group-text">人</span>
+                                            </div>
+                                            <div class="form-text">名額上限為 <strong>50</strong> 人</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">三獎名額</label>
+                                            <div class="input-group">
+                                                <input class="form-control" type="number" name="third_prize">
+                                                <span class="input-group-text">人</span>
+                                            </div>
+                                            <div class="form-text">名額上限為 <strong>100</strong> 人</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">普通獎名額</label>
+                                            <div class="input-group">
+                                                <input class="form-control" type="number" name="general_prize">
+                                                <span class="input-group-text">人</span>
+                                            </div>
+                                            <div class="form-text">名額上限為 <strong>800</strong> 人</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">主題選擇</label>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" id="theme-default" type="radio" name="topic" value="01_classic" checked>
+                                                <label class="form-check-label" for="theme-default">經典主題</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" id="theme-redpack" type="radio" name="topic" value="02_redpack">
+                                                <label class="form-check-label" for="theme-redpack">紅包主題</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" id="theme-rabbit" type="radio" name="topic" value="03_newyear_rabbit">
+                                                <label class="form-check-label" for="theme-rabbit">兔年主題</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" id="theme-sashimi" type="radio" name="topic" value="04_sashimi">
+                                                <label class="form-check-label" for="theme-sashimi">生魚片主題</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer">
+                                <button id="save-data-form" class="btn btn-primary pull-right" type="button">儲存</button>
+                                <button class="btn btn-secondary pull-left" type="reset">重置</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+<script>
+
+    const formMethod = "{{.Route.Method}}"
+
+    checkPeople()
+    if(formMethod === "post"){
+        saveNewData()
+    }else if(formMethod === "put"){
+        const gameData = "https://"+ getAPIDomainFromURL() +"/v1/interact/game/"+ getKeyFromURL("game") +"?game_id="+ getKeyFromURL("game_id")
+        fetch(gameData).then(function(res){ return res.json() })
+        .catch(function(error){ console.log("錯誤: "+ error) })
+        .then(function(response){
+            renderGameData(response.data)
+            saveEditData()
+        })
+    }
+
+    function renderGameData(data){
+        $("input[name=title]").val(data.title)
+        $("input[name=max_people]").val(data.max_people)
+        $("input[name=people]").val(data.people)
+        data.allow === "open" ? $("input[name=allow]").prop("checked", true) : $("input[name=allow]").prop("checked", false)
+        data.limit_time === "open" ? $("input[name=limit_time]").prop("checked", true) : $("input[name=limit_time]").prop("checked", false)
+        $("input[name=second]").val(data.second)
+        $("input[name=first_prize]").val(data.first_prize)
+        $("input[name=second_prize]").val(data.second_prize)
+        $("input[name=third_prize]").val(data.third_prize)
+        $("input[name=general_prize]").val(data.general_prize)
+        $("input[name=topic][value="+ data.topic +"]").prop("checked", true)
+    }
+
+    function saveNewData(){
+        $("#save-data-form").bind("click", function(){
+            let formDataBox = new FormData()
+            formDataBox.append("user", getKeyFromURL("user_id"))
+            formDataBox.append("user_id", "{{.User.UserID}}")
+            formDataBox.append("activity_id", getKeyFromURL("activity_id"))
+            formDataBox.append("title", $("input[name=title]").val())
+            formDataBox.append("max_people", parseInt($("input[name=max_people]").val()))
+            formDataBox.append("people", parseInt($("input[name=people]").val()))
+            formDataBox.append("limit_time", returnCheckboxValue("limit_time"))
+            formDataBox.append("second", parseInt($("input[name=second]").val()))
+            formDataBox.append("allow", returnCheckboxValue("allow"))
+            formDataBox.append("first_prize", parseInt($("input[name=first_prize]").val()))
+            formDataBox.append("second_prize", parseInt($("input[name=second_prize]").val()))
+            formDataBox.append("third_prize", parseInt($("input[name=third_prize]").val()))
+            formDataBox.append("general_prize", parseInt($("input[name=general_prize]").val()))
+            formDataBox.append("topic", $("input[name=topic]:checked").val())
+            formDataBox.append("skin", "classic")
+            formDataBox.append("music", "classic")
+            formDataBox.append("token", "{{.Token}}")
+
+            let settings = {
+                "url": "{{.Route.POST}}",
+                "method": "POST",
+                "timeout": 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "data": formDataBox,
+                "dataType": "json",
+                "success": function(data){
+                    Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).fire({
+                        icon: "success",
+                        title: "已新增場次"
+                    }).then(() => {
+                        location.replace("{{.Route.Back}}")
+                    })
+                },
+                "error": function(result){
+                    Swal.fire({
+                        icon: result.statusText,
+                        title: result.responseJSON.message
+                    })
+                    return
+                }
+            }
+
+            peopleFinalCheck(settings)
+        })
+    }
+
+    function saveEditData(){
+        $("#save-data-form").bind("click", function(){
+            let formDataBox = new FormData()
+            formDataBox.append("user", getKeyFromURL("user_id"))
+            formDataBox.append("user_id", "{{.User.UserID}}")
+            formDataBox.append("game_id", getKeyFromURL("game_id"))
+            formDataBox.append("activity_id", getKeyFromURL("activity_id"))
+            formDataBox.append("title", $("input[name=title]").val())
+            formDataBox.append("max_people", parseInt($("input[name=max_people]").val()))
+            formDataBox.append("people", parseInt($("input[name=people]").val()))
+            formDataBox.append("limit_time", returnCheckboxValue("limit_time"))
+            formDataBox.append("second", parseInt($("input[name=second]").val()))
+            formDataBox.append("allow", returnCheckboxValue("allow"))
+            formDataBox.append("first_prize", parseInt($("input[name=first_prize]").val()))
+            formDataBox.append("second_prize", parseInt($("input[name=second_prize]").val()))
+            formDataBox.append("third_prize", parseInt($("input[name=third_prize]").val()))
+            formDataBox.append("general_prize", parseInt($("input[name=general_prize]").val()))
+            formDataBox.append("topic", $("input[name=topic]:checked").val())
+            formDataBox.append("token", "{{.Token}}")
+
+            let settings = {
+                "url": "{{.Route.PUT}}",
+                "method": "PUT",
+                "timeout": 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "data": formDataBox,
+                "dataType": "json",
+                "success": function(data){
+                    Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).fire({
+                        icon: "success",
+                        title: "已編輯場次"
+                    }).then(() => {
+                        location.replace("{{.Route.Back}}")
+                    })
+                },
+                "error": function(result){
+                    Swal.fire({
+                        icon: result.statusText,
+                        title: result.responseJSON.message
+                    })
+                    return
+                }
+            }
+
+            peopleFinalCheck(settings)
+        })
+    }
+
+    function peopleFinalCheck(setting){
+        const maxPeople = Number($("input[name=max_people]").val())
+        const currentPeople = Number($("input[name=people]").val())
+        if(currentPeople > maxPeople){
+            Swal.fire({
+                icon: "error",
+                title: "參與人數最多為 "+ maxPeople +" 人"
+            })
+        }else{
+            $.ajax(setting).done(function(){})
+        }
+    }
+
+</script>
+</html>

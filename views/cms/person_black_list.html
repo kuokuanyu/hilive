@@ -1,0 +1,198 @@
+<div class="options-skin">
+    <h1 class="container-title">黑名單人員管理</h1>
+    <section class="container-box">
+        <div class="search-content flex-column flex-lg-row">
+            <div class="filter-input">
+                <label class="form-label" for="game-type">黑名單區域</label>
+                <select name="game_type" id="game-type" class="form-select">
+                    <option value="activity">整個活動</option>
+                    <option value="message">訊息區</option>
+                    <option value="question">提問區</option>
+                    <option value="redpack">搖紅包</option>
+                    <option value="ropepack">套紅包</option>
+                    <option value="draw_numbers">搖號抽獎</option>
+                    <option value="lottery">遊戲抽獎</option>
+                    <option value="whack_mole">敲敲樂</option>
+                    <option value="monopoly">鑑定師</option>
+                    <option value="QA">快問快答</option>
+                    <option value="tugofwar">拔河遊戲</option>
+                    <option value="bingo">賓果遊戲</option>
+                </select>
+            </div>
+            <div class="filter-input d-none">
+                <label class="form-label" for="game-scene">遊戲場次</label>
+                <select name="game_scene" id="game-scene" class="form-select"></select>
+            </div>
+            <div class="filter-input">
+                <label class="form-label" for="people-status">狀態過濾</label>
+                <select name="people_status" id="people-status" class="form-select">
+                    <option value="all">全部</option>
+                    <option value="normal">一般</option>
+                    <option value="black">黑名單</option>
+                </select>
+            </div>
+        </div>
+    </section>
+    <section class="container-box">
+        <div class="main-content m-0 border-0">
+
+            <div class="toolbox">
+                <div class="d-flex flex-row flex-wrap align-items-center gap-2"></div>
+                <div class="d-flex flex-row flex-wrap align-items-center gap-2">
+                    <button class="btn btn-noborder" data-name="add-select-black">
+                        <i class="bi bi-person-plus-fill"></i>
+                        <p>加入黑名單</p>
+                    </button>
+                    <button class="btn btn-noborder" data-name="remove-select-black">
+                        <i class="bi bi-person-dash-fill"></i>
+                        <p>移出黑名單</p>
+                    </button>
+                    <button class="btn btn-noborder" data-name="download-data">
+                        <i class="bi bi-upload"></i>
+                        <p>黑名單匯出</p>
+                    </button>
+                </div>
+            </div>
+            <div class="data-view">
+                <div class="table" style="max-height: 37.5rem;" data-type="all">
+                    <div class="thead">
+                        <div class="tr">
+                            <div class="th check-th">
+                                <input class="form-check-input" type="checkbox" data-name="select-tr">
+                            </div>
+                            <div class="th index-th"><p>筆數</p></div>
+                            <div class="th title-th full"><p>參加人員</p>
+                                <i class="bi bi-arrow-down d-none"></i>
+                                <i class="bi bi-arrow-up d-none"></i>
+                            </div>
+                            <div class="th type-th"><p>狀態</p></div>
+                            <div class="th text-th"><p>備註</p></div>
+                            <div class="th type-th d-none" data-name="gameType"><p>遊戲類型</p></div>
+                            <div class="th text-th full d-none" data-name="gameName"><p>場次名稱</p></div>
+                            <div class="th control-th pin right-pin pin-sm sm-container"><p>操作</p></div>
+                        </div>
+                    </div>
+                    <div class="tbody"></div>
+                </div>
+            </div>
+            <div class="data-count"><p>總共有 <strong>0</strong> 筆資料</p></div>
+            <div class="page-box for-desktop">
+                <button class="btn btn-prev-page disabled" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                </button>
+                <div class="page-number-box d-flex flex-row align-items-end gap-1"></div>
+                <button class="btn btn-next-page" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="page-box for-phone">
+                <p>目前頁數</p>
+                <input class="form-control" type="number" min="1" max="1" value="1">
+                <span>/</span>
+                <p>總共<strong>1</strong>頁</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="modal fade" id="userDataModal" aria-labelledby="userDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userDataModalLabel">詳細資料</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="fs-5 fw-bold title">狀態</div>
+                        <div class="fs-6 content text-black-50" data-name="status">一般</div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="fs-5 fw-bold title">備註</div>
+                        <div class="fs-6 content text-black-50" data-name="reason">無填寫</div>
+                    </li>
+                    <li class="list-group-item d-none">
+                        <div class="fs-5 fw-bold title">遊戲類型</div>
+                        <div class="fs-6 content text-black-50" data-name="gameType">無填寫</div>
+                    </li>
+                    <li class="list-group-item d-none">
+                        <div class="fs-5 fw-bold title">場次名稱</div>
+                        <div class="fs-6 content text-black-50" data-name="gameScene">無填寫</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-border-gray" data-name="add-black" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add fill-red" viewBox="0 0 16 16">
+                        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                        <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
+                    </svg>
+                    <p>加入黑名單</p>
+                </button>
+                <button class="btn btn-border-gray" data-name="remove-black" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-dash fill-green" viewBox="0 0 16 16">
+                        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM11 12h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1Zm0-7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                        <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
+                    </svg>
+                    <p>移出黑名單</p>
+                </button>
+                <button class="btn btn-border-gray" data-name="edit-reason" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                    </svg>
+                    <p>編輯原因</p>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<template id="tr">
+    <div class="tr">
+        <div class="td check-td">
+            <input class="form-check-input" type="checkbox" data-name="select-tr">
+        </div>
+        <div class="td index-td" data-name="index" data-bs-toggle="modal" data-bs-target="#userDataModal"></div>
+        <div class="td title-td full">
+            <div class="group">
+                <div class="sm-square-image">
+                    <img src="/admin/uploads/system/img-user-pic.png" data-name="avatar">
+                </div>
+                <p data-name="name"></p>
+            </div>
+        </div>
+        <div class="td type-td" data-name="status">
+            <span class="label label-gray">一般</span>
+        </div>
+        <div class="td text-td" data-name="reason"><p></p></div>
+        <div class="td type-td" data-name="gameType"></div>
+        <div class="td text-td full" data-name="gameName"></div>
+        <div class="td control-td pin right-pin pin-sm sm-container">
+            <ul>
+                <li title="加入黑名單" data-name="add-black"><i class="bi bi-person-plus-fill"></i></li>
+                <li title="移出黑名單" data-name="remove-black"><i class="bi bi-person-dash-fill"></i></li>
+                <li title="編輯備註" data-name="edit-reason"><i class="bi bi-pencil"></i></li>
+            </ul>
+        </div>
+    </div>
+</template>
+
+<var class="variable d-none">
+    <var class="userID">{{.User.UserID}}</var>
+    <var class="token">{{.Token}}</var>
+    <var class="route-post">{{.Route.POST}}</var>
+    <var class="route-put">{{.Route.PUT}}</var>
+    <var class="route-export">{{.Route.Export}}</var>
+</var>
+
+<!-- <button class="btn btn-border-gray btn-sm" data-name="edit-select-reason" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+    </svg>
+    <p>編輯備註</p>
+</button> -->

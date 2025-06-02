@@ -1,0 +1,451 @@
+{{if eq .HasSidebar true}}
+
+    <nav id="sidebar">
+        <ul class="menu-rank1">
+
+            {{$ActivityID := .ActivityID }}
+            {{range $key, $list := .Menu.List }}
+
+                <li id={{$list.SidebarBtnL}} class="rank1-box">
+                    <div class="group-h">
+                        <div class="icon-block">
+                            <div class="icon-box">
+
+                                {{if eq $list.SidebarBtnL "info"}}
+
+                                    <img src="/admin/assets/website/lib/img/sidebar-calendar.svg" alt="calendar">
+                                
+                                {{else if eq $list.SidebarBtnL "applysign"}}
+
+                                    <img src="/admin/assets/website/lib/img/sidebar-list.svg" alt="list">
+                                
+                                {{else if eq $list.SidebarBtnL "interact"}}
+                                    
+                                    <img src="/admin/assets/website/lib/img/sidebar-gift.svg" alt="gift">
+
+                                {{else if eq $list.SidebarBtnL "staffmanage"}}
+
+                                    <img src="/admin/assets/website/lib/img/sidebar-people.svg" alt="people">
+
+                                {{end}}
+                                
+                            </div>
+                        </div>
+                        <div class="right-box">
+                            <div class="group-h">
+                                <div class="link-title">{{$list.Name}}</div>
+                                <div class="arrow-block">
+                                    <div class="arrow-box">
+                                        <img src="/admin/assets/website/lib/img/sidebar-arrow.svg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="menu-rank2">
+
+                        {{range $key2, $item := $list.ChildrenList}}
+                            {{if eq (len $item.ChildrenList) 0}}
+
+                                <li id={{$item.SidebarBtnL}} class="rank2-box">
+                                    <a data-href="{{$item.URL}}?activity_id={{$ActivityID}}">
+                                        <span>{{$item.Name}}</span>
+                                    </a>
+                                </li>
+
+                            {{else}}
+
+                                <li id={{$item.SidebarBtnL}} class="rank2-box style-2">
+                                    <div class="group-h">
+                                        <span>{{$item.Name}}</span>
+                                        <div class="arrow-block">
+                                            <div class="arrow-box">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><path d="M296.26,217l-136,136a23.9,23.9,0,0,1-33.9,0l-22.6-22.6a23.9,23.9,0,0,1,0-33.9l96.4-96.4-96.4-96.4a23.9,23.9,0,0,1,0-33.9L126.26,47a23.9,23.9,0,0,1,33.9,0l136,136A23.93,23.93,0,0,1,296.26,217Z"/></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="menu-rank3">
+
+                                        {{range $key3, $subItem := $item.ChildrenList}}
+                                            {{if eq (len $subItem.ChildrenList) 0}}
+
+                                                {{if eq $subItem.Name "圖片播放區"}}
+
+                                                    <li class="rank3-box page-not-open">
+                                                        <a href="#not-open"><span>圖片播放區</span></a>
+                                                    </li>
+
+                                                {{else if eq $subItem.Name "倒數簽到"}}
+
+                                                    <li class="rank3-box page-not-open">
+                                                        <a href="#not-open"><span>倒數簽到</span></a>
+                                                    </li>
+                                                        
+                                                {{else}}
+
+                                                    <li id={{$subItem.SidebarBtnL}} class="rank3-box">
+                                                        <a data-href="{{$subItem.URL}}?activity_id={{$ActivityID}}" data-label-name="{{$subItem.SidebarBtnL}}">
+                                                            <span>{{$subItem.Name}}</span>
+                                                        </a>
+                                                    </li>
+                                                    
+                                                {{end}}
+
+                                            {{else}}
+
+                                                <li class="rank3-box" style="justify-content: flex-start; cursor: none; pointer-events: none;">
+                                                    <span style="color: #767676 !important">--{{$subItem.Name}}--</span>
+                                                </li>
+
+                                                {{range $key4, $fourItem := $subItem.ChildrenList}}
+
+                                                    <li id={{$fourItem.SidebarBtnL}} class="rank3-box">
+                                                        <a data-href="{{$fourItem.URL}}?activity_id={{$ActivityID}}" data-label-name="{{$fourItem.SidebarBtnL}}">
+                                                            <span>{{$fourItem.Name}}</span>
+                                                        </a>
+                                                    </li>
+
+                                                {{end}}
+
+                                            {{end}}
+                                        
+                                        {{end}}
+                                    
+                                    </ul>
+                                </li>
+
+                            {{end}}
+                        {{end}}
+
+                    </ul>
+                </li>
+
+            {{end}}
+
+        </ul>
+    </nav>
+    <script>
+        dfgdgdgdgd()
+    </script>
+    <article id="main-content" class="section-content">
+        <div class="event-content">
+            <div class="event-info-card">
+                <div class="group-v">
+                    <div class="name">
+                        <span class="name party-name"></span>
+                        <span class="label status-label party-status"></span>
+                    </div>
+                    <div class="number-block">
+                        <span class="title">參加人數 : </span>
+                        <span class="party-now-people"></span>
+                        <span>/</span>
+                        <span class="party-all-people"></span>
+                    </div>
+                    <div class="date-block">
+                        <span class="title">活動時間 : </span>
+                        <span class="start-time party-start-time"></span>
+                        <span>~</span>
+                        <span class="end-time party-end-time"></span>
+                    </div>
+                </div>
+                <div class="group-v flex-end">
+                    <div class="control-box">
+                        <a data-href="{{.Route.Edit}}" id="edit-overview-party" class="button button-border-blue">修改活動資料</a>
+                        <a id="delete-overview-party" class="button button-border-gray">刪除</a>
+                    </div>
+                </div>
+            </div>
+        
+            {{$Info := .Route.PATCH}}
+            {{$Activity := .ActivityID}}
+        
+            <div class="title-block title-block-sm">話語時刻</div>
+            <div class="content-block">
+                <div class="wrap-block" style="grid-gap: 0.625rem;">
+        
+                    {{range $key1, $info := .PanelInfo.InfoList}}
+        
+                        {{if eq (index $info "overview_type").Value "聊天牆展示"}}
+        
+                            <div id="{{(index $info "div_id").Content}}" class="event-option-card checkin-type">
+                                <div class="icon-box">
+                                    <img src="/admin/assets/website/lib/icon/{{(index $info "div_id").Content}}.svg" alt="">
+                                </div>
+                                <div class="info-box">
+                                    <div class="title">{{(index $info "overview_name").Content}}</div>
+                                    <div class="explain">{{(index $info "description").Value}}</div>
+                                </div>
+                                <div class="control-box">
+                                    <div class="group-v">
+                                        <div class="form-check form-switch">
+                                            <input class="input form-check-input event-status" name="{{(index $info "name").Value}}" type="checkbox">
+                                        </div>
+                                        <a data-href="{{(index $info "url").Value}}?activity_id={{$Activity}}" class="button-option">
+                                            <i class="fas fa-cog"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+        
+                        {{end}}
+        
+                    {{end}}
+                
+                </div>
+            </div>
+        
+            <div class="title-block title-block-sm">進場等候</div>
+            <div class="content-block">
+                <div class="wrap-block" style="grid-gap: 0.625rem;">
+        
+                    {{range $key1, $info := .PanelInfo.InfoList}}
+        
+                        {{if eq (index $info "overview_type").Value "暖場互動"}}
+        
+                            <div id="{{(index $info "div_id").Content}}" class="event-option-card prize-type">
+                                <div class="icon-box">
+                                    <img src="/admin/assets/website/lib/icon/{{(index $info "div_id").Content}}.svg" alt="">
+                                </div>
+                                <div class="info-box">
+                                    <div class="title">{{(index $info "overview_name").Content}}</div>
+                                    <div class="explain">{{(index $info "description").Value}}</div>
+                                </div>
+                                <div class="control-box">
+                                    <div class="group-v">
+                                        <div class="form-check form-switch">
+                                            <input class="input form-check-input event-status" name="{{(index $info "name").Value}}" type="checkbox">
+                                        </div>
+                                        <a data-href="{{(index $info "url").Value}}?activity_id={{$Activity}}" class="button-option">
+                                            <i class="fas fa-cog"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+        
+                        {{end}}
+        
+                    {{end}}
+        
+                </div>
+            </div>
+        
+            <div class="title-block title-block-sm">驚喜時間</div>
+            <div class="content-block">
+                <div class="wrap-block" style="grid-gap: 0.625rem;">
+        
+                    {{range $key1, $info := .PanelInfo.InfoList}}
+        
+                        {{if eq (index $info "overview_type").Value "抽獎類型"}}
+        
+                            <div id="{{(index $info "div_id").Content}}" class="event-option-card message-type">
+                                <div class="icon-box">
+                                    <img src="/admin/assets/website/lib/icon/{{(index $info "div_id").Content}}.svg" alt="">
+                                </div>
+                                <div class="info-box">
+                                    <div class="title">{{(index $info "overview_name").Content}}</div>
+                                    <div class="explain">{{(index $info "description").Value}}</div>
+                                </div>
+                                <div class="control-box">
+                                    <div class="group-v">
+                                        <div class="form-check form-switch">
+                                            <input class="input form-check-input event-status" name="{{(index $info "name").Value}}" type="checkbox">
+                                        </div>
+                                        <a data-href="{{(index $info "url").Value}}?activity_id={{$Activity}}" class="button-option">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M495.9 166.6C499.2 175.2 496.4 184.9 489.6 191.2L446.3 230.6C447.4 238.9 448 247.4 448 256C448 264.6 447.4 273.1 446.3 281.4L489.6 320.8C496.4 327.1 499.2 336.8 495.9 345.4C491.5 357.3 486.2 368.8 480.2 379.7L475.5 387.8C468.9 398.8 461.5 409.2 453.4 419.1C447.4 426.2 437.7 428.7 428.9 425.9L373.2 408.1C359.8 418.4 344.1 427 329.2 433.6L316.7 490.7C314.7 499.7 307.7 506.1 298.5 508.5C284.7 510.8 270.5 512 255.1 512C241.5 512 227.3 510.8 213.5 508.5C204.3 506.1 197.3 499.7 195.3 490.7L182.8 433.6C167 427 152.2 418.4 138.8 408.1L83.14 425.9C74.3 428.7 64.55 426.2 58.63 419.1C50.52 409.2 43.12 398.8 36.52 387.8L31.84 379.7C25.77 368.8 20.49 357.3 16.06 345.4C12.82 336.8 15.55 327.1 22.41 320.8L65.67 281.4C64.57 273.1 64 264.6 64 256C64 247.4 64.57 238.9 65.67 230.6L22.41 191.2C15.55 184.9 12.82 175.3 16.06 166.6C20.49 154.7 25.78 143.2 31.84 132.3L36.51 124.2C43.12 113.2 50.52 102.8 58.63 92.95C64.55 85.8 74.3 83.32 83.14 86.14L138.8 103.9C152.2 93.56 167 84.96 182.8 78.43L195.3 21.33C197.3 12.25 204.3 5.04 213.5 3.51C227.3 1.201 241.5 0 256 0C270.5 0 284.7 1.201 298.5 3.51C307.7 5.04 314.7 12.25 316.7 21.33L329.2 78.43C344.1 84.96 359.8 93.56 373.2 103.9L428.9 86.14C437.7 83.32 447.4 85.8 453.4 92.95C461.5 102.8 468.9 113.2 475.5 124.2L480.2 132.3C486.2 143.2 491.5 154.7 495.9 166.6V166.6zM256 336C300.2 336 336 300.2 336 255.1C336 211.8 300.2 175.1 256 175.1C211.8 175.1 176 211.8 176 255.1C176 300.2 211.8 336 256 336z"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+        
+                        {{end}}
+        
+                    {{end}}
+        
+                </div>
+            </div>
+        
+            <div class="title-block title-block-sm">互動時間</div>
+            <div class="content-block">
+                <div class="wrap-block" style="grid-gap: 0.625rem;">
+                
+                    {{range $key1, $info := .PanelInfo.InfoList}}
+        
+                        {{if eq (index $info "overview_type").Value "競技類型"}}
+        
+                            <div id="{{(index $info "div_id").Content}}" class="event-option-card message-type">
+                                <div class="icon-box">
+                                    <img src="/admin/assets/website/lib/icon/{{(index $info "div_id").Content}}.svg" alt="">
+                                </div>
+                                <div class="info-box">
+                                    <div class="title">{{(index $info "overview_name").Content}}</div>
+                                    <div class="explain">{{(index $info "description").Value}}</div>
+                                </div>
+                                <div class="control-box">
+                                    <div class="group-v">
+                                        <div class="form-check form-switch">
+                                            <input class="input form-check-input event-status" name="{{(index $info "name").Value}}" type="checkbox">
+                                        </div>
+                                        <a data-href="{{(index $info "url").Value}}?activity_id={{$Activity}}" class="button-option">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M495.9 166.6C499.2 175.2 496.4 184.9 489.6 191.2L446.3 230.6C447.4 238.9 448 247.4 448 256C448 264.6 447.4 273.1 446.3 281.4L489.6 320.8C496.4 327.1 499.2 336.8 495.9 345.4C491.5 357.3 486.2 368.8 480.2 379.7L475.5 387.8C468.9 398.8 461.5 409.2 453.4 419.1C447.4 426.2 437.7 428.7 428.9 425.9L373.2 408.1C359.8 418.4 344.1 427 329.2 433.6L316.7 490.7C314.7 499.7 307.7 506.1 298.5 508.5C284.7 510.8 270.5 512 255.1 512C241.5 512 227.3 510.8 213.5 508.5C204.3 506.1 197.3 499.7 195.3 490.7L182.8 433.6C167 427 152.2 418.4 138.8 408.1L83.14 425.9C74.3 428.7 64.55 426.2 58.63 419.1C50.52 409.2 43.12 398.8 36.52 387.8L31.84 379.7C25.77 368.8 20.49 357.3 16.06 345.4C12.82 336.8 15.55 327.1 22.41 320.8L65.67 281.4C64.57 273.1 64 264.6 64 256C64 247.4 64.57 238.9 65.67 230.6L22.41 191.2C15.55 184.9 12.82 175.3 16.06 166.6C20.49 154.7 25.78 143.2 31.84 132.3L36.51 124.2C43.12 113.2 50.52 102.8 58.63 92.95C64.55 85.8 74.3 83.32 83.14 86.14L138.8 103.9C152.2 93.56 167 84.96 182.8 78.43L195.3 21.33C197.3 12.25 204.3 5.04 213.5 3.51C227.3 1.201 241.5 0 256 0C270.5 0 284.7 1.201 298.5 3.51C307.7 5.04 314.7 12.25 316.7 21.33L329.2 78.43C344.1 84.96 359.8 93.56 373.2 103.9L428.9 86.14C437.7 83.32 447.4 85.8 453.4 92.95C461.5 102.8 468.9 113.2 475.5 124.2L480.2 132.3C486.2 143.2 491.5 154.7 495.9 166.6V166.6zM256 336C300.2 336 336 300.2 336 255.1C336 211.8 300.2 175.1 256 175.1C211.8 175.1 176 211.8 176 255.1C176 300.2 211.8 336 256 336z"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+        
+                        {{end}}
+        
+                    {{end}}
+        
+                </div>
+            </div>
+        
+            <input type="hidden" name="activity_id" value="{{.ActivityID}}">
+            <input type="hidden" name="token" value="{{.Token}}">
+        
+        </div>
+    </article>
+
+{{end}}
+
+<script>
+
+    function loadDataJSON(){
+        var json = {{.ActivityJSON}}
+        $(".event-info-card").find(".party-name").text(json["activity_name"])
+        $(".event-info-card").find(".party-now-people").text(json["attend"])
+        $(".event-info-card").find(".party-all-people").text(json["people"])
+        $(".event-info-card").find(".party-start-time").text(json["start_time"])
+        $(".event-info-card").find(".party-end-time").text(json["end_time"])
+
+        var toggleArray = [
+            {{range $key1, $info := .PanelInfo.InfoList}} json["{{(index $info "name").Value}}"], {{end}}
+        ]
+
+        $(".event-option-card").find(".event-status").each(function(e){
+            $(this).val(toggleArray[e])
+            if($(this).val() === "open"){
+                $(this).prop("checked", true)
+            }else if($(this).val() === "close"){
+                $(this).prop("checked", false)
+            }
+        })
+
+        $(".event-status[name='overview_message']").remove()
+        $(".event-status[name='overview_danmu']").remove()
+        $(".event-status[name='overview_picture']").remove()
+        $("#event-picture").css("opacity", "0.5")
+
+        // $(".event-status[name='overview_threed']").remove()
+        // $("#event-checkin3D").css("opacity", "0.5")
+
+        $(".event-status[name='overview_countdown']").remove()
+        $("#event-countdown").css("opacity", "0.5")
+
+        if(json["login_required"] === "open"){
+            $("li#game-href").addClass("d-none")
+        }
+        
+    }
+    loadDataJSON()
+    
+    
+
+
+    $("#edit-overview-party").bind("click", function(){
+        var url = $(this)[0].dataset.href
+        $.get(url, function(data){
+            $("#full-content").html(data)
+        })
+    })
+
+    $(".event-option-card").find(".button-option").bind("click", function(){
+        var url = $(this).closest("a")[0].dataset.href
+        $.get(url, function(data){
+            $("#main-content").html(data)
+        })
+    })
+
+    eventInfoStatu()
+
+    function eventInfoStatu(){
+
+        var today = new Date()
+        var eventInfoLabel = $(".event-info-card")
+        var eventStatus = eventInfoLabel.find(".status-label")
+        var eventStartTime = eventInfoLabel.find(".start-time")
+        var eventEndTime = eventInfoLabel.find(".end-time")
+        
+        for(var i = 0; i < eventStartTime.length; i++){
+            var eventEndTimeInnerText = Date.parse(eventEndTime[i].innerText)
+            var eventStartTimeInnerText = Date.parse(eventStartTime[i].innerText)
+            
+            if(today > eventEndTimeInnerText){
+                eventStatus[i].classList.add('label-gray')
+                eventStatus[i].innerText = '已結束'
+            }else if(today < eventStartTimeInnerText){
+                eventStatus[i].classList.add('label-green')
+                eventStatus[i].innerText = '籌備中'
+            }else if(eventEndTimeInnerText > Date.parse(today) && Date.parse(today) > eventStartTimeInnerText){
+                eventStatus[i].classList.add('label-orange')
+                eventStatus[i].innerText = '進行中'
+            }
+        }
+      
+    }
+
+    function submitCheckbox(selector){
+    }
+
+    $(".event-status").bind("click", function(){
+        if($(this).prop("checked") == true){
+            $(this).val("open")
+        }else{
+            $(this).val("close")
+        }
+        var formDataBox = new FormData()
+        formDataBox.append("user_id", "{{.User.UserID}}")
+        formDataBox.append("activity_id", "{{.ActivityID}}")
+        formDataBox.append("overview_message", "open")
+        formDataBox.append("overview_topic", $(".event-status[name='overview_topic']").val())
+        formDataBox.append("overview_question", $(".event-status[name='overview_question']").val())
+        formDataBox.append("overview_danmu", "open")
+        formDataBox.append("overview_special_danmu", $(".event-status[name='overview_special_danmu']").val())
+        formDataBox.append("overview_picture", "close")
+        formDataBox.append("overview_holdscreen", $(".event-status[name='overview_holdscreen']").val())
+        formDataBox.append("overview_general", $(".event-status[name='overview_general']").val())
+        formDataBox.append("overview_threed", $(".event-status[name='overview_threed']").val())
+        formDataBox.append("overview_countdown", "close")
+        formDataBox.append("overview_lottery", $(".event-status[name='overview_lottery']").val())
+        formDataBox.append("overview_redpack", $(".event-status[name='overview_redpack']").val())
+        formDataBox.append("overview_ropepack", $(".event-status[name='overview_ropepack']").val())
+        formDataBox.append("overview_whack_mole", $(".event-status[name='overview_whack_mole']").val())
+        formDataBox.append("overview_draw_numbers", $(".event-status[name='overview_draw_numbers']").val())
+        formDataBox.append("overview_monopoly", $(".event-status[name='overview_monopoly']").val())
+        formDataBox.append("overview_qa", $(".event-status[name='overview_qa']").val())
+        formDataBox.append("token", "{{.Token}}")
+        var settings = formSet("{{.Route.PATCH}}", "PATCH", formDataBox)
+        ajaxForm(settings, "/admin/info/overview?activity_id={{.ActivityID}}&sidebar=false", "#main-content", "修改成功", "發生錯誤")
+    })
+
+    $("#delete-overview-party").bind("click", function(){
+        var formDataBox = new FormData()
+        formDataBox.append("user_id", "{{.User.UserID}}")
+        formDataBox.append("id", "{{.ActivityID}}")
+        formDataBox.append("token", "{{.Token}}")
+
+        let settings = formSet("{{.Route.DELETE}}", "DELETE", formDataBox)
+        Swal.fire(sweetalertDeleteOptions("確定刪除此活動嗎?")).then(function(result){
+            if(result.isConfirmed){
+                ajaxForm(settings, "/admin/activity?user_id={{.User.UserID}}&header=false", "#full-content", "刪除成功", "發生錯誤，請聯絡客服")
+            }else{
+                console.log("取消刪除")
+            }
+        })
+    })
+
+    $("li.rank1-box:first-child").addClass("focus")
+    $("li.rank2-box:first-child").addClass("focus")
+
+    
+
+</script>

@@ -1,0 +1,103 @@
+<div class="options-content">
+    <div class="title-block">參加人員清單</div>
+    <div id="game-staff" class="content-block">
+        <div class="list-block">
+
+            <div class="list-table-card">
+                <div class="list-title-block">
+                    <div class="start-group" style="width: 28.125rem;">
+                        <button class="button button-blue button-sm select-gameStaff-all" style="width: 3.125rem;">全選</button>
+                        <div class="title-box" style="width: 25rem;">參加人員</div>
+                    </div>
+                    <div class="title-box" style="width: 6.25rem;">報名情況</div>
+                    <div class="title-box" style="width: 9.875rem;">報名時間</div>
+                    <div class="title-box" style="width: 6.25rem;">輪次</div>
+                    <div class="title-box" style="width: 6.25rem;">操作</div>
+                </div>
+            </div>
+        
+            {{if eq (len .PanelInfo.InfoList) 0}}
+        
+                <div class="no-data-box">
+                    <span>尚無資料</span>
+                </div>
+        
+            {{else}}
+        
+                {{range $key1, $info := .PanelInfo.InfoList}}
+        
+                    <div class="list-table-card" data-id="{{(index $info "id").Content}}">
+                        <div class="list-info-block">
+                            <div class="start-group" style="width: 28.125rem;">
+                                <div class="checkbox-box display-flex jc-center" style="width: 3.125rem;">
+                                    <input class="form-check-input select-input" type="checkbox">
+                                </div>
+                                <div class="person-box" style="width: 25rem;">
+                                    <div class="avatar-box">
+                                        <img src="{{(index $info "line_users_join_avatar").Content}}">
+                                    </div>
+                                    <div class="name">{{(index $info "line_users_join_name").Content}}</div>
+                                </div>
+                            </div>
+                            <div class="label-box" style="width: 6.25rem;">
+        
+                                {{if eq (index $info "status").Content "success"}}
+                                    <div class="label label-green">成功</div>
+                                {{else if eq (index $info "status").Content "fail"}}
+                                    <div class="label label-red">失敗</div>
+                                {{end}}
+        
+                            </div>
+                            <div class="time-box display-flex" style="flex-direction: column; width: 9.875rem;">
+                                <div class="datetime" style="display: none;">{{(index $info "apply_time").Content}}</div>
+                                <div class="date"></div>
+                                <div class="time"></div>
+                            </div>
+                            <div class="button-box" style="width: 6.25rem;">
+                                <div class="label label-border-yellow">第{{(index $info "round").Content}}輪</div>
+                            </div>
+                            <div class="button-box" style="width: 6.25rem;"></div>
+                        </div>
+                    </div>
+        
+                {{end}}
+        
+            {{end}}
+
+        </div>
+    </div>
+</div>
+<div class="float-bar">
+    <div class="group control">
+        <div class="group-title">操作</div>
+        {{if eq .CanDelete true}}
+            <button class="button button-red button-sm delete-staff-event">刪除</button>
+        {{end}}
+    </div>
+    <div class="group round">
+        <div class="group-title">輪次過濾</div>
+
+        {{if eq .StaffManage.IsFilterPage true}}
+
+            <button class="button button-border-gray button-sm link-game-scenes">返回</button>
+
+        {{else if eq .StaffManage.IsFilterPage false}}
+
+            {{range $key, $value := .StaffManage.Rounds}}
+
+                <button class="button button-border-gray button-sm link-round" data-round="{{$value}}">第 {{$value}} 輪</button>
+
+            {{end}}
+
+        {{end}}
+
+    </div>
+</div>
+
+<var class="variable d-none">
+    <var class="userID">{{.User.UserID}}</var>
+    <var class="token">{{.Token}}</var>
+    <var class="gameID">{{.GameID}}</var>
+    <var class="route-delete">{{.Route.DELETE}}</var>
+    <var class="route-staffmanage">{{.Route.StaffManage}}</var>
+</var>

@@ -1,0 +1,228 @@
+<div class="options-skin">
+    <h1 class="container-title">拔河遊戲 - 獎品設置</h1>
+    <details class="container-box" open>
+        <summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>獎品資訊</h2>
+        </summary>
+        <div class="main-content">
+            <div class="alert w-100">
+                <ol>
+                    <li>當您編輯獎品數量時，會幫您自動更新另一隊的獎品數量。</li>
+                    <li>因該遊戲每輪次都會發送一個數量的獎品，獎品數量請輸入預計進行遊玩的輪次。</li>
+                    <li>可把獎品數量輸入成想遊玩的次數，剩餘數量當成目前可遊玩的次數。</li>
+                </ol>
+            </div>
+            <div class="d-flex flex-column flex-md-row gap-3 w-100">
+                <div class="tugwar-prize-card" data-name="win">
+                    <div class="card-head">
+                        <h4>勝利方獎品</h4>
+                        <button class="btn btn-border-gray" data-name="edit-data" data-bs-toggle="modal" data-bs-target="#prizeForm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                            </svg>
+                            <p>編輯獎品</p>
+                        </button>
+                    </div>
+                    <div class="card-avatar">
+                        <div class="avatar-box">
+                            <img src="/admin/uploads/system/img-prize-pic.png" alt="勝利方獎品">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table>
+                            <tr data-name="prizeName">
+                                <th>獎品名稱</th>
+                                <td></td>
+                            </tr>
+                            <tr data-name="prizeType">
+                                <th>獎品類型</th>
+                                <td></td>
+                            </tr>
+                            <tr data-name="prizeAmount1">
+                                <th>獎品數量</th>
+                                <td></td>
+                            </tr>
+                            <tr data-name="prizeAmount2">
+                                <th>剩餘數量</th>
+                                <td></td>
+                            </tr>
+                            <tr data-name="prizeMethod">
+                                <th>兌獎方法</th>
+                                <td></td>
+                            </tr>
+                            <tr data-name="prizePassword">
+                                <th>兌獎密碼</th>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="tugwar-prize-card" data-name="lose">
+                    <div class="card-head">
+                        <h4>失敗方獎品</h4>
+                        <button class="btn btn-border-gray" data-name="edit-data" data-bs-toggle="modal" data-bs-target="#prizeForm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                            </svg>
+                            <p>編輯獎品</p>
+                        </button>
+                    </div>
+                    <div class="card-avatar">
+                        <div class="avatar-box">
+                            <img src="/admin/uploads/system/img-prize-pic.png" alt="勝利方獎品">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table>
+                            <tr data-name="prizeName">
+                                <th>獎品名稱</th>
+                                <td></td>
+                            </tr>
+                            <tr data-name="prizeType">
+                                <th>獎品類型</th>
+                                <td></td>
+                            </tr>
+                            <tr data-name="prizeAmount1">
+                                <th>獎品數量</th>
+                                <td></td>
+                            </tr>
+                            <tr data-name="prizeAmount2">
+                                <th>剩餘數量</th>
+                                <td></td>
+                            </tr>
+                            <tr data-name="prizeMethod">
+                                <th>兌獎方法</th>
+                                <td></td>
+                            </tr>
+                            <tr data-name="prizePassword">
+                                <th>兌獎密碼</th>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </details>
+    <div class="footer">
+        <a class="button button-border-blue" type="button" href="#tugofwar">返回場次設置</a>
+    </div>
+</div>
+
+<div class="modal fade" id="prizeForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="prizeFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="prizeFormLabel">獎品設置</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex flex-column flex-wrap gap-3">
+
+                    <div class="form-group">
+                        <label class="label-text" class="form-label" for="prize_picture">獎品圖片</label>
+                        <div class="d-flex align-items-end gap-3">
+                            <label class="upload-avatar-box" for="prize_picture">
+                                <div class="view-img">
+                                    <img src="/admin/uploads/system/img-prize-pic.png" alt="獎品圖片">
+                                </div>
+                                <div class="filter-bg"></div>
+                                <div class="btn-upload-avatar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                    </svg>
+                                </div>
+                                <input class="d-none" id="prize_picture" type="file" name="prize_picture" accept="image/jpeg,image/png,image/gif">
+                                <input type="hidden" name="prize_picture__default_flag" value="0">
+                            </label>
+                            <button class="btn btn-border-gray btn-sm" data-name="default-image" data-image="/admin/uploads/system/img-prize-pic.png">
+                                <p>預設圖片</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="prize_name">獎品名稱</label>
+                        <p>最多為20個字元</p>
+                        <input id="prize_name" class="form-control" name="prize_name" type="text" value="" maxlength="20">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">獎品類型</label>
+                        <div class="radio-button-box">
+                            <div class="radio-button">
+                                <input type="radio" id="prize_type_first" name="prize_type" value="first" checked>
+                                <label for="prize_type_first">頭獎</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="prize_type_second" name="prize_type" value="second">
+                                <label for="prize_type_second">二獎</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="prize_type_third" name="prize_type" value="third">
+                                <label for="prize_type_third">參獎</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="prize_type_general" name="prize_type" value="general">
+                                <label for="prize_type_general">普通獎</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="prize_type_thanks" name="prize_type" value="thanks">
+                                <label for="prize_type_thanks">謝謝參與</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="prize_amount">獎品數量</label>
+                        <div class="input-group">
+                            <input id="prize_amount" class="form-control" name="prize_amount" type="number" value="" maxlength="10" min="0" max="9999999999">
+                            <span class="input-group-text">個</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="prize_price">獎品價值</label>
+                        <div class="input-group">
+                            <input id="prize_price" class="form-control" name="prize_price" type="number" value="" maxlength="10" min="0" max="9999999999">
+                            <span class="input-group-text">元</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">兌獎方式</label>
+                        <div class="radio-button-box">
+                            <div class="radio-button">
+                                <input type="radio" id="prize_method_site" name="prize_method" value="site" checked>
+                                <label for="prize_method_site">現場兌換</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="prize_method_mail" name="prize_method" value="mail">
+                                <label for="prize_method_mail">郵寄兌換</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="prize_password">兌獎密碼</label>
+                        <p>最多為20個字元</p>
+                        <input id="prize_password" class="form-control" name="prize_password" type="text" value="" maxlength="20">
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button class="btn btn-blue" data-name="save-prize-data">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save2" viewBox="0 0 16 16">
+                        <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v4.5h2a.5.5 0 0 1 .354.854l-2.5 2.5a.5.5 0 0 1-.708 0l-2.5-2.5A.5.5 0 0 1 5.5 6.5h2V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+                    </svg>
+                    <p>儲存設置</p>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<var class="variable d-none">
+    <var class="userID">{{.User.UserID}}</var>
+    <var class="token">{{.Token}}</var>
+    <var class="gameID">{{.GameID}}</var>
+    <var class="route-put">{{.Route.PUT}}</var>
+</var>

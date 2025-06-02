@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>進階管理設置</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="/admin/assets/dist/js/all.js"></script>
+
+    <link rel="stylesheet" href="/admin/assets/dist/css/all.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="main-header">
+            <a class="logo" href="/admin">
+                <div class="logo-mini">
+                    <img src="/admin/assets/dist/favicon.svg" alt="Hi">
+                </div>
+                <div class="logo-lg">
+                    <img src="/admin/assets/dist/logo.svg" alt="HiLives">
+                </div>
+            </a>
+            <nav class="navbar">
+                <div id="headernav">
+                    <div class="navbar-menu">
+                        <ul class="navbar-nav">
+                            <li>
+                                <a href="https://hilives.net/" target="_blank">
+                                    <i class="bi bi-briefcase"></i>
+                                    <span>宣傳網站</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/activity?header=true">
+                                    <i class="bi bi-balloon"></i>
+                                    <span>活動管理平台</span>
+                                </a>
+                            </li>
+                            <li class="dropdown user user-menu">
+                                <a class="dropdown-toggle" href="#">
+                                    <div class="avatar-box">
+                                        <img src="{{.User.Avatar}}" alt="User Image">
+                                    </div>
+                                    <span>{{.User.Name}}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="user-header">
+                                        <div class="avatar-box">
+                                            <img src="{{.User.Avatar}}" alt="User Image">
+                                        </div>
+                                        <p>
+                                            {{.User.Name}}
+                                            <small>開發人員</small>
+                                        </p>
+                                    </li>
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a class="btn-flat" href="">設定</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a class="btn-flat" href="{{.Route.Logout}}">登出</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="not-open">
+                        <a href="/admin/dashboard">
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                            <span> Hilives數據表</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                    <li class="treeview active">
+                        <a href="#">
+                            <i class="bi bi-gear-fill"></i>
+                            <span> 用戶權限管理</span>
+                            <span class="pull-right-container">
+                                <i class="bi bi-chevron-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu menu-open">
+                            <li class="active">
+                                <a href="/admin/manager">
+                                    <i class="bi bi-people-fill"></i>
+                                    用戶管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/permission">
+                                    <i class="bi bi-shield-lock-fill"></i>
+                                    權限管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/menu">
+                                    <i class="bi bi-menu-button-wide-fill"></i>
+                                    側邊選單管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/overview">
+                                    <i class="bi bi-layout-wtf"></i>
+                                    活動總覽管理
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/log">
+                            <i class="bi bi-clipboard2-data-fill"></i>
+                            <span> Log日誌紀錄</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                    <li class="not-open">
+                        <a href="/admin/file">
+                            <i class="bi bi-file-earmark-medical-fill"></i>
+                            <span> 檔案管理</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+        <div class="content-wrapper">
+            <section class="content-header">
+                <div>
+                    <ol class="breadcrumb">
+                        <li>首頁</li>
+                        <li>用戶權限管理</li>
+                        <li>身份權限</li>
+                    </ol>
+                </div>
+                <h4>
+                    身份權限管理
+                    <small>身份權限管理</small>
+                </h4>
+            </section>
+            <section class="content">
+                <div class="main-container-content">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="btn-group">
+                                <a class="btn btn-primary btn-sm" href="/admin/permission/new">新增權限</a>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>權限名稱</th>
+                                        <th>可使用方法</th>
+                                        <th class="col-8">可訪問路徑</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+<script>
+
+    let menuData = "https://"+ getAPIDomainFromURL() +"/v1/admin/menu"
+    let methodData = [
+        { id: 1, title: "新增", value: "POST"},
+        { id: 2, title: "編輯", value: "PUT"},
+        { id: 3, title: "刪除", value: "DELETE"},
+        { id: 4, title: "全部", value: "POST,PUT,DELETE"},
+    ]
+
+    fetch("https://"+ getAPIDomainFromURL() +"/v1/admin/permission").then(function(res){
+        return res.json()
+    }).then(function(res){
+        console.log(res.data)
+        let permission = res.data
+        fetch(menuData).then(function(res){
+            return res.json()
+        }).then(function(res){
+            let menu = res.data
+            loadData(permission, menu)
+        }).then(() => {
+            editFunction()
+            deleteFunction()
+        })
+    })
+
+    
+    
+
+    function loadData(data, menu){
+        const template = `
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a class="edit-data">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a class="delete-data">
+                        <i class="bi bi-trash3"></i>
+                    </a>
+                </td>
+            </tr>
+        `
+        $(data).each(function(i){
+            const container = $(template)
+            container.attr("data-id", data[i].id)
+            container.find("td").eq(0).text(data[i].permission)
+            container.find("td").eq(1).text(data[i].http_method)
+            let methodText = container.find("td").eq(1).text().replace("POST", "新增").replace("PUT", "編輯").replace("DELETE", "刪除")
+            container.find("td").eq(1).text(methodText)
+
+            let dataPath = data[i].http_path
+            let box = container.find("td").eq(2)
+            
+            if(dataPath[0] === "admin"){
+                box.html("<li class='value-label'>管理員權限身份</li>")
+            }else if(dataPath[0] === "*"){
+                box.html("<li class='value-label'>活動所有權限</li>")
+            }else{
+                $(dataPath).each(function(o){
+                    let url = dataPath[o]
+                    $(menu).each(function(i1){
+                        let list2 = menu[i1].children_list
+                        $(list2).each(function(i2){
+                            if(url === list2[i2].url){
+                                let text = url.replace(url, list2[i2].title)
+                                box.append("<li class='value-label'>"+ text +"</li>")
+                            }else{
+                                let list3 = list2[i2].children_list
+                                $(list3).each(function(i3){
+                                    if(url === list3[i3].url){
+                                        let text = url.replace(url, list2[i2].title + "-" + list3[i3].title)
+                                        box.append("<li class='value-label'>"+ text +"</li>")
+                                    }else{
+                                        let list4 = list3[i3].children_list
+                                        $(list4).each(function(i4){
+                                            if(url === list4[i4].url){
+                                                let text = url.replace(url, list2[i2].title + "-" + list4[i4].title)
+                                                box.append("<li class='value-label'>"+ text +"</li>")
+                                            }else{
+                                                let list5 = list4[i4].children_list
+                                                $(list5).each(function(i5){
+                                                    if(url === list5[i5].url){
+                                                        let text = url.text().replace(url, list2[i2].title + "-" + list5[i5].title)
+                                                        box.append("<li class='value-label'>"+ text +"</li>")
+                                                    }
+                                                })
+                                            }
+                                        })
+                                    }
+                                })
+                            }
+                        })
+                    })
+                })
+            }
+
+            $(".table").find("tbody").append(container)
+        })
+    }
+
+    function editFunction(){
+        $(".edit-data").bind("click", function(){
+            let parent = $(this).parents("tr")
+            location.replace("/admin/permission/edit?id=" + parent.data("id"))
+        })
+    }
+
+    function deleteFunction(){
+        $(".delete-data").bind("click", function(){
+
+            Swal.fire({
+                title: "確定要刪除此身份嗎?",
+                showCancelButton: true,
+                confirmButtonText: "刪除",
+                cancelButtonText: "取消",
+                confirmButtonColor: "#3891a6"
+            }).then((result) => {
+                if(result.isConfirmed){
+                    let parent = $(this).parents("tr")
+                    let formDataBox = new FormData()
+                    formDataBox.append("id", parent.data("id"))
+                    formDataBox.append("user_id", "{{.User.UserID}}")
+                    formDataBox.append("token", "{{.Token}}")
+
+                    let settings = {
+                        "url": "{{.Route.DELETE}}",
+                        "method": "DELETE",
+                        "timeout": 0,
+                        "processData": false,
+                        "mimeType": "multipart/form-data",
+                        "contentType": false,
+                        "data": formDataBox,
+                        "dataType": "json",
+                        "success": function(data){
+                            Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 2000
+                            }).fire({
+                                icon: "success",
+                                title: "身份已刪除"
+                            })
+                            parent.remove()
+                        },
+                        "error": function(result){
+                            Swal.fire({
+                                title: result.statusText,
+                                text: result.responseJSON.message,
+                                icon: 'error',
+                                confirmButtonColor: '#3891a6'
+                            })
+                            return
+                        }
+                    }
+
+                    $.ajax(settings).done(function(e){})
+                }
+            })
+            
+        })
+    }
+
+</script>
+</html>

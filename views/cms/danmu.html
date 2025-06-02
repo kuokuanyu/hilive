@@ -1,0 +1,248 @@
+<main>
+    <div class="page-container">
+        <div class="container main-skin">
+            <h2 class="page-title">一般彈幕設置</h2>
+            <fieldset class="options-group">
+                <legend class="title">基本設置</legend>
+                <div class="options-group-space">
+                    <fieldset class="inputs-group">
+                        <label class="input-name">顯示暱稱</label>
+                        <div class="d-flex flex-row gap-2 mb-2">
+                            <input type="radio" id="barrage-name-open" class="radio-button" name="danmu_display_name" value="open" checked>
+                            <label for="barrage-name-open">開啟</label>
+                            <input type="radio" id="barrage-name-close" class="radio-button" name="danmu_display_name" value="close">
+                            <label for="barrage-name-close">關閉</label>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inputs-group">
+                        <label class="input-name">顯示頭像</label>
+                        <div class="d-flex flex-row gap-2 mb-2">
+                            <input type="radio" id="barrage-avatar-open" class="radio-button" name="danmu_display_avatar" value="open" checked>
+                            <label for="barrage-avatar-open">開啟</label>
+                            <input type="radio" id="barrage-avatar-close" class="radio-button" name="danmu_display_avatar" value="close">
+                            <label for="barrage-avatar-close">關閉</label>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inputs-group">
+                        <label class="input-name">彈幕循環</label>
+                        <div class="d-flex flex-row gap-2 mb-2">
+                            <input type="radio" id="barrage-loop-open" class="radio-button" name="danmu_loop" value="open" checked>
+                            <label for="barrage-loop-open">開啟</label>
+                            <input type="radio" id="barrage-loop-close" class="radio-button" name="danmu_loop" value="close">
+                            <label for="barrage-loop-close">關閉</label>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inputs-group">
+                        <label class="input-name">彈幕顯示位置</label>
+                        <div class="d-flex flex-sm-row flex-column gap-3">
+                            <input type="radio" id="barrage-screen-all" class="radio-button" name="danmu_position" value="all" checked>
+                            <label for="barrage-screen-all">全螢幕</label>
+                            <input type="radio" id="barrage-screen-top" class="radio-button" name="danmu_position" value="top">
+                            <label for="barrage-screen-top">螢幕上方</label>
+                            <input type="radio" id="barrage-screen-middle" class="radio-button" name="danmu_position" value="middle">
+                            <label for="barrage-screen-middle">螢幕中間</label>
+                            <input type="radio" id="barrage-screen-bottom" class="radio-button" name="danmu_position" value="bottom">
+                            <label for="barrage-screen-bottom">螢幕下方</label>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inputs-group">
+                        <label class="input-name">彈幕大小</label>
+                        <div class="input-range-box">
+                            <input class="input" id="barrage-size" type="range" name="danmu_size" value="75" min="50" max="100" step="1">
+                            <div class="unit-box">
+                                <p>小</p><p>中</p><p>大</p>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inputs-group">
+                        <label class="input-name">彈幕速度</label>
+                        <div class="input-range-box">
+                            <input class="input" id="barrage-speed" type="range" name="danmu_speed" value="50" min="1" max="100" step="1" style="transform: rotate(180deg);">
+                            <div class="unit-box">
+                                <p>慢</p><p>中</p><p>快</p>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inputs-group">
+                        <label class="input-name">彈幕密度</label>
+                        <div class="input-range-box">
+                            <input class="input" id="barrage-density" type="range" name="danmu_density" value="50" min="1" max="100" step="1">
+                            <div class="unit-box">
+                                <p>低</p><p>中</p><p>高</p>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inputs-group">
+                        <label class="input-name">彈幕不透明度</label>
+                        <div class="input-range-box">
+                            <input class="input" id="barrage-opacity" type="range" name="danmu_opacity" value="90" min="1" max="100" step="1">
+                            <div class="unit-box">
+                                <p>0%</p><p>50%</p><p>100%</p>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </fieldset>
+            <fieldset class="options-group">
+                <legend class="title">彈幕外觀設置</legend>
+                <div class="options-group-space">
+                    <fieldset class="inputs-group">
+                        <label class="input-name">樣式選擇</label>
+                        <div class="d-flex flex-lg-row flex-column gap-3">
+                            <input type="radio" id="default-style" class="image-button" name="danmu_background" value="1" checked>
+                            <label class="image-radio" for="default-style">
+                                <div class="img-skin">
+                                    <div class="img-box">
+                                        <img src="/admin/assets/dist/img/style-small/default-normalbarrage.png" alt="預設樣式">
+                                    </div>
+                                </div>
+                                <p class="theme-name">預設主題</p>
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div class="page-footer">
+        <button id="save-game-data" class="btn base-button button-md button-main-color" type="submit">儲存設置</button>
+        <a class="btn base-button icon-button button-md button-main-bordercolor" href="#" target="_blank" role="button">活動畫面預覽<i class="bi bi-box-arrow-up-right"></i></a>
+    </div>
+</main>
+
+<script>
+
+    if("page"){
+        let dataURL = "https://"+ getAPIDomainFromURL() +"/v1/activity?activity_id={{.ActivityID}}"
+
+        fetch(dataURL)
+        .then(function(res){
+            return res.json()
+        }).then(function(result){
+            loadData(result.data)
+        }).catch(function(error){
+            console.log(error)
+        })
+
+        function loadData(data){
+            if(data.danmu_loop === "open"){
+                $("#barrage-loop-open").prop("checked", true)
+            }else{
+                $("#barrage-loop-close").prop("checked", true)
+            }
+            if(data.danmu_display_avatar === "open"){
+                $("#barrage-avatar-open").prop("checked", true)
+            }else{
+                $("#barrage-avatar-close").prop("checked", true)
+            }
+            if(data.danmu_display_name === "open"){
+                $("#barrage-name-open").prop("checked", true)
+            }else{
+                $("#barrage-name-close").prop("checked", true)
+            }
+            if(data.danmu_top === "open" && data.danmu_mid === "open" && data.danmu_bottom === "open"){
+                $("#barrage-screen-all").prop("checked", true)
+            }else if(data.danmu_top === "open"){
+                $("#barrage-screen-top").prop("checked", true)
+            }else if(data.danmu_mid === "open"){
+                $("#barrage-screen-middle").prop("checked", true)
+            }else if(data.danmu_bottom === "open"){
+                $("#barrage-screen-bottom").prop("checked", true)
+            }
+            $("[name='danmu_size']").val(data.danmu_size)
+            $("[name='danmu_speed']").val(data.danmu_speed)
+            $("[name='danmu_density']").val(data.danmu_density)
+            $("[name='danmu_opacity']").val(data.danmu_opacity)
+            $(".image-button[value='"+ data.danmu_background +"']").prop("checked", true)
+
+            // $("#barrage-color-text").val(partySetting.barrage.color1)
+            // $("#barrage-color-background").val(partySetting.barrage.color2)
+        }
+    }
+
+    //儲存設置
+    $("#save-game-data").bind("click", function(){
+        let formDataBox = new FormData()
+
+        formDataBox.append("user_id", "{{.User.UserID}}")
+        formDataBox.append("activity_id", "{{.ActivityID}}")
+        formDataBox.append("danmu_loop", $("[name='danmu_loop']:checked").val())
+
+        if($("[name='danmu_position']:checked").val() === "all"){
+            formDataBox.append("danmu_top", "open")
+            formDataBox.append("danmu_mid", "open")
+            formDataBox.append("danmu_bottom", "open")
+        }else if($("[name='danmu_position']:checked").val() === "top"){
+            formDataBox.append("danmu_top", "open")
+            formDataBox.append("danmu_mid", "close")
+            formDataBox.append("danmu_bottom", "close")
+        }else if($("[name='danmu_position']:checked").val() === "middle"){
+            formDataBox.append("danmu_top", "close")
+            formDataBox.append("danmu_mid", "open")
+            formDataBox.append("danmu_bottom", "close")
+        }else if($("[name='danmu_position']:checked").val() === "bottom"){
+            formDataBox.append("danmu_top", "close")
+            formDataBox.append("danmu_mid", "close")
+            formDataBox.append("danmu_bottom", "open")
+        }
+
+        formDataBox.append("danmu_display_name", $("[name='danmu_display_name']:checked").val())
+        formDataBox.append("danmu_display_avatar", $("[name='danmu_display_avatar']:checked").val())
+        formDataBox.append("danmu_size", $("[name='danmu_size']").val())
+        formDataBox.append("danmu_speed", $("[name='danmu_speed']").val())
+        formDataBox.append("danmu_density", $("[name='danmu_density']").val())
+        formDataBox.append("danmu_opacity", $("[name='danmu_opacity']").val())
+        formDataBox.append("danmu_background", $("[name='danmu_background']:checked").val())
+
+        formDataBox.append("token", "{{.Token}}")
+
+        let settings = {
+            "url": "{{.Route.PATCH}}",
+            "method": "PATCH",
+            "timeout": 0,
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": formDataBox,
+            "dataType": "json",
+            "success": function(data){
+                $.get($(".rank2").find(".focus > div").data("href"), function(data){
+                    $("#main-content").html(data)
+                })
+            },
+            "error": function(result){
+                toastMsg(result.statusText, result.responseJSON.message)
+                return
+            }
+        }
+
+        $.ajax(settings).done(function(){
+            Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 5000
+            }).fire({
+                icon: "success",
+                title: "已儲存設置"
+            })
+        }).fail(function(response){
+            Swal.fire({
+                title: "發生錯誤",
+                text: response.responseJSON.message,
+                icon: 'error',
+                confirmButtonColor: '#3891a6'
+            })
+        })
+
+	})
+
+    function getAPIDomainFromURL(){
+        if(window.location.host.startsWith("dev")){
+            return "apidev.hilives.net"
+        }else{
+            return "api.hilives.net"
+        }
+    }
+
+</script>

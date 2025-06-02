@@ -1,0 +1,149 @@
+<div class="options-skin">
+	<h1 class="container-title">訊息審核</h1>
+	<details class="container-box" open>
+		<summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>基本設置</h2>
+        </summary>
+		<div class="main-content">
+
+			<div class="d-flex flex-wrap gap-3">
+
+				<div class="form-group">
+                    <label class="form-label">手動審核</label>
+					<p>如選擇開啟此功能，訊息會在送出後經過審核</p>
+                    <div class="radio-button-box">
+                        <div class="radio-button">
+                            <input type="radio" id="message_check_manual_check_open" name="message_check_manual_check" value="open">
+                            <label for="message_check_manual_check_open">開啟</label>
+                        </div>
+                        <div class="radio-button">
+                            <input type="radio" id="message_check_manual_check_close" name="message_check_manual_check" value="close" checked>
+                            <label for="message_check_manual_check_close">關閉</label>
+                        </div>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label class="form-label d-flex align-items-center gap-3">
+						敏感詞
+						<a id="link-sensitivity" class="btn btn-blue btn-sm" href="#message_sensitivity">添加</a>
+					</label>
+					<p>目前無法對歷史訊息溯及既往，該功能只能在未開啟活動畫面的情況下進行調整</p>
+                    <div class="radio-button-box">
+                        <div class="radio-button">
+                            <input type="radio" id="message_check_sensitivity_replace" name="message_check_sensitivity" value="replace" checked>
+                            <label for="message_check_sensitivity_replace">替換字詞</label>
+                        </div>
+                        <div class="radio-button">
+                            <input type="radio" id="message_check_sensitivity_refuse" name="message_check_sensitivity" value="refuse">
+                            <label for="message_check_sensitivity_refuse">隱藏整條訊息</label>
+                        </div>
+                    </div>
+                </div>
+
+			</div>
+
+		</div>
+	</details>
+	<details class="container-box" open>
+		<summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>訊息審核</h2>
+        </summary>
+		<div class="main-content">
+
+			<div class="toolbox">
+				<ul id="filter-status" class="nav nav-pills nav-button-box gap-1" role="tablist">
+					<li id="btn-review-filter" class="nav-item" role="presentation">
+						<button class="nav-link nav-button active" id="pills-review-tab" data-status="review" data-bs-toggle="pill" type="button" role="tab" aria-selected="true">待審核</button>
+					</li>
+					<li id="btn-yes-filter" class="nav-item" role="presentation">
+						<button class="nav-link nav-button" id="pills-yes-tab" data-status="yes" data-bs-toggle="pill" type="button" role="tab" aria-selected="false">通過</button>
+					</li>
+					<li id="btn-no-filter" class="nav-item" role="presentation">
+						<button class="nav-link nav-button" id="pills-no-tab" data-status="no" data-bs-toggle="pill" type="button" role="tab" aria-selected="false">未通過</button>
+					</li>
+				</ul>
+				<ul id="filter-type" class="nav nav-pills nav-button-box gap-1" role="tablist">
+					<li id="btn-all-filter" class="nav-item" role="presentation">
+						<button class="nav-link nav-button active" id="pills-all-tab" data-type="all" data-bs-toggle="pill" type="button" role="tab" aria-selected="true">全部</button>
+					</li>
+					<li id="btn-normalmessage-filter" class="nav-item" role="presentation">
+						<button class="nav-link nav-button" id="pills-normal-message-tab" data-type="normal-message" data-bs-toggle="pill" type="button" role="tab" aria-selected="false">一般訊息</button>
+					</li>
+					<li id="btn-normalbarrage-filter" class="nav-item" role="presentation">
+						<button class="nav-link nav-button" id="pills-normal-barrage-tab" data-type="normal-barrage" data-bs-toggle="pill" type="button" role="tab" aria-selected="false">一般彈幕</button>
+					</li>
+					<li id="btn-specialbarrage-filter" class="nav-item" role="presentation">
+						<button class="nav-link nav-button" id="pills-special-barrage-tab" data-type="special-barrage" data-bs-toggle="pill" type="button" role="tab" aria-selected="false">特殊彈幕</button>
+					</li>
+					<li id="btn-occupybarrage-filter" class="nav-item" role="presentation">
+						<button class="nav-link nav-button" id="pills-occupy-barrage-tab" data-type="occupy-barrage" data-bs-toggle="pill" type="button" role="tab" aria-selected="false">霸佔彈幕</button>
+					</li>
+					<li id="btn-question-filter" class="nav-item" role="presentation">
+						<button class="nav-link nav-button" id="pills-question-tab" data-type="question" data-bs-toggle="pill" type="button" role="tab" aria-selected="false">提問區訊息</button>
+					</li>
+				</ul>
+			</div>
+			<div class="data-view">
+				<div class="table" style="max-height: 37.5rem;">
+					<div class="thead">
+						<div class="tr">
+                            <div class="th title-th"><p>訊息來源</p></div>
+                            <div class="th textarea-limited-th xl-container full"><p>訊息內容</p></div>
+                            <div class="th type-th"><p>訊息類型</p></div>
+                            <div class="th type-th"><p>審核狀態</p></div>
+                            <div class="th number-th"><p>訊息金額(NTD)</p></div>
+                            <div class="th date-th"><p>發送時間</p></div>
+                            <div class="th control-th pin right-pin pin-sm sm-container"><p>操作</p></div>
+                        </div>
+					</div>
+                    <div class="tbody"></div>
+				</div>
+			</div>
+
+		</div>
+	</details>
+</div>
+
+<template id="tr">
+    <div class="tr">
+        <div class="td title-td">
+			<div class="group">
+                <div class="sm-square-image">
+                    <img src="/admin/uploads/system/img-user-pic.png" data-name="avatar">
+                </div>
+                <p data-name="name"></p>
+            </div>
+		</div>
+		<div class="td textarea-limited-td xl-container full">
+            <p data-name="content"></p>
+        </div>
+        <div class="td type-td" data-name="type"></div>
+        <div class="td type-td" data-name="status">待審核</div>
+		<div class="td number-td" data-name="price">0</div>
+		<div class="td date-td" data-name="time"></div>
+        <div class="td control-td pin right-pin pin-sm sm-container">
+            <ul data-type="message">
+                <li title="通過" data-name="pass-message-data" disabled><i class="bi bi-check-lg"></i></li>
+                <li title="拒絕" data-name="refuse-message-data" disabled><i class="bi bi-x-lg"></i></li>
+            </ul>
+			<ul data-type="question">
+                <li title="通過" data-name="pass-question-data" disabled><i class="bi bi-check-lg"></i></i></li>
+                <li title="拒絕" data-name="refuse-question-data" disabled><i class="bi bi-x-lg"></i></li>
+            </ul>
+        </div>
+    </div>
+</template>
+
+<var class="variable d-none">
+    <var class="userID">{{.User.UserID}}</var>
+    <var class="token">{{.Token}}</var>
+    <var class="route-patch">{{.Route.PATCH}}</var>
+    <var class="route-put">{{.Route.PUT}}</var>
+    <var class="route-sensitivity">{{.Route.Sensitivity}}</var>
+</var>

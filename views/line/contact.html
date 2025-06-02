@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>舉辦活動</title>
+
+        <!-- Jquery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        
+        <!-- Main style -->
+        <link href="/admin/assets/dist/css/main.css?ver=20220214" rel="stylesheet">
+        
+    </head>
+    <body>
+        <div class="p-20 d-flex flex-column gap-20">
+            <div class="p-20 d-flex flex-column gap-10 card">
+                <h5 class="title">填寫需求</h5>
+                <p class="text">如果你想體驗我們平台的話，請填寫您的基本資料，以及活動資料。</p>
+                <a class="btn btn-green-color have-require">點我填寫</a>
+            </div>
+            <div class="p-20 d-flex flex-column gap-10 card">
+                <h5 class="title">聯繫我們</h5>
+                <p class="text">遇到問題的話，歡迎聯繫我們。LINE的聯繫ID為: hilives5338</p>
+                <a class="btn btn-green-color" href="https://line.me/ti/p/W9_fntU14G">點我加入</a>
+            </div>
+        </div>
+    </body>
+    <script>
+        $(".have-require").bind("click", function(){
+            location.href = "/activity/create/require?user_id="+ getQueryVariable("user_id")
+        })
+
+        function getQueryVariable(variable){
+			var query = window.location.search.substring(1)
+			var vars = query.split("&")
+			for(var i = 0; i < vars.length; i++){
+				var pair = vars[i].split("=")
+				if(pair[0] == variable){
+					return pair[1]
+				}
+			}
+			return("")
+		}
+    </script>
+</html>

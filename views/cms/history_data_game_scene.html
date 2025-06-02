@@ -1,0 +1,34 @@
+<main>
+    <div class="page-container">
+        <div class="container main-skin h-100">
+            <h2 class="page-title">遊戲場次列表</h2>
+            <div class="table-box">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th class="col-4">場次名稱</th>
+                            <th class="col-4">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{if eq (len .PanelInfo.InfoList) 0}}
+                            <tr class="no-data">
+                                <td>尚無任何場次資料</td>
+                            </tr>
+                        {{else}}
+                            {{$managehref := .Route.StaffManage}}
+                            {{range $key1, $info := .PanelInfo.InfoList}}
+                                <tr>
+                                    <td>{{(index $info "title").Content}}</td>
+                                    <td>
+                                        <a class="btn btn-primary link-gamer-manage" href="#record-{{(index $info "game").Content}}-list" data-id="{{(index $info "game_id").Content}}" data-href="{{$managehref}}">參加人員管理</a>
+                                    </td>
+                                </tr>
+                            {{end}}
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>

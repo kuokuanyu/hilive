@@ -1,0 +1,68 @@
+
+<div style="padding: 0.625rem; background-color: #f9f9f9;">
+    <div class="icon-tip-block">
+        <div class="icon-tip-box">
+            <div class="icon-box">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path class="a" d="M28.75,28.75h-7.5A13.76,13.76,0,0,0,7.5,42.5,2.5,2.5,0,0,0,10,45H40a2.5,2.5,0,0,0,2.5-2.5A13.76,13.76,0,0,0,28.75,28.75ZM11.33,41.25a10,10,0,0,1,9.92-8.75h7.5a10,10,0,0,1,9.92,8.75ZM25,25A10,10,0,1,0,15,15,10,10,0,0,0,25,25ZM25,8.75A6.25,6.25,0,1,1,18.75,15,6.25,6.25,0,0,1,25,8.75Z"/></svg>
+            </div>
+            <div class="text">獲獎人姓名</div>
+        </div>
+        <div class="icon-tip-box">
+            <div class="icon-box">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path class="a" d="M7.5,41.25A3.75,3.75,0,0,0,11.25,45H22.5V27.5H7.5Zm4-9.79h7.08V41H11.46Z"/><path class="a" d="M27.5,45H38.75a3.75,3.75,0,0,0,3.75-3.75V27.5h-15Zm4-13.54h7.08V41H31.46Z"/><path class="a" d="M42.5,15H39.25A7.06,7.06,0,0,0,40,11.88,6.88,6.88,0,0,0,33.13,5H33a7.06,7.06,0,0,0-6.07,3.47L25,11.68,23.12,8.47A7.06,7.06,0,0,0,17.05,5h-.18A6.88,6.88,0,0,0,10,11.88,7.06,7.06,0,0,0,10.75,15H7.5A2.5,2.5,0,0,0,5,17.5v5A2.5,2.5,0,0,0,7.5,25h35A2.5,2.5,0,0,0,45,22.5v-5A2.5,2.5,0,0,0,42.5,15ZM30.12,10.37A3.3,3.3,0,0,1,33,8.75h.18a3.13,3.13,0,0,1,0,6.25H27.4ZM16.87,8.75h.18a3.3,3.3,0,0,1,2.83,1.62L22.6,15H16.87a3.13,3.13,0,0,1,0-6.25ZM25.31,19H41V21H9V19H25.31Z"/></svg>
+            </div>
+            <div class="text">獲獎名稱</div>
+        </div>
+        <div class="icon-tip-box">
+            <div class="icon-box">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path class="a" d="M23.12,14.38a1.88,1.88,0,1,1,3.76,0V24l6.66,4.44A1.81,1.81,0,0,1,34,31a1.72,1.72,0,0,1-2.53.45l-7.5-5a1.72,1.72,0,0,1-.84-1.56ZM25,5A20,20,0,1,1,5,25,20,20,0,0,1,25,5ZM8.75,25A16.25,16.25,0,1,0,25,8.75,16.24,16.24,0,0,0,8.75,25Z"/></svg>
+            </div>
+            <div class="text">獲獎時間</div>
+        </div>
+    </div>
+    <div class="prize-list">
+
+        {{if eq (len .StaffManage.StaffList) 0}}
+
+            <div class="nodata-block">
+                <div class="info-nodata text-center" style="color: #666;">尚無獲獎訊息</div>
+            </div>
+
+        {{else}}
+
+            {{range $key1, $info := .StaffManage.StaffList}}
+
+                <div class="prize-card">
+                    <div class="d-flex flex-row gap-1">
+                        <div class="avatar-block">
+                            <img class="avatar" src='{{(index $info "line_users_join_avatar").Content}}'>
+                        </div>
+                        <div class="prize-info-block">
+                            <div class="info-box">
+                                <div class="icon-box">
+                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path class="a" d="M28.75,28.75h-7.5A13.76,13.76,0,0,0,7.5,42.5,2.5,2.5,0,0,0,10,45H40a2.5,2.5,0,0,0,2.5-2.5A13.76,13.76,0,0,0,28.75,28.75ZM11.33,41.25a10,10,0,0,1,9.92-8.75h7.5a10,10,0,0,1,9.92,8.75ZM25,25A10,10,0,1,0,15,15,10,10,0,0,0,25,25ZM25,8.75A6.25,6.25,0,1,1,18.75,15,6.25,6.25,0,0,1,25,8.75Z"/></svg>
+                                </div>
+                                <div class="text">{{(index $info "line_users_join_name").Content}}</div>
+                            </div>
+                            <div class="info-box">
+                                <div class="icon-box">
+                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path class="a" d="M7.5,41.25A3.75,3.75,0,0,0,11.25,45H22.5V27.5H7.5Zm4-9.79h7.08V41H11.46Z"/><path class="a" d="M27.5,45H38.75a3.75,3.75,0,0,0,3.75-3.75V27.5h-15Zm4-13.54h7.08V41H31.46Z"/><path class="a" d="M42.5,15H39.25A7.06,7.06,0,0,0,40,11.88,6.88,6.88,0,0,0,33.13,5H33a7.06,7.06,0,0,0-6.07,3.47L25,11.68,23.12,8.47A7.06,7.06,0,0,0,17.05,5h-.18A6.88,6.88,0,0,0,10,11.88,7.06,7.06,0,0,0,10.75,15H7.5A2.5,2.5,0,0,0,5,17.5v5A2.5,2.5,0,0,0,7.5,25h35A2.5,2.5,0,0,0,45,22.5v-5A2.5,2.5,0,0,0,42.5,15ZM30.12,10.37A3.3,3.3,0,0,1,33,8.75h.18a3.13,3.13,0,0,1,0,6.25H27.4ZM16.87,8.75h.18a3.3,3.3,0,0,1,2.83,1.62L22.6,15H16.87a3.13,3.13,0,0,1,0-6.25ZM25.31,19H41V21H9V19H25.31Z"/></svg>
+                                </div>
+                                <div class="text">{{(index $info "activity_prize_join_prize_name").Content}}</div>
+                            </div>
+                            <div class="info-box">
+                                <div class="icon-box">
+                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path class="a" d="M23.12,14.38a1.88,1.88,0,1,1,3.76,0V24l6.66,4.44A1.81,1.81,0,0,1,34,31a1.72,1.72,0,0,1-2.53.45l-7.5-5a1.72,1.72,0,0,1-.84-1.56ZM25,5A20,20,0,1,1,5,25,20,20,0,0,1,25,5ZM8.75,25A16.25,16.25,0,1,0,25,8.75,16.24,16.24,0,0,0,8.75,25Z"/></svg>
+                                </div>
+                                <div class="text">{{(index $info "win_time").Content}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {{end}}
+
+        {{end}}
+        
+    </div>
+</div>

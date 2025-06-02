@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>進階管理設置</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="/admin/assets/dist/js/all.js"></script>
+
+    <link rel="stylesheet" href="/admin/assets/dist/css/all.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="main-header">
+            <a class="logo" href="/admin">
+                <div class="logo-mini">
+                    <img src="/admin/assets/dist/favicon.svg" alt="Hi" />
+                </div>
+                <div class="logo-lg">
+                    <img src="/admin/assets/dist/logo.svg" alt="HiLives" />
+                </div>
+            </a>
+            <nav class="navbar">
+                <div id="headernav">
+                    <div class="navbar-menu">
+                        <ul class="navbar-nav">
+                            <li>
+                                <a href="https://hilives.net/" target="_blank">
+                                    <i class="bi bi-briefcase"></i>
+                                    <span>宣傳網站</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/activity?header=true">
+                                    <i class="bi bi-balloon"></i>
+                                    <span>活動管理平台</span>
+                                </a>
+                            </li>
+                            <li class="dropdown user user-menu">
+                                <a class="dropdown-toggle" href="#">
+                                    <div class="avatar-box">
+                                        <img src="{{.User.Avatar}}" alt="User Image" />
+                                    </div>
+                                    <span>{{.User.Name}}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="user-header">
+                                        <div class="avatar-box">
+                                            <img src="{{.User.Avatar}}" alt="User Image" />
+                                        </div>
+                                        <p>
+                                            {{.User.Name}}
+                                            <small>開發人員</small>
+                                        </p>
+                                    </li>
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a class="btn-flat" href="">設定</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a class="btn-flat" href="{{.Route.Logout}}">登出</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="not-open">
+                        <a href="/admin/dashboard">
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                            <span> Hilives數據表</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                    <li class="treeview active">
+                        <a href="#">
+                            <i class="bi bi-gear-fill"></i>
+                            <span> 用戶權限管理</span>
+                            <span class="pull-right-container">
+                                <i class="bi bi-chevron-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu menu-open">
+                            <li class="active">
+                                <a href="/admin/manager">
+                                    <i class="bi bi-people-fill"></i>
+                                    用戶管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/permission">
+                                    <i class="bi bi-shield-lock-fill"></i>
+                                    權限管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/menu">
+                                    <i class="bi bi-menu-button-wide-fill"></i>
+                                    側邊選單管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/overview">
+                                    <i class="bi bi-layout-wtf"></i>
+                                    活動總覽管理
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/log">
+                            <i class="bi bi-clipboard2-data-fill"></i>
+                            <span> Log日誌紀錄</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                    <li class="not-open">
+                        <a href="/admin/file">
+                            <i class="bi bi-file-earmark-medical-fill"></i>
+                            <span> 檔案管理</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+        <div class="content-wrapper">
+            <section class="content-header">
+                <div>
+                    <ol class="breadcrumb">
+                        <li>首頁</li>
+                        <li>用戶權限管理</li>
+                        <li>HiLives用戶</li>
+                        <li>用戶活動列表</li>
+                    </ol>
+                </div>
+                <h4>
+                    選擇遊戲項目
+                    <small>選擇遊戲項目</small>
+                </h4>
+            </section>
+            <section class="content">
+                <div class="main-container-content">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">選擇遊戲項目</h3>
+                            <div class="btn-group pull-right">
+                                <a class="back-manager" href="#">返回</a>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="p-3 d-flex flex-wrap gap-3">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/admin/uploads/system/redpack/theme/default.jpg" class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">搖紅包</h5>
+                                        <p class="card-text">搖晃你手機，一起拚運氣</p>
+                                        <a href="{{.Route.Game}}redpack" class="btn btn-primary">選擇</a>
+                                    </div>
+                                </div>
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/admin/uploads/system/ropepack/theme/default.jpg" class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">套紅包</h5>
+                                        <p class="card-text">手指點一點，獎品在面前</p>
+                                        <a href="{{.Route.Game}}ropepack" class="btn btn-primary">選擇</a>
+                                    </div>
+                                </div>
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/admin/assets/website/lib/style/turntable/classic.png" class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">遊戲抽獎</h5>
+                                        <p class="card-text">轉轉大輪盤，禮物有夠讚</p>
+                                        <a href="{{.Route.Game}}lottery" class="btn btn-primary">選擇</a>
+                                    </div>
+                                </div>
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/admin/uploads/system/drawnumbers/theme/default.png" class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">搖號抽獎</h5>
+                                        <p class="card-text">搖號抽獎</p>
+                                        <a href="{{.Route.Game}}draw_numbers" class="btn btn-primary">選擇</a>
+                                    </div>
+                                </div>
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/admin/uploads/system/whackmole/classic/thumbnail.png" class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">敲敲樂</h5>
+                                        <p class="card-text">打地鼠</p>
+                                        <a href="{{.Route.Game}}whack_mole" class="btn btn-primary">選擇</a>
+                                    </div>
+                                </div>
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/admin/assets/website/lib/style/monopoly/classic.png" class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">鑑定師</h5>
+                                        <p class="card-text">鑑定師</p>
+                                        <a href="{{.Route.Game}}monopoly" class="btn btn-primary">選擇</a>
+                                    </div>
+                                </div>
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/admin/assets/cms/img/style/qa/classic.png" class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">快問快答</h5>
+                                        <p class="card-text">快問快答</p>
+                                        <a href="{{.Route.Game}}QA" class="btn btn-primary">選擇</a>
+                                    </div>
+                                </div>
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/admin/assets/cms/img/style/tugofwar/classic.png" class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">拔河遊戲</h5>
+                                        <p class="card-text">拔河遊戲</p>
+                                        <a href="{{.Route.Game}}tugofwar" class="btn btn-primary">選擇</a>
+                                    </div>
+                                </div>
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/admin/assets/cms/img/style/tugofwar/classic.png" class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">賓果遊戲</h5>
+                                        <p class="card-text">賓果遊戲</p>
+                                        <a href="{{.Route.Game}}bingo" class="btn btn-primary">選擇</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+<script>
+    $(".back-manager").bind("click", function(){
+        location.href = "/admin/manager/activity?user_id=" + getKeyFromURL("user_id")
+    })
+</script>
+</html>

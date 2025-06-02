@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HILIVES活動管理平台</title>
+    <link rel="icon" type="image/x-icon" href="/admin/assets/dist/favicon.svg">
+
+    <link rel="canonical" href="https://event.hilives.net" />
+
+    <!-- Jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+
+    <!-- Sweetalert2 之後改成HILIVES品牌的風格 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- QRcode -->
+    <script src="/admin/assets/dist/js/qr-code-styling.js"></script>
+    <script src="/admin/assets/dist/js/create-qrcode.js"></script>
+
+    <!-- Taiwan zip code -->
+    <!-- <script src="/admin/assets/website/js/twzipcode.js"></script> -->
+    <script src="/admin/assets/website/js/jquery.twzipcode.min.js"></script>
+
+    <!-- Bootstrap 之後改成自己開發-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap Icon CSS檔案裡面已經有包含了，應該不需要-->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
+    <!-- Main Style -->
+    <link id="main-css" href="/admin/assets/cms/css/cms.css" rel="stylesheet">
+
+    <!-- Main Script -->
+    <script src="/admin/assets/website/js/index.min.js?ver=20230516"></script>
+    <script id="main-js" src="/admin/assets/cms/js/cms.js" charset="big5"></script>
+    <!-- <script src="/admin/assets/cms/js/router.js" charset="big5"></script> -->
+
+    <!-- jsDelivr :: Sortable :: Latest (https://www.jsdelivr.com/package/npm/sortablejs) -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
+
+</head>
+<body>
+
+    <header id="headbar">
+        <nav class="d-flex justify-content-between w-100 h-100">
+            <a class="brand-name" href="" aria-label="HILIVES活動管理平台">
+                <span class="en-name"><strong>HI</strong>LIVES</span>
+                <span class="zh-name">活動管理平台</span>
+            </a>
+            <button class="menu-toggler" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                </svg>
+            </button>
+            <ul class="link-button-box">
+                <li class="profile-info" aria-label="profile-info">
+                    <div class="headpic">
+                        {{if eq .User.Avatar ""}}
+                            <img src="/admin/assets/website/lib/default-avatar.png">
+                        {{else}}
+                            <img src="{{.User.Avatar}}">
+                        {{end}}
+                    </div>
+                    <span class="user-name">{{.User.Name}}</span>
+                    <a href="#profile" aria-label="profile-link">編輯個人資訊</a>
+                </li>
+                <li class="link-button" aria-label="profile-link">
+                    <a href="#profile">
+                        <div class="headpic">
+                            {{if eq .User.Avatar ""}}
+                                <img src="/admin/assets/website/lib/default-avatar.png">
+                            {{else}}
+                                <img src="{{.User.Avatar}}">
+                            {{end}}
+                        </div>
+                        <span class="user-name">{{.User.Name}}</span>
+                    </a>
+                </li>
+                {{if eq .IsAdmin true}}
+
+                    <li class="link-button" aria-label="administrator-link">
+                        <a href="{{.Route.Admin}}">
+                            <span>權限管理</span>
+                        </a>
+                    </li>
+
+                {{end}}
+                <li class="link-button focus" aria-label="activity-link">
+                    <a href="#activity">
+                        <span>我的活動</span>
+                    </a>
+                </li>
+                <li class="link-button" aria-label="logout-link">
+                    <a href="{{.Route.Logout}}">
+                        <span>登出</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+	</header>
+    <div id="full-container"></div>
+
+    {{if eq .User.Cookie "no"}}
+        <aside id="cookie-panel">
+            <div class="cookie-content">
+                <p>為了提供您最佳的服務，本網站會在您的電腦中放置並取用我們的Cookie，若您不願接受Cookie的寫入，您可在您使用的瀏覽器功能項中設定隱私權等級為高，即可拒絕Cookie的寫入，但可能會導致網站某些功能無法正常執行。</p>
+                <button class="button button-green">接受</button>
+            </div>
+        </aside>
+    {{end}}
+
+</body>
+<script>
+
+    $("#headbar").find(".link-button").click(function(){
+        $("#headbar").find(".link-button").removeClass("focus")
+        $(this).addClass("focus")
+    })
+
+    $(".menu-toggler").click(function(){
+        $(this).toggleClass("focus")
+        $("#headbar").find(".link-button-box").toggleClass("focus")
+        if($("#sidebar").length > 0){
+            $("#sidebar").toggleClass("open")
+            sidebarPositionTop()
+        }
+    })
+
+    function sidebarPositionTop(){
+        let headbarMenuHeight = $("#headbar").find(".link-button-box").outerHeight()
+        // let headbarHeight = $("#headbar").outerHeight()
+        $("#sidebar").css("top", headbarMenuHeight)
+    }
+
+    $("#cookie-panel").find(".button").bind("click", function(){
+        event.stopPropagation()
+
+        var formDataBox = new FormData()
+        formDataBox.append("user", "{{.User.UserID}}")
+        formDataBox.append("cookie", "yes")
+        formDataBox.append("phone", "{{.User.Phone}}")
+
+        var settings = formSet("https://"+ getAPIDomainFromURL() +"/v1/user", "PUT", formDataBox)
+
+        $.ajax(settings).done(function(){
+            $("#cookie-panel").addClass("accept")
+        }).fail(function(response){
+            console.log("資料傳遞錯誤，請聯絡客服", response)
+        })
+
+    })
+
+    let img = $(".link-button[aria-label=profile-link]").find("img").attr("src")
+    $(".link-button[aria-label=profile-link]").find("img").attr("src", img +"?ver="+ randomCode)
+    $(".profile-info[aria-label=profile-info]").find("img").attr("src", img +"?ver="+ randomCode)
+
+    const mainJs = $("#main-js")
+    const mainJsSrc = mainJs.attr("src")
+    mainJs.attr("src", mainJsSrc + "?ver=HILIVES-"+ Date.now())
+
+    const mainCss = $("#main-css")
+    const mainCssSrc = mainCss.attr("href")
+    mainCss.attr("href", mainCssSrc + "?ver=HILIVES-"+ Date.now())
+
+</script>
+</html>

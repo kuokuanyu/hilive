@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>進階管理設置</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="/admin/assets/dist/js/all.js"></script>
+
+    <link rel="stylesheet" href="/admin/assets/dist/css/all.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="main-header">
+            <a class="logo" href="/admin">
+                <div class="logo-mini">
+                    <img src="/admin/assets/dist/favicon.svg" alt="Hi">
+                </div>
+                <div class="logo-lg">
+                    <img src="/admin/assets/dist/logo.svg" alt="HiLives">
+                </div>
+            </a>
+            <nav class="navbar">
+                <div id="headernav">
+                    <div class="navbar-menu">
+                        <ul class="navbar-nav">
+                            <li>
+                                <a href="https://hilives.net/" target="_blank">
+                                    <i class="bi bi-briefcase"></i>
+                                    <span>宣傳網站</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/activity?header=true">
+                                    <i class="bi bi-balloon"></i>
+                                    <span>活動管理平台</span>
+                                </a>
+                            </li>
+                            <li class="dropdown user user-menu">
+                                <a class="dropdown-toggle" href="#">
+                                    <div class="avatar-box">
+                                        <img src="{{.User.Avatar}}" alt="User Image">
+                                    </div>
+                                    <span>{{.User.Name}}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="user-header">
+                                        <div class="avatar-box">
+                                            <img src="{{.User.Avatar}}" alt="User Image">
+                                        </div>
+                                        <p>
+                                            {{.User.Name}}
+                                            <small>開發人員</small>
+                                        </p>
+                                    </li>
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a class="btn-flat" href="">設定</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a class="btn-flat" href="{{.Route.Logout}}">登出</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="not-open">
+                        <a href="/admin/dashboard">
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                            <span> Hilives數據表</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                    <li class="treeview active">
+                        <a href="#">
+                            <i class="bi bi-gear-fill"></i>
+                            <span> 用戶權限管理</span>
+                            <span class="pull-right-container">
+                                <i class="bi bi-chevron-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu menu-open">
+                            <li class="active">
+                                <a href="/admin/manager">
+                                    <i class="bi bi-people-fill"></i>
+                                    用戶管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/permission">
+                                    <i class="bi bi-shield-lock-fill"></i>
+                                    權限管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/menu">
+                                    <i class="bi bi-menu-button-wide-fill"></i>
+                                    側邊選單管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/overview">
+                                    <i class="bi bi-layout-wtf"></i>
+                                    活動總覽管理
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/log">
+                            <i class="bi bi-clipboard2-data-fill"></i>
+                            <span> Log日誌紀錄</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                    <li class="not-open">
+                        <a href="/admin/file">
+                            <i class="bi bi-file-earmark-medical-fill"></i>
+                            <span> 檔案管理</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+        <div class="content-wrapper">
+            <section class="content-header">
+                <div>
+                    <ol class="breadcrumb">
+                        <li>首頁</li>
+                        <li>用戶權限管理</li>
+                        <li>HiLives用戶</li>
+                    </ol>
+                </div>
+                <h4>
+                    HiLives用戶管理
+                    <small>HiLives用戶管理</small>
+                </h4>
+            </section>
+            <section class="content">
+                <div class="main-container-content">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">新增HiLives用戶</h3>
+                            <div class="btn-group pull-right">
+                                <a href="/admin/manager">返回</a>
+                            </div>
+                        </div>
+                        <div class="box-body p-3">
+                            <div class="box-body p-3">
+                                <div class="box-body p-3">
+                                    <div class="fields-group d-flex flex-column gap-3">
+                                        <div class="form-group">
+                                            <label class="form-label" for="">用戶名稱</label>
+                                            <input class="form-control" type="text" name="name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="">手機號碼</label>
+                                            <input class="form-control" type="text" name="phone">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="">電子信箱</label>
+                                            <input class="form-control" type="text" name="email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="">密碼</label>
+                                            <input class="form-control" type="text" name="password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="">再次輸入密碼</label>
+                                            <input class="form-control" type="text" name="password_again">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="">活動場次上限</label>
+                                            <input class="form-control" type="number" name="max_activity">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="">活動人數上限</label>
+                                            <input class="form-control" type="number" name="max_activity_people">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="">遊戲人數上限</label>
+                                            <input class="form-control" type="number" name="max_game_people">
+                                        </div>
+                                        <!-- <div class="form-group">
+                                            <label class="form-label" for="">用戶頭像</label>
+                                            <input class="form-control" type="file" name="avatar" accept="image/*">
+                                            <input type="hidden" name="avatar__default_flag" value="0">
+                                        </div> -->
+                                        <div class="form-group">
+                                            <label class="form-label" for="">用戶身份</label>
+                                            <ul id="permission-input-box" class="select-choice-box" style="display: none;"></ul>
+                                            <select class="form-control select-choice-input" name="permissions">
+                                                <option selected>新增身份...</option>
+                                            </select>
+                                        </div>
+
+                                        <h4 class="box-title mt-5 mb-0">商用綁定相關</h4>
+                                        <p class="mb-0" style="padding: 0.5rem 0.688rem; color: #06374E; border-left: 5px solid #20A39E; background-color: #D2FAEA;">提醒: 這部分可以為空，如果需要綁定的話，每個欄位皆需填寫。</p>
+                                        <div class="form-group">
+                                            <label class="form-label" for="">line_id</label>
+                                            <input class="form-control line-input" type="text" name="line_id">
+                                            <div class="form-text">請提供LINE LOGIN中Linked OA的ID資訊或是LINE官方號的專屬ID，值必須包含@</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="">channel_id</label>
+                                            <input class="form-control line-input" type="text" name="channel_id">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="">channel_secret</label>
+                                            <input class="form-control line-input" type="text" name="channel_secret">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="">chatbot_secret</label>
+                                            <input class="form-control line-input" type="text" name="chatbot_secret">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="">chatbot_token</label>
+                                            <input class="form-control line-input" type="text" name="chatbot_token">
+                                        </div>
+                                        <p style="padding: 0.5rem 0.688rem; color: #0C1453; border-left: 5px solid #4357AD; background-color: #DCE4FA;">
+                                            提醒: 需提供LINE官方帳號相關資訊並在官方帳號頁面中設置callback url、webhook url才能正確執行報名簽到流程。
+                                            <br>
+                                            <span class="callback-url">callback URL: <strong></strong></span>
+                                            <br>
+                                            <span class="webhook-url">webhook URL: <strong></strong></span>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer">
+                                <button id="save-data-form" classs="btn-group pull-right" type="submit">儲存</button>
+                                <button classs="btn-group pull-left" type="reset">重置</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+<script>
+
+    
+
+    let method = "{{.Route.Method}}"
+    let permissionData = "https://"+ getAPIDomainFromURL() +"/v1/admin/permission"
+
+    //讀取身份權限資料
+    fetch(permissionData).then(function(res){
+        return res.json()
+    }).then(function(res){
+        //載入身份資料到select表單
+        $(res.data).each(function(i){
+            renderSelectOptionData(res.data[i].id, res.data[i].permission, $("select[name=permissions]"))
+        })
+        //載入select監聽事件
+        selectChoiceInputFuction($("#permission-input-box"))
+        //如果是編輯頁面的話
+        if(method === "put"){
+            let managerData = "https://"+ getAPIDomainFromURL() +"/v1/admin/manager?user_id="+ getKeyFromURL("user_id")
+            //讀取此筆頁面資料
+            fetch(managerData).then(function(res){
+                return res.json()
+            }).then(function(res){
+                //載入基本資料
+                console.log(res.data)
+                renderManagerEditData(res.data)
+                //讀取已選擇標籤資料，執行渲染標籤功能
+                $(res.data.permissions).each(function(i){
+                    let data = res.data.permissions
+                    renderSelectChoiceData(data[i].id, data[i].permission, $("#permission-input-box"))
+                })
+            })
+
+            $("h3.box-title").text("編輯用戶")
+            $(".user-id").text($(".user-id").text() +"{{.User.UserID}}")
+            saveEditData(getKeyFromURL("id"))
+        //如果是新增頁面的話
+        }else if(method === "post"){
+            $("h3.box-title").text("新增用戶")
+            saveNewData()
+        }
+    })
+
+    function renderSelectOptionData(id, text, selector){
+        const template = `<option></option>`
+        const container = $(template)
+        container.val(id).text(text)
+        selector.append(container)
+    }
+
+    function renderManagerEditData(data){
+        $("[name='name']").val(data.name)
+        $("[name='phone']").val(data.phone)
+        $("[name='email']").val(data.email)
+        $("[name='max_activity']").val(data.max_activity)
+        $("[name='max_activity_people']").val(data.max_activity_people)
+        $("[name='max_game_people']").val(data.max_game_people)
+
+        $("[name='line_id']").val(data.line_id)
+        $("[name='channel_id']").val(data.channel_id)
+        $("[name='channel_secret']").val(data.channel_secret)
+        $("[name='chatbot_secret']").val(data.chatbot_secret)
+        $("[name='chatbot_token']").val(data.chatbot_token)
+    }
+
+    //select監聽事件，change就執行渲染標籤功能，並回到初選
+    function selectChoiceInputFuction(selector){
+        $(".select-choice-input").bind("change", function(){
+            let thisChoice = $(this).find("option:selected")
+            let buttonName = true
+
+            $(selector.find("li")).each(function(i){
+                let currentValue = selector.find("li").eq(i).data("id")
+                if(Number(thisChoice.val()) === Number(currentValue)){
+                    buttonName = false
+                }
+            }).promise().done(() => {
+                if(buttonName){
+                    renderSelectChoiceData(thisChoice.val(), thisChoice.text(), selector)
+                }
+                $(".select-choice-input").find("option").eq(0).prop("selected", true)
+            })
+        })
+    }
+
+    //渲染標籤功能，載入刪除功能，載入標籤顯示功能
+    function renderSelectChoiceData(id, text, selector){
+        const template = `
+            <li class="select-choice">
+                <span class="select-choice-remove">×</span>
+                <span class="name"></span>
+            </li>
+        `
+        
+        const container = $(template)
+        container.attr("data-id", id)
+        container.find(".name").text(text)
+        selector.append(container)
+        
+        removeSelectChoiceLabel(selector)
+        displaySelectChoiceBox(selector)
+    }
+
+    //刪除功能，載入標籤顯示功能
+    function removeSelectChoiceLabel(selector){
+        $(".select-choice-remove").bind("click", function(){
+            $(this).parents(".select-choice").remove()
+            displaySelectChoiceBox(selector)
+        })
+    }
+
+    //標籤顯示功能，判斷是否有標籤，如果有即開啟。判斷是否還有標籤，如果沒有即關閉。
+    function displaySelectChoiceBox(selector){
+        if(selector.find("li").length === 0){
+            selector.css("display", "none")
+        }else{
+            selector.css("display", "flex")
+        }
+    }
+
+    function saveNewData(){
+        $("#save-data-form").bind("click", function(){
+            let permissionsArray = []
+            $("#permission-input-box").find("li").each(function(){
+                permissionsArray.push($(this).data("id"))
+            })
+            let permissions = permissionsArray.join()
+
+            let formDataBox = new FormData()
+            formDataBox.append("name", $("[name='name']").val())
+            formDataBox.append("phone", $("[name='phone']").val())
+            formDataBox.append("email", $("[name='email']").val())
+            formDataBox.append("password", $("[name='password']").val())
+            formDataBox.append("password_again", $("[name='password_again']").val())
+            formDataBox.append("max_activity", Number($("[name='max_activity']").val()))
+            formDataBox.append("max_activity_people", Number($("[name='max_activity_people']").val()))
+            formDataBox.append("max_game_people", Number($("[name='max_game_people']").val()))
+
+            // formDataBox.append("avatar", $("[name='avatar']").get(0).files[0])
+            // if($("[name='avatar']").get(0).files[0] == undefined){
+            //     formDataBox.delete("avatar")
+            // }
+            // formDataBox.append("avatar__default_flag", $("[name='avatar__default_flag']").val())
+
+            formDataBox.append("permissions", permissions)
+            formDataBox.append("user_id", "{{.User.UserID}}")
+            formDataBox.append("token", "{{.Token}}")
+
+            const line_id = $("[name=line_id]").val()
+            const channel_id = $("[name=channel_id]").val()
+            const channel_secret = $("[name=channel_secret]").val()
+            const chatbot_secret = $("[name=chatbot_secret]").val()
+            const chatbot_token = $("[name=chatbot_token]").val()
+
+            if(isEmpty(line_id) || isEmpty(channel_id) || isEmpty(channel_secret) || isEmpty(chatbot_secret) || isEmpty(chatbot_token)){
+                if(isEmpty(line_id) && isEmpty(channel_id) && isEmpty(channel_secret) && isEmpty(chatbot_secret) && isEmpty(chatbot_token)){
+                    if(line_id.indexOf("@") !== -1){
+                        formDataBox.append("line_id", $("[name=line_id]").val())
+                        formDataBox.append("channel_id", $("[name=channel_id]").val())
+                        formDataBox.append("channel_secret", $("[name=channel_secret]").val())
+                        formDataBox.append("chatbot_secret", $("[name=chatbot_secret]").val())
+                        formDataBox.append("chatbot_token", $("[name=chatbot_token]").val())
+                    }else{
+                        Swal.fire({
+                            icon: "error",
+                            title: "line_id須包含@"
+                        })
+                        return
+                    }
+                }else{
+                    Swal.fire({
+                        icon: "error",
+                        title: "您必須完整填寫所有的綁定表單內容"
+                    })
+                    return
+                }
+            }
+
+            let settings = {
+                "url": "{{.Route.POST}}",
+                "method": "POST",
+                "timeout": 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "data": formDataBox,
+                "dataType": "json",
+                "success": function(data){
+                    Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).fire({
+                        icon: "success",
+                        title: "已新增HiLives用戶"
+                    }).then(() => {
+                        location.replace("/admin/manager")
+                    })
+                },
+                "error": function(result){
+                    Swal.fire({
+                        icon: result.statusText,
+                        title: result.responseJSON.message
+                    })
+                    return
+                }
+            }
+
+            $.ajax(settings).done(function(){})
+        })
+    }
+
+    function saveEditData(id){
+        $("#save-data-form").bind("click", function(){
+            let permissionsArray = []
+            $("#permission-input-box").find("li").each(function(){
+                permissionsArray.push($(this).data("id"))
+            })
+            let permissions = permissionsArray.join()
+
+            let formDataBox = new FormData()
+            formDataBox.append("id", id)
+            formDataBox.append("name", $("[name='name']").val())
+            formDataBox.append("phone", $("[name='phone']").val())
+            formDataBox.append("email", $("[name='email']").val())
+            formDataBox.append("password", $("[name='password']").val())
+            formDataBox.append("password_again", $("[name='password_again']").val())
+            formDataBox.append("max_activity", Number($("[name='max_activity']").val()))
+            formDataBox.append("max_activity_people", Number($("[name='max_activity_people']").val()))
+            formDataBox.append("max_game_people", Number($("[name='max_game_people']").val()))
+
+            // formDataBox.append("avatar", $("[name='avatar']").get(0).files[0])
+            // if($("[name='avatar']").get(0).files[0] == undefined){
+            //     formDataBox.delete("avatar")
+            // }
+            // formDataBox.append("avatar__default_flag", $("[name='avatar__default_flag']").val())
+
+            formDataBox.append("permissions", permissions)
+            formDataBox.append("user", getKeyFromURL("user_id"))
+            formDataBox.append("user_id", "{{.User.UserID}}")
+            formDataBox.append("token", "{{.Token}}")
+
+            const line_id = $("[name=line_id]").val()
+            const channel_id = $("[name=channel_id]").val()
+            const channel_secret = $("[name=channel_secret]").val()
+            const chatbot_secret = $("[name=chatbot_secret]").val()
+            const chatbot_token = $("[name=chatbot_token]").val()
+
+            if(isEmpty(line_id) || isEmpty(channel_id) || isEmpty(channel_secret) || isEmpty(chatbot_secret) || isEmpty(chatbot_token)){
+                if(isEmpty(line_id) && isEmpty(channel_id) && isEmpty(channel_secret) && isEmpty(chatbot_secret) && isEmpty(chatbot_token)){
+                    if(line_id.indexOf("@") !== -1){
+                        formDataBox.append("line_id", $("[name=line_id]").val())
+                        formDataBox.append("channel_id", $("[name=channel_id]").val())
+                        formDataBox.append("channel_secret", $("[name=channel_secret]").val())
+                        formDataBox.append("chatbot_secret", $("[name=chatbot_secret]").val())
+                        formDataBox.append("chatbot_token", $("[name=chatbot_token]").val())
+                    }else{
+                        Swal.fire({
+                            icon: "error",
+                            title: "line_id須包含@"
+                        })
+                        return
+                    }
+                }else{
+                    Swal.fire({
+                        icon: "error",
+                        title: "您必須完整填寫所有的綁定表單內容"
+                    })
+                    return
+                }
+            }
+
+            let settings = {
+                "url": "{{.Route.PUT}}",
+                "method": "PUT",
+                "timeout": 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "data": formDataBox,
+                "dataType": "json",
+                "success": function(data){
+                    Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).fire({
+                        icon: "success",
+                        title: "已編輯HiLives用戶"
+                    }).then(() => {
+                        location.replace("/admin/manager")
+                    })
+                },
+                "error": function(result){
+                    Swal.fire({
+                        icon: result.statusText,
+                        title: result.responseJSON.message
+                    })
+                    return
+                }
+            }
+
+            $.ajax(settings).done(function(){})
+        })
+    }
+
+    function isEmpty(str){
+        if(!str){ return 0 }
+        else{ return str.trim().length }
+    }
+
+    showTipUrl()
+    function showTipUrl(){
+        $(".callback-url").find("strong").text("https://"+ getAPIDomainFromURL() +"/v1/auth/line/callback")
+        if(method === "put"){
+            $(".webhook-url").find("strong").text("https://"+ getAPIDomainFromURL() +"/v1/message/line/callback?user_id={{.User.UserID}}")
+        }else{
+            $(".webhook-url").find("strong").text("https://"+ getAPIDomainFromURL() +"/v1/message/line/callback?user_id=用戶ID")
+        }
+    }
+
+</script>
+</html>
+
+

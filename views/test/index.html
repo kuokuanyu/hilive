@@ -1,0 +1,476 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>WebSocket</title>
+</head>
+<body>
+<button type="button" onclick="connnectWS()">建立連線</button>
+<button type="button" onclick="sendMeg()">傳送訊息</button>
+<button type="button" onclick="sendMeg2()">傳送訊息2</button>
+<button type="button" onclick="sendMeg3()">傳送訊息3</button>
+<button type="button" onclick="sendMeg4()">傳送訊息4</button>
+<button type="button" onclick="sendMeg5()">傳送訊息5</button>
+<button type="button" onclick="connClose()">關閉連線</button>
+<button type="button" onclick="Prizefun('123')">測試XNL</button>
+
+
+
+<div id="content"></div>
+<script>
+var text=document.getElementById("content");
+var link="wss://apidev.hilives.net/ws/v1\
+/activity/reset\
+?activity_id=Bfon6SaV6ORhmuDQUioI\
+&game_id=B9bvBOvJe1KWnreuPS0x\
+&game=tugofwar\
+&session_id=fIDvVOy6vfmP8fxWTqTLTFK1mnGIDHvO\
+&role=guest\
+&user_id=U3140fd73cfd35dd992668ab3b6efdae9\
+&isredis=false&device=pc&control_id=123";
+// wss://api.hilives.net/ws/v1 正式區
+// wss://apidev.hilives.net/ws/v1 測試區
+// activity_id = FEVNqoH9Vv3iDlo7byeB
+// 打地鼠 = 4CZ8bjMt1bp53yDIKAOp
+// 遊戲抽獎 = EqggvtkqLhrZHv3c9eo4
+// /activity/sign/staff 簽到人員
+// /game/staff 人員處理
+// /game/people 人數
+// /game/score 分數
+// /game/status/host  主持人端遊戲狀態
+// /game/status/guest 玩家端遊戲狀態
+// /game/winning/staff 即時中獎人員資訊
+// /host/question 主持端提問牆
+// /guest/question 主持端提問牆
+// /activity 活動資訊
+// /host/control 手機控制主持人聊天室螢幕
+// /host/control/session 取得該活動所有可以遙控裝置
+// /host/chatroom/record 聊天紀錄
+// /black/staff 黑名單
+// /game/reset 即時判斷頁面是否需要重整
+// /activity/reset 即時判斷頁面是否需要重整
+var conn={
+    connect:function(link) {
+        this.ws=new WebSocket(link);   
+        //連線開啟時觸發 
+        this.ws.onopen = function(evt) {  
+            console.log("websocket open ...");
+        };  
+        //接收到訊息時觸發  
+        this.ws.onmessage = function(evt) {  
+            console.log('接收到訊息')
+            var object = JSON.parse(evt.data);
+
+            // 如果object.error不為空代表有發生錯誤
+            //角色
+            // console.log('用戶: ',object.User);
+            // console.log('即時遊戲資訊: ',object.Game);
+            // console.log('即時獎品數: ',object.Game.amount);
+            // console.log('中獎人員: ', object.PrizeStaffs)
+            // console.log('中獎人員長度: ', object.PrizeStaffs.length)
+            // console.log('獎品: ', object.PrizeStaff)
+            // console.log('訊息: ', object.message)
+            // console.log('object.QuestionsOrderByTime: ', object.QuestionsOrderByTime)
+            // console.log('object.QuestionsOrderByLikes: ', object.QuestionsOrderByLikes)
+            // console.log('object.Questions: ', object.Questions)
+            // console.log('object.UserQuestions: ', object.UserQuestions)
+            // console.log('object.LikesRecords: ', object.LikesRecords)
+            // console.log('object.Activity: ', object.Activity)
+            console.log('錯誤: ', object.error)
+        };  
+         //連線錯誤時觸發  
+         this.ws.onerror = function(evt) {  
+            console.log("websocket error.");  
+            // conn.connect(link);
+        }; 
+        //連線關閉時觸發  
+        this.ws.onclose = function(evt) {  
+            console.log("websocket closed.");  
+            // conn.connect(link); // 重新連線
+        }; 
+    }
+}
+
+
+//取得用戶角色資訊
+function User_Information(){ 
+    var url = 'https://apidev.hilives.net/v1/game/lucky?activity_id=FEVNqoH9Vv3iDlo7byeB&game_id=EqggvtkqLhrZHv3c9eo4&game=lottery&session_id=zZJjW5zuV4cQbW72XeJCkmkFmW0WFP58&prize_id=moYzfevI9qYJv8HHPJJJ&people=2&mode=order';
+    var redpack = new XMLHttpRequest(); 
+    
+    redpack.open("GET", url, true);
+    redpack.onreadystatechange = function () {
+        // console.log(this.status)
+        // console.log(this.readyState)
+        if (this.readyState == 4 && this.status == 200) { //是否連接成功
+            var text = redpack.responseText
+            // console.log(text);
+            var XMLobject = JSON.parse(redpack.responseText);
+            console.log(XMLobject.data)
+            console.log(XMLobject.data.length)
+            // console.log(XMLobject.data.Prizes==null)
+            // console.log(XMLobject.data.Prizes.length)
+            
+            // gameModel.Session = XMLobject.data.title;
+            // gameModel.AllowRePrize = XMLobject.data.allow;
+            // //是否有限制遊戲時間
+            // if(XMLobject.data.limit_time == "open")
+            // {
+            //     gameModel.XMLTimeLimit = true;
+            //     gameModel.gametimelimit = XMLobject.data.second;
+            // }
+            // else gameModel.XMLTimeLimit = false;
+
+            // console.log(typeof(text));
+            // console.log("status = " + redpack.status);
+            // console.log("readyState = " + redpack.readyState);
+        } else if (this.readyState == 4 && this.status == 400){
+            var XMLobject = JSON.parse(redpack.responseText);
+            console.log(XMLobject.message)
+        }
+    };
+    redpack.send();
+}
+
+// function HandleLiffState(){
+//     if (gameModel.activity_id == "" || gameModel.game_id == "")
+//     {
+//         if (gameModel.liffstate.length > 13) gameModel.liffstate = gameModel.liffstate.substr(0 , 13)
+//     }
+    
+//     if (gameModel.liffstate.includes("&game_id"))
+//     {
+//         params = gameModel.liffstate.split("&game_id")
+//         gameModel.activity_id = params[0]
+
+//         if(params.length == 2)
+//         {
+//            params = params[1].split("#mst_challenge")
+//            gameModel.game_id = params[0]
+//         }
+//     }
+// }
+
+// function writeToScreen(message) { 
+//     var pre = document.createElement("p"); 
+//     pre.style.wordWrap = "break-word"; 
+//     pre.innerHTML = message; 
+//     output.appendChild(pre); 
+// }
+function connnectWS(){
+    conn.connect(link);
+}
+function sendMeg(){
+    // console.log('測試 chatroom_session值');
+    // console.log(readCookie('chatroom_session'));
+    conn.ws.send(JSON.stringify({
+    // id: 6,
+    // message: "question",
+    // content: "我要測試題問",
+    
+    // session_id:'fIDvVOy6vfmP8fxWTqTLTFK1mnGIDHvO',
+
+    // page: "chatroom",
+    // action: "next",
+
+    // message: "message",
+    // message_price: "10",
+    // message_status: "yes",
+    // message_style: "default",
+    // message_type: "normal-message",
+    // user_id: "U3140fd73cfd35dd992668ab3b6efdae9",
+    // PrizeStaffs: [
+    //  {
+    //     method: "thanks"
+    // },
+    // {
+    //     method: "site"
+    // },
+    // {
+    //     method: "thanks"
+    // }  
+    // ],
+    User: {
+        user_id: "5",
+        name: "yooooo",
+        avatar: "https://profile.line-scdn.net/0hiVX9_hekNnllQB319GdJLlkFOBQSbjAxHXYuGRNGbkpLJHEoWCV6HUlDaxwdI3UsDSFwGBRCYBob",
+        team: "left_team",
+        action: "join",
+    },
+    // Game: {
+        // game_status: "",
+        // round: 1,
+        // score: 500,
+        // second: 19,
+    // }
+    }));
+}
+function connClose(){
+  conn.ws.close();
+}
+
+function sendMeg2(){
+    conn.ws.send(JSON.stringify({
+    User: {
+        user_id: "17",
+        name: "y",
+        avatar: "https://profile.line-scdn.net/0hiVX9_hekNnllQB319GdJLlkFOBQSbjAxHXYuGRNGbkpLJHEoWCV6HUlDaxwdI3UsDSFwGBRCYBob",
+        team: "right_team",
+        action: "join",
+    },
+    }));
+}
+
+function sendMeg3(){
+    conn.ws.send(JSON.stringify({
+    User: {
+        user_id: "7",
+        name: "yyyyyyyyyyyyyyyy",
+        avatar: "https://profile.line-scdn.net/0hiVX9_hekNnllQB319GdJLlkFOBQSbjAxHXYuGRNGbkpLJHEoWCV6HUlDaxwdI3UsDSFwGBRCYBob",
+        team: "left_team",
+        action: "join",
+    },
+    }));
+}
+
+function sendMeg4(){
+    conn.ws.send(JSON.stringify({
+    User: {
+        user_id: "11",
+        name: "khgkjg",
+        avatar: "https://profile.line-scdn.net/0hiVX9_hekNnllQB319GdJLlkFOBQSbjAxHXYuGRNGbkpLJHEoWCV6HUlDaxwdI3UsDSFwGBRCYBob",
+        team: "left_team",
+        action: "join",
+    },
+    }));
+}
+
+function sendMeg5(){
+    conn.ws.send(JSON.stringify({
+    User: {
+        user_id: "12",
+        name: "hfdh",
+        avatar: "https://profile.line-scdn.net/0hiVX9_hekNnllQB319GdJLlkFOBQSbjAxHXYuGRNGbkpLJHEoWCV6HUlDaxwdI3UsDSFwGBRCYBob",
+        team: "left_team",
+        action: "join",
+    },
+    }));
+}
+
+function connClose(){
+  conn.ws.close();
+}
+
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+
+function Prizefun(prize_id){
+    var url = 'https://apidev.hilives.net/v1/staffmanage/winning/json';                
+    var prize = new XMLHttpRequest();
+    prize.open("PUT", url, true);
+    prize.onreadystatechange = function () {
+        if (prize.readyState == 4 && (prize.status >= 200 && prize.status <= 207)) {
+        var text = prize.responseText
+        console.log(text);
+        };
+        // prize.setRequestHeader("Content-Type", "application/json");
+        // prize.send(JSON.stringify({id:prize_id}));
+        // prize.send(JSON.stringify({status:"yes"}));
+    }
+    prize.setRequestHeader("Content-Type", "application/json");
+    prize.setRequestHeader("accept", "application/json");
+    prize.send(JSON.stringify({id:prize_id, status:'yes'}));
+}
+
+// function Redpackfun(){
+//     var url = 'https://api.hilives.net/v1/interact/game/redpack?game_id=bQLMdNv0pAofxl9hl5VW'; 
+//     var redpack = new XMLHttpRequest();
+//     redpack.open("GET", url, true);
+       
+//     redpack.onreadystatechange = function () {
+//         if (redpack.readyState == 4 && (redpack.status >= 200 && redpack.status <= 207)) {
+//             var text = redpack.responseText
+//             console.log(text);
+//             var XMLobject = JSON.parse(text);
+
+//             if(XMLobject.limit_time == "open"){
+//                 gameModel.XMLTimeLimit = true;
+//                 gameModel.gametimelimit = XMLobject.limit_time;
+//             }
+//             else{
+//                 gameModel.XMLTimeLimit = false;
+//                 console.log(XMLobject.limit_time);
+//             }
+//             console.log(typeof(text));
+//             console.log("status = " +redpack.status);
+//             console.log("readyState = "+ redpack.readyState);
+     
+//         } else {
+//             console.log(redpack.readyState == 4);
+//             console.log(redpack.status);
+//             console.log(redpack.responseText);
+            
+//             var XMLobject = JSON.parse(redpack.responseText);
+//             console.log(XMLobject);
+//             console.log(XMLobject.data.limit_time);
+//                      // console.log(redpack);
+//         }
+     
+//     };
+//     redpack.send();
+    
+// }
+
+// let ws = new WebSocket("wss://api.hilives.net/ws/v1/interact/game/status/host?game_id=bQLMdNv0pAofxl9hl5VW");
+// ws.onopen = function (event) {
+//         console.log("WebSocket_GameStatus_Host 通道開啟");
+//     };
+//     //接收到訊息時觸發  
+//     ws.onmessage = function (event) {
+//         console.log("response text msg: " + event.data);
+//         var gameModel = require("Model");
+//         var object = JSON.parse(event.data)
+//         gameModel.GameStatusMessage = object.Game.status;
+//         console.log('遊戲狀態: ',gameModel.GameStatusMessage);
+//     };
+//     //連線錯誤時
+//     ws.onerror = function (event) {
+//         console.log("WebSocket_GameStatus_Host 連線錯誤");
+//     };
+//     //連線關閉時觸發  
+//     ws.onclose = function (event) {
+//         console.log("WebSocket_GameStatus_Host 通道關閉");
+//     }; 
+
+
+//主持人將開始、再一輪、關閉的訊息傳到Websocket (start、again、close)
+// function WebSocket_GameStatus_Host(status){
+//     let ws = new WebSocket("wss://api.hilives.net/ws/v1/interact/game/status/host?game_id=bQLMdNv0pAofxl9hl5VW");
+// ws.onopen = function (event) {
+//         console.log("WebSocket_GameStatus_Host 通道開啟");
+//     };
+//     //接收到訊息時觸發  
+//     ws.onmessage = function (event) {
+//         console.log("response text msg: " + event.data);
+//         var gameModel = require("Model");
+//         var object = JSON.parse(event.data)
+//         gameModel.GameStatusMessage = object.Game.status;
+//         console.log('遊戲狀態: ',gameModel.GameStatusMessage);
+//     };
+//     //連線錯誤時
+//     ws.onerror = function (event) {
+//         console.log("WebSocket_GameStatus_Host 連線錯誤");
+//     };
+//     //連線關閉時觸發  
+//     ws.onclose = function (event) {
+//         console.log("WebSocket_GameStatus_Host 通道關閉");
+//     }; 
+
+
+//     setTimeout(function(){
+//         if(ws.readyState === WebSocket.OPEN){
+//             ws.send(JSON.stringify({
+//                 Game: {
+//                     status: status,
+//                 }}));
+//         }
+//         else{
+//             console.log("WebSocket_GameStatus_Host 通道未開啟")
+//         }
+//     },1000);
+// } 
+
+
+// 威翔的範例
+// 1. 單純接收後端訊息的ws
+//主持人從Websocket取得現在人數
+function WebSocket_NumberOfPeople_Host(){
+    //取得Websocket通訊網址
+    let ws = new WebSocket("wss://" + gameModel.local_ID + "/ws/v1/game/people?game_id="+ gameModel.game_id);
+    //連線開啟時觸發 
+    ws.onopen = function (event) {
+        console.log("WebSocket_NumberOfPeople_Host 通道開啟");
+    };
+    //接收到訊息時觸發  
+    ws.onmessage = function (event) {
+        var gameModel = require("Model");
+        var object = JSON.parse(event.data) //將後端資料放入object
+        gameModel.people = object.Game.people;
+        gameModel.round = object.Game.round;
+    };
+    //連線錯誤時
+    ws.onerror = function (event) {
+        console.log("WebSocket_NumberOfPeople_Host 連線錯誤");
+    };
+    //連線關閉時觸發  
+    ws.onclose = function (event) {
+        console.log("WebSocket_NumberOfPeople_Host 通道關閉");
+        gameModel.WebSocket_NumberOfPeople_Host(); // ws被異常關閉時需要重啟
+    };
+} 
+// 2. 前端推送訊息給後端，後端接收訊息後處理並回傳前端需要的參數
+//主持人將開始、再一輪、關閉的訊息傳到Websocket (start、again、close)
+function WebSocket_GameStatus_Host(status,time){
+    //連線開啟時觸發 
+    gameModel.GameStatusWS_Host.onopen = function (event) {
+        console.log("WebSocket_GameStatus_Host 通道開啟");
+    };
+    //接收到訊息時觸發  
+    gameModel.GameStatusWS_Host.onmessage = function (event) {
+        var gameModel = require("Model");
+        var object = JSON.parse(event.data)
+        gameModel.GameStatusMessage = object.Game.status;
+        gameModel.connet_ws = true;
+    };
+    //連線錯誤時
+    gameModel.GameStatusWS_Host.onerror = function (event) {
+        console.log("WebSocket_GameStatus_Host 連線錯誤");
+    };
+    //連線關閉時觸發  
+    gameModel.GameStatusWS_Host.onclose = function (event) {
+        console.log("WebSocket_GameStatus_Host 通道關閉");
+        gameModel.connet_ws = false;
+        // 異常關閉時重啟
+        gameModel.GameStatusWS_Host = new WebSocket("wss://" + gameModel.local_ID + "/ws/v1/game/status/host?game_id="+ gameModel.game_id); //開啟遊戲狀態ws;
+        gameModel.WebSocket_GameStatus_Host(status,1000)
+    };
+    //等待0.1秒，等通道打開再執行推送資料給Websocket
+    setTimeout(function(){
+        if(gameModel.GameStatusWS_Host.readyState === WebSocket.OPEN){
+            var message = "start";
+
+            // 推送訊息
+            gameModel.GameStatusWS_Host.send(JSON.stringify({
+                Game: {
+                    status: status,
+                }}));
+        }
+        else
+        {
+            gameModel.connet_ws = false;
+            console.log("WebSocket_GameStatus_Host 通道未開啟")
+        } 
+    },time);
+} 
+
+// 動態取得url參數
+function getQueryVariable(variable){
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == variable){return pair[1];}
+        }
+        return("");
+      }
+</script>
+</body>
+</html>

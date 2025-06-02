@@ -1,0 +1,114 @@
+<div class="options-content">
+    <div class="title-block">參加人員清單</div>
+    <div id="game-staff" class="content-block">
+        <div class="list-block">
+
+            <div class="list-table-card">
+                <div class="list-title-block">
+                    <div class="start-group" style="width: 28.125rem;">
+                        <div class="title-box" style="width: 25rem;">參加人員</div>
+                    </div>
+                    <div class="title-box" style="width: 6.25rem;">操作</div>
+                </div>
+            </div>
+        
+            {{if eq (len .StaffManage.Staffs) 0}}
+        
+                <div class="no-data-box">
+                    <span>尚無資料</span>
+                </div>
+        
+            {{else}}
+        
+                {{$Edit := .CanEdit}}
+                {{range $key1, $info := .StaffManage.Staffs}}
+        
+                    <div class="list-table-card" data-id="{{.UserID}}">
+                        <div class="list-info-block">
+                            <div class="start-group" style="width: 28.125rem;">
+                                <div class="person-box" style="width: 25rem;">
+                                    <div class="avatar-box">
+                                        <img src="{{.Avatar}}">
+                                    </div>
+                                    <div class="name">{{.Name}}</div>
+                                </div>
+                            </div>
+                            
+                            <div class="button-box" style="width: 6.25rem;">
+                                {{if eq $Edit true}}
+                                    <button class="button button-blue button-sm add-black-event" type="button">加入黑名單</button>
+                                {{end}}
+                            </div>
+                        </div>
+                    </div>
+        
+                {{end}}
+        
+            {{end}}
+
+        </div>
+    </div>
+    <div class="title-block">遊戲黑名單</div>
+    <div id="black-game-staff" class="content-block">
+        <div class="list-block">
+
+            <div class="list-table-card">
+                <div class="list-title-block">
+                    <div class="start-group">
+                        <div class="title-box">參加人員</div>
+                    </div>
+                    <div class="title-box">黑名單原因</div>
+                    <div class="title-box" style="width: 11rem;">操作</div>
+                </div>
+            </div>
+        
+            {{if eq (len .StaffManage.Blacks) 0}}
+        
+                <div class="no-data-box">
+                    <span>尚無資料</span>
+                </div>
+        
+            {{else}}
+        
+                {{$Edit := .CanEdit}}
+                {{range $key1, $info := .StaffManage.Blacks}}
+        
+                    <div class="list-table-card" data-id="{{.UserID}}">
+                        <div class="list-info-block">
+                            <div class="start-group">
+                                <div class="person-box">
+                                    <div class="avatar-box">
+                                        <img src="{{.Avatar}}">
+                                    </div>
+                                    <div class="name">{{.Name}}</div>
+                                </div>
+                            </div>
+                            <div class="label-box">
+                                <div class="name reason">{{.Reason}}</div>
+                            </div>
+                            <div class="button-box" style="width: 11rem;">
+                                {{if eq $Edit true}}
+                                    <button class="button button-border-gray button-sm edit-black-reason" type="button">編輯原因</button>
+                                    <button class="button button-border-gray button-sm remove-black-event" type="button">取消黑名單</button>
+                                {{end}}
+                            </div>
+                        </div>
+                    </div>
+        
+                {{end}}
+        
+            {{end}}
+
+        </div>
+    </div>
+</div>
+
+<var class="variable d-none">
+    <var class="userID">{{.User.UserID}}</var>
+    <var class="token">{{.Token}}</var>
+    <var class="activityID">{{.ActivityID}}</var>
+    <var class="gameID">{{.GameID}}</var>
+    <var class="route-post">{{.Route.POST}}</var>
+    <var class="route-put">{{.Route.PUT}}</var>
+    <var class="route-staffmanage">{{.Route.StaffManage}}</var>
+</var>

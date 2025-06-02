@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/9b44c9cf8a.js" crossorigin="anonymous"></script>
+    <!-- jQuery validate -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+    <link href="{{.Route.Prefix}}/assets/login/dist/connect-line.css" rel="stylesheet">
+    <title>Hi Live</title>
+</head>
+<body>
+    <div class="container position-absolute translate-center-center">
+        <div class="info-page-background"></div>
+        <div class="info-page-card">
+            <div id="brand-block" class="block">
+                <img src="{{.Route.Prefix}}/assets/dist/logo/logo.svg" alt="hilive-logo">
+            </div>
+            <div id="form-block" class="block">
+                <div class="button-box">
+                    <button id="btn-goto-chatroom" class="btn-lg" onclick="gotoChatroom()">聊天室</button>
+                    <button id="btn-goto-manager" class="btn-lg" onclick="gotoManager()">後臺管理</button>
+                </div>
+            </div>
+        </div> 
+    </div>
+</body>
+<script>
+
+    function gotoChatroom(){
+        location.href = "/guest?activity_id={{.ActivityID}}"
+    }
+    
+    function gotoManager(){
+        location.href = "/admin/activity?header=true"
+    }
+
+</script>
+</html>

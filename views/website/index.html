@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hilives活動平台 | 活動舉辦、活動規劃、互動遊戲、聊天彈幕</title>
+    <link rel="icon" type="image/x-icon" href="/admin/assets/website/lib/favicon.svg">
+
+    <meta name="google-site-verification" content="oKXwTgbPhDBo5anG2fyu8fnRF3g95WVSkApzvtHclv0" />
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="HILIVES是一款活動舉辦及聚會互動的平台，例如: 尾牙、婚禮，或其他的團體聚會，主辦人可以利用平台舉辦活動，並規劃活動內的各項互動及資訊，設置完成之後可以讓參加賓客掃描QRcode進入活動，開始進行聊天、互動，活動結束後也可查看整個活動的資料數據。">
+    
+    <link rel="canonical" href="https://event.hilives.net" />
+
+    <meta property="og:title" content="Hilives活動平台">
+    <meta property="og:description" content="HILIVES是一款活動舉辦及聚會互動的平台，例如: 尾牙、婚禮，或其他的團體聚會，主辦人可以利用平台舉辦活動，並規劃活動內的各項互動及資訊，設置完成之後可以讓參加賓客掃描QRcode進入活動，開始進行聊天、互動，活動結束後也可查看整個活動的資料數據。">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="晶橙資訊科技有限公司">
+    <meta property="og:url" content="https://event.hilives.net">
+    <meta property="og:image" content="/admin/assets/website/lib/banner1.png">
+    <meta property="og:image:width" content="1920">
+    <meta property="og:image:height" content="720">
+
+    <meta name="keywords" content="活動舉辦,活動規劃,聊天彈幕,互動遊戲,尾牙,公司聚會,婚禮,活動舉辦平台">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    
+    <!-- Main CSS -->
+    <link href="/admin/assets/website/css/index.css?ver=20231017" rel="stylesheet">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GTMVEB01N9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-GTMVEB01N9');
+    </script>
+
+</head>
+<body>
+    <header id="main-header">
+        <div class="container-sm">
+            <a class="logo" href="https://event.hilives.net/">
+                <img src="/admin/assets/website/lib/txet-logo.png" alt="HiLives">
+            </a>
+            <nav id="web-header-menu" class="header-menu">
+                <ul class="page-box border-0">
+                    <li>
+                        <a class="button-style-square link-help-button" href="https://event.hilives.net/admin/activity?header=true" target="_blank">活動管理平台</a>
+                    </li>
+                    <li>
+                        <a class="button-style-square link-help-button" href="https://hilives.kb.help/" target="_blank">幫助中心</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div id="main-container">
+        <div id="main-banner">
+            <div id="carouselBannerIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselBannerIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselBannerIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="/admin/assets/website/lib/banner1.png" class="d-block w-100" alt="享受樂趣，讓活動更有趣">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/admin/assets/website/lib/banner2.png" class="d-block w-100" alt="多種互動遊戲，high翻活動現場">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselBannerIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">上一個</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselBannerIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">下一個</span>
+                </button>
+            </div>
+        </div>
+        <div class="container">
+            <h1 class="d-none">HILIVES是舉辦活動的設置平台，如: 尾牙活動、婚禮宴會、節慶聚會...等，有許多的互動遊戲、聊天彈幕，提供多樣的自定義設置。</h1>
+            <section id="introduce-section" class="section">
+                <div class="container mb-5">
+                    <div class="row row-cols-auto g-1 flex-column-reverse flex-md-row">
+                        <div class="col-md-6 d-flex flex-column align-items-start">
+                            <h2 class="section-title mb-2 mt-3">什麼是HiLives?</h2>
+                            <p>HiLives是一款增加聚會互動的平台，例如: 尾牙、婚禮，或其他的團體聚會，
+                                主辦人可以利用平台建立活動，並調整活動內各項活動的資訊，
+                                參加賓客就可以掃描QRcode進入活動，開始進行聊天、互動。
+                            </p>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center justify-content-center">
+                            <img class="w-75" src="/admin/assets/website/lib/bee-illustration.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <ul class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <li class="col">
+                            <div class="picture">
+                                <img src="/admin/assets/website/lib/diversity.svg" alt="多樣性">
+                            </div>
+                            <h5>多樣性</h5>
+                            <p>不管是彈幕還是遊戲，都會持續的新增不同的樣式，未來也會持續新增新的互動功能。</p>
+                        </li>
+                        <li class="col">
+                            <div class="picture">
+                                <img src="/admin/assets/website/lib/interactivity.svg" alt="互動性">
+                            </div>
+                            <h5>互動性</h5>
+                            <p>可以透過平台的互動遊戲結識新的朋友，也能傳訊息至主持螢幕，讓大家看見你的祝福。</p>
+                        </li>
+                        <li class="col">
+                            <div class="picture">
+                                <img src="/admin/assets/website/lib/convenient.svg" alt="便利性">
+                            </div>
+                            <h5>便利性</h5>
+                            <p>只要有手機及一台電腦，就能透過網路，建立多場活動與掃描QRcode參加活動，活動資訊也能一目瞭然。</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section class="mt-5 section blue-block">
+                <div class="icon-title">
+                    <h2 class="section-title">活動報名</h2>
+                </div>
+                <div class="d-flex align-items-start">
+                    <div class="card w-100 align-items-stretch">
+                        <div class="row row-cols-lg-2 g-4">
+                            <div class="col-lg-6">
+                                <h4>Line掃碼報名</h4>
+                                <p>活動建立時可自定義報名資料欄位，建立完成可生成QRCode圖檔 提供下載後宣傳使用。</p>
+                                <br>
+                                <p>掃碼後可完成報名作業。</p>
+                                <p>( 報名作業可開啟審核功能進行報名審核 )</p>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="image-skin">
+                                    <div class="image-border">
+                                        <img src="/admin/assets/website/lib/example-sign-up.png">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 d-flex justify-content-center example-picture">
+                    <img src="/admin/assets/website/lib/example-signup2.png">
+                </div>
+            </section>
+            <section class="mt-5 section blue-block">
+                <div class="icon-title">
+                    <h2 class="section-title">簽到展示</h2>
+                </div>
+                <div class="d-flex align-items-start">
+                    <div class="card w-100 align-items-stretch">
+                        <div class="row row-cols-lg-2 g-4">
+                            <div class="col-lg-6">
+                                <h4>Line掃碼簽到</h4>
+                                <p>Line掃碼即可完成簽到流程，同步在活動現場的大螢幕上可以顯示，搭配了Line頭像的動態簽到牆的視覺效果，增加不少參與氛圍~~</p>
+                                <br>
+                                <p>目前簽到頁的類型有:</p>
+                                <br>
+                                <p>1. 平面簽到</p>
+                                <p>2. 立體簽到 (敬請期待)</p>
+                                <p>3. 倒數簽到 (敬請期待)</p>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="image-skin">
+                                    <div class="image-border">
+                                        <img src="/admin/assets/website/lib/example-checkin1.png">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 example-picture">
+                    <img src="/admin/assets/website/lib/example-checkin.png">
+                </div>
+            </section>
+            <section id="chatroom-section" class="mt-5 section blue-block">
+                <div class="icon-title">
+                    <h2 class="section-title">活動聊天室</h2>
+                </div>
+                <div class="row row-cols-auto">
+                    <div class="d-flex align-items-start">
+                        <div class="row row-cols-lg-2 g-4">
+                            <div class="col-lg-6">
+                                <div class="card h-100">
+                                    <h4>一般訊息</h4>
+                                    <p>這類型的訊息會顯示在活動畫面的聊天區頁面上，主辦方可以操作控制按鈕來顯示各位參加來賓的訊息。</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card h-100">
+                                    <h4>一般彈幕</h4>
+                                    <p>不管任何頁面，彈幕類型的訊息都會出現活動畫面最前面，由右至左的移動，如果暫時不想讓彈幕出現，點擊隱藏彈幕按鈕後，即可隱藏所有類型的彈幕。</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card h-100">
+                                    <h4>特殊彈幕</h4>
+                                    <p>特殊彈幕有著比一般彈幕不同的效果，例如: 巨大顯示、並排顯示等，而且層級比一般彈幕還來得高，也更加細緻。</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card h-100">
+                                    <h4>霸佔彈幕</h4>
+                                    <p>是所有彈幕中層級最高的，會佔據整個活動畫面，其他類型的彈幕都會被覆蓋，特定主題的效果動畫也會比較多。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 example-picture">
+                    <img src="/admin/assets/website/lib/chatroom-example.png">
+                </div>
+            </section>
+            <section class="mt-5 section blue-block">
+                <div class="icon-title">
+                    <h2 class="section-title">活動資訊</h2>
+                </div>
+                <div class="row row-cols-auto">
+                    <div class="d-flex align-items-start">
+                        <div class="row row-cols-lg-2 g-4">
+                            <div class="col-lg-6">
+                                <div class="card h-100">
+                                    <h4>活動介紹</h4>
+                                    <p>設置活動的基本訊息，讓參加者方便查閱活動資訊。如: 交通資訊、活動事由...等</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card h-100">
+                                    <h4>活動嘉賓</h4>
+                                    <p>可以對會議議程配置相應的嘉賓訊息，參加活動者可以快速通過Line掃碼查看嘉賓訊息。</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card h-100">
+                                    <h4>活動行程</h4>
+                                    <p>可以安排活動的流程時間，參加活動者可以快速通過Line掃碼查看行程訊息。</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card h-100">
+                                    <h4>活動資料</h4>
+                                    <p>如果無法透過活動介紹來補充完整的訊息，可藉由外連結頁面來達成。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="mt-5 section blue-block">
+                <div class="icon-title">
+                    <h2 class="section-title">參加遊戲</h2>
+                </div>
+                <div class="d-flex align-items-start">
+                    <div class="card w-100 align-items-stretch">
+                        <div class="row row-cols-lg-2 g-4">
+                            <div class="col-lg-6">
+                                <h4>使用LINE進入遊戲</h4>
+                                <p>各種適合活動現場互動的小品遊戲，可以通過Line掃碼後加入，等待主持人開啟活動就可以快速體驗各種抽獎、競賽互動類型的樂趣，過程熱鬧又有趣。</p>
+                                <br>
+                                <h6>幸運抽獎</h6>
+                                <p>這類型的遊戲可以測試參加者們的幸運程度，看誰可以贏得最大獎。</p>
+                                <br>
+                                <h6>互動競賽</h6>
+                                <p>透過競賽式的小遊戲，讓大家不用起身也能一起互動，更幸運的是，人人有機會得到獎品。</p>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="image-skin">
+                                    <div class="image-border">
+                                        <img src="/admin/assets/website/lib/example-game.png">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="mt-5 section blue-block">
+                <div class="icon-title">
+                    <h2 class="section-title">兌獎獎品</h2>
+                </div>
+                <div class="row row-cols-auto">
+                    <div class="d-flex align-items-start">
+                        <div class="row row-cols-lg-2 g-4">
+                            <div class="col-lg-6">
+                                <div class="card h-100">
+                                    <h4>兌換方式</h4>
+                                    <p>可以在手機畫面的兌獎頁面兌換，也可以透過主持人從現場兌換，而主辦方必須在後台修改兌換狀態。</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card h-100">
+                                    <h4>兌換密碼</h4>
+                                    <p>為了防止中獎者誤點兌獎按鈕，我們可以在平台設置兌獎密碼，而中獎者必須輸入主持人提供的密碼才能兌換。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="container">
+            <section id="screencasts-section" class="section">
+                <h2 class="section-title">互動頁面展示影片</h2>
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <div class="col movie-button" data-bs-toggle="modal" data-bs-target="#movie-modal" data-url="KvVBHQDjc1g">
+                            <div class="example-movie">
+                                <div class="example-picture">
+                                    <img src="/admin/assets/website/lib/game-movie-11.jpg">
+                                    <div class="play-screen">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="example-title">Hilives各式聚會活動</h6>
+                        </div>
+                        <div class="col movie-button" data-bs-toggle="modal" data-bs-target="#movie-modal" data-url="OEtyS36Ec4w">
+                            <div class="example-movie">
+                                <div class="example-picture">
+                                    <img src="/admin/assets/website/lib/game-movie-1.jpg">
+                                    <div class="play-screen">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="example-title">搖紅包互動展示</h6>
+                        </div>
+                        <div class="col movie-button" data-bs-toggle="modal" data-bs-target="#movie-modal" data-url="13BOT4MK3E8">
+                            <div class="example-movie">
+                                <div class="example-picture">
+                                    <img src="/admin/assets/website/lib/game-movie-2.jpg">
+                                    <div class="play-screen">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="example-title">套紅包互動展示</h6>
+                        </div>
+                        <div class="col movie-button" data-bs-toggle="modal" data-bs-target="#movie-modal" data-url="FrPRBMKIWAI">
+                            <div class="example-movie">
+                                <div class="example-picture">
+                                    <img src="/admin/assets/website/lib/game-movie-3.jpg">
+                                    <div class="play-screen">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="example-title">敲敲樂互動展示</h6>
+                        </div>
+                        <div class="col movie-button" data-bs-toggle="modal" data-bs-target="#movie-modal" data-url="j4SkJb3k8kM">
+                            <div class="example-movie">
+                                <div class="example-picture">
+                                    <img src="/admin/assets/website/lib/game-movie-4.jpg">
+                                    <div class="play-screen">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="example-title">搖號抽獎互動展示</h6>
+                        </div>
+                        <div class="col movie-button" data-bs-toggle="modal" data-bs-target="#movie-modal" data-url="E_0ivxMDxso">
+                            <div class="example-movie">
+                                <div class="example-picture">
+                                    <img src="/admin/assets/website/lib/game-movie-5.jpg">
+                                    <div class="play-screen">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="example-title">遊戲抽獎互動展示</h6>
+                        </div>
+                        <div class="col movie-button" data-bs-toggle="modal" data-bs-target="#movie-modal" data-url="tEAhlTv4lkA">
+                            <div class="example-movie">
+                                <div class="example-picture">
+                                    <img src="/admin/assets/website/lib/game-movie-10.jpg">
+                                    <div class="play-screen">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="example-title">快問快答互動展示</h6>
+                        </div>
+                        <div class="col movie-button" data-bs-toggle="modal" data-bs-target="#movie-modal" data-url="VTP3JXFQsEo">
+                            <div class="example-movie">
+                                <div class="example-picture">
+                                    <img src="/admin/assets/website/lib/game-movie-6.jpg">
+                                    <div class="play-screen">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="example-title">尾牙提問頁互動展示</h6>
+                        </div>
+                        <div class="col movie-button" data-bs-toggle="modal" data-bs-target="#movie-modal" data-url="KDYS6GTxyeE">
+                            <div class="example-movie">
+                                <div class="example-picture">
+                                    <img src="/admin/assets/website/lib/game-movie-7.jpg">
+                                    <div class="play-screen">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="example-title">尾牙聊天室互動展示</h6>
+                        </div>
+                        <div class="col movie-button" data-bs-toggle="modal" data-bs-target="#movie-modal" data-url="d5GMt4nn1po">
+                            <div class="example-movie">
+                                <div class="example-picture">
+                                    <img src="/admin/assets/website/lib/game-movie-8.jpg">
+                                    <div class="play-screen">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="example-title">婚禮聊天室彈幕與霸屏</h6>
+                        </div>
+                        <div class="col movie-button" data-bs-toggle="modal" data-bs-target="#movie-modal" data-url="eLi2zbVFqAI">
+                            <div class="example-movie">
+                                <div class="example-picture">
+                                    <img src="/admin/assets/website/lib/game-movie-9.jpg">
+                                    <div class="play-screen">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="example-title">廠商聯誼會簽到牆</h6>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <section id="contact-section" class="section">
+            <div class="row d-flex justify-content-center mb-3">
+                <div class="col-6">
+                    <img src="/admin/assets/dist/logo/logo-dark.svg" alt="HiLives">
+                </div>
+            </div>
+            <div class="d-flex flex-column align-items-md-start align-items-sm-center">
+                <h3>開始規劃一個活動吧!</h3>
+                <a id="open-messenger-button" class="button-style-round button-morning-color">聯繫我們</a>
+            </div>
+        </section>
+        <footer id="main-footer">
+            <div class="container-sm">
+                <div class="row row-cols-sm-2 row-cols-md-3 footer-map">
+                    <ul class="col-lg-4">
+                        <div class="row">
+                            <div class="col-8 contact-list">
+                                <h6>聯絡方式</h6>
+                                <li>聯絡電話 - 0985939906</li>
+                                <li>聯絡信箱 - sales@hilives.net</li>
+                                <li>Line-ID - hilives5338</li>
+                            </div>
+                        </div>
+                    </ul>
+                    <ul class="col-lg-2 d-flex flex-column align-items-center">
+                        <h6>Hilives 聯絡客服帳號</h6>
+                        <div class="col-6 mb-2">
+                            <a href="https://line.me/ti/p/W9_fntU14G" target="_blank">
+                                <img src="/admin/assets/website/lib/line_qrcode.jpg" alt="Hilives">
+                            </a>
+                        </div>
+                        <p">加入好友，預約體驗</p>
+                    </ul>
+                </div>
+                <hr class="footer-horizontal-line">
+                <div class="footer-copyright">
+                    <p>Copyright © 2022 HiLives. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <div class="modal fade view-modal" id="movie-modal" tabindex="-1" aria-labelledby="movie-modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <iframe title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            xfbml            : true,
+            version          : 'v14.0'
+        });
+    };
+
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<!-- Your Chat Plugin code -->
+<div class="fb-customerchat" attribution="install_email" attribution_version="biz_inbox" page_id="101297195928825"></div>
+
+<!-- Main Javascript -->
+<script charset="utf-8" src="/admin/assets/website/js/index.js?ver=20220801"></script>
+<script>
+
+    hilivesHomePageFunction()
+    
+</script>
+</html>

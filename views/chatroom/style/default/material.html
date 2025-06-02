@@ -1,0 +1,40 @@
+<div class="content-header-skin-md">
+    <button class="back">
+        <i class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+        </i>
+        <span>返回選單</span>
+    </button>
+</div>
+<div class="info-skin">
+    <div class="page-title-block">
+        <div class="page-title">{{.ActivityModel.MaterialTitle}}</div>
+    </div>
+    <div class="page-block">
+
+        {{if eq (len .PanelInfo.InfoList) 0}}
+
+            <div class="nodata-block">
+                <div class="info-nodata">尚未設置資料資訊</div>
+            </div>
+
+        {{else}}
+
+            {{range $key, $info := .PanelInfo.InfoList}}
+        
+                <div class="info-block">
+                    <div class="info-title">{{(index $info "title").Content}}</div>
+                    <div class="info-content">
+                        <div class="info-describe">{{(index $info "introduce").Content}}</div>
+                        <a class="info-link" href='{{(index $info "link").Content}}' target="_blank">{{(index $info "link").Content}}</a>
+                    </div>
+                </div>
+
+            {{end}}
+
+        {{end}}
+
+    </div>
+</div>

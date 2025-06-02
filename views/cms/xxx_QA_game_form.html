@@ -1,0 +1,1903 @@
+
+<div class="options-content">
+    <div class="title-block">快問快答遊戲場次設置</div>
+    <div class="content-block">
+        <div id="game-info-form" class="form">
+            <div class="input-block">
+
+                <fieldset class="input-group-3">
+					<label class="input-title" for="title">場次名稱</label>
+					<input class="input form-control" name="title" value="" maxlength="20" placeholder="請輸入場次名稱" autocomplete="off" required="true">
+					<p class="help-message">上限為20個字元</p>
+				</fieldset>
+
+                <fieldset class="input-group-3 form-check form-switch">
+                    <div class="input-box">
+                        <label class="input-title" for="limit_time">答題限制時間</label>
+                        <input class="input form-check-input" id="limit_time" type="checkbox" name="limit_time" value="open" checked>
+                        <input type="hidden" name="limit_time" value="close">
+                    </div>
+                    <div class="input-box">
+                        <input class="input form-control" id="second" type="number" name="second" min="10" max="60" value="10" placeholder="答題時間秒數">
+                        <span class="input-title" style="padding-left: 0.625rem;">秒</span>
+                    </div>
+                    <p class="help-message">如果開啟此選項，請填入答題時間的秒數，至少10秒</p>
+                </fieldset>
+
+                <fieldset class="input-group-3">
+                    <div class="input-box">
+                        <label class="input-title col-sm-2" for="qa_second">題目顯示時間</label>
+                        <input class="input form-control" id="qa_second" type="number" name="qa_second" min="10" max="60" value="10" placeholder="請填入題目顯示時間，最多為60，至少10秒">
+                        <span class="input-title" style="padding-left: 0.625rem;">秒</span>
+                    </div>
+                </fieldset>
+
+                <fieldset class="input-group-3">
+                    <label class="input-title" for="activity_name">最多中獎人數上限</label>
+                    <div class="input-box">
+                        <label class="input-title col-sm-2" for="first_prize">頭獎人數</label>
+                        <input class="input form-control" id="first_prize" type="number" name="first_prize" min="0" max="50" placeholder="請填入頭獎限制人數，最多為50">
+                        <span class="input-title" style="padding-left: 0.625rem;">人</span>
+                    </div>
+                    <div class="input-box">
+                        <label class="input-title col-sm-2" for="second_prize">二獎人數</label>
+                        <input class="input form-control" id="ban_second" type="number" name="second_prize" min="0" max="50" placeholder="請填入二獎限制人數，最多為50">
+                        <span class="input-title" style="padding-left: 0.625rem;">人</span>
+                    </div>
+                    <div class="input-box">
+                        <label class="input-title col-sm-2" for="third_prize">三獎人數</label>
+                        <input class="input form-control" id="ban_second" type="number" name="third_prize" min="0" max="100" placeholder="請填入三獎限制人數，最多為100">
+                        <span class="input-title" style="padding-left: 0.625rem;">人</span>
+                    </div>
+                    <div class="input-box">
+                        <label class="input-title col-sm-2" for="general_prize">普通獎人數</label>
+                        <input class="input form-control" id="ban_second" type="number" name="general_prize" min="0" max="800" placeholder="請填入普通獎限制人數，最多為800">
+                        <span class="input-title" style="padding-left: 0.625rem;">人</span>
+                    </div>
+                </fieldset>
+
+                <fieldset class="input-group-1 form-check form-switch">
+                    <label class="input-title" for="allow">是否允許重複中獎</label>
+                    <input class="input form-check-input" id="allow" type="checkbox" name="allow" value="open" checked>
+                    <input type="hidden" name="allow" value="close">
+                </fieldset>
+
+                <fieldset class="input-group-3">
+                    <div class="input-box">
+                        <label class="input-title col-sm-2" for="people">參加人數上限</label>
+                        <input class="input form-control" id="people" type="number" name="people" min="0" max="{{.People}}" placeholder="請填入參與人數">
+                        <span class="input-title" style="padding-left: 0.625rem;">人</span>
+                    </div>
+                    <p class="help-message">您目前的最大參與人數為 <strong>{{.People}}</strong> 人</p>
+                </fieldset>
+
+                <fieldset class="fieldset-group">
+                    <div class="mb-2 d-flex align-items-center justify-content-between w-100">
+                        <h5 class="fieldset-title me-auto">快問快答題目設置</h5>
+                        <button class="button-style-square button-navy-color add-question-data" type="button" data-bs-toggle="modal" data-bs-target="#add-question-modal">增加題目</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered align-middle w-100">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col">題數</th>
+                                    <th class="w-50" scope="col">題目</th>
+                                    <th scope="col">題目答案</th>
+                                    <th scope="col">加權分數</th>
+                                    <th scope="col">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </fieldset>
+
+                <fieldset class="options-group">
+                    <legend class="title">遊戲外觀設置</legend>
+                    <div class="options-group-space">
+                        <fieldset class="inputs-group">
+                            <label class="input-name">主題選擇</label>
+                            <div class="d-flex flex-lg-row flex-column gap-3">
+                                <input type="radio" id="classic-theme" class="image-button" name="topic" value="classic" checked>
+                                <label class="image-radio" for="classic-theme">
+                                    <div class="img-skin">
+                                        <div class="img-box">
+                                            <img src="/admin/uploads/system/qa/classic/cover_picture.png" alt="經典主題">
+                                        </div>
+                                    </div>
+                                    <p class="theme-name">經典主題</p>
+                                </label>
+                                <input type="radio" id="electric-theme" class="image-button" name="topic" value="electric">
+                                <label class="image-radio" for="electric-theme">
+                                    <div class="img-skin">
+                                        <div class="img-box">
+                                            <img src="/admin/uploads/system/qa/electric/cover_picture.png" alt="電路主題">
+                                        </div>
+                                    </div>
+                                    <p class="theme-name">電路主題</p>
+                                </label>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">樣式選擇</label>
+                            <div class="d-flex flex-sm-row flex-column gap-3">
+                                <input type="radio" id="default-skin" class="radio-button skin-button" name="skin" value="classic" checked>
+                                <label for="default-skin">預設樣式</label>
+                                <input type="radio" id="custom-skin" class="radio-button skin-button" name="skin" value="customize">
+                                <label for="custom-skin">自訂義樣式</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                </fieldset>
+                <fieldset id="custom-classic-form" class="options-group d-none">
+                    <legend class="title">自訂義樣式設置</legend>
+                    <div class="options-group-space">
+                        <fieldset class="inputs-group">
+                            <label class="input-name">1. 吉祥物</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-mascot"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-mascot" type="file" name="qa_mascot" accept="image/*">
+                                <input type="hidden" name="qa_mascot__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/mascot.png">恢復預設</button>
+                            </div>
+                            <img id="mascot-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/mascot.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 508px / 長: 435px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">2. 主持人背景</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-hoststartbackground"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-hoststartbackground" type="file" name="qa_host_start_background" accept="image/*">
+                                <input type="hidden" name="qa_host_start_background__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/host_start_background.jpg">恢復預設</button>
+                            </div>
+                            <img id="hoststartbackground-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/host_start_background.jpg">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 4096px / 長: 2300px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">3. 主持人遊戲背景</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-hostgamebackground"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-hostgamebackground" type="file" name="qa_host_game_background" accept="image/*">
+                                <input type="hidden" name="qa_host_game_background__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/host_game_background.jpg">恢復預設</button>
+                            </div>
+                            <img id="hostgamebackground-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/host_game_background.jpg">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 4096px / 長: 2300px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">4. 主持人結算背景</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-hostendbackground"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-hostendbackground" type="file" name="qa_host_end_background" accept="image/*">
+                                <input type="hidden" name="qa_host_end_background__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/host_end_background.jpg">恢復預設</button>
+                            </div>
+                            <img id="hostendbackground-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/host_end_background.jpg">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 4096px / 長: 2300px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">5. 主持人遊戲排行榜第一名</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-gametop1"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-gametop1" type="file" name="qa_game_top_1" accept="image/*">
+                                <input type="hidden" name="qa_game_top_1__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/game_top_1.png">恢復預設</button>
+                            </div>
+                            <img id="gametop1-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/game_top_1.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 1667px / 長: 316px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">6. 主持人遊戲排行榜第二名</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-gametop2"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-gametop2" type="file" name="qa_game_top_2" accept="image/*">
+                                <input type="hidden" name="qa_game_top_2__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/game_top_2.png">恢復預設</button>
+                            </div>
+                            <img id="gametop2-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/game_top_2.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 1667px / 長: 316px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">7. 主持人遊戲排行榜第三名</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-gametop3"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-gametop3" type="file" name="qa_game_top_3" accept="image/*">
+                                <input type="hidden" name="qa_game_top_3__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/game_top_3.png">恢復預設</button>
+                            </div>
+                            <img id="gametop3-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/game_top_3.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 1667px / 長: 316px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">8. 主持人遊戲排行榜第四名</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-gametop4"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-gametop4" type="file" name="qa_game_top_4" accept="image/*">
+                                <input type="hidden" name="qa_game_top_4__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/game_top_4.png">恢復預設</button>
+                            </div>
+                            <img id="gametop4-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/game_top_4.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 1667px / 長: 316px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">9. 主持人遊戲排行榜第五名</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-gametop5"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-gametop5" type="file" name="qa_game_top_5" accept="image/*">
+                                <input type="hidden" name="qa_game_top_5__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/game_top_5.png">恢復預設</button>
+                            </div>
+                            <img id="gametop5-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/game_top_5.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 1667px / 長: 316px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">10. 主持人結算排行榜第一名</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-endtop1"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-endtop1" type="file" name="qa_end_top_1" accept="image/*">
+                                <input type="hidden" name="qa_end_top_1__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/end_top_1.png">恢復預設</button>
+                            </div>
+                            <img id="endtop1-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/end_top_1.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 1453px / 長: 593px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">11. 主持人結算排行榜第二名</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-endtop2"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-endtop2" type="file" name="qa_end_top_2" accept="image/*">
+                                <input type="hidden" name="qa_end_top_2__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/end_top_2.png">恢復預設</button>
+                            </div>
+                            <img id="endtop2-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/end_top_2.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 957px / 長: 397px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">12. 主持人結算排行榜第三名</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-endtop3"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-endtop3" type="file" name="qa_end_top_3" accept="image/*">
+                                <input type="hidden" name="qa_end_top_3__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/end_top_3.png">恢復預設</button>
+                            </div>
+                            <img id="endtop3-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/end_top_3.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 956px / 長: 398px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">13. 主持人結算排行榜三名後</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-endtop"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-endtop" type="file" name="qa_end_top" accept="image/*">
+                                <input type="hidden" name="qa_end_top__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/end_top.png">恢復預設</button>
+                            </div>
+                            <img id="endtop-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/end_top.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 1107px / 長: 253px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">14. 主持人開始遊戲按鈕</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-hoststartgamebutton"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-hoststartgamebutton" type="file" name="qa_host_start_game_button" accept="image/*">
+                                <input type="hidden" name="qa_host_start_game_button__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/host_start_game_button.png">恢復預設</button>
+                            </div>
+                            <img id="hoststartgamebutton-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/host_start_game_button.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 1044px / 長: 815px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">15. 主持人暫停倒數按鈕</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-hostpausecountdownbutton"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-hostpausecountdownbutton" type="file" name="qa_host_pause_countdown_button" accept="image/*">
+                                <input type="hidden" name="qa_host_pause_countdown_button__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/host_pause_countdown_button.png">恢復預設</button>
+                            </div>
+                            <img id="hostpausecountdownbutton-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/host_pause_countdown_button.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 805px / 長: 256px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">16. 主持人繼續倒數按鈕</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-hostcontinuecountdownbutton"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-hostcontinuecountdownbutton" type="file" name="qa_host_continue_countdown_button" accept="image/*">
+                                <input type="hidden" name="qa_host_continue_countdown_button__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/host_continue_countdown_button.png">恢復預設</button>
+                            </div>
+                            <img id="hostcontinuecountdownbutton-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/host_continue_countdown_button.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 805px / 長: 256px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">17. 主持人開始作答按鈕</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-hoststartanswerbutton"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-hoststartanswerbutton" type="file" name="qa_host_start_answer_button" accept="image/*">
+                                <input type="hidden" name="qa_host_start_answer_button__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/host_start_answer_button.png">恢復預設</button>
+                            </div>
+                            <img id="hoststartanswerbutton-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/host_start_answer_button.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 805px / 長: 256px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">18. 主持人答案揭曉按鈕</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-hostseeanswerbutton"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-hostseeanswerbutton" type="file" name="qa_host_see_answer_button" accept="image/*">
+                                <input type="hidden" name="qa_host_see_answer_button__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/host_see_answer_button.png">恢復預設</button>
+                            </div>
+                            <img id="hostseeanswerbutton-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/host_see_answer_button.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 805px / 長: 256px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">19. 主持人下一題按鈕</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-hostnextquestionbutton"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-hostnextquestionbutton" type="file" name="qa_host_next_question_button" accept="image/*">
+                                <input type="hidden" name="qa_host_next_question_button__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/host_next_question_button.png">恢復預設</button>
+                            </div>
+                            <img id="hostnextquestionbutton-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/host_next_question_button.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 805px / 長: 256px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">20. 主持人結算按鈕</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-hostendgamebutton"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-hostendgamebutton" type="file" name="qa_host_end_game_button" accept="image/*">
+                                <input type="hidden" name="qa_host_end_game_button__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/host_end_game_button.png">恢復預設</button>
+                            </div>
+                            <img id="hostendgamebutton-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/host_end_game_button.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 805px / 長: 256px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">21. 主持人再來一輪按鈕</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-hostagaingamebutton"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-hostagaingamebutton" type="file" name="qa_host_again_game_button" accept="image/*">
+                                <input type="hidden" name="qa_host_again_game_button__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/host_again_game_button.png">恢復預設</button>
+                            </div>
+                            <img id="hostagaingamebutton-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/host_again_game_button.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 805px / 長: 254px</p>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="inputs-group">
+                            <label class="input-name">22. 玩家加入遊戲背景</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-playerstartbackground"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-playerstartbackground" type="file" name="qa_player_start_background" accept="image/*">
+                                <input type="hidden" name="qa_player_start_background__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/player_start_background.png">恢復預設</button>
+                            </div>
+                            <img id="playerstartbackground-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/player_start_background.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 1440px / 長: 2560px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">23. 玩家遊戲背景</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-playergamebackground"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-playergamebackground" type="file" name="qa_player_game_background" accept="image/*">
+                                <input type="hidden" name="qa_player_game_background__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/player_game_background.png">恢復預設</button>
+                            </div>
+                            <img id="playergamebackground-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/player_game_background.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 1440px / 長: 2560px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">24. 玩家加入遊戲按鈕</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-playerjoingamebutton"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-playerjoingamebutton" type="file" name="qa_player_join_game_button" accept="image/*">
+                                <input type="hidden" name="qa_player_join_game_button__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/player_join_game_button.png">恢復預設</button>
+                            </div>
+                            <img id="playerjoingamebutton-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/player_join_game_button.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 1044px / 長: 815px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">25. 玩家選擇答案按鈕</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-playerselectanswerbutton"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-playerselectanswerbutton" type="file" name="qa_player_select_answer_button" accept="image/*">
+                                <input type="hidden" name="qa_player_select_answer_button__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/player_select_answer_button.png">恢復預設</button>
+                            </div>
+                            <img id="playerselectanswerbutton-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/player_select_answer_button.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 672px / 長: 213px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">26. 玩家答案確認按鈕</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-playerconfirmanswerbutton"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-playerconfirmanswerbutton" type="file" name="qa_player_confirm_answer_button" accept="image/*">
+                                <input type="hidden" name="qa_player_confirm_answer_button__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/player_confirm_answer_button.png">恢復預設</button>
+                            </div>
+                            <img id="playerconfirmanswerbutton-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/player_confirm_answer_button.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 672px / 長: 213px</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="inputs-group">
+                            <label class="input-name">27. 玩家已確認按鈕</label>
+                            <div class="d-grid d-md-flex gap-2 mb-2">
+                                <label class="btn base-button button-md icon-button button-kakitsubata-color" for="input-file-playerconfirmstatusbutton"><i class="bi bi-image"></i>上傳圖片</label>
+                                <input class="d-none" id="input-file-playerconfirmstatusbutton" type="file" name="qa_player_confirm_status_button" accept="image/*">
+                                <input type="hidden" name="qa_player_confirm_status_button__default_flag" value="0">
+                                <button class="btn base-button button-md button-callalily-color default-image-button" data-image="/admin/uploads/system/qa/classic/player_confirm_status_button.png">恢復預設</button>
+                            </div>
+                            <img id="playerconfirmstatusbutton-image" class="img-skin view-mode" src="/admin/uploads/system/qa/classic/player_confirm_status_button.png">
+                            <div class="info-group">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <p>圖片尺寸最大限制為 - 寬: 672px / 長: 213px</p>
+                            </div>
+                        </fieldset>
+                    </div>
+                </fieldset>
+
+                {{range $key, $data := .FormInfo.FieldList}}
+
+                    {{if $data.IsHide}}
+                        <input id="{{$data.Name}}" type="hidden" name="{{$data.Field}}" value="{{$data.Value}}">
+                    {{end}}
+
+                {{end}}
+
+            </div>
+            <div class="button-block">
+                <button type="submit" id="sumbit-game-info" class="button-style-square button-navy-color">確定儲存</button>
+                <button type="reset" id="go-back-game-info" class="button-style-square button-fog-color">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add-question-modal" tabindex="-1" aria-labelledby="add-question-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-simple-skin">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h3 class="skin-title">增加快問快答題目</h3>
+            <p>遊戲最多只能有<b>20道題目</b>，所有欄位皆為必填，一個問題只能有<b>4個選項</b>、<b>1個正確解答</b>。</p>
+            <div class="mb-3">
+                <label class="form-label" for="qa-question">題目</label>
+                <textarea class="form-control" id="qa-question" rows="2"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="qa-option-A">選項A</label>
+                <input type="text" class="form-control" id="qa-option-A" name="option">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="qa-option-B">選項B</label>
+                <input type="text" class="form-control" id="qa-option-B" name="option">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="qa-option-C">選項C</label>
+                <input type="text" class="form-control" id="qa-option-C" name="option">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="qa-option-D">選項D</label>
+                <input type="text" class="form-control" id="qa-option-D" name="option">
+            </div>
+            <div class="mt-3">
+                <fieldset>
+                    <legend class="form-label">正確解答</legend>
+                    <div class="d-flex justify-content-around">
+                        <div class="form-check form-check-inline me-0">
+                            <input class="form-check-input" type="radio" id="ans-option-A" name="answer" value="0" checked>
+                            <label class="form-check-label" for="ans-option-A">選項A</label>
+                        </div>
+                        <div class="form-check form-check-inline me-0">
+                            <input class="form-check-input" type="radio" id="ans-option-B" name="answer" value="1">
+                            <label class="form-check-label" for="ans-option-B">選項B</label>
+                        </div>
+                        <div class="form-check form-check-inline me-0">
+                            <input class="form-check-input" type="radio" id="ans-option-C" name="answer" value="2">
+                            <label class="form-check-label" for="ans-option-C">選項C</label>
+                        </div>
+                        <div class="form-check form-check-inline me-0">
+                            <input class="form-check-input" type="radio" id="ans-option-D" name="answer" value="3">
+                            <label class="form-check-label" for="ans-option-D">選項D</label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="mt-3 mb-2">
+                <label class="form-label" for="qa-option-D">加權分數</label>
+                <input type="number" class="form-control qa-score" id="qa-score" name="score" min="1" placeholder="請填入大於0的數字">
+            </div>
+            <p class="error-text"></p>
+            <div class="control-box">
+                <button class="button-style-square button-navy-color save-add-question-data">繼續新增</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="edit-question-modal" tabindex="-1" aria-labelledby="edit-question-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-simple-skin">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h3 class="skin-title">編輯快問快答題目</h3>
+            <div class="mb-3">
+                <label class="form-label" for="edit-qa-question">題目</label>
+                <textarea class="form-control" id="edit-qa-question" rows="2"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="edit-qa-option-A">選項A</label>
+                <input type="text" class="form-control" id="edit-qa-option-A" name="option">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="edit-qa-option-B">選項B</label>
+                <input type="text" class="form-control" id="edit-qa-option-B" name="option">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="edit-qa-option-C">選項C</label>
+                <input type="text" class="form-control" id="edit-qa-option-C" name="option">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="edit-qa-option-D">選項D</label>
+                <input type="text" class="form-control" id="edit-qa-option-D" name="option">
+            </div>
+            <div class="mt-3">
+                <fieldset>
+                    <legend class="form-label">正確解答</legend>
+                    <div class="d-flex justify-content-around">
+                        <div class="form-check form-check-inline me-0">
+                            <input class="form-check-input" type="radio" id="edit-ans-option-A" name="answer" value="0">
+                            <label class="form-check-label" for="edit-ans-option-A">選項A</label>
+                        </div>
+                        <div class="form-check form-check-inline me-0">
+                            <input class="form-check-input" type="radio" id="edit-ans-option-B" name="answer" value="1">
+                            <label class="form-check-label" for="edit-ans-option-B">選項B</label>
+                        </div>
+                        <div class="form-check form-check-inline me-0">
+                            <input class="form-check-input" type="radio" id="edit-ans-option-C" name="answer" value="2">
+                            <label class="form-check-label" for="edit-ans-option-C">選項C</label>
+                        </div>
+                        <div class="form-check form-check-inline me-0">
+                            <input class="form-check-input" type="radio" id="edit-ans-option-D" name="answer" value="3">
+                            <label class="form-check-label" for="edit-ans-option-D">選項D</label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="mt-3 mb-2">
+                <label class="form-label" for="qa-option-D">加權分數</label>
+                <input type="number" class="form-control qa-score" id="edit-qa-score" name="edit-score" min="1" placeholder="請填入大於0的數字">
+            </div>
+            <input type="hidden" name="question-index">
+            <p class="error-text"></p>
+            <div class="control-box">
+                <button class="button-style-square button-navy-color save-edit-question-data" data-bs-dismiss="modal">確定修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<template id="question-table-tr">
+    <tr>
+        <th class="index" scope="row"></th>
+        <td class="question"></td>
+        <td class="ans"></td>
+        <td class="score"></td>
+        <td>
+            <button class="button-style-square sm button-navy-color edit-question-data" type="button" data-bs-toggle="modal" data-bs-target="#edit-question-modal">編輯</button>
+            <button class="button-style-square sm button-cherry-color delete-question-data">刪除</button>
+        </td>
+    </tr>
+</template>
+
+<script>
+
+    var currentTheme = "classic"
+
+    function changeTheme(theme){
+        currentTheme = theme
+        theme = "classic"
+
+        $("#mascot-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/mascot.png")
+        $("#mascot-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/mascot.png")
+
+        $("#hoststartbackground-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/host_start_background.jpg")
+        $("#hoststartbackground-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/host_start_background.jpg")
+
+        $("#hostgamebackground-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/host_game_background.jpg")
+        $("#hostgamebackground-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/host_game_background.jpg")
+
+        $("#hostendbackground-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/host_end_background.jpg")
+        $("#hostendbackground-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/host_end_background.jpg")
+
+        $("#gametop1-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/game_top_1.png")
+        $("#gametop1-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/game_top_1.png")
+
+        $("#gametop2-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/game_top_2.png")
+        $("#gametop2-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/game_top_2.png")
+
+        $("#gametop3-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/game_top_3.png")
+        $("#gametop3-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/game_top_3.png")
+
+        $("#gametop4-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/game_top_4.png")
+        $("#gametop4-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/game_top_4.png")
+
+        $("#gametop5-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/game_top_5.png")
+        $("#gametop5-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/game_top_5.png")
+
+        $("#endtop1-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/end_top_1.png")
+        $("#endtop1-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/end_top_1.png")
+
+        $("#endtop2-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/end_top_2.png")
+        $("#endtop2-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/end_top_2.png")
+
+        $("#endtop3-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/end_top_3.png")
+        $("#endtop3-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/end_top_3.png")
+
+        $("#endtop-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/end_top.png")
+        $("#endtop-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/end_top.png")
+
+        $("#hoststartgamebutton-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/host_start_game_button.png")
+        $("#hoststartgamebutton-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/host_start_game_button.png")
+
+        $("#hostpausecountdownbutton-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/host_pause_countdown_button.png")
+        $("#hostpausecountdownbutton-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/host_pause_countdown_button.png")
+
+        $("#hostcontinuecountdownbutton-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/host_continue_countdown_button.png")
+        $("#hostcontinuecountdownbutton-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/host_continue_countdown_button.png")
+
+        $("#hoststartanswerbutton-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/host_start_answer_button.png")
+        $("#hoststartanswerbutton-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/host_start_answer_button.png")
+
+        $("#hostseeanswerbutton-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/host_see_answer_button.png")
+        $("#hostseeanswerbutton-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/host_see_answer_button.png")
+
+        $("#hostnextquestionbutton-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/host_next_question_button.png")
+        $("#hostnextquestionbutton-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/host_next_question_button.png")
+
+        $("#hostendgamebutton-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/host_end_game_button.png")
+        $("#hostendgamebutton-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/host_end_game_button.png")
+
+        $("#hostagaingamebutton-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/host_again_game_button.png")
+        $("#hostagaingamebutton-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/host_again_game_button.png")
+
+        $("#playerstartbackground-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/player_start_background.png")
+        $("#playerstartbackground-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/player_start_background.png")
+
+        $("#playergamebackground-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/player_game_background.png")
+        $("#playergamebackground-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/player_game_background.png")
+
+        $("#playerjoingamebutton-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/player_join_game_button.png")
+        $("#playerjoingamebutton-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/player_join_game_button.png")
+
+        $("#playerselectanswerbutton-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/player_select_answer_button.png")
+        $("#playerselectanswerbutton-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/player_select_answer_button.png")
+
+        $("#playerconfirmanswerbutton-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/player_confirm_answer_button.png")
+        $("#playerconfirmanswerbutton-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/player_confirm_answer_button.png")
+
+        $("#playerconfirmstatusbutton-image").attr("src", "/admin/uploads/system/qa/"+ theme +"/player_confirm_status_button.png")
+        $("#playerconfirmstatusbutton-image").parents(".inputs-group").find(".default-image-button").data("image", "/admin/uploads/system/qa/"+ theme +"/player_confirm_status_button.png")
+    }
+
+    $(".image-button").bind("click", function(){
+        const theme = $(this).val()
+        changeTheme(theme)
+        if(theme === "electric"){
+            $("#custom-skin").next("label").css("display", "none")
+            $("input.skin-button[value=classic]").prop("checked", true)
+            $("#custom-classic-form").addClass("d-none")
+        }else{
+            $("input[name=skin]").parents(".inputs-group").removeClass("d-none")
+            $("#custom-skin").next("label").css("display", "inline-block")
+        }
+    })
+
+    $(".skin-button").on("click", function(){
+        if($(this).val() === "customize"){
+            $("#custom-classic-form").removeClass("d-none")
+        }else{
+            $("#custom-classic-form").addClass("d-none")
+        }
+    })
+
+    if($("[name='game_id']").length === 2){
+        var gameID = $("[name='game_id']").get(1).value
+        var questionDataURL = "https://"+ getAPIDomainFromURL() +"/v1/interact/game/QA?game_id=" + gameID
+
+        fetch(questionDataURL)
+        .then(function(res){
+            return res.json()
+        }).then(function(result){
+            loadDataQA(result.data)
+        })
+    }
+
+    //取得API的網域
+    function getAPIDomainFromURL(){
+        if(window.location.host.startsWith("dev")){
+            return "apidev.hilives.net"
+        }else{
+            return "api.hilives.net"
+        }
+    }
+
+    var peopleValue, firstPrizeValue, secondPrizeValue, thirdPrizeValue, generalPrizeValue
+
+    checkMaxPeople()
+    function checkMaxPeople(){
+        $("input[name=people]").unbind("input").bind("input", function(){
+            let maxPeople = Number("{{.People}}")
+            let currentPeople = Number($("input[name=people]").val())
+            if(currentPeople > maxPeople){
+                $("input[name=people]").removeClass("is-valid").addClass("is-invalid")
+            }else{
+                $("input[name=people]").removeClass("is-invalid").addClass("is-valid")
+            }
+        })
+    }
+
+    var method = "{{.Route.Method}}"
+    
+    $("#limit_time").bind("click", function(){
+        limitTime()
+    })
+
+    function limitTime(){
+        if($("[name='limit_time']").prop("checked") === true){
+            $("[name='limit_time']").val("open")
+            $("[name='second']").prop("disabled", false)
+        }else{
+            $("[name='limit_time']").val("close")
+            $("[name='second']").prop("disabled", true)
+        }
+    }
+
+    limitTime()
+
+    $("#allow").bind("click", function(){
+        allow()
+    })
+
+    function allow(){
+        if($("[name='allow']").prop("checked") === true){
+            $("[name='allow']").val("open")
+        }else{
+            $("[name='allow']").val("close")
+        }
+    }
+
+    allow()
+
+    $("input.qa-score").unbind("change").bind("change", function(){
+        if($(this).val() < 1){
+            $(this).val(1)
+        }
+    })
+
+    function loadDataQA(data){
+        $("[name='title']").val(data.title)
+        if(data.limit_time === "open"){
+            $("[name='limit_time']").prop("checked", true).val(data.limit_time)
+            $("[name='second']").prop("disabled", false)
+        }else{
+            $("[name='limit_time']").prop("checked", false).val(data.limit_time)
+            $("[name='second']").prop("disabled", true)
+        }
+        $("[name='qa_second']").val(data.qa_second)
+        $("[name='second']").val(data.second)
+        $("[name='first_prize']").val(data.first_prize)
+        $("[name='second_prize']").val(data.second_prize)
+        $("[name='third_prize']").val(data.third_prize)
+        $("[name='general_prize']").val(data.general_prize)
+        if(data.allow === "open"){
+            $("[name='allow']").prop("checked", true).val(data.allow)
+        }else{
+            $("[name='allow']").prop("checked", false).val(data.allow)
+        }
+        $("[name='people']").val(data.people)
+        $("[name='topic'][value="+ data.topic +"]").prop("checked", true)
+        if(data.topic !== "classic"){
+            $("[name='skin']").parents(".inputs-group").addClass("d-none")
+        }
+        currentTheme = data.topic
+        $("[name='skin'][value="+ data.skin +"]").prop("checked", true)
+
+        $(data.questions).each(function(i){
+            const index = $("tbody").find("tr").length + 1
+            const template = $("#question-table-tr").html()
+            const container = $(template)
+
+            const question = data.questions[i].question
+            const options = data.questions[i].options.join("&&&")
+            const answer = data.questions[i].answer
+            const score = data.questions[i].score
+
+            container.find(".index").text(index)
+            container.find(".question").text(question)
+            
+            if(answer === "0"){
+                container.find(".ans").text("選項A")
+            }else if(answer === "1"){
+                container.find(".ans").text("選項B")
+            }else if(answer === "2"){
+                container.find(".ans").text("選項C")
+            }else if(answer === "3"){
+                container.find(".ans").text("選項D")
+            }
+
+            container.find(".score").text(score)
+
+            container.find(".edit-question-data").attr("data-bs-index", index).attr("data-bs-question", question).attr("data-bs-options", options).attr("data-bs-answer", answer).attr("data-bs-score", score)
+            $("tbody").append(container)
+        })
+
+        setTimeout(function(){
+            editQuestionData()
+            deleteQuestionData()
+            peopleValue = Number($("[name='people']").val())
+            firstPrizeValue = Number($("[name='first_prize']").val())
+            secondPrizeValue = Number($("[name='second_prize']").val())
+            thirdPrizeValue = Number($("[name='third_prize']").val())
+            generalPrizeValue = Number($("[name='general_prize']").val())
+        }, 500)
+
+        if(data.skin === "customize"){
+            $("#custom-classic-form").removeClass("d-none").addClass("d-block")
+            $("#mascot-image").attr("src", data.qa_mascot)
+            $("#hoststartbackground-image").attr("src", data.qa_host_start_background)
+            $("#hostgamebackground-image").attr("src", data.qa_host_game_background)
+            $("#hostendbackground-image").attr("src", data.qa_host_end_background)
+            $("#gametop1-image").attr("src", data.qa_game_top_1)
+            $("#gametop2-image").attr("src", data.qa_game_top_2)
+            $("#gametop3-image").attr("src", data.qa_game_top_3)
+            $("#gametop4-image").attr("src", data.qa_game_top_4)
+            $("#gametop5-image").attr("src", data.qa_game_top_5)
+            $("#endtop1-image").attr("src", data.qa_end_top_1)
+            $("#endtop2-image").attr("src", data.qa_end_top_2)
+            $("#endtop3-image").attr("src", data.qa_end_top_3)
+            $("#endtop-image").attr("src", data.qa_end_top)
+            $("#hoststartgamebutton-image").attr("src", data.qa_host_start_game_button)
+            $("#hostpausecountdownbutton-image").attr("src", data.qa_host_pause_countdown_button)
+            $("#hostcontinuecountdownbutton-image").attr("src", data.qa_host_continue_countdown_button)
+            $("#hoststartanswerbutton-image").attr("src", data.qa_host_start_answer_button)
+            $("#hostseeanswerbutton-image").attr("src", data.qa_host_see_answer_button)
+            $("#hostnextquestionbutton-image").attr("src", data.qa_host_next_question_button)
+            $("#hostendgamebutton-image").attr("src", data.qa_host_end_game_button)
+            $("#hostagaingamebutton-image").attr("src", data.qa_host_again_game_button)
+            $("#playerstartbackground-image").attr("src", data.qa_player_start_background)
+            $("#playergamebackground-image").attr("src", data.qa_player_game_background)
+            $("#playerjoingamebutton-image").attr("src", data.qa_player_join_game_button)
+            $("#playerselectanswerbutton-image").attr("src", data.qa_player_select_answer_button)
+            $("#playerconfirmanswerbutton-image").attr("src", data.qa_player_confirm_answer_button)
+            $("#playerconfirmstatusbutton-image").attr("src", data.qa_player_confirm_status_button)
+        }
+    }
+
+    $("#add-question-modal").bind("show.bs.modal", function(event){
+        if($("tbody").find("tr").length >= 20){
+            $(".save-add-question-data").prop("disabled", true)
+        }
+    })
+
+    $(".save-add-question-data").bind("click", function(){
+        if($("tbody").find("tr").length >= 20){
+            $(".save-add-question-data").prop("disabled", true)
+        }else{
+            const index = $("tbody").find("tr").length + 1
+            const template = $("#question-table-tr").html()
+            const container = $(template)
+
+            const question = $("#qa-question").val()
+            const options = addArraySplit($("#add-question-modal").find("[name=option]"))
+            const answer = $("#add-question-modal").find("[name=answer]:checked").val()
+            const score = $("#qa-score").val()
+
+            container.find(".index").text(index)
+            container.find(".question").text(question)
+            container.find(".ans").text($("[name=answer]:checked").next("label").text())
+            container.find(".score").text(score)
+            container.find(".edit-question-data").attr("data-bs-index", index).attr("data-bs-question", question).attr("data-bs-options", options).attr("data-bs-answer", answer).attr("data-bs-score", score)
+            
+            const inputs = $("#add-question-modal").find(".form-control")
+            $(inputs).each(function(i){
+                if(!$(inputs)[i].value){
+                    toastMsg("error", "請輸入題目或四個選項及加權分數")
+                }
+            })
+            if($(inputs)[0].value && $(inputs)[1].value && $(inputs)[2].value && $(inputs)[3].value && $(inputs)[4].value && $(inputs)[5].value){
+                $("tbody").append(container)
+                $(inputs).each(function(i){
+                    $(inputs).eq(i).val("")
+                })
+            }
+
+            deleteQuestionData()
+        }
+    })
+
+    function deleteQuestionData(){
+        $(".delete-question-data").unbind("click").bind("click", function(){
+            $(this).parents("tr").remove()
+            $("tbody").find("tr").each(function(i){
+                $(this).find(".index").text(i + 1)
+                $(this).find(".edit-question-data").attr("data-bs-index", i + 1)
+            })
+        })
+    }
+
+    deleteQuestionData()
+
+    function editQuestionData(){
+        $("#edit-question-modal").bind("show.bs.modal", function(event){
+            event.stopPropagation()
+            const editButton = event.relatedTarget
+            const index = editButton.getAttribute("data-bs-index")
+            const question = editButton.getAttribute("data-bs-question")
+            const options = editButton.getAttribute("data-bs-options").split("&&&")
+            const answer = editButton.getAttribute("data-bs-answer")
+            const score = editButton.getAttribute("data-bs-score")
+
+            $(this).find("#edit-qa-question").val(question)
+
+            $(this).find("#edit-qa-option-A").val(options[0])
+            $(this).find("#edit-qa-option-B").val(options[1])
+            $(this).find("#edit-qa-option-C").val(options[2])
+            $(this).find("#edit-qa-option-D").val(options[3])
+            
+            if(answer === "0"){
+                $(this).find("#edit-ans-option-A").prop("checked", true)
+            }else if(answer === "1"){
+                $(this).find("#edit-ans-option-B").prop("checked", true)
+            }else if(answer === "2"){
+                $(this).find("#edit-ans-option-C").prop("checked", true)
+            }else if(answer === "3"){
+                $(this).find("#edit-ans-option-D").prop("checked", true)
+            }
+
+            $(this).find("[name=question-index]").val(index)
+            $(this).find("[name=edit-score]").val(score)
+        })
+    }
+
+    editQuestionData()
+
+    $(".save-edit-question-data").bind("click", function(){
+        const index = $("[name=question-index]").val()
+
+        const question = $("#edit-qa-question").val()
+        const options = addArraySplit($("#edit-question-modal").find("[name=option]"))
+        const answer = $("#edit-question-modal").find("[name=answer]:checked").val()
+        const score = $("#edit-qa-score").val()
+
+        const inputs = $("#edit-question-modal").find(".form-control")
+        $(inputs).each(function(i){
+            if(!$(inputs)[i].value){
+                toastMsg("error", "請輸入題目或四個選項及加權分數")
+            }
+        })
+        if($(inputs)[0].value && $(inputs)[1].value && $(inputs)[2].value && $(inputs)[3].value && $(inputs)[4].value && $(inputs)[5].value){
+            $("tbody").find("tr").each(function(i){
+                if($(this).find("th.index").text() === index){
+                    $(this).find(".question").text(question)
+                    $(this).find(".ans").text($("[name=answer]:checked").next("label").text())
+                    $(this).find(".score").text(score)
+                    $(this).find(".edit-question-data").attr("data-bs-index", index).attr("data-bs-question", question).attr("data-bs-options", options).attr("data-bs-answer", answer).attr("data-bs-score", score)
+                }
+            })
+        }
+    })
+    
+
+    function addArraySplit(select){
+        var arrSt = []
+        $(select).each(function(i){
+            var v = $(this).val()
+            v = $.trim(v)
+            if(v !== ""){
+                arrSt.push($(this).val())
+            }
+        })
+        return arrSt.join("&&&")
+    }
+
+    if(method === "post"){
+
+        $("#sumbit-game-info").bind("click", function(){
+            var formDataBox = new FormData()
+
+            formDataBox.append("user_id", "{{.User.UserID}}")
+            formDataBox.append("activity_id", "{{.ActivityID}}")
+            formDataBox.append("title", $("[name='title']").val())
+            formDataBox.append("limit_time", $("[name='limit_time']").val())
+            formDataBox.append("qa_second", parseInt($("[name='qa_second']").val()))
+            
+            if($("[name='limit_time']").val() === "open"){
+                formDataBox.append("second", parseInt($("[name='second']").val()))
+            }else{
+                formDataBox.append("second", 0)
+            }
+
+            formDataBox.append("first_prize", parseInt($("[name='first_prize']").val()))
+            formDataBox.append("second_prize", parseInt($("[name='second_prize']").val()))
+            formDataBox.append("third_prize", parseInt($("[name='third_prize']").val()))
+            formDataBox.append("general_prize", parseInt($("[name='general_prize']").val()))
+            formDataBox.append("allow", $("[name='allow']").val())
+            formDataBox.append("people", Number($("input[name=people]").val()))
+            formDataBox.append("max_people", Number($("input[name=people]").parents(".input-group-3").find("strong").text()))
+            formDataBox.append("topic", $("[name='topic']:checked").val())
+            formDataBox.append("skin", $("[name='skin']:checked").val())
+
+            if($("[name='skin']:checked").val() === "customize"){
+
+                if($("[name='qa_mascot']").get(0).files[0] == undefined && $("#mascot-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_mascot__default_flag", "1")
+                }else if($("[name='qa_mascot']").get(0).files[0] == undefined && $("#mascot-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_mascot__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_mascot", $("[name='qa_mascot']").get(0).files[0])
+                    formDataBox.append("qa_mascot__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_start_background']").get(0).files[0] == undefined && $("#hoststartbackground-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_start_background__default_flag", "1")
+                }else if($("[name='qa_host_start_background']").get(0).files[0] == undefined && $("#hoststartbackground-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_start_background__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_start_background", $("[name='qa_host_start_background']").get(0).files[0])
+                    formDataBox.append("qa_host_start_background__default_flag", "0")
+                }
+
+                if($("[name='qa_host_game_background']").get(0).files[0] == undefined && $("#hostgamebackground-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_game_background__default_flag", "1")
+                }else if($("[name='qa_host_game_background']").get(0).files[0] == undefined && $("#hostgamebackground-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_game_background__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_game_background", $("[name='qa_host_game_background']").get(0).files[0])
+                    formDataBox.append("qa_host_game_background__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_end_background']").get(0).files[0] == undefined && $("#hostendbackground-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_end_background__default_flag", "1")
+                }else if($("[name='qa_host_end_background']").get(0).files[0] == undefined && $("#hostendbackground-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_end_background__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_end_background", $("[name='qa_host_end_background']").get(0).files[0])
+                    formDataBox.append("qa_host_end_background__default_flag", "0")
+                }
+                
+                if($("[name='qa_game_top_1']").get(0).files[0] == undefined && $("#gametop1-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_game_top_1__default_flag", "1")
+                }else if($("[name='qa_game_top_1']").get(0).files[0] == undefined && $("#gametop1-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_game_top_1__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_game_top_1", $("[name='qa_game_top_1']").get(0).files[0])
+                    formDataBox.append("qa_game_top_1__default_flag", "0")
+                }
+                
+                if($("[name='qa_game_top_2']").get(0).files[0] == undefined && $("#gametop2-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_game_top_2__default_flag", "1")
+                }else if($("[name='qa_game_top_2']").get(0).files[0] == undefined && $("#gametop2-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_game_top_2__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_game_top_2", $("[name='qa_game_top_2']").get(0).files[0])
+                    formDataBox.append("qa_game_top_2__default_flag", "0")
+                }
+                
+                if($("[name='qa_game_top_3']").get(0).files[0] == undefined && $("#gametop3-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_game_top_3__default_flag", "1")
+                }else if($("[name='qa_game_top_3']").get(0).files[0] == undefined && $("#gametop3-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_game_top_3__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_game_top_3", $("[name='qa_game_top_3']").get(0).files[0])
+                    formDataBox.append("qa_game_top_3__default_flag", "0")
+                }
+                
+                if($("[name='qa_game_top_4']").get(0).files[0] == undefined && $("#gametop4-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_game_top_4__default_flag", "1")
+                }else if($("[name='qa_game_top_4']").get(0).files[0] == undefined && $("#gametop4-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_game_top_4__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_game_top_4", $("[name='qa_game_top_4']").get(0).files[0])
+                    formDataBox.append("qa_game_top_4__default_flag", "0")
+                }
+                
+                if($("[name='qa_game_top_5']").get(0).files[0] == undefined && $("#gametop5-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_game_top_5__default_flag", "1")
+                }else if($("[name='qa_game_top_5']").get(0).files[0] == undefined && $("#gametop5-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_game_top_5__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_game_top_5", $("[name='qa_game_top_5']").get(0).files[0])
+                    formDataBox.append("qa_game_top_5__default_flag", "0")
+                }
+                
+                if($("[name='qa_end_top_1']").get(0).files[0] == undefined && $("#endtop1-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_end_top_1__default_flag", "1")
+                }else if($("[name='qa_end_top_1']").get(0).files[0] == undefined && $("#endtop1-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_end_top_1__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_end_top_1", $("[name='qa_end_top_1']").get(0).files[0])
+                    formDataBox.append("qa_end_top_1__default_flag", "0")
+                }
+                
+                if($("[name='qa_end_top_2']").get(0).files[0] == undefined && $("#endtop2-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_end_top_2__default_flag", "1")
+                }else if($("[name='qa_end_top_2']").get(0).files[0] == undefined && $("#endtop2-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_end_top_2__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_end_top_2", $("[name='qa_end_top_2']").get(0).files[0])
+                    formDataBox.append("qa_end_top_2__default_flag", "0")
+                }
+                
+                if($("[name='qa_end_top_3']").get(0).files[0] == undefined && $("#endtop3-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_end_top_3__default_flag", "1")
+                }else if($("[name='qa_end_top_3']").get(0).files[0] == undefined && $("#endtop3-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_end_top_3__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_end_top_3", $("[name='qa_end_top_3']").get(0).files[0])
+                    formDataBox.append("qa_end_top_3__default_flag", "0")
+                }
+                
+                
+                if($("[name='qa_end_top']").get(0).files[0] == undefined && $("#endtop-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_end_top__default_flag", "1")
+                }else if($("[name='qa_end_top']").get(0).files[0] == undefined && $("#endtop-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_end_top__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_end_top", $("[name='qa_end_top']").get(0).files[0])
+                    formDataBox.append("qa_end_top__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_start_game_button']").get(0).files[0] == undefined && $("#hoststartgamebutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_start_game_button__default_flag", "1")
+                }else if($("[name='qa_host_start_game_button']").get(0).files[0] == undefined && $("#hoststartgamebutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_start_game_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_start_game_button", $("[name='qa_host_start_game_button']").get(0).files[0])
+                    formDataBox.append("qa_host_start_game_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_pause_countdown_button']").get(0).files[0] == undefined && $("#hostpausecountdownbutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_pause_countdown_button__default_flag", "1")
+                }else if($("[name='qa_host_pause_countdown_button']").get(0).files[0] == undefined && $("#hostpausecountdownbutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_pause_countdown_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_pause_countdown_button", $("[name='qa_host_pause_countdown_button']").get(0).files[0])
+                    formDataBox.append("qa_host_pause_countdown_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_continue_countdown_button']").get(0).files[0] == undefined && $("#hostcontinuecountdownbutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_continue_countdown_button__default_flag", "1")
+                }else if($("[name='qa_host_continue_countdown_button']").get(0).files[0] == undefined && $("#hostcontinuecountdownbutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_continue_countdown_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_continue_countdown_button", $("[name='qa_host_continue_countdown_button']").get(0).files[0])
+                    formDataBox.append("qa_host_continue_countdown_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_start_answer_button']").get(0).files[0] == undefined && $("#hoststartanswerbutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_start_answer_button__default_flag", "1")
+                }else if($("[name='qa_host_start_answer_button']").get(0).files[0] == undefined && $("#hoststartanswerbutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_start_answer_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_start_answer_button", $("[name='qa_host_start_answer_button']").get(0).files[0])
+                    formDataBox.append("qa_host_start_answer_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_see_answer_button']").get(0).files[0] == undefined && $("#hostseeanswerbutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_see_answer_button__default_flag", "1")
+                }else if($("[name='qa_host_see_answer_button']").get(0).files[0] == undefined && $("#hostseeanswerbutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_see_answer_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_see_answer_button", $("[name='qa_host_see_answer_button']").get(0).files[0])
+                    formDataBox.append("qa_host_see_answer_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_next_question_button']").get(0).files[0] == undefined && $("#hostnextquestionbutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_next_question_button__default_flag", "1")
+                }else if($("[name='qa_host_next_question_button']").get(0).files[0] == undefined && $("#hostnextquestionbutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_next_question_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_next_question_button", $("[name='qa_host_next_question_button']").get(0).files[0])
+                    formDataBox.append("qa_host_next_question_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_end_game_button']").get(0).files[0] == undefined && $("#hostendgamebutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_end_game_button__default_flag", "1")
+                }else if($("[name='qa_host_end_game_button']").get(0).files[0] == undefined && $("#hostendgamebutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_end_game_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_end_game_button", $("[name='qa_host_end_game_button']").get(0).files[0])
+                    formDataBox.append("qa_host_end_game_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_again_game_button']").get(0).files[0] == undefined && $("#hostagaingamebutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_again_game_button__default_flag", "1")
+                }else if($("[name='qa_host_again_game_button']").get(0).files[0] == undefined && $("#hostagaingamebutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_again_game_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_again_game_button", $("[name='qa_host_again_game_button']").get(0).files[0])
+                    formDataBox.append("qa_host_again_game_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_player_start_background']").get(0).files[0] == undefined && $("#playerstartbackground-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_player_start_background__default_flag", "1")
+                }else if($("[name='qa_player_start_background']").get(0).files[0] == undefined && $("#playerstartbackground-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_player_start_background__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_player_start_background", $("[name='qa_player_start_background']").get(0).files[0])
+                    formDataBox.append("qa_player_start_background__default_flag", "0")
+                }
+                
+                if($("[name='qa_player_game_background']").get(0).files[0] == undefined && $("#playergamebackground-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_player_game_background__default_flag", "1")
+                }else if($("[name='qa_player_game_background']").get(0).files[0] == undefined && $("#playergamebackground-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_player_game_background__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_player_game_background", $("[name='qa_player_game_background']").get(0).files[0])
+                    formDataBox.append("qa_player_game_background__default_flag", "0")
+                }
+                
+                if($("[name='qa_player_join_game_button']").get(0).files[0] == undefined && $("#playerjoingamebutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_player_join_game_button__default_flag", "1")
+                }else if($("[name='qa_player_join_game_button']").get(0).files[0] == undefined && $("#playerjoingamebutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_player_join_game_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_player_join_game_button", $("[name='qa_player_join_game_button']").get(0).files[0])
+                    formDataBox.append("qa_player_join_game_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_player_select_answer_button']").get(0).files[0] == undefined && $("#playerselectanswerbutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_player_select_answer_button__default_flag", "1")
+                }else if($("[name='qa_player_select_answer_button']").get(0).files[0] == undefined && $("#playerselectanswerbutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_player_select_answer_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_player_select_answer_button", $("[name='qa_player_select_answer_button']").get(0).files[0])
+                    formDataBox.append("qa_player_select_answer_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_player_confirm_answer_button']").get(0).files[0] == undefined && $("#playerconfirmanswerbutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_player_confirm_answer_button__default_flag", "1")
+                }else if($("[name='qa_player_confirm_answer_button']").get(0).files[0] == undefined && $("#playerconfirmanswerbutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_player_confirm_answer_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_player_confirm_answer_button", $("[name='qa_player_confirm_answer_button']").get(0).files[0])
+                    formDataBox.append("qa_player_confirm_answer_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_player_confirm_status_button']").get(0).files[0] == undefined && $("#playerconfirmstatusbutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_player_confirm_status_button__default_flag", "1")
+                }else if($("[name='qa_player_confirm_status_button']").get(0).files[0] == undefined && $("#playerconfirmstatusbutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_player_confirm_status_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_player_confirm_status_button", $("[name='qa_player_confirm_status_button']").get(0).files[0])
+                    formDataBox.append("qa_player_confirm_status_button__default_flag", "0")
+                }
+
+            }else{
+                formDataBox.append("qa_mascot__default_flag", "1")
+                formDataBox.append("qa_host_start_background__default_flag", "1")
+                formDataBox.append("qa_host_game_background__default_flag", "1")
+                formDataBox.append("qa_host_end_background__default_flag", "1")
+                formDataBox.append("qa_game_top_1__default_flag", "1")
+                formDataBox.append("qa_game_top_2__default_flag", "1")
+                formDataBox.append("qa_game_top_3__default_flag", "1")
+                formDataBox.append("qa_game_top_4__default_flag", "1")
+                formDataBox.append("qa_game_top_5__default_flag", "1")
+                formDataBox.append("qa_end_top_1__default_flag", "1")
+                formDataBox.append("qa_end_top_2__default_flag", "1")
+                formDataBox.append("qa_end_top_3__default_flag", "1")
+                formDataBox.append("qa_end_top__default_flag", "1")
+                formDataBox.append("qa_host_start_game_button__default_flag", "1")
+                formDataBox.append("qa_host_pause_countdown_button__default_flag", "1")
+                formDataBox.append("qa_host_continue_countdown_button__default_flag", "1")
+                formDataBox.append("qa_host_start_answer_button__default_flag", "1")
+                formDataBox.append("qa_host_see_answer_button__default_flag", "1")
+                formDataBox.append("qa_host_next_question_button__default_flag", "1")
+                formDataBox.append("qa_host_end_game_button__default_flag", "1")
+                formDataBox.append("qa_host_again_game_button__default_flag", "1")
+                formDataBox.append("qa_player_start_background__default_flag", "1")
+                formDataBox.append("qa_player_game_background__default_flag", "1")
+                formDataBox.append("qa_player_join_game_button__default_flag", "1")
+                formDataBox.append("qa_player_select_answer_button__default_flag", "1")
+                formDataBox.append("qa_player_confirm_answer_button__default_flag", "1")
+                formDataBox.append("qa_player_confirm_status_button__default_flag", "1")
+            }
+
+            for(let i = 0; i < 20; i++){
+                let index = i + 1
+                if(i < $("tbody").find("tr").length){
+                    formDataBox.append("qa_" + index, $("tbody").find(".edit-question-data")[i].dataset.bsQuestion)
+                    formDataBox.append("qa_" + index + "_options", $("tbody").find(".edit-question-data")[i].dataset.bsOptions)
+                    formDataBox.append("qa_" + index + "_answer", $("tbody").find(".edit-question-data")[i].dataset.bsAnswer)
+                    formDataBox.append("qa_" + index + "_score", Number($("tbody").find(".edit-question-data")[i].dataset.bsScore))
+                }
+            }
+
+            formDataBox.append("total_qa", $("tbody").find("tr").length)
+            formDataBox.append("token", "{{.Token}}")
+
+            let settings = {
+                "url": "{{.Route.POST}}",
+                "method": "POST",
+                "timeout": 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "data": formDataBox,
+                "dataType": "json",
+                "success": function(data){
+                    $.get("/admin/interact/game/QA?activity_id={{.ActivityID}}", function(data){
+                        $("#main-content").html(data)
+                    })
+                },
+                "error": function(result){
+                    toastMsg(result.statusText, result.responseJSON.message)
+                    return
+                }
+            }
+
+            let maxPeople = Number($("input[name=people]").parents(".input-group-3").find("strong").text())
+            let currentPeople = Number($("input[name=people]").val())
+
+            const isSecond = $("input[name=limit_time]:checked").val()
+            let second = Number($("input[name=second]").val())
+            let qa_second = Number($("input[name=qa_second]").val())
+
+            if(currentPeople > maxPeople){
+                Swal.fire({
+                    icon: "error",
+                    title: "目前的最大參與人數為 "+ maxPeople +" 人"
+                })
+            }else if(isSecond === "open" && second < 10){
+                Swal.fire({
+                    icon: "error",
+                    title: "答題限時秒數至少為大於10秒"
+                })
+            }else if(qa_second < 10){
+                Swal.fire({
+                    icon: "error",
+                    title: "題目顯示秒數至少為大於10秒"
+                })
+            }else if($("tbody").find(".edit-question-data").length == 0){
+                Swal.fire({
+                    icon: "error",
+                    title: "題目至少一題"
+                })
+            }else{
+                $.ajax(settings).done(function(response){
+                    Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 5000
+                    }).fire({
+                        icon: "success",
+                        title: "遊戲設置成功"
+                    })
+                }).fail(function(response){
+                    Swal.fire({
+                        title: "發生錯誤",
+                        text: response.responseJSON.message,
+                        icon: 'error',
+                        confirmButtonColor: '#3891a6'
+                    })
+                })
+            }
+        })
+
+    }else if(method === "put"){
+
+        $("#sumbit-game-info").bind("click", function(){
+            var formDataBox = new FormData()
+            var gameId = $("[name='game_id']").get(1).value
+
+            formDataBox.append("user_id", "{{.User.UserID}}")
+            formDataBox.append("game_id", gameId)
+            formDataBox.append("title", $("[name='title']").val())
+            formDataBox.append("limit_time", $("[name='limit_time']").val())
+            formDataBox.append("qa_second", parseInt($("[name='qa_second']").val()))
+
+            if($("[name='limit_time']").val() === "open"){
+                formDataBox.append("second", parseInt($("[name='second']").val()))
+            }else{
+                formDataBox.append("second", 0)
+            }
+            
+            if(firstPrizeValue !== Number($("input[name=first_prize]").val())){
+                formDataBox.append("first_prize", parseInt($("[name='first_prize']").val()))
+            }
+            if(secondPrizeValue !== Number($("input[name=second_prize]").val())){
+                formDataBox.append("second_prize", parseInt($("[name='second_prize']").val()))
+            }
+            if(thirdPrizeValue !== Number($("input[name=third_prize]").val())){
+                formDataBox.append("third_prize", parseInt($("[name='third_prize']").val()))
+            }
+            if(generalPrizeValue !== Number($("input[name=general_prize]").val())){
+                formDataBox.append("general_prize", parseInt($("[name='general_prize']").val()))
+            }
+            if(peopleValue !== Number($("input[name=people]").val())){
+                formDataBox.append("people", Number($("input[name=people]").val()))
+            }
+            formDataBox.append("max_people", Number($("input[name=people]").parents(".input-group-3").find("strong").text()))
+
+            formDataBox.append("allow", $("[name='allow']").val())
+
+            formDataBox.append("topic", $("[name='topic']:checked").val())
+            formDataBox.append("skin", $("[name='skin']:checked").val())
+
+            if($("[name='skin']:checked").val() === "customize"){
+                
+                if($("[name='qa_mascot']").get(0).files[0] == undefined && $("#mascot-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_mascot__default_flag", "1")
+                }else if($("[name='qa_mascot']").get(0).files[0] == undefined && $("#mascot-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_mascot__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_mascot", $("[name='qa_mascot']").get(0).files[0])
+                    formDataBox.append("qa_mascot__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_start_background']").get(0).files[0] == undefined && $("#hoststartbackground-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_start_background__default_flag", "1")
+                }else if($("[name='qa_host_start_background']").get(0).files[0] == undefined && $("#hoststartbackground-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_start_background__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_start_background", $("[name='qa_host_start_background']").get(0).files[0])
+                    formDataBox.append("qa_host_start_background__default_flag", "0")
+                }
+
+                if($("[name='qa_host_game_background']").get(0).files[0] == undefined && $("#hostgamebackground-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_game_background__default_flag", "1")
+                }else if($("[name='qa_host_game_background']").get(0).files[0] == undefined && $("#hostgamebackground-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_game_background__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_game_background", $("[name='qa_host_game_background']").get(0).files[0])
+                    formDataBox.append("qa_host_game_background__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_end_background']").get(0).files[0] == undefined && $("#hostendbackground-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_end_background__default_flag", "1")
+                }else if($("[name='qa_host_end_background']").get(0).files[0] == undefined && $("#hostendbackground-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_end_background__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_end_background", $("[name='qa_host_end_background']").get(0).files[0])
+                    formDataBox.append("qa_host_end_background__default_flag", "0")
+                }
+                
+                if($("[name='qa_game_top_1']").get(0).files[0] == undefined && $("#gametop1-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_game_top_1__default_flag", "1")
+                }else if($("[name='qa_game_top_1']").get(0).files[0] == undefined && $("#gametop1-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_game_top_1__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_game_top_1", $("[name='qa_game_top_1']").get(0).files[0])
+                    formDataBox.append("qa_game_top_1__default_flag", "0")
+                }
+                
+                if($("[name='qa_game_top_2']").get(0).files[0] == undefined && $("#gametop2-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_game_top_2__default_flag", "1")
+                }else if($("[name='qa_game_top_2']").get(0).files[0] == undefined && $("#gametop2-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_game_top_2__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_game_top_2", $("[name='qa_game_top_2']").get(0).files[0])
+                    formDataBox.append("qa_game_top_2__default_flag", "0")
+                }
+                
+                if($("[name='qa_game_top_3']").get(0).files[0] == undefined && $("#gametop3-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_game_top_3__default_flag", "1")
+                }else if($("[name='qa_game_top_3']").get(0).files[0] == undefined && $("#gametop3-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_game_top_3__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_game_top_3", $("[name='qa_game_top_3']").get(0).files[0])
+                    formDataBox.append("qa_game_top_3__default_flag", "0")
+                }
+                
+                if($("[name='qa_game_top_4']").get(0).files[0] == undefined && $("#gametop4-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_game_top_4__default_flag", "1")
+                }else if($("[name='qa_game_top_4']").get(0).files[0] == undefined && $("#gametop4-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_game_top_4__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_game_top_4", $("[name='qa_game_top_4']").get(0).files[0])
+                    formDataBox.append("qa_game_top_4__default_flag", "0")
+                }
+                
+                if($("[name='qa_game_top_5']").get(0).files[0] == undefined && $("#gametop5-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_game_top_5__default_flag", "1")
+                }else if($("[name='qa_game_top_5']").get(0).files[0] == undefined && $("#gametop5-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_game_top_5__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_game_top_5", $("[name='qa_game_top_5']").get(0).files[0])
+                    formDataBox.append("qa_game_top_5__default_flag", "0")
+                }
+                
+                if($("[name='qa_end_top_1']").get(0).files[0] == undefined && $("#endtop1-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_end_top_1__default_flag", "1")
+                }else if($("[name='qa_end_top_1']").get(0).files[0] == undefined && $("#endtop1-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_end_top_1__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_end_top_1", $("[name='qa_end_top_1']").get(0).files[0])
+                    formDataBox.append("qa_end_top_1__default_flag", "0")
+                }
+                
+                if($("[name='qa_end_top_2']").get(0).files[0] == undefined && $("#endtop2-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_end_top_2__default_flag", "1")
+                }else if($("[name='qa_end_top_2']").get(0).files[0] == undefined && $("#endtop2-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_end_top_2__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_end_top_2", $("[name='qa_end_top_2']").get(0).files[0])
+                    formDataBox.append("qa_end_top_2__default_flag", "0")
+                }
+                
+                if($("[name='qa_end_top_3']").get(0).files[0] == undefined && $("#endtop3-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_end_top_3__default_flag", "1")
+                }else if($("[name='qa_end_top_3']").get(0).files[0] == undefined && $("#endtop3-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_end_top_3__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_end_top_3", $("[name='qa_end_top_3']").get(0).files[0])
+                    formDataBox.append("qa_end_top_3__default_flag", "0")
+                }
+                
+                
+                if($("[name='qa_end_top']").get(0).files[0] == undefined && $("#endtop-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_end_top__default_flag", "1")
+                }else if($("[name='qa_end_top']").get(0).files[0] == undefined && $("#endtop-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_end_top__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_end_top", $("[name='qa_end_top']").get(0).files[0])
+                    formDataBox.append("qa_end_top__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_start_game_button']").get(0).files[0] == undefined && $("#hoststartgamebutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_start_game_button__default_flag", "1")
+                }else if($("[name='qa_host_start_game_button']").get(0).files[0] == undefined && $("#hoststartgamebutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_start_game_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_start_game_button", $("[name='qa_host_start_game_button']").get(0).files[0])
+                    formDataBox.append("qa_host_start_game_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_pause_countdown_button']").get(0).files[0] == undefined && $("#hostpausecountdownbutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_pause_countdown_button__default_flag", "1")
+                }else if($("[name='qa_host_pause_countdown_button']").get(0).files[0] == undefined && $("#hostpausecountdownbutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_pause_countdown_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_pause_countdown_button", $("[name='qa_host_pause_countdown_button']").get(0).files[0])
+                    formDataBox.append("qa_host_pause_countdown_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_continue_countdown_button']").get(0).files[0] == undefined && $("#hostcontinuecountdownbutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_continue_countdown_button__default_flag", "1")
+                }else if($("[name='qa_host_continue_countdown_button']").get(0).files[0] == undefined && $("#hostcontinuecountdownbutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_continue_countdown_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_continue_countdown_button", $("[name='qa_host_continue_countdown_button']").get(0).files[0])
+                    formDataBox.append("qa_host_continue_countdown_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_start_answer_button']").get(0).files[0] == undefined && $("#hoststartanswerbutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_start_answer_button__default_flag", "1")
+                }else if($("[name='qa_host_start_answer_button']").get(0).files[0] == undefined && $("#hoststartanswerbutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_start_answer_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_start_answer_button", $("[name='qa_host_start_answer_button']").get(0).files[0])
+                    formDataBox.append("qa_host_start_answer_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_see_answer_button']").get(0).files[0] == undefined && $("#hostseeanswerbutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_see_answer_button__default_flag", "1")
+                }else if($("[name='qa_host_see_answer_button']").get(0).files[0] == undefined && $("#hostseeanswerbutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_see_answer_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_see_answer_button", $("[name='qa_host_see_answer_button']").get(0).files[0])
+                    formDataBox.append("qa_host_see_answer_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_next_question_button']").get(0).files[0] == undefined && $("#hostnextquestionbutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_next_question_button__default_flag", "1")
+                }else if($("[name='qa_host_next_question_button']").get(0).files[0] == undefined && $("#hostnextquestionbutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_next_question_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_next_question_button", $("[name='qa_host_next_question_button']").get(0).files[0])
+                    formDataBox.append("qa_host_next_question_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_end_game_button']").get(0).files[0] == undefined && $("#hostendgamebutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_end_game_button__default_flag", "1")
+                }else if($("[name='qa_host_end_game_button']").get(0).files[0] == undefined && $("#hostendgamebutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_end_game_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_end_game_button", $("[name='qa_host_end_game_button']").get(0).files[0])
+                    formDataBox.append("qa_host_end_game_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_host_again_game_button']").get(0).files[0] == undefined && $("#hostagaingamebutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_host_again_game_button__default_flag", "1")
+                }else if($("[name='qa_host_again_game_button']").get(0).files[0] == undefined && $("#hostagaingamebutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_host_again_game_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_host_again_game_button", $("[name='qa_host_again_game_button']").get(0).files[0])
+                    formDataBox.append("qa_host_again_game_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_player_start_background']").get(0).files[0] == undefined && $("#playerstartbackground-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_player_start_background__default_flag", "1")
+                }else if($("[name='qa_player_start_background']").get(0).files[0] == undefined && $("#playerstartbackground-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_player_start_background__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_player_start_background", $("[name='qa_player_start_background']").get(0).files[0])
+                    formDataBox.append("qa_player_start_background__default_flag", "0")
+                }
+                
+                if($("[name='qa_player_game_background']").get(0).files[0] == undefined && $("#playergamebackground-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_player_game_background__default_flag", "1")
+                }else if($("[name='qa_player_game_background']").get(0).files[0] == undefined && $("#playergamebackground-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_player_game_background__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_player_game_background", $("[name='qa_player_game_background']").get(0).files[0])
+                    formDataBox.append("qa_player_game_background__default_flag", "0")
+                }
+                
+                if($("[name='qa_player_join_game_button']").get(0).files[0] == undefined && $("#playerjoingamebutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_player_join_game_button__default_flag", "1")
+                }else if($("[name='qa_player_join_game_button']").get(0).files[0] == undefined && $("#playerjoingamebutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_player_join_game_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_player_join_game_button", $("[name='qa_player_join_game_button']").get(0).files[0])
+                    formDataBox.append("qa_player_join_game_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_player_select_answer_button']").get(0).files[0] == undefined && $("#playerselectanswerbutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_player_select_answer_button__default_flag", "1")
+                }else if($("[name='qa_player_select_answer_button']").get(0).files[0] == undefined && $("#playerselectanswerbutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_player_select_answer_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_player_select_answer_button", $("[name='qa_player_select_answer_button']").get(0).files[0])
+                    formDataBox.append("qa_player_select_answer_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_player_confirm_answer_button']").get(0).files[0] == undefined && $("#playerconfirmanswerbutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_player_confirm_answer_button__default_flag", "1")
+                }else if($("[name='qa_player_confirm_answer_button']").get(0).files[0] == undefined && $("#playerconfirmanswerbutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_player_confirm_answer_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_player_confirm_answer_button", $("[name='qa_player_confirm_answer_button']").get(0).files[0])
+                    formDataBox.append("qa_player_confirm_answer_button__default_flag", "0")
+                }
+                
+                if($("[name='qa_player_confirm_status_button']").get(0).files[0] == undefined && $("#playerconfirmstatusbutton-image").attr("src").indexOf("system") !== -1){
+                    formDataBox.append("qa_player_confirm_status_button__default_flag", "1")
+                }else if($("[name='qa_player_confirm_status_button']").get(0).files[0] == undefined && $("#playerconfirmstatusbutton-image").attr("src").indexOf("system") === -1){
+                    formDataBox.append("qa_player_confirm_status_button__default_flag", "0")
+                }else{
+                    formDataBox.append("qa_player_confirm_status_button", $("[name='qa_player_confirm_status_button']").get(0).files[0])
+                    formDataBox.append("qa_player_confirm_status_button__default_flag", "0")
+                }
+                
+            }else{
+                formDataBox.append("qa_mascot__default_flag", "1")
+                formDataBox.append("qa_host_start_background__default_flag", "1")
+                formDataBox.append("qa_host_game_background__default_flag", "1")
+                formDataBox.append("qa_host_end_background__default_flag", "1")
+                formDataBox.append("qa_game_top_1__default_flag", "1")
+                formDataBox.append("qa_game_top_2__default_flag", "1")
+                formDataBox.append("qa_game_top_3__default_flag", "1")
+                formDataBox.append("qa_game_top_4__default_flag", "1")
+                formDataBox.append("qa_game_top_5__default_flag", "1")
+                formDataBox.append("qa_end_top_1__default_flag", "1")
+                formDataBox.append("qa_end_top_2__default_flag", "1")
+                formDataBox.append("qa_end_top_3__default_flag", "1")
+                formDataBox.append("qa_end_top__default_flag", "1")
+                formDataBox.append("qa_host_start_game_button__default_flag", "1")
+                formDataBox.append("qa_host_pause_countdown_button__default_flag", "1")
+                formDataBox.append("qa_host_continue_countdown_button__default_flag", "1")
+                formDataBox.append("qa_host_start_answer_button__default_flag", "1")
+                formDataBox.append("qa_host_see_answer_button__default_flag", "1")
+                formDataBox.append("qa_host_next_question_button__default_flag", "1")
+                formDataBox.append("qa_host_end_game_button__default_flag", "1")
+                formDataBox.append("qa_host_again_game_button__default_flag", "1")
+                formDataBox.append("qa_player_start_background__default_flag", "1")
+                formDataBox.append("qa_player_game_background__default_flag", "1")
+                formDataBox.append("qa_player_join_game_button__default_flag", "1")
+                formDataBox.append("qa_player_select_answer_button__default_flag", "1")
+                formDataBox.append("qa_player_confirm_answer_button__default_flag", "1")
+                formDataBox.append("qa_player_confirm_status_button__default_flag", "1")
+            }
+
+            for(let i = 0; i < 20; i++){
+                let index = i + 1
+                if(i < $("tbody").find("tr").length){
+                    formDataBox.append("qa_" + index, $("tbody").find(".edit-question-data")[i].dataset.bsQuestion)
+                    formDataBox.append("qa_" + index + "_options", $("tbody").find(".edit-question-data")[i].dataset.bsOptions)
+                    formDataBox.append("qa_" + index + "_answer", $("tbody").find(".edit-question-data")[i].dataset.bsAnswer)
+                    formDataBox.append("qa_" + index + "_score", Number($("tbody").find(".edit-question-data")[i].dataset.bsScore))
+                }
+            }
+
+            formDataBox.append("total_qa", $("tbody").find("tr").length)
+            formDataBox.append("token", "{{.Token}}")
+            
+            let settings = {
+                "url": "{{.Route.PUT}}",
+                "method": "PUT",
+                "timeout": 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "data": formDataBox,
+                "dataType": "json",
+                "success": function(data){
+                    $.get("/admin/interact/game/QA?activity_id={{.ActivityID}}", function(data){
+                        $("#main-content").html(data)
+                    })
+                },
+                "error": function(result){
+                    toastMsg(result.statusText, result.responseJSON.message)
+                    return
+                }
+            }
+
+            let maxPeople = Number($("input[name=people]").parents(".input-group-3").find("strong").text())
+            let currentPeople = Number($("input[name=people]").val())
+
+            const isSecond = $("input[name=limit_time]:checked").val()
+            let second = Number($("input[name=second]").val())
+            let qa_second = Number($("input[name=qa_second]").val())
+            
+            if(currentPeople > maxPeople){
+                Swal.fire({
+                    icon: "error",
+                    title: "目前的最大參與人數為 "+ maxPeople +" 人"
+                })
+            }else if(isSecond === "open" && second < 10){
+                Swal.fire({
+                    icon: "error",
+                    title: "答題限時秒數至少為大於10秒"
+                })
+            }else if(qa_second < 10){
+                Swal.fire({
+                    icon: "error",
+                    title: "題目顯示秒數至少為大於10秒"
+                })
+            }else if($("tbody").find(".edit-question-data").length == 0){
+                Swal.fire({
+                    icon: "error",
+                    title: "題目至少一題"
+                })
+            }else{
+                $.ajax(settings).done(function(response){
+                    Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 5000
+                    }).fire({
+                        icon: "success",
+                        title: "遊戲設置成功"
+                    })
+                }).fail(function(response){
+                    Swal.fire({
+                        title: "發生錯誤",
+                        text: response.responseJSON.message,
+                        icon: 'error',
+                        confirmButtonColor: '#3891a6'
+                    })
+                })
+            }
+        })
+
+    }
+
+    runRequestPage("#go-back-game-info", "{{.Route.Back}}", "#main-content")
+
+    //恢復預設圖片
+    returnDefaultPicture()
+    function returnDefaultPicture(){
+        $(".default-image-button").on("click", function () {
+            const thisGroup = $(this).parents(".inputs-group")
+            thisGroup.find("input[type='file']").val("")
+            thisGroup.find("input[type='hidden']").val("1")
+            thisGroup.find("img").attr("src", $(this).data("image"))
+
+            if(this.files && this.files[0]){
+                var reader = new FileReader()
+                reader.onload = function(e){
+                    thisGroup.find("img").attr("src", e.target.result)
+                }
+                reader.readAsDataURL(this.files[0])
+            }
+
+        })
+    }
+
+    //預覽上傳圖片
+    changePicturePreview()
+    function changePicturePreview(){
+        $("input[type='file']").on("change", function(){
+            const thisGroup = $(this).parents(".inputs-group")
+            thisGroup.find("input[type='hidden']").val("0")
+    
+            if(this.files && this.files[0]){
+                var reader = new FileReader()
+                reader.onload = function(e){
+                    thisGroup.find("img").attr("src", e.target.result)
+                }
+                reader.readAsDataURL(this.files[0])
+            }
+        })
+    }
+
+</script>

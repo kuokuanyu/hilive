@@ -1,0 +1,272 @@
+<div class="options-skin">
+    <h1 class="container-title">活動簽到管理</h1>
+    <details class="container-box" open>
+        <summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>簽到設置</h2>
+        </summary>
+        <div class="main-content">
+
+            <div class="mt-3 alert w-100">
+                <ol>
+                    <li>如果簽到流程無法正常執行時，請跟本公司聯絡，確認LINE官方帳號資料是否正確。</li>
+                    <li>如果想連接自己的LINE官方帳號進行報名簽到流程，請跟本公司聯絡，本公司會提供LINE官方帳號的設置教學並協助您進行連接設置。</li>
+                </ol>
+            </div>
+            <form class="form mb-2">
+                {{range $key, $data := .SettingFormInfo.FieldList}}
+                    {{if eq $data.Field "sign_check"}}
+                        <div class="py-md-1 one-line one-line-md">
+                            <label class="form-label">簽到審核</label>
+                            <div class="radio-button-box">
+                                <div class="radio-button">
+                                    <input type="radio" id="input-signCheck-open" name="{{$data.Field}}" value="open" {{if eq $data.Value "open"}} checked {{end}}>
+                                    <label for="input-signCheck-open">開啟</label>
+                                </div>
+                                <div class="radio-button">
+                                    <input type="radio" id="input-signCheck-close" name="{{$data.Field}}" value="close" {{if eq $data.Value "close"}} checked {{end}}>
+                                    <label for="input-signCheck-close">關閉</label>
+                                </div>
+                            </div>
+                        </div>
+                    {{else if eq $data.Field "sign_allow"}}
+                        <div class="py-md-1 one-line one-line-md">
+                            <label class="form-label">參加人即刻簽到</label>
+                            <div class="radio-button-box">
+                                <div class="radio-button">
+                                    <input type="radio" id="input-signAllow-open" name="{{$data.Field}}" value="open" {{if eq $data.Value "open"}} checked {{end}}>
+                                    <label for="input-signAllow-open">允許</label>
+                                </div>
+                                <div class="radio-button">
+                                    <input type="radio" id="input-signAllow-close" name="{{$data.Field}}" value="close" {{if eq $data.Value "close"}} checked {{end}}>
+                                    <label for="input-signAllow-close">拒絕</label>
+                                </div>
+                            </div>
+                        </div>
+                    {{else if eq $data.Field "sign_minutes"}}
+                        <div class="py-md-1 one-line flex-wrap">
+                            <label class="form-label">活動前</label>
+                            <input class="form-control" type="number" id="form-control" name="{{$data.Field}}" value="{{$data.Value}}" max="60" style="width: 5rem;">
+                            <label class="form-label">分鐘開放簽到</label>
+                        </div>
+                    {{end}}
+                {{end}}
+                <div class="d-flex flex-sm-row flex-column gap-2">
+                    <button class="btn btn-green save-data" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save2" viewBox="0 0 16 16">
+                            <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v4.5h2a.5.5 0 0 1 .354.854l-2.5 2.5a.5.5 0 0 1-.708 0l-2.5-2.5A.5.5 0 0 1 5.5 6.5h2V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+                        </svg>
+                        <p>儲存設置</p>
+                    </button>
+                    <button class="btn btn-blue show-QRcode" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-qr-code" viewBox="0 0 16 16">
+                            <path d="M2 2h2v2H2V2Z"/>
+                            <path d="M6 0v6H0V0h6ZM5 1H1v4h4V1ZM4 12H2v2h2v-2Z"/>
+                            <path d="M6 10v6H0v-6h6Zm-5 1v4h4v-4H1Zm11-9h2v2h-2V2Z"/>
+                            <path d="M10 0v6h6V0h-6Zm5 1v4h-4V1h4ZM8 1V0h1v2H8v2H7V1h1Zm0 5V4h1v2H8ZM6 8V7h1V6h1v2h1V7h5v1h-4v1H7V8H6Zm0 0v1H2V8H1v1H0V7h3v1h3Zm10 1h-1V7h1v2Zm-1 0h-1v2h2v-1h-1V9Zm-4 0h2v1h-1v1h-1V9Zm2 3v-1h-1v1h-1v1H9v1h3v-2h1Zm0 0h3v1h-2v1h-1v-2Zm-4-1v1h1v-2H7v1h2Z"/>
+                            <path d="M7 12h1v3h4v1H7v-4Zm9 2v2h-3v-1h2v-1h1Z"/>
+                        </svg>
+                        <p>下載簽到專用QRcode</p>
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </details>
+    <details class="container-box" open>
+        <summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>簽到人員資料</h2>
+        </summary>
+        <div class="main-content">
+
+            <p class="mt-3 fw-bold current-people-number" style="font-size: 0.875rem; line-height: 1;">目前簽到人數: <strong>0</strong>人</p>
+            <div class="search-content flex-column flex-lg-row w-100">
+                <div class="filter-input">
+                    <label class="form-label" for="sign-status">簽到狀態</label>
+                    <select name="sign_status" id="sign-status" class="form-select">
+                        <option value="all">全部</option>
+                        <option value="sign">已簽到</option>
+                        <option value="cancel">未簽到</option>
+                    </select>
+                </div>
+                <div class="filter-input">
+                    <label class="form-label" for="search-data-input">用戶搜尋</label>
+                    <div class="search-data-box">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="search-data-input" placeholder="請輸入用戶名稱" aria-describedby="search-data-button">
+                            <button class="btn btn-border-gray" type="button" id="search-data-button" style="border-top-right-radius: 0.25rem; border-bottom-right-radius: 0.25rem;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </button>
+                            <button class="btn btn-border-gray d-none" type="button" id="clear-search-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                  </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="toolbox">
+                <div class="d-flex flex-row flex-wrap align-items-center gap-2">
+                    <button class="btn btn-noborder" data-name="sign-select-data">
+                        <i class="bi bi-person-fill-check"></i>
+                        <p>已簽到</p>
+                    </button>
+                    <button class="btn btn-noborder" data-name="cancel-select-data">
+                        <i class="bi bi-person-fill-x"></i>
+                        <p>未簽到</p>
+                    </button>
+                </div>
+                <div class="d-flex flex-row flex-wrap align-items-center gap-2">
+                    <button class="btn btn-noborder" data-name="delete-select-data">
+                        <i class="bi bi-trash"></i>
+                        <p>刪除選取資料</p>
+                    </button>
+                    <button class="btn btn-noborder" data-name="download-data">
+                        <i class="bi bi-upload"></i>
+                        <p>資料匯出</p>
+                    </button>
+                </div>
+            </div>
+            <div class="data-view">
+                <div class="table" style="max-height: 37.5rem;" data-type="all">
+                    <div class="thead">
+                        <div class="tr">
+                            <div class="th check-th">
+                                <input class="form-check-input" type="checkbox" data-name="select-tr">
+                            </div>
+                            <div class="th index-th"><p>筆數</p></div>
+                            <div class="th title-th full"><p>參加人員</p>
+                                <i class="bi bi-arrow-down d-none"></i>
+                                <i class="bi bi-arrow-up d-none"></i>
+                            </div>
+                            <div class="th date-th"><p>簽到時間</p></div>
+                            <div class="th type-th"><p>簽到狀態</p></div>
+                            <div class="th type-th"><p>狀態備註</p></div>
+                            <div class="th control-th pin right-pin pin-sm sm-container"><p>操作</p></div>
+                        </div>
+                    </div>
+                    <div class="tbody"></div>
+                </div>
+            </div>
+            <div class="data-count"><p>總共有 <strong>0</strong> 筆資料</p></div>
+            <div class="page-box for-desktop">
+                <button class="btn btn-prev-page disabled" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                </button>
+                <div class="page-number-box d-flex flex-row align-items-end gap-1"></div>
+                <button class="btn btn-next-page" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="page-box for-phone">
+                <p>目前頁數</p>
+                <input id="page-input" class="form-control" type="number" min="1" max="1" value="1">
+                <span>/</span>
+                <p>總共<strong>1</strong>頁</p>
+            </div>
+
+        </div>
+    </details>
+</div>
+
+<div class="modal fade" id="userDataModal" tabindex="-1" aria-labelledby="userDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userDataModalLabel">詳細資料</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="fs-5 fw-bold title">簽到時間</div>
+                        <div class="fs-6 content text-black-50" data-name="signTime">無填寫</div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="fs-5 fw-bold title">簽到狀態</div>
+                        <div class="fs-6 content text-black-50" data-name="status">無填寫</div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="fs-5 fw-bold title">狀態備註</div>
+                        <div class="fs-6 content text-black-50" data-name="reason">無填寫</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-border-gray" data-name="sign-data" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-check fill-green" viewBox="0 0 16 16">
+                        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                        <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
+                    </svg>
+                    <p>已簽到</p>
+                </button>
+                <button class="btn btn-border-gray" data-name="cancel-data" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-x fill-red" viewBox="0 0 16 16">
+                        <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
+                        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708Z"/>
+                    </svg>
+                    <p>未簽到</p>
+                </button>
+                <button class="btn btn-border-gray" data-name="delete-data" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                    </svg>
+                    <p>刪除</p>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<template id="tr">
+    <div class="tr">
+        <div class="td check-td">
+            <input class="form-check-input" type="checkbox" data-name="select-tr">
+        </div>
+        <div class="td index-td" data-name="index" data-bs-toggle="modal" data-bs-target="#userDataModal"></div>
+        <div class="td title-td full">
+            <div class="group">
+                <div class="sm-square-image">
+                    <img src="/admin/uploads/system/img-user-pic.png" data-name="avatar">
+                </div>
+                <p data-name="name"></p>
+            </div>
+        </div>
+        <div class="td date-td" data-name="signTime"><p></p></div>
+        <div class="td type-td" data-name="status">
+            <span class="label"></span>
+        </div>
+        <div class="td type-td" data-name="reason"></div>
+        <div class="td control-td pin right-pin pin-sm sm-container">
+            <ul>
+                <li title="已簽到" data-name="sign-data"><i class="bi bi-person-fill-check"></i></li>
+                <li title="未簽到" data-name="cancel-data"><i class="bi bi-person-fill-x"></i></li>
+                <li title="刪除" data-name="delete-data"><i class="bi bi-trash"></i></li>
+            </ul>
+        </div>
+    </div>
+</template>
+
+<var class="variable d-none">
+    <var class="userID">{{.User.UserID}}</var>
+    <var class="token">{{.Token}}</var>
+    <var class="route-patch">{{.Route.PATCH}}</var>
+    <var class="route-put">{{.Route.PUT}}</var>
+    <var class="route-delete">{{.Route.DELETE}}</var>
+    <var class="route-export">{{.Route.Export}}</var>
+    <var class="route-applysign">{{.Route.ApplySign}}</var>
+    <var class="custom-data-json">{{.ApplysignCustomizeJSON}}</var>
+</var>

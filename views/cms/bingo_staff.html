@@ -1,0 +1,74 @@
+<div class="options-skin">
+    <h1 class="container-title">賓果遊戲 - 人員調整</h1>
+    <details class="container-box" open>
+        <summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>編輯賓果人員</h2>
+        </summary>
+        <div class="main-content">
+            <div class="alert w-100">
+                <p>如果遇到得獎人數大於設置的每輪發獎人數，此頁面能即時調整人員得獎的編制。</p>
+            </div>
+            <div class="search-content flex-column flex-lg-row w-100">
+                <div class="filter-input">
+                    <label class="form-label" for="game-round">遊戲輪次</label>
+                    <select name="game_round" id="game-round" class="form-select">
+                        <option value="all">全部</option>
+                    </select>
+                </div>
+            </div>
+            <div class="pb-3 d-flex flex-column flex-xxl-row align-items-center gap-3 w-100" style="overflow-x: auto;">
+                
+                <div class="team-info-box" data-name="prize-list">
+                    <div class="info-head">
+                        <div class="info-box">
+                            <p class="team-name">得獎名單</p>
+                        </div>
+                    </div>
+                    <div class="info-body"></div>
+                </div>
+                <div class="team-info-box" data-name="wait-list">
+                    <div class="info-head">
+                        <div class="info-box">
+                            <p class="team-name">備選名單</p>
+                        </div>
+                    </div>
+                    <div class="info-body"></div>
+                </div>
+
+            </div>
+        </div>
+    </details>
+    <div class="footer">
+        <a class="button button-border-blue" type="button" href="#bingo">返回場次資訊</a>
+    </div>
+</div>
+
+<template>
+    <div class="info-card">
+        <div class="profile-box">
+            <div class="avatar">
+                <img src="/admin/uploads/system/img-user-pic.png">
+            </div>
+            <p class="name"></p>
+        </div>
+        <div class="control-box">
+            <button class="btn btn-border-gray btn-sm change-team">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sign-turn-left" viewBox="0 0 16 16">
+                    <path d="M11 8.5A2.5 2.5 0 0 0 8.5 6H7V4.534a.25.25 0 0 0-.41-.192L4.23 6.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 7 8.466V7h1.5A1.5 1.5 0 0 1 10 8.5V11h1V8.5Z"/>
+                    <path fill-rule="evenodd" d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435Zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134Z"/>
+                </svg>
+                <p>更換到得獎名單</p>
+            </button>
+        </div>
+    </div>
+</template>
+
+<var class="variable d-none">
+    <var class="userID">{{.User.UserID}}</var>
+    <var class="token">{{.Token}}</var>
+    <var class="gameID">{{.GameID}}</var>
+    <var class="route-put">{{.Route.PUT}}</var>
+</var>

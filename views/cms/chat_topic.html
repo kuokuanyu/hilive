@@ -1,0 +1,54 @@
+<div class="options-skin">
+    <h1 class="container-title">主題背景區</h1>
+    <details class="container-box" open>
+        <summary class="toggle-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            <h2>基本設置</h2>
+        </summary>
+        <div class="main-content">
+
+            <div class="d-flex flex-wrap gap-3">
+
+                <div class="form-group">
+                    <label class="form-label">背景圖片</label>
+                    <p>檔案大小不可超過10MB</p>
+                    <div class="d-flex flex-sm-row flex-column align-items-start gap-2">
+                        <div class="background-view-img">
+                            <img src="/admin/uploads/system/img-topic-bg.jpg" alt="背景圖片">
+                        </div>
+                        <div class="d-flex flex-sm-column align-items-end gap-2">
+                            <label class="btn btn-green btn-sm" data-name="upload-background" for="topic_background">
+                                <i class="bi bi-image"></i>
+                                <p>上傳圖片</p>
+                            </label>
+                            <input class="d-none" id="topic_background" type="file" name="topic_background" accept="image/jpeg,image/png,image/gif,image/svg+xml">
+                            <input type="hidden" name="topic_background__default_flag" value="0">
+                            <button class="btn btn-border-gray btn-sm" data-name="default-image" data-image="/admin/uploads/system/img-topic-bg.jpg">
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                                <p>預設背景</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </details>
+    <div class="footer">
+        <button id="save-game-data" class="btn btn-blue" data-name="saveGameData">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save2" viewBox="0 0 16 16">
+                <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v4.5h2a.5.5 0 0 1 .354.854l-2.5 2.5a.5.5 0 0 1-.708 0l-2.5-2.5A.5.5 0 0 1 5.5 6.5h2V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+            </svg>
+            <p>儲存設置</p>
+        </button>
+    </div>
+</div>
+
+<var class="variable d-none">
+    <var class="userID">{{.User.UserID}}</var>
+    <var class="token">{{.Token}}</var>
+    <var class="route-patch">{{.Route.PATCH}}</var>
+</var>

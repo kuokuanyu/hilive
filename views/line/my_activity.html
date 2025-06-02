@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>活動查詢</title>
+
+        <!-- Jquery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        
+        <!-- Main style -->
+        <link href="/admin/assets/dist/css/main.css?ver=20220214" rel="stylesheet">
+        
+    </head>
+    <body>
+        <div class="p-10 d-flex flex-column align-items-center gap-5 header">
+            <div class="input">
+                <span class="text-white-color">活動狀態</span>
+                <select class="form-select search" name="event_status">
+                    <option value="all">顯示全部</option>
+                    <option value="Coming soon">籌備中</option>
+                    <option value="Open">進行中</option>
+                    <option value="End">已結束</option>
+                </select>
+            </div>
+            <div class="input">
+                <span class="text-white-color">報名狀態</span>
+                <select class="form-select search" name="sign_status">
+                    <option value="all">顯示全部</option>
+                    <option value="review">審核中</option>
+                    <option value="pass">已通過</option>
+                    <option value="fail">未通過</option>
+                </select>
+            </div>
+        </div>
+        <div class="p-10 d-flex flex-column gap-10 content event-box"></div>
+        <template id="info-card">
+            <div class="p-10 d-flex flex-column gap-5 event-simple-card">
+                <div class="subtitle event-time"></div>
+                <div class="d-flex justify-content-between">
+                    <div class="name event-name"></div>
+                    <div class="d-flex flex-column justify-content-center gap-5">
+                        <span class="badge event-status"></span>
+                        <span class="badge signup-status"></span>
+                    </div>
+                </div>
+                <div class="text current-people">已參加人數: <strong></strong>人</div>
+            </div>
+        </template>
+    </body>
+    <script>
+        let status_event = "all"
+        let status_sign = "all"
+        let activityData = []
+
+        const activityDataPromise = new Promise((resolve, reject) => {
+            const myDataUrl = "https://"+ getAPIDomainFromURL() +"/v1/applysign?user_id="+ getQueryVariable("user_id")
+            // const myDataUrl = "https://apidev.hilives.net/v1/applysign?user_id=U172765b72f9e72583cfcb25e9fd6605f"
+            fetch(myDataUrl).then(res => { return res.json() })
+            .then(resJson => {
+                pushMyData(resJson.data)
+            }).catch(function(error){
+                console.log(error)
+            })
+        })
+
+        activityDataPromise.then(myDataFinish())
+
+        function pushMyData(data){
+            $(data).each(function(i){
+                let index = {
+                    activity_id: data[i].activity_id,
+                    activity_name: data[i].activity_name,
+                    start_time: data[i].start_time,
+                    end_time: data[i].end_time,
+                    sign_status: data[i].status,
+                    user_id: data[i].user_id,
+                }
+                activityData.push(index)
+            })
+        }
+
+        function myDataFinish(){
+            const activityDataUrl = "https://"+ getAPIDomainFromURL() +"/v1/activity"
+            // const activityDataUrl = "https://apidev.hilives.net/v1/activity"
+            fetch(activityDataUrl).then(res => { return res.json() })
+            .then(resJson => {
+                pushActivityData(resJson.data)
+            }).then(function(){
+                loadData(activityData)
+            }).catch(function(error){
+                console.log(error)
+            })
+        }
+        
+        function pushActivityData(data){
+            const result = activityData.map((i) => {
+                const newArray = data.find((o) => i.activity_id === o.activity_id)
+                const index = {
+                    activity_id: newArray.activity_id,
+                    attend: newArray.attend,
+                }
+                return index
+            })
+
+            const mergedArray = result.reduce((acc, cur) => {
+                const matchingObject = activityData.find(obj => obj.activity_id === cur.activity_id)
+                if (matchingObject) {
+                    acc.push({...cur, ...matchingObject})
+                }
+                return acc
+            }, [])
+
+            activityData = mergedArray
+        }
+
+        function loadData(data){
+            const template = $("#info-card").html()
+            $(".event-box").empty()
+            $(data).each(function(i){
+                const container = $(template)
+                container.attr("data-id", data[i].activity_id)
+                container.find(".event-name").text(data[i].activity_name)
+                container.find(".event-time").text(data[i].start_time +" ~ "+ data[i].end_time)
+                container.find(".current-people > strong").text(data[i].attend)
+                $(".event-box").append(container)
+                eventStatus(data[i], container)
+                signStatus(data[i], container)
+                if(status_event !== "all"){
+                    if(container.data("event-status") !== status_event){
+                        if(status_event === "Coming soon"){
+                            $(".event-simple-card[data-event-status='Open']").remove()
+                            $(".event-simple-card[data-event-status='End']").remove()
+                        }else if(status_event === "Open"){
+                            $(".event-simple-card[data-event-status='Coming soon']").remove()
+                            $(".event-simple-card[data-event-status='End']").remove()
+                        }else if(status_event === "End"){
+                            $(".event-simple-card[data-event-status='Coming soon']").remove()
+                            $(".event-simple-card[data-event-status='Open']").remove()
+                        }
+                    }
+                }
+                if(status_sign !== "all"){
+                    if(container.data("signup-status") !== status_sign){
+                        if(status_sign === "review"){
+                            $(".event-simple-card[data-signup-status='pass']").remove()
+                            $(".event-simple-card[data-signup-status='fail']").remove()
+                        }else if(status_sign === "pass"){
+                            $(".event-simple-card[data-signup-status='review']").remove()
+                            $(".event-simple-card[data-signup-status='fail']").remove()
+                        }else if(status_sign === "fail"){
+                            $(".event-simple-card[data-signup-status='review']").remove()
+                            $(".event-simple-card[data-signup-status='pass']").remove()
+                        }
+                    }
+                }
+            }).promise().then(function(){
+                isGoin()
+            })
+        }
+
+        function eventStatus(eventData, container){
+            let today = new Date()
+                today = Date.parse(today)
+            const startTime = Date.parse(eventData.start_time)
+            const endTime = Date.parse(eventData.end_time)
+
+            if(today > endTime){
+                container.attr("data-event-status", "End")
+                container.find(".event-status").text("已結束")
+            }else if(today < startTime){
+                container.attr("data-event-status", "Coming soon")
+                container.find(".event-status").text("籌備中")
+            }else if(endTime > today && today > startTime){
+                container.attr("data-event-status", "Open")
+                container.find(".event-status").text("進行中")
+            }
+        }
+
+        function signStatus(eventData, container){
+            const status = eventData.sign_status
+            if(status === "apply"){
+                container.attr("data-signup-status", "pass")
+                container.find(".signup-status").text("已通過")
+            }else if(status === "review"){
+                container.attr("data-signup-status", "review")
+                container.find(".signup-status").text("審核中")
+            }else if(status === "refuse"){
+                container.attr("data-signup-status", "fail")
+                container.find(".signup-status").text("未通過")
+            }else if(status === "sign"){
+                container.attr("data-signup-status", "pass")
+                container.find(".signup-status").text("已簽到")
+            }else if(status === "not sign"){
+                container.attr("data-signup-status", "pass")
+                container.find(".signup-status").text("未簽到")
+            }else if(status === "cancel"){
+                container.attr("data-signup-status", "fail")
+                container.find(".signup-status").text("取消簽到")
+            }else{
+                container.attr("data-signup-status", "fail")
+                container.find(".signup-status").text("發生錯誤")
+            }
+        }
+
+        function isGoin(){
+            $(".event-simple-card").bind("click", function(e){
+                const eventStatus = $(e.currentTarget).data("event-status")
+                const signStatus = $(e.currentTarget).data("signup-status")
+                if(eventStatus === "Open"){
+                    location.href = "{{.Route.ApplySign}}" + $(e.currentTarget).data("id")
+                }else{
+                    alert("活動未開放")
+                }
+            })
+        }
+
+        filterActivityStatus()
+        function filterActivityStatus(){
+            $("[name=event_status]").bind("change", function(e){
+                status_event = $(e.target).val()
+                loadData(activityData)
+            })
+        }
+
+        filterSignStatus()
+        function filterSignStatus(){
+            $("[name=sign_status]").bind("change", function(e){
+                status_sign = $(e.target).val()
+                loadData(activityData)
+            })
+        }
+
+        function getAPIDomainFromURL(){
+            if(window.location.host.startsWith("dev")){
+                return "apidev.hilives.net"
+            }else{
+                return "api.hilives.net"
+            }
+        }
+
+        function getQueryVariable(variable){
+			var query = window.location.search.substring(1)
+			var vars = query.split("&")
+			for(var i = 0; i < vars.length; i++){
+				var pair = vars[i].split("=")
+				if(pair[0] == variable){
+					return pair[1]
+				}
+			}
+			return("")
+		}
+
+    </script>
+</html>

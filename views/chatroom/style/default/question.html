@@ -1,0 +1,623 @@
+<head>
+    <link href="/admin/assets/chatroom/style/default/css/activity-room.css?ver=HILIVES20240611" rel="stylesheet">
+</head>
+<script>
+    function getQueryVariable(variable){
+        var query = window.location.search.substring(1)
+        var vars = query.split("&")
+        for(var i = 0; i < vars.length; i++){
+            var pair = vars[i].split("=")
+            if(pair[0] == variable){
+                return pair[1]
+            }
+        }
+        return("")
+    }
+
+    if(window.location.search.substring(1).startsWith('activity_id')){
+        window.activityID = getQueryVariable("activity_id")
+    }else{
+        window.activityID = window.location.search.substring(29)
+    }
+
+</script>
+<div class="loading-content" data-name="question" style="z-index: 2;">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status"></div>
+    </div>
+    <h6>提問頁載入中...</h6>
+</div>
+<div class="content-header-skin-md">
+    <button class="back">
+        <i class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+        </i>
+        <span>返回選單</span>
+    </button>
+</div>
+<div id="question-page" class="info-skin">
+    <ul class="nav nav-pills page-select-block" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active page-select-button focus" id="all-question-button" data-bs-toggle="pill" data-bs-target="#all-question-block" type="button" role="tab" aria-controls="all-question-block" aria-selected="true">所有提問</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link page-select-button" id="my-question-button" data-bs-toggle="pill" data-bs-target="#my-question-block" type="button" role="tab" aria-controls="my-question-block" aria-selected="false">我的提問</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="question-tabContent">
+        <div class="tab-pane fade show active" id="all-question-block" role="tabpanel" aria-labelledby="all-question-tab">
+            
+            <div class="no-data-block">尚無互動資料</div>
+
+        </div>
+        <div class="tab-pane fade" id="my-question-block" role="tabpanel" aria-labelledby="my-question-tab">
+
+            <div class="no-data-block">尚無互動資料</div>
+
+        </div>
+    </div>
+    <div class="question-control-block">
+        <button id="have-a-question" class="button">
+            <div class="text">我要提問</div>
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 60.67"><path d="M49.61,50.43h-.27a2,2,0,0,0-2.1,2v.26a2.05,2.05,0,0,0,2.1,2h.27a2.05,2.05,0,0,0,2.1-2v-.26A2,2,0,0,0,49.61,50.43ZM71,19.67H29a10,10,0,0,0-10,10v28a10,10,0,0,0,10,10h6.12l-1.06,6.9a5,5,0,0,0,8,4.74L57.27,67.67H71a10,10,0,0,0,10-10v-28A10,10,0,0,0,71,19.67Zm5,38a5,5,0,0,1-5,5H55.58L39,75.33l2-12.66H29a5,5,0,0,1-5-5v-28a5,5,0,0,1,5-5H71a5,5,0,0,1,5,5ZM55.23,33.54a8.5,8.5,0,0,0-5.73-1.87A8.24,8.24,0,0,0,44,33.41a6.83,6.83,0,0,0-2.15,3.3,1.89,1.89,0,0,0,.26,1.66,2.11,2.11,0,0,0,1.51.88l.25,0a2.06,2.06,0,0,0,2-1.41A4.11,4.11,0,0,1,47,36a3.63,3.63,0,0,1,2.51-.88,3.68,3.68,0,0,1,2.63,1,2.93,2.93,0,0,1,1.07,2.24,2.36,2.36,0,0,1-.35,1.25,7.89,7.89,0,0,1-1.73,1.76,21.46,21.46,0,0,0-2.07,1.9,6.72,6.72,0,0,0-1.2,1.88,7.55,7.55,0,0,0-.51,2.9c0,.18,0,.45,0,.8a.64.64,0,0,0,.66.61h1.29a2.06,2.06,0,0,0,2.09-1.83,5.89,5.89,0,0,1,.15-.91,2.93,2.93,0,0,1,.51-1,12,12,0,0,1,1.68-1.58,12.89,12.89,0,0,0,2.84-3,5.59,5.59,0,0,0,.78-2.88A5.87,5.87,0,0,0,55.23,33.54Z" transform="translate(-19 -19.67)"/></svg>
+            </div>
+        </button>
+    </div>
+</div>
+<div id="question-textarea-block">
+    <div class="close-block">
+        <button class="button-close" type="button">關閉</button>
+    </div>
+    <div class="textarea-block">
+        <textarea class="question-textarea" placeholder="請輸入提問內容，限制100字內" name="question" data-type="question"></textarea>
+    </div>
+    <div class="control-block">
+        <button class="send-question-message" type="submit">送出</button>
+    </div>
+</div>
+<script>
+    $("#have-a-question").bind("click", function(){
+        $("#question-textarea-block").addClass("up")
+    })
+    $("#question-textarea-block").find(".button-close").bind("click", function(){
+        $("#question-textarea-block").removeClass("up")
+    })
+    $(".page-select-button").bind("click", function(){
+        $(".page-select-button").removeClass("focus")
+        $(this).addClass("focus")
+    })
+</script>
+<script>
+
+(function(){
+    
+    let chatCheckOptions = []
+    let chatSensitivity = []
+
+    let wsQuestionBlack
+    let wsQuestionBlackReconnect = false
+
+    let wsQuestion
+    let questionReconnect = false
+
+    let questionContent = ""
+    let hideName = "close"
+
+    let dataURL = "https://"+ getAPIDomainFromURL() +"/v1/activity?activity_id=" + window.activityID
+
+    fetch(dataURL)
+    .then((res) => res.json())
+    .then((res) => {
+        
+        const data = res.data
+        hideName = data.question_anonymous
+
+        loadedAll()
+
+    }).catch(function(error){
+        console.log(error)
+    })
+
+    function loadedAll(){
+        loadChatCheckData().then((res) => { chatCheckOptions = res })
+        loadSensitivityData().then((res) => { chatSensitivity = res })
+
+        // 載入黑名單資料
+        questionBlackWebSocket()
+
+        //連接WebSocket
+        questionWebSocket()
+
+        sendQuestion()
+    }
+
+    // 載入訊息審核參數
+    async function loadChatCheckData(){
+        let checkOptions = []
+        const url = "https://"+ selectLocalhostAPI() +"/v1/activity?activity_id="+ window.activityID
+        await fetch(url)
+        .then((res) => res.json())
+        .then((result) => {
+            let messageStatus = result.data.message_check_manual_check
+            let messageCheck = result.data.message_check_sensitivity
+            messageStatus === "open" ? messageStatus = "review" : messageStatus = "yes"
+            checkOptions.push({"status": messageStatus, "check": messageCheck})
+        })
+        .catch((error) => alertBox("無法讀取審核設置", "alert-black-question"))
+        return checkOptions[0]
+    }
+
+    // 載入敏感詞資料
+    async function loadSensitivityData(){
+        let words = []
+        const url = "https://"+ selectLocalhostAPI() +"/v1/interact/wall/message_sensitivity?activity_id="+ window.activityID
+        await fetch(url)
+        .then((res) => res.json())
+        .then((result) => {
+            words.push(result.data)
+        })
+        .catch((error) => alertBox("無法讀取敏感詞資料", "alert-black-question"))
+        return words[0]
+    }
+
+    //判斷網域
+    function selectLocalhostAPI(){
+        if(location.host === "event.hilives.net"){
+            return "api.hilives.net"
+        }else if(location.host === "dev.hilives.net"){
+            return "apidev.hilives.net"
+        }
+    }
+
+    //取得cookie的key值
+    function getCookie(name){
+        const value = `; ${document.cookie}`
+        const parts = value.split(`; ${name}=`)
+        if (parts.length === 2) return parts.pop().split(';').shift()
+    }
+
+    function questionBlackWebSocket(){
+        const url = "wss://"+ getAPIDomainFromURL() +"/ws/v1/black/staff?activity_id="+ getKeyFromURL("activity_id") +"&user_id="+ partySetting.userID +"&game=question"
+        
+        wsQuestionBlack = new WebSocket(url)
+
+        wsQuestionBlack.onopen = function(){
+            setTimeout(function(){
+                $(".loading-content[data-name=question]").addClass("d-none")
+            }, 2000)
+            console.log("wsQuestionBlack開啟")
+        }
+
+        wsQuestionBlack.onerror = function(){
+            $(".loading-content[data-name=question]").removeClass("d-none")
+            $(".loading-content[data-name=question]").find("h6").text("wsQuestionBlack錯誤，代碼: " + error.code, error.reason)
+        }
+
+        wsQuestionBlack.onclose = function(error){
+            console.log("wsQuestionBlack關閉，代碼: " + error.code, error.reason)
+
+            if(error.code !== 1000){
+                $(".loading-content[data-name=question]").removeClass("d-none")
+                $(".loading-content[data-name=question]").find("h6").text("wsQuestionBlack重新啟動中...")
+                reconnectQuestionBlackWebsocket()
+            }else{
+                console.log("wsQuestionBlack已正常關閉")
+            }
+        }
+
+        wsQuestionBlack.onmessage = function(e){
+            let data = JSON.parse(e.data)
+            isItBlack("alert-black-question", data["is_black"])
+        }
+
+    }
+
+    function reconnectQuestionBlackWebsocket(){
+        if(wsQuestionBlackReconnect){ return }
+        wsQuestionBlackReconnect = true
+        setTimeout(function(){
+            websocketChatBlackHeartbeat()
+            wsQuestionBlackReconnect = false
+        }, 2000)
+    }
+
+    function websocketQuestionBlackHeartbeat(){
+        try{
+            if("WebSocket" in window){
+                questionBlackWebSocket()
+            }else{
+                alert("很抱歉，您的裝置無法支援WebSocket相關功能。")
+            }
+        }catch(e){
+            reconnectQuestionBlackWebsocket()
+            alert("訊息連線發生異常，請重新整理網頁，如無法排除問題，請聯絡技術專員。")
+            console.log(e)
+        }
+    }
+
+    function reconnectQuestionBlackWebsocket(){
+        if(questionReconnect){ return }
+        questionReconnect = true
+        setTimeout(function(){
+            websocketQuestionHeartbeat()
+            questionReconnect = false
+        }, 2000)
+    }
+
+    function websocketQuestionHeartbeat(){
+        try{
+            if("WebSocket" in window){
+                questionWebSocket()
+            }else{
+                alert("很抱歉，您的裝置無法支援WebSocket相關功能。")
+            }
+        }catch(e){
+            reconnectQuestionBlackWebsocket()
+            alert("控制連線發生異常，請重新整理網頁，如無法排除問題，請聯絡技術專員。")
+            console.log(e)
+        }
+    }
+
+    function questionWebSocket(){
+        const url = "wss://" + selectLocalhostAPI() + "/ws/v1/guest/question?activity_id="+ window.activityID + "&session_id=" + getCookie("chatroom_session")
+        
+        wsQuestion = new WebSocket(url)
+
+        wsQuestion.onopen = function(){
+            setTimeout(function(){
+                $(".loading-content[data-name=question]").addClass("d-none")
+            }, 1000)
+            console.log("wsQuestion開啟")
+        }
+
+        wsQuestion.onerror = function(error){
+            $(".loading-content[data-name=question]").removeClass("d-none")
+            $(".loading-content[data-name=question]").find("h6").text("wsQuestion錯誤，代碼: " + error.code, error.reason)
+        }
+
+        wsQuestion.onclose = function(error){
+            console.log("wsQuestion關閉，代碼: " + error.code, error.reason)
+            
+            if(error.code !== 1000){
+                $(".loading-content[data-name=question]").removeClass("d-none")
+                $(".loading-content[data-name=question]").find("h6").text("wsQuestion重新啟動中...")
+                reconnectQuestionBlackWebsocket()
+            }else{
+                console.log("wsQuestion已正常關閉")
+            }
+        }
+
+        wsQuestion.onmessage = function(e){
+            let object = JSON.parse(e.data)
+            object.AllQuestions = object.Questions.filter(item => item.message_status === "yes")
+            object.UserQuestions = object.Questions.filter(item => item.user_id === partySetting.userID)
+            updateObject(object)
+        }
+
+    }
+
+    window.onbeforeunload = function(){
+        wsQuestion.close(1000)
+    }
+
+    //*------操作------*//
+
+    //判斷是否為新資料
+    function updateObject(object){
+
+        let allObjectLength = $(object.AllQuestions).length
+        let myObjectLength = $(object.UserQuestions).length
+        let allBoxLength = $("#all-question-block").find(".question-box").length
+        let myBoxLength = $("#my-question-block").find(".question-box").length
+
+        if(allObjectLength > allBoxLength){
+            addAllQuestionBox(object)
+            likeButtonToggle(object)
+            removeNoDataSign()
+        }else{
+            if(allObjectLength < allBoxLength){
+                addAllQuestionBox(object)
+                likeButtonToggle(object)
+            }else{
+                updateAllQuestionBox(object)
+            }
+        }
+        
+        if(myObjectLength > myBoxLength){
+            addMyQuestionBox(object)
+            likeButtonToggle(object)
+            removeNoDataSign()
+        }else{
+            updateMyQuestionBox(object)
+        }
+    }
+
+    //提問區塊結構
+    function questionBox(pic, txt, num, status){
+        var questionBox = `
+            <div class="question-box">
+                <div class="problem-block">
+                    <div class="avatar-block">
+                        <div class="avatar-box">
+                            <img src="${pic}">
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="message-status">${status}</div>
+                        <div class="describe-block">${txt}</div>
+                    </div>
+                </div>
+                <div class="control-block">
+                    <div class="like-button">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M96 191.1H32c-17.67 0-32 14.33-32 31.1v223.1c0 17.67 14.33 31.1 32 31.1h64c17.67 0 32-14.33 32-31.1V223.1C128 206.3 113.7 191.1 96 191.1zM512 227c0-36.89-30.05-66.92-66.97-66.92h-99.86C354.7 135.1 360 113.5 360 100.8c0-33.8-26.2-68.78-70.06-68.78c-46.61 0-59.36 32.44-69.61 58.5c-31.66 80.5-60.33 66.39-60.33 93.47c0 12.84 10.36 23.99 24.02 23.99c5.256 0 10.55-1.721 14.97-5.26c76.76-61.37 57.97-122.7 90.95-122.7c16.08 0 22.06 12.75 22.06 20.79c0 7.404-7.594 39.55-25.55 71.59c-2.046 3.646-3.066 7.686-3.066 11.72c0 13.92 11.43 23.1 24 23.1h137.6C455.5 208.1 464 216.6 464 227c0 9.809-7.766 18.03-17.67 18.71c-12.66 .8593-22.36 11.4-22.36 23.94c0 15.47 11.39 15.95 11.39 28.91c0 25.37-35.03 12.34-35.03 42.15c0 11.22 6.392 13.03 6.392 22.25c0 22.66-29.77 13.76-29.77 40.64c0 4.515 1.11 5.961 1.11 9.456c0 10.45-8.516 18.95-18.97 18.95h-52.53c-25.62 0-51.02-8.466-71.5-23.81l-36.66-27.51c-4.315-3.245-9.37-4.811-14.38-4.811c-13.85 0-24.03 11.38-24.03 24.04c0 7.287 3.312 14.42 9.596 19.13l36.67 27.52C235 468.1 270.6 480 306.6 480h52.53c35.33 0 64.36-27.49 66.8-62.2c17.77-12.23 28.83-32.51 28.83-54.83c0-3.046-.2187-6.107-.6406-9.122c17.84-12.15 29.28-32.58 29.28-55.28c0-5.311-.6406-10.54-1.875-15.64C499.9 270.1 512 250.2 512 227z"/></svg>
+                        </div>
+                        <div class="number">${num}</div>
+                    </div>
+                </div>
+            </div>
+        `
+        return questionBox
+    }
+
+    function messageStatusEnToZh(status){
+        if(status === "no"){
+            return "已封鎖訊息"
+        }else if(status === "review"){
+            return "審核中"
+        }
+    }
+
+    //增加提問區塊至所有提問
+    function addAllQuestionBox(object){
+        $("#all-question-block").empty()
+
+        $(object.AllQuestions).each(function(e){
+            const thisObject = $(object.AllQuestions).get(e)
+            if(hideName === "close"){
+                const template = questionBox(thisObject.avatar, thisObject.message, thisObject.likes, messageStatusEnToZh(thisObject.message_status))
+                const box = $(template)
+                $(box).attr("data-id", thisObject.id)
+                if(thisObject.message_status === "yes"){
+                    $(box).find(".message-status").remove()
+                }
+                $(object.LikesRecords).each(function(i){
+                    const likeId = $(object.LikesRecords).get(i).question_id
+                    if(likeId === thisObject.id){
+                        $(box).find(".like-button").addClass("like")
+                    }
+                }).promise().done(function(){
+                    $("#all-question-block").append(box)
+                })
+            }else{
+                const template = questionBox("/admin/assets/dist/img/default-avatar.png", thisObject.message, thisObject.likes, messageStatusEnToZh(thisObject.message_status))
+                const box = $(template)
+                $(box).attr("data-id", thisObject.id)
+                if(thisObject.message_status === "yes"){
+                    $(box).find(".message-status").remove()
+                }
+                $(object.LikesRecords).each(function(i){
+                    const likeId = $(object.LikesRecords).get(i).question_id
+                    if(likeId === thisObject.id){
+                        $(box).find(".like-button").addClass("like")
+                    }
+                }).promise().done(function(){
+                    $("#all-question-block").append(box)
+                })
+            }
+        })
+        
+    }
+
+    //增加提問區塊至我的提問
+    function addMyQuestionBox(object){
+        $("#my-question-block").empty()
+        $(object.UserQuestions).each(function(i){
+            const thisObject = $(object.UserQuestions).get(i)
+            if(hideName === "close"){
+                const template = questionBox(thisObject.avatar, thisObject.message, thisObject.likes, messageStatusEnToZh(thisObject.message_status))
+                const box = $(template)
+                $(box).attr("data-id", thisObject.id)
+                if(thisObject.message_status === "yes"){
+                    $(box).find(".message-status").remove()
+                }
+                $(object.LikesRecords).each(function(i){
+                    const likeId = $(object.LikesRecords).get(i).question_id
+                    if(likeId === thisObject.id){
+                        $(box).find(".like-button").addClass("like")
+                    }
+                }).promise().done(function(){
+                    $("#my-question-block").append(box)
+                })
+
+            }else{
+                const template = questionBox("/admin/assets/dist/img/default-avatar.png", thisObject.message, thisObject.likes, messageStatusEnToZh(thisObject.message_status))
+                const box = $(template)
+                $(box).attr("data-id", thisObject.id)
+                if(thisObject.message_status === "yes"){
+                    $(box).find(".message-status").remove()
+                }
+                $(object.LikesRecords).each(function(i){
+                    const likeId = $(object.LikesRecords).get(i).question_id
+                    if(likeId === thisObject.id){
+                        $(box).find(".like-button").addClass("like")
+                    }
+                }).promise().done(function(){
+                    $("#my-question-block").append(box)
+                })
+            }
+        })
+    }
+
+    //更新提問區塊至所有提問
+    function updateAllQuestionBox(object){
+        $(object.AllQuestions).each((i, subArr) => {
+            let questionId = subArr.id
+            const box = $("#all-question-block").find(".question-box[data-id='"+ questionId +"']")
+
+            box.find(".like-button").find(".number").html(subArr.likes)
+            box.find(".like-button").removeClass("like")
+
+            $(object.LikesRecords).each((i2, subArr2) => {
+                let likeId = subArr2.question_id
+                if(likeId === questionId){
+                    box.find(".like-button").addClass("like")
+                }
+            })
+        })
+    }
+
+    //更新提問區塊至我的提問
+    function updateMyQuestionBox(object){
+        $(object.UserQuestions).each((i, subArr) => {
+            let questionId = subArr.id
+            $("#my-question-block").find(".question-box").eq(i).attr("data-id", questionId)
+            const box = $("#my-question-block").find(".question-box[data-id='"+ questionId +"']")
+            if(subArr.message_status === "yes"){
+                box.find(".message-status").remove()
+            } else if (subArr.message_status === "no") {
+                if(box.find(".message-status").length === 0){
+                    let li = $("<div class='message-status'></div>")
+                    box.find(".content").prepend(li)
+                }
+                box.find(".message-status").text("已封鎖訊息")
+            } else if (subArr.message_status === "review") {
+                if(box.find(".message-status").length === 0){
+                    let li = $("<div class='message-status'></div>")
+                    box.find(".content").prepend(li)
+                }
+                box.find(".message-status").text("審核中")
+            }
+            
+            box.find(".like-button").find(".number").html(subArr.likes)
+            box.find(".like-button").removeClass("like")
+
+            $(object.LikesRecords).each((i2, subArr2) => {
+                let likeId = subArr2.question_id
+                if(likeId === questionId){
+                    box.find(".like-button").addClass("like")
+                }
+            })
+        })
+    }
+
+    //移除"尚無資料"訊息
+    function removeNoDataSign(){
+        if($("#all-question-block").find(".no-data-block").length > 0){
+            $("#all-question-block").find(".no-data-block").remove()
+        }
+        if($("#my-question-block").find(".no-data-block").length > 0){
+            $("#my-question-block").find(".no-data-block").remove()
+        }
+    }
+
+    //發送訊息
+    function sendQuestion(){
+        $(".send-question-message").unbind("click").bind("click", function(){
+            if("{{.IsBlack}}" === "false"){
+                questionContent = $(".question-textarea").val()
+                questionContent = $.trim(questionContent)
+                chatNewContentData()
+                if(questionContent !== "" && questionContent.length <= 100){
+
+                    if(chatCheckOptions.status === "review"){
+                        wsQuestion.send(JSON.stringify({
+                            action: "question",
+                            message: questionContent,
+                            message_status: "review"
+                        }))
+                    }else{
+                        wsQuestion.send(JSON.stringify({
+                            action: "question",
+                            message: questionContent,
+                            message_status: "yes"
+                        }))
+                    }
+                    
+                    // $("#all-question-block").remove($(".question-box"))
+                    // renderQuestionToHtml(questionContent)
+
+                    $(".question-textarea").val("")
+                    $("#question-tabContent").scrollTop(0)
+                    removeNoDataSign()
+                    $("#question-textarea-block").removeClass("up")
+
+                }else{
+                    alert("格式錯誤，請注意是否 已填寫問題 或 超過100個字")
+                }
+            }else if("{{.IsBlack}}" === "true"){
+                const alertBox = `
+                    <div class="alert-block">
+                        <div class="alert-box">
+                            <div class="alert-text">您已被設為黑名單，暫停發言</div>
+                            <div class="close">確定</div>
+                        </div>
+                    </div>
+                `
+                $(".main-content").append(alertBox)
+                $(".alert-block").find(".close").bind("click", function(){
+                    $(".alert-block").remove()
+                })
+            }
+        })
+    }
+    
+    //點擊like事件
+    function likeButtonToggle(object){
+        $(".like-button").unbind("click").bind("click", function(e){
+            var box = $(this).parents(".question-box")
+            var boxID = box.data("id")
+
+            if($(this).hasClass("like")){
+                var likeValue = parseInt(e.currentTarget.innerText) - 1
+                $(e.currentTarget.children[1]).text(likeValue)
+                wsQuestion.send(JSON.stringify({
+                    id: boxID,
+                    action: "unlike"
+                }))
+                $(this).removeClass("like")
+            }else{
+                var likeValue = parseInt(e.currentTarget.innerText) + 1
+                $(e.currentTarget.children[1]).text(likeValue)
+                wsQuestion.send(JSON.stringify({
+                    id: boxID,
+                    action: "like"
+                }))
+                $(this).addClass("like")
+            }
+        })
+    }
+
+    //增加提問區塊
+    function renderQuestionToHtml(text){
+        var box = questionBox("/admin/assets/dist/img/default-avatar.png", text, 0, "審核中")
+        $("#all-question-block").prepend(box)
+        $("#my-question-block").prepend(box)
+        likeButtonToggle()
+    }
+
+    //處理敏感詞訊息內容
+    function chatNewContentData(){
+        return new Promise(function(resolve, reject){
+            if(chatCheckOptions.check === "replace"){
+                chatSensitivity.forEach((item) => {
+                    questionContent = questionContent.replaceAll(item.sensitivity_word, item.replace_word)
+                })
+                resolve(questionContent)
+            }else if(chatCheckOptions.check === "refuse"){
+                chatSensitivity.forEach((item) => {
+                    // if(questionContent.includes(item.sensitivity_word)){
+                    //     alert("訊息內容有敏感字眼: " + item.sensitivity_word + "，請替換別的文字。")
+                    // }
+                    questionContent = questionContent.replaceAll(item.sensitivity_word, "")
+                })
+            }
+        })
+    }
+
+})()
+
+</script>

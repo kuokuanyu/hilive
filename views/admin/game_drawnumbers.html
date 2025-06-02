@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>進階管理設置</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="/admin/assets/dist/js/all.js"></script>
+
+    <link rel="stylesheet" href="/admin/assets/dist/css/all.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="main-header">
+            <a class="logo" href="/admin">
+                <div class="logo-mini">
+                    <img src="/admin/assets/dist/favicon.svg" alt="Hi" />
+                </div>
+                <div class="logo-lg">
+                    <img src="/admin/assets/dist/logo.svg" alt="HiLives" />
+                </div>
+            </a>
+            <nav class="navbar">
+                <div id="headernav">
+                    <div class="navbar-menu">
+                        <ul class="navbar-nav">
+                            <li>
+                                <a href="https://hilives.net/" target="_blank">
+                                    <i class="bi bi-briefcase"></i>
+                                    <span>宣傳網站</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/activity?header=true">
+                                    <i class="bi bi-balloon"></i>
+                                    <span>活動管理平台</span>
+                                </a>
+                            </li>
+                            <li class="dropdown user user-menu">
+                                <a class="dropdown-toggle" href="#">
+                                    <div class="avatar-box">
+                                        <img src="{{.User.Avatar}}" alt="User Image" />
+                                    </div>
+                                    <span>{{.User.Name}}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="user-header">
+                                        <div class="avatar-box">
+                                            <img src="{{.User.Avatar}}" alt="User Image" />
+                                        </div>
+                                        <p>
+                                            {{.User.Name}}
+                                            <small>開發人員</small>
+                                        </p>
+                                    </li>
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a class="btn-flat" href="">設定</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a class="btn-flat" href="{{.Route.Logout}}">登出</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="not-open">
+                        <a href="/admin/dashboard">
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                            <span> Hilives數據表</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                    <li class="treeview active">
+                        <a href="#">
+                            <i class="bi bi-gear-fill"></i>
+                            <span> 用戶權限管理</span>
+                            <span class="pull-right-container">
+                                <i class="bi bi-chevron-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu menu-open">
+                            <li class="active">
+                                <a href="/admin/manager">
+                                    <i class="bi bi-people-fill"></i>
+                                    用戶管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/permission">
+                                    <i class="bi bi-shield-lock-fill"></i>
+                                    權限管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/menu">
+                                    <i class="bi bi-menu-button-wide-fill"></i>
+                                    側邊選單管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/overview">
+                                    <i class="bi bi-layout-wtf"></i>
+                                    活動總覽管理
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/log">
+                            <i class="bi bi-clipboard2-data-fill"></i>
+                            <span> Log日誌紀錄</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                    <li class="not-open">
+                        <a href="/admin/file">
+                            <i class="bi bi-file-earmark-medical-fill"></i>
+                            <span> 檔案管理</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+        <div class="content-wrapper">
+            <section class="content-header">
+                <div>
+                    <ol class="breadcrumb">
+                        <li>首頁</li>
+                        <li>用戶權限管理</li>
+                        <li>HiLives用戶</li>
+                        <li>用戶活動列表</li>
+                        <li>用戶遊戲列表</li>
+                    </ol>
+                </div>
+                <h4>
+                    用戶遊戲管理
+                    <small>用戶遊戲管理</small>
+                </h4>
+            </section>
+            <section class="content">
+                <div class="main-container-content">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">搖號抽獎資訊</h3>
+                            <div class="btn-group pull-right">
+                                <a class="back-page" href="#">返回</a>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table id="member-table" class="table">
+                                <tr>
+                                    <th>用戶名稱</th>
+                                    <th>遊戲最大人數上限</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="btn-group">
+                                <a class="btn btn-primary btn-sm add-data" href="{{.Route.New}}">新增遊戲場次</a>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table id="gamelist-table" class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>場次名稱</th>
+                                        <th>公布中獎名單倒數功能</th>
+                                        <th>公布中獎名單倒數時間</th>
+                                        <th>是否重複中獎</th>
+                                        <th>中獎人員姓名頭像</th>
+                                        <th>主題樣式</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+<script>
+
+    fetch("https://"+ getAPIDomainFromURL() +"/v1/activity?activity_id=" + getKeyFromURL("activity_id")).then(function(res){
+        return res.json()
+    }).then(function(res){
+        loadMenberData(res.data)
+    })
+
+    function loadMenberData(data){
+        const template = `
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        `
+        const container = $(template)
+        const memberData = data
+        container.find("td").eq(0).text(memberData.name)
+        container.find("td").eq(1).text(memberData.max_game_people)
+        $("#member-table").find("tbody").append(container)
+    }
+
+    let game_api = "https://"+ getAPIDomainFromURL() +"/v1/interact/game?activity_id=" + getKeyFromURL("activity_id") + "&game=draw_numbers"
+
+    fetch(game_api).then(function(res){
+        return res.json()
+    }).then(function(res){
+        loadGamelistData(res.data)
+    }).then(() => {
+        editFunction()
+        deleteFunction()
+    })
+
+    function loadGamelistData(data){
+        const template = `
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a class="edit-data">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a class="delete-data">
+                        <i class="bi bi-trash3"></i>
+                    </a>
+                </td>
+            </tr>
+        `
+        $(data).each(function(i){
+            const container = $(template)
+            container.attr("data-id", data[i].game_id)
+            container.find("td").eq(0).text(data[i].title)
+            container.find("td").eq(1).text(data[i].limit_time)
+            container.find("td").eq(2).text(data[i].second)
+            container.find("td").eq(3).text(data[i].allow)
+            container.find("td").eq(4).text(data[i].display_name)
+            container.find("td").eq(5).text(data[i].topic)
+            $("#gamelist-table").find("tbody").append(container)
+        })
+    }
+
+    function editFunction(){
+        $(".edit-data").bind("click", function(){
+            let parent = $(this).parents("tr")
+            location.replace("{{.Route.Edit}}" + parent.data("id"))
+        })
+    }
+
+    function deleteFunction(){
+        $(".delete-data").bind("click", function(){
+
+            Swal.fire({
+                title: "確定要刪除此遊戲場次嗎?",
+                showCancelButton: true,
+                confirmButtonText: "刪除",
+                cancelButtonText: "取消",
+                confirmButtonColor: "#3891a6"
+            }).then((result) => {
+                if(result.isConfirmed){
+                    let parent = $(this).parents("tr")
+                    let formDataBox = new FormData()
+                    formDataBox.append("id", parent.data("id"))
+                    formDataBox.append("user", getKeyFromURL("user_id"))
+                    formDataBox.append("user_id", "{{.User.UserID}}")
+                    formDataBox.append("activity_id", getKeyFromURL("activity_id"))
+                    formDataBox.append("token", "{{.Token}}")
+
+                    let settings = {
+                        "url": "{{.Route.DELETE}}",
+                        "method": "DELETE",
+                        "timeout": 0,
+                        "processData": false,
+                        "mimeType": "multipart/form-data",
+                        "contentType": false,
+                        "data": formDataBox,
+                        "dataType": "json",
+                        "success": function(data){
+                            Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 2000
+                            }).fire({
+                                icon: "success",
+                                title: "此遊戲場次已刪除"
+                            })
+                            parent.remove()
+                        },
+                        "error": function(result){
+                            console.log(result)
+                            Swal.fire({
+                                text: result.responseText,
+                                icon: result.statusText,
+                                confirmButtonColor: '#3891a6'
+                            })
+                            return
+                        }
+                    }
+
+                    $.ajax(settings).done(function(e){})
+                }
+            })
+            
+        })
+    }
+
+</script>
+<script>
+    $(".back-page").bind("click", function(){
+        location.replace("/admin/manager/activity/game?user_id="+ getKeyFromURL("user_id") +"&activity_id="+ getKeyFromURL("activity_id"))
+    })
+</script>
+</html>

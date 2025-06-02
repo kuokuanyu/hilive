@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="James">
+    <title>HILIVES 活動管理平台</title>
+    <link rel="icon" type="image/x-icon" href="/admin/assets/website/lib/favicon.svg">
+
+    <link rel="canonical" href="https://event.hilives.net" />
+    
+    <link href="/admin/assets/cms/css/cms.css?ver=HILIVES1.0.5-20240105" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="login-background text-center">
+        <div class="hexagon-bubble">
+            <div class="hexagon"></div>
+            <div class="hexagon"></div>
+            <div class="hexagon"></div>
+            <div class="hexagon"></div>
+            <div class="hexagon"></div>
+            <div class="hexagon"></div>
+            <div class="hexagon"></div>
+            <div class="hexagon"></div>
+        </div>
+        <main class="p-5 d-flex flex-column justify-content-start justify-content-sm-center align-items-center h-100">
+            <div class="login-skin">
+                <img class="login-logo" src="/admin/assets/dist/logo/logo.svg">
+                <div id="login-skin" class="skin d-flex flex-column">
+                    <h1 class="h4 fw-bold">HILIVES 活動管理平台</h1>
+                    <hr class="mb-4">
+                    <!-- <div id="coming-skin" class="flex-column mb-4">
+                        <h2 class="mt-1 mb-3 text-orange fw-bolder">維護公告</h2>
+                        <h6 class="mb-0 h6 text-gray">預計維護時間</h6>
+                        <p class="fs-5 text-green">2024年3月22日 上午9:00 ~ 下午18:00</p>
+                        <p class="mb-0 text-gray">目前僅開放給<strong>測試人員</strong>進入<br>造成不便請見諒</p>
+                    </div> -->
+                    <form id="login-form" class="d-flex flex-column gap-4" novalidate>
+                        <div class="d-flex flex-column gap-2">
+                            <div class="login-input-icon-group">
+                                <label for="login-phone"><i class="bi bi-telephone"></i></label>
+                                <input type="text" class="form-control" id="login-phone" name="phone_number" placeholder="請輸入手機號碼" pattern="^09\\d{8}$" autocomplete="username" required>
+                            </div>
+                            <div class="login-input-icon-group">
+                                <label for="login-password"><i class="bi bi-lock"></i></label>
+                                <input type="password" class="form-control" id="login-password" name="password" placeholder="請輸入登入密碼" autocomplete="current-password" required>
+                                <div class="btn-see-password">
+                                    <i class="bi bi-eye"></i>
+                                </div>
+                            </div>
+                            <p class="invalid-text">手機號碼 或 密碼 有輸入錯誤</p>
+                        </div>
+                        <button type="button" class="btn btn-blue" data-bs-toggle="modal" data-bs-target="#updateModal"><p>更新訊息</p></button>
+                        <div class="d-flex flex-column gap-2">
+                            <button class="btn btn-green btn-enter-system" type="button">
+                                <p>登入</p>
+                            </button>
+                            <button class="btn btn-orange btn-open-signSkin" type="button">
+                                <p>註冊</p>
+                            </button>
+                        </div>
+                        <p class="muted-text">
+                            忘記密碼了嗎? <a class="btn-open-passwordSkin">請點擊這裡</a>
+                        </p>
+                    </form>
+                </div>
+                <div id="sign-skin" class="skin d-none flex-column">
+                    <h1 class="h4 fw-bold">註冊</h1>
+                    <hr class="mb-4">
+                    <p class="muted-text mb-4 text-start">請確認您所填寫的資料，所有欄位皆為必填，填寫成功後，系統將會跳轉至認證頁面。</p>
+                    <form id="sign-form" class="d-flex flex-column gap-4" novalidate>
+                        <div class="d-flex flex-column gap-2">
+                            <div class="login-input-icon-group">
+                                <label for="sign-name"><i class="bi bi-person"></i></label>
+                                <input type="text" class="form-control" id="sign-name" name="name" placeholder="請輸入使用者名稱" autocomplete="off" maxlength="20" required>
+                            </div>
+                            <div class="login-input-icon-group">
+                                <label for="sign-phone"><i class="bi bi-telephone"></i></label>
+                                <input type="text" class="form-control" id="sign-phone" name="phone" placeholder="請輸入手機號碼" autocomplete="off" maxlength="10" pattern="^09\\d{8}$" required>
+                            </div>
+                            <div class="login-input-icon-group">
+                                <label for="sign-email"><i class="bi bi-envelope"></i></label>
+                                <input type="email" class="form-control" id="sign-email" name="email" placeholder="請輸入電子信箱" autocomplete="off" required>
+                            </div>
+                            <div class="login-input-icon-group">
+                                <label for="sign-password"><i class="bi bi-lock"></i></label>
+                                <input type="password" class="form-control" id="sign-password" name="password" placeholder="請輸入登入密碼" autocomplete="off" required>
+                            </div>
+                            <div class="login-input-icon-group">
+                                <label for="sign-password-again"><i class="bi bi-lock-fill"></i></label>
+                                <input type="password" class="form-control" id="sign-password-again" name="password_again" placeholder="請再次輸入登入密碼" autocomplete="off" required>
+                            </div>
+                            <p class="invalid-text"></p>
+                            <p class="valid-text text-start"></p>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-gray btn-back-loginSkin" type="button"><p>返回</p></button>
+                            <button class="btn btn-green btn-send-sign" type="submit"><p>確定</p></button>
+                        </div>
+                    </form>
+                </div>
+                <div id="password-skin" class="skin d-none flex-column">
+                    <h1 class="h4 fw-bold">忘記密碼</h1>
+                    <hr class="mb-4">
+                    <p class="muted-text mb-4 text-start">請輸入當時註冊的手機號碼與電子信箱，填寫成功後，系統將會跳轉至認證頁面。</p>
+                    <form id="password-form" class="d-flex flex-column gap-4" novalidate>
+                        <div class="d-flex flex-column gap-2">
+                            <div class="login-input-icon-group">
+                                <label for="password-phone"><i class="bi bi-telephone"></i></label>
+                                <input type="text" class="form-control" id="password-phone" name="phone" placeholder="請輸入手機號碼" pattern="^09\\d{8}$" autocomplete="off" required>
+                            </div>
+                            <div class="login-input-icon-group">
+                                <label for="password-email"><i class="bi bi-envelope"></i></label>
+                                <input type="email" class="form-control" id="password-email" name="email" placeholder="請輸入電子信箱" autocomplete="off" required>
+                            </div>
+                            <p class="invalid-text"></p>
+                            <p class="valid-text text-start"></p>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-gray btn-back-loginSkin" type="button"><p>返回</p></button>
+                            <button class="btn btn-green btn-send-password" type="button">確定</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="sign-password-skin" class="skin d-none flex-column">
+                    <h1 class="h4 fw-bold">修改密碼</h1>
+                    <hr class="mb-4">
+                    <p class="muted-text mb-4 text-start">請輸入登入密碼，以及記住您的密碼。</p>
+                    <form id="sign-password-form" class="d-flex flex-column gap-4" novalidate>
+                        <div class="d-flex flex-column gap-2">
+                            <div class="login-input-icon-group">
+                                <label for="password-password"><i class="bi bi-lock"></i></label>
+                                <input type="password" class="form-control" id="password-password" name="password" placeholder="請輸入登入密碼" autocomplete="off" required>
+                            </div>
+                            <div class="login-input-icon-group">
+                                <label for="password-password-again"><i class="bi bi-lock-fill"></i></label>
+                                <input type="password" class="form-control" id="password-password-again" name="password_again" placeholder="請再次輸入登入密碼" autocomplete="off" required>
+                            </div>
+                            <p class="invalid-text"></p>
+                            <p class="valid-text text-start"></p>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-gray btn-back-loginSkin" type="button"><p>返回</p></button>
+                            <button class="btn btn-green btn-send-sign-password" type="button">確定</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="verification-skin" class="skin d-none flex-column">
+                    <h1 class="h4 fw-bold">驗證碼認證</h1>
+                    <hr class="mb-4">
+                    <p class="muted-text mb-4 text-start">請先點擊取得驗證碼，驗證碼簡訊將會發送至您註冊的手機裡。</p>
+                    <form id="code-form" class="d-flex flex-column gap-4" novalidate>
+                        <div class="d-flex flex-column gap-2">
+                            <div class="login-input-icon-group">
+                                <label for="verification-code"><i class="bi bi-key"></i></label>
+                                <input type="text" class="form-control" id="verification-code" name="code" placeholder="請輸入驗證碼" required>
+                            </div>
+                            <p class="invalid-text"></p>
+                            <p class="valid-text text-start"></p>
+                        </div>
+                        <div class="d-flex flex-column gap-2">
+                            <button class="btn btn-blue btn-get-code" type="button">
+                                <p>取得驗證碼</p>
+                                <span class="badge"><strong>300</strong>秒</span>
+                            </button>
+                            <button class="btn btn-green btn-send-code" type="button">
+                                <p>確認送出</p>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div id="update-skin" class="skin d-none flex-column">
+                    <h1 class="h4 fw-bold">維修訊息</h1>
+                    <hr class="mb-4">
+                    <div class="d-flex flex-column gap-4 update-content">
+                        <div class="text-start">
+                            <!-- <h2 class="h6 text-gray">預計維修時間</h2> -->
+                            <!-- <p class="fs-5 text-green mb-0">2023年06月30日</p> -->
+                            <!-- <h2 class="h6 text-gray">7月1日 - 更新內容</h2> -->
+                            <h2 class="h6 text-gray">8月4日 - 更新內容</h2>
+                        </div>
+                        <div class="text-start">
+                            <!-- <h2 class="h6 text-gray">預計更新內容</h2> -->
+                            <h2 class="mb-2 h6 text-gray">新增功能</h2>
+                            <ol class="mb-4">
+                                <!-- <li>搖紅包新增櫻花主題風格音樂，以及自訂義音樂設置</li>
+                                <li>管理人員頁面新增中獎名單匯出功能</li>
+                                <li>快問快答的題目可使用Excel檔匯入題目設置</li>
+                                <li>新增LINE官方帳號(hilives)圖文選單功能</li>
+                                <li>遠端遙控活動大螢幕分頁的功能</li>
+                                <li>活動表單頁面的LINE官方帳號設置</li>
+                                <li>管理平台Log日誌系統</li> -->
+                                <li>報名簽到頁面新增搜尋與過濾的功能</li>
+                            </ol>
+                            <h2 class="mb-2 h6 text-gray">修改事項</h2>
+                            <ol class="mb-4">
+                                <!-- <li>管理平台現在點擊上下一頁或重新整理也能回到預期的頁面</li>
+                                <li>修改因活動、遊戲名稱裡有 " ' 符號而導致資料載入格式有誤的問題</li>
+                                <li>活動報名、活動簽到設置頁面優化</li>
+                                <li>登入系統開放註冊、忘記密碼的功能</li> -->
+                                <li>管理人員相關頁面簡化，將多個子頁面合併成一個主頁，並透過用過濾的方式切換頁面</li>
+                                <li>手機端的獎品兌換頁面修改</li>
+                                <li>提問牆關閉QRcode顯示切換的功能</li>
+                                <li>sidebar操作優化</li>
+                            </ol>
+                            <!-- <h2 class="mb-2 h6 text-gray">遊戲表單設置更新</h2>
+                            <ol class="mb-2">
+                                <li>所有遊戲的主題縮圖格式統整</li>
+                                <li>所有遊戲的最少時間可設置5秒</li>
+                                <li>搖紅包新增櫻花主題以及自訂義功能</li>
+                                <li>遊戲抽獎圖檔樣式更新以及自訂義功能</li>
+                                <li>套紅包新增自訂義功能</li>
+                                <li>抓偽鈔新增自訂義功能</li>
+                            </ol> -->
+                        </div>
+                        <button class="btn btn-gray btn-back-loginSkin" type="button"><p>返回</p></button>
+                        <p class="muted-text">網站最後更新時間為2024年01月05日</p>
+                    </div>
+                </div>
+            </div>
+            <p class="login-copyright mt-3 pb-3">© HILIVES 2024</p>
+        </main>
+    </div>
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="updateModalLabel">03月22日 - 更新內容</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-start">
+                        <h2 class="mb-3 h5 text-gray">新增及優化的功能:</h2>
+                        <ol class="mb-2 d-flex flex-column gap-2">
+                            <li>一般簽到設置頁面客製調整更新</li>
+                            <li>新增簽名牆相關功能頁面 大螢幕、操作端、手機端、後臺管理設置</li>
+                            <li>自訂義圖片名稱增加picture或animation的字串</li>
+                            <li>所有有用到表格元件的相關頁面優化</li>
+                            <li>活動介紹、嘉賓、行程、資料這四個頁面、所有遊戲(除拔河遊戲、賓果遊戲)獎品的設置頁面增加匯入功能</li>
+                            <li>遊戲開啟時，還能調整各項設定，一旦遊戲進行中，將不可進行相關設置</li>
+                            <li>一次上傳圖片功能增加了圖片名稱不符的警告</li>
+                            <li>素材資源檔案名稱後面添加隨機碼參數，方便自動刪除快取緩存問題</li>
+                            <li>搖號抽獎、賓果遊戲增加櫻花主題</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-gray btn-back-loginSkin" type="button" data-bs-dismiss="modal"><p>關閉視窗</p></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <var class="variable d-none">
+        <var class="route-user">{{.Route.User}}</var>
+        <var class="route-login">{{.Route.Login}}</var>
+        <var class="route-register">{{.Route.Register}}</var>
+        <var class="route-retrieve">{{.Route.Retrieve}}</var>
+        <var class="route-verification">{{.Route.Verification}}</var>
+        <var class="route-verificationCheck">{{.Route.VerificationCheck}}</var>
+    </var>
+</body>
+<script src="/admin/assets/cms/js/login.js?ver=HILIVES1.0.5-20240105" charset="big5"></script>
+</html>

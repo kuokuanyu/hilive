@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>進階管理設置</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="/admin/assets/dist/js/all.js"></script>
+
+    <link rel="stylesheet" href="/admin/assets/dist/css/all.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="main-header">
+            <a class="logo" href="/admin">
+                <div class="logo-mini">
+                    <img src="/admin/assets/dist/favicon.svg" alt="Hi">
+                </div>
+                <div class="logo-lg">
+                    <img src="/admin/assets/dist/logo.svg" alt="HiLives">
+                </div>
+            </a>
+            <nav class="navbar">
+                <div id="headernav">
+                    <div class="navbar-menu">
+                        <ul class="navbar-nav">
+                            <li>
+                                <a href="https://hilives.net/" target="_blank">
+                                    <i class="bi bi-briefcase"></i>
+                                    <span>宣傳網站</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/activity?header=true">
+                                    <i class="bi bi-balloon"></i>
+                                    <span>活動管理平台</span>
+                                </a>
+                            </li>
+                            <li class="dropdown user user-menu">
+                                <a class="dropdown-toggle" href="#">
+                                    <div class="avatar-box">
+                                        <img src="{{.User.Avatar}}" alt="User Image">
+                                    </div>
+                                    <span>{{.User.Name}}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="user-header">
+                                        <div class="avatar-box">
+                                            <img src="{{.User.Avatar}}" alt="User Image">
+                                        </div>
+                                        <p>
+                                            {{.User.Name}}
+                                            <small>開發人員</small>
+                                        </p>
+                                    </li>
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a class="btn-flat" href="">設定</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a class="btn-flat" href="{{.Route.Logout}}">登出</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="not-open">
+                        <a href="/admin/dashboard">
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                            <span> Hilives數據表</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                    <li class="treeview active">
+                        <a href="#">
+                            <i class="bi bi-gear-fill"></i>
+                            <span> 用戶權限管理</span>
+                            <span class="pull-right-container">
+                                <i class="bi bi-chevron-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu menu-open">
+                            <li class="active">
+                                <a href="/admin/manager">
+                                    <i class="bi bi-people-fill"></i>
+                                    用戶管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/permission">
+                                    <i class="bi bi-shield-lock-fill"></i>
+                                    權限管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/menu">
+                                    <i class="bi bi-menu-button-wide-fill"></i>
+                                    側邊選單管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/overview">
+                                    <i class="bi bi-layout-wtf"></i>
+                                    活動總覽管理
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/admin/log">
+                            <i class="bi bi-clipboard2-data-fill"></i>
+                            <span> Log日誌紀錄</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                    <li class="not-open">
+                        <a href="/admin/file">
+                            <i class="bi bi-file-earmark-medical-fill"></i>
+                            <span> 檔案管理</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+        <div class="content-wrapper">
+            <section class="content-header">
+                <div>
+                    <ol class="breadcrumb">
+                        <li>首頁</li>
+                        <li>用戶權限管理</li>
+                        <li>身份權限</li>
+                    </ol>
+                </div>
+                <h4>
+                    身份權限管理
+                    <small>身份權限管理</small>
+                </h4>
+            </section>
+            <section class="content">
+                <div class="main-container-content">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">新增身份權限</h3>
+                            <div class="btn-group pull-right">
+                                <a href="/admin/permission">返回</a>
+                            </div>
+                        </div>
+                        <div class="box-body p-3">
+                            <div class="box-body p-3">
+                                <div class="box-body p-3">
+                                    <div class="fields-group d-flex flex-column gap-3">
+                                        <div class="form-group">
+                                            <label class="form-label" for="">身份權限名稱</label>
+                                            <input class="form-control" type="text" name="permission">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="">可使用方法</label>
+                                            <ul id="method-input-box" class="select-choice-box" style="display: none;"></ul>
+                                            <select class="form-control select-choice-input" name="http_method">
+                                                <option selected>新增方法...</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="">可訪問路徑</label>
+                                            <ul id="url-input-box" class="select-choice-box" style="display: none;"></ul>
+                                            <select class="form-control select-choice-input" name="http_path">
+                                                <option selected>新增路徑...</option>
+                                            </select>
+                                            <!-- <textarea class="form-control" name="http_path" rows="5"></textarea> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer">
+                                <button id="save-data-form" classs="btn-group pull-right" type="submit">儲存</button>
+                                <button classs="btn-group pull-left" type="reset">重置</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+<script>
+
+    let method = "{{.Route.Method}}"
+    let menuData = "https://"+ getAPIDomainFromURL() +"/v1/admin/menu"
+    let methodData = [
+        { id: 1, title: "新增", value: "POST"},
+        { id: 2, title: "編輯", value: "PUT"},
+        { id: 3, title: "刪除", value: "DELETE"},
+        { id: 4, title: "全部", value: "POST,PUT,DELETE"},
+    ]
+
+    //讀取側邊選單資料
+    fetch(menuData).then(function(res){
+        return res.json()
+    }).then(function(res){
+        let menu = res.data
+        //載入方法資料到select表單
+        $(methodData).each(function(i){
+            renderSelectOptionData(methodData[i].id, methodData[i].value, methodData[i].title, $("select[name=http_method]"))
+        })
+        //載入select監聽事件
+        selectMethodChoiceInputFuction($("select[name=http_method]"), $("#method-input-box"))
+        //載入路徑資料到select表單
+        renderMenuSelectOptionData(res.data)
+        //載入select監聽事件
+        selectUrlChoiceInputFuction($("select[name=http_path]"), $("#url-input-box"))
+        //如果是編輯頁面的話
+        if(method === "put"){
+            let permissionData = "https://"+ getAPIDomainFromURL() +"/v1/admin/permission?id="+ getKeyFromURL("id")
+            fetch(permissionData).then(function(res){
+                return res.json()
+            }).then(function(res){
+                console.log(res.data)
+                //載入基本資料
+                renderPermissionEditData(res.data, menu)
+                //讀取已選擇標籤資料，執行渲染標籤功能
+            })
+            $("h3.box-title").text("編輯身份權限")
+            saveEditData(getKeyFromURL("id"))
+        //如果是新增頁面的話
+        }else if(method === "post"){
+            $("h3.box-title").text("新增身份權限")
+            saveNewData()
+        }
+    })
+
+    function renderSelectOptionData(id, value, text, selector){
+        const template = `<option></option>`
+        const container = $(template)
+        container.val(value).text(text).attr("data-id", id)
+        selector.append(container)
+    }
+
+    function renderMenuSelectOptionData(data){
+        const option = `<option></option>`
+        const selectInput = $("select[name=http_path]")
+
+        $(data).each(function(i1){
+            let list1 = data
+            const container = $(option)
+            container.text("Ⅰ."+ list1[i1].title).prop("disabled", true)
+            selectInput.append(container)
+
+            let list2 = list1[i1].children_list
+            $(list2).each(function(i2){
+                let text = "&ensp;Ⅱ.&ensp;"+ list2[i2].title
+                const container = $(option)
+                container.val(list2[i2].url).append(text).attr("data-title", list2[i2].title).attr("data-id", list2[i2].id)
+                if(list2[i2].url === ""){ container.prop("disabled", true) }
+                selectInput.append(container)
+
+                let list3 = list2[i2].children_list
+                $(list3).each(function(i3){
+                    let text = "&emsp;Ⅲ.&ensp;"+ list3[i3].title
+                    const container = $(option)
+                    container.val(list3[i3].url).append(text).attr("data-title", list2[i2].title + "-" + list3[i3].title).attr("data-id", list3[i3].id)
+                    if(list3[i3].url === ""){ container.prop("disabled", true) }
+                    selectInput.append(container)
+
+                    let list4 = list3[i3].children_list
+                    $(list4).each(function(i4){
+                        let text = "&emsp;&emsp;Ⅳ.&ensp;"+ list4[i4].title
+                        const container = $(option)
+                        container.val(list4[i4].url).append(text).attr("data-title", list2[i2].title + "-" + list4[i4].title).attr("data-id", list4[i4].id)
+                        if(list4[i4].url === ""){ container.prop("disabled", true) }
+                        selectInput.append(container)
+
+                        let list5 = list4[i4].children_list
+                        $(list5).each(function(i5){
+                            let text = "&emsp;&emsp;&emsp;Ⅴ.&ensp;"+ list5[i5].title
+                            const container = $(option)
+                            container.val(list5[i5].url).append(text).attr("data-title", list2[i2].title + "-" + list5[i5].title).attr("data-id", list5[i5].id)
+                            if(list5[i5].url === ""){ container.prop("disabled", true) }
+                            selectInput.append(container)
+                        })
+
+                    })
+
+                })
+
+            })
+
+        })
+    }
+
+    function renderPermissionEditData(data, menu){
+        $("[name='permission']").val(data.permission)
+        let arr = data.http_method.split(",")
+        $(arr).each(function(i){
+            $(methodData).each(function(ii){
+                if(methodData[ii].value === arr[i]){
+                    renderSelectChoiceData(methodData[ii].id, arr[i], methodData[ii].title, $("#method-input-box"))
+                }
+            })
+        })
+
+        $(data.http_path).each(function(i){
+            let url = data.http_path[i]
+            const box = $("#url-input-box")
+            $(menu).each(function(i1){
+                let list2 = menu[i1].children_list
+                $(list2).each(function(i2){
+                    if(url === list2[i2].url){
+                        renderSelectChoiceData(list2[i2].id, url, list2[i2].title, box)
+                    }else{
+                        let list3 = list2[i2].children_list
+                        $(list3).each(function(i3){
+                            if(url === list3[i3].url){
+                                renderSelectChoiceData(list3[i3].id, url, list2[i2].title + "-" + list3[i3].title, box)
+                            }else{
+                                let list4 = list3[i3].children_list
+                                $(list4).each(function(i4){
+                                    if(url === list4[i4].url){
+                                        renderSelectChoiceData(list4[i4].id, url, list2[i2].title + "-" + list4[i4].title, box)
+                                    }else{
+                                        let list5 = list4[i4].children_list
+                                        $(list5).each(function(i5){
+                                            if(url === list5[i5].url){
+                                                renderSelectChoiceData(list5[i5].id, url, list2[i2].title + "-" + list5[i5].title, box)
+                                            }
+                                        })
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+            })
+        })
+
+    }
+
+    //select監聽事件，change就執行渲染標籤功能，並回到初選
+    function selectMethodChoiceInputFuction(selectInput, selector){
+        selectInput.bind("change", function(){
+            let thisChoice = $(this).find("option:selected")
+            let buttonName = true
+
+            $(selector.find("li")).each(function(i){
+                let currentValue = selector.find("li").eq(i).data("id")
+                if(Number(thisChoice.data("id")) === Number(currentValue)){
+                    buttonName = false
+                }
+            }).promise().done(() => {
+                if(buttonName){
+                    renderSelectChoiceData(thisChoice.data("id"), thisChoice.val(), thisChoice.text(), selector)
+                    if(thisChoice.data("id") === 4){
+                        selector.find("li").remove()
+                        renderSelectChoiceData(thisChoice.data("id"), thisChoice.val(), thisChoice.text(), selector)
+                    }else{
+                        selector.find("li[data-id=4]").remove()
+                    }
+                }
+                selectInput.find("option").eq(0).prop("selected", true)
+            })
+        })
+    }
+
+    function selectUrlChoiceInputFuction(selectInput, selector){
+        selectInput.bind("change", function(){
+            let thisChoice = $(this).find("option:selected")
+            let buttonName = true
+
+            $(selector.find("li")).each(function(i){
+                let currentValue = selector.find("li").eq(i).data("id")
+                if(Number(thisChoice.data("id")) === Number(currentValue)){
+                    buttonName = false
+                }
+            }).promise().done(() => {
+                if(buttonName){
+                    renderSelectChoiceData(thisChoice.data("id"), thisChoice.val(), thisChoice.data("title"), selector)
+                }
+                selectInput.find("option").eq(0).prop("selected", true)
+            })
+        })
+    }
+
+    //渲染標籤功能，載入刪除功能，載入標籤顯示功能
+    function renderSelectChoiceData(id, value, text, selector){
+        const template = `
+            <li class="select-choice">
+                <span class="select-choice-remove">×</span>
+                <span class="name"></span>
+            </li>
+        `
+        
+        const container = $(template)
+        container.attr("data-id", id)
+        container.attr("data-value", value)
+        container.find(".name").text(text)
+        selector.append(container)
+        
+        removeSelectChoiceLabel(selector)
+        displaySelectChoiceBox(selector)
+    }
+
+    //刪除功能，載入標籤顯示功能
+    function removeSelectChoiceLabel(selector){
+        $(".select-choice-remove").bind("click", function(){
+            $(this).parents(".select-choice").remove()
+            displaySelectChoiceBox(selector)
+        })
+    }
+
+    //標籤顯示功能，判斷是否有標籤，如果有即開啟。判斷是否還有標籤，如果沒有即關閉。
+    function displaySelectChoiceBox(selector){
+        if(selector.find("li").length === 0){
+            selector.css("display", "none")
+        }else{
+            selector.css("display", "flex")
+        }
+    }
+
+    function saveNewData(){
+        $("#save-data-form").bind("click", function(){
+            let methodArray = []
+            $("#method-input-box").find("li").each(function(){
+                methodArray.push($(this).data("value"))
+            })
+            let httpMethod = methodArray.join()
+
+            let pathArray = []
+            $("#url-input-box").find("li").each(function(){
+                pathArray.push($(this).data("value"))
+            })
+            let httpPath = pathArray.join()
+
+            let formDataBox = new FormData()
+            formDataBox.append("permission", $("[name='permission']").val())
+            formDataBox.append("http_method", httpMethod)
+            formDataBox.append("http_path", httpPath)
+            formDataBox.append("user_id", "{{.User.UserID}}")
+            formDataBox.append("token", "{{.Token}}")
+
+            let settings = {
+                "url": "{{.Route.POST}}",
+                "method": "POST",
+                "timeout": 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "data": formDataBox,
+                "dataType": "json",
+                "success": function(data){
+                    Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).fire({
+                        icon: "success",
+                        title: "已新增身份權限"
+                    }).then(() => {
+                        location.replace("/admin/permission")
+                    })
+                },
+                "error": function(result){
+                    console.log(result.statusText, result.responseJSON.message)
+                    return
+                }
+            }
+
+            $.ajax(settings).done(function(){})
+        })
+    }
+
+    function saveEditData(id){
+        $("#save-data-form").bind("click", function(){
+            let methodArray = []
+            $("#method-input-box").find("li").each(function(){
+                methodArray.push($(this).data("value"))
+            })
+            let httpMethod = methodArray.join()
+
+            let pathArray = []
+            $("#url-input-box").find("li").each(function(){
+                pathArray.push($(this).data("value"))
+            })
+            let httpPath = pathArray.join()
+
+            let formDataBox = new FormData()
+            formDataBox.append("id", id)
+            formDataBox.append("permission", $("[name='permission']").val())
+            formDataBox.append("http_method", httpMethod)
+            formDataBox.append("http_path", httpPath)
+            formDataBox.append("user_id", "{{.User.UserID}}")
+            formDataBox.append("token", "{{.Token}}")
+
+            let settings = {
+                "url": "{{.Route.PUT}}",
+                "method": "PUT",
+                "timeout": 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "data": formDataBox,
+                "dataType": "json",
+                "success": function(data){
+                    Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).fire({
+                        icon: "success",
+                        title: "已編輯身份權限"
+                    }).then(() => {
+                        location.replace("/admin/permission")
+                    })
+                },
+                "error": function(result){
+                    console.log(result.statusText, result.responseJSON.message)
+                    return
+                }
+            }
+
+            $.ajax(settings).done(function(){})
+        })
+    }   
+
+</script>
+</html>

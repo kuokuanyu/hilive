@@ -1,0 +1,187 @@
+<main id="main-container" class="d-flex justify-content-center w-100">
+    <div class="options-skin" style="width: 65rem;">
+        <h1 class="container-title">活動場次設置</h1>
+        <details class="container-box" open>
+            <summary class="toggle-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                </svg>
+                <h2>基本設置</h2>
+            </summary>
+            <div class="main-content mb-2">
+                <div class="d-flex flex-wrap gap-3 w-100">
+
+                    <div class="form-group">
+                        <label class="form-label" for="activity_name">活動場次名稱</label>
+                        <p>最多為20個字元</p>
+                        <input id="activity_name" class="form-control" name="activity_name" type="text" maxlength="20" placeholder="請輸入此活動的場次名稱">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="activity_name">活動類型</label>
+                        <select id="activity_type" class="form-control form-select" name="activity_type" placeholder="請選擇此活動場次的活動類型" required style="max-width: 21.875rem;">
+                            <option value="">請選擇活動類型</option>
+                            <option value="婚禮">婚禮</option>
+                            <option value="年會">年會</option>
+                            <option value="企業會議">企業會議</option>
+                            <option value="校園活動">校園活動</option>
+                            <option value="競技賽事">競技賽事</option>
+                            <option value="商業活動">商業活動</option>
+                            <option value="論壇會議">論壇會議</option>
+                            <option value="酒吧/餐飲娛樂">酒吧/餐飲娛樂</option>
+                            <option value="電視/媒體">電視/媒體</option>
+                            <option value="培訓/教育">培訓/教育</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="people">參加人數</label>
+                        <p>您的活動場次限制人數最多為 <strong>{{.People}}</strong> 人</p>
+                        <div class="input-group string">
+                            <input id="people" class="form-control" name="people" type="number" maxlength="5" min="0" max="{{.People}}" placeholder="請輸入此活動的人數上限">
+                            <span class="input-group-text">人</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="people">活動舉辦區域</label>
+                        <div id="citytown-box" class="d-flex gap-2">
+                            <div class="">
+                                <label class="label-text" class="form-label">縣市</label>
+                                <div data-role="county" data-style="form-control form-select"></div>
+                            </div>
+                            <div class="">
+                                <label class="label-text" class="form-label">鄉鎮市區</label>
+                                <div data-role="district" data-style="form-control form-select"></div>
+                            </div>
+                            <div data-role="zipcode" data-style="d-none"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="people">活動舉辦時間</label>
+                        <div class="d-flex gap-2">
+                            <div class="">
+                                <label class="label-text" class="form-label" for="start_time">開始時間</label>
+                                <input id="start_time" class="form-control" type="datetime-local" name="start_time" value="" placeholder="" required>
+                            </div>
+                            <div class="">
+                                <label class="label-text" class="form-label" for="end_time">結束時間</label>
+                                <input id="end_time" class="form-control" type="datetime-local" name="end_time" value="" placeholder="" required>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </details>
+        <details class="container-box" open>
+            <summary class="toggle-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                </svg>
+                <h2>活動畫面登入設置</h2>
+            </summary>
+            <div class="main-content mb-2">
+                <div class="d-flex flex-wrap gap-3 w-100">
+
+                    <div class="form-group">
+                        <label class="form-label">連結登入</label>
+                        <p>如選擇開啟，需在活動資訊卡片選擇「<i class="bi bi-link-45deg"></i>登入連結」按鈕來開啟活動畫面</p>
+                        <div class="radio-button-box">
+                            <div class="radio-button">
+                                <input type="radio" id="login_required_close" name="login_required" value="close">
+                                <label for="login_required_close">開啟</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="login_required_open" name="login_required" value="open" checked>
+                                <label for="login_required_open">關閉</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">自定義密碼設置</label>
+                        <p>此功能只對已開啟的連結登入功能有效，請輸入您的自訂義密碼，上限8個字。如選擇關閉密碼設置欄位，需自行承擔安全性的風險</p>
+                        <div class="radio-button-box">
+                            <div class="radio-button">
+                                <input type="radio" id="password_required_open" name="password_required" value="open" checked>
+                                <label for="password_required_open">開啟</label>
+                            </div>
+                            <div class="radio-button">
+                                <input type="radio" id="password_required_close" name="password_required" value="close">
+                                <label for="password_required_close">關閉</label>
+                            </div>
+                        </div>
+                        <div class="input-group string">
+                            <input id="login_password" class="form-control" name="login_password" type="text" value="password" maxlength="8">
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </details>
+        <details class="container-box">
+            <summary class="toggle-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                </svg>
+                <h2>LINE官方帳號設置(如需設置，請與我們聯絡)</h2>
+            </summary>
+            <div class="main-content mb-2">
+                <div class="alert w-100">
+                    <p>這部分可以為空，如果需要綁定的話，每個欄位皆需填寫</p>
+                    <p>需提供LINE官方帳號相關資訊並在官方帳號頁面中設置callback url、webhook url才能正確執行報名簽到流程</p>
+                    <p class="callback-url">callback URL: <strong></strong></p>
+                    <p class="webhook-url">webhook URL: <strong></strong></p>
+                </div>
+                <div id="line-form" class="d-flex flex-wrap gap-3 w-100">
+
+                    <div class="form-group">
+                        <label class="form-label" for="line_id">Line ID</label>
+                        <p>請提供LINE LOGIN中Linked OA的ID資訊或是LINE官方號的專屬ID，值必須包含@</p>
+                        <input id="line_id" class="form-control line-input" type="text" name="line_id" placeholder="請輸入Line的 Line ID">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="channel_id">Channel ID</label>
+                        <input id="channel_id" class="form-control line-input" type="text" name="channel_id" placeholder="請輸入Line的 Channel ID">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="channel_secret">Channel Secret</label>
+                        <input id="channel_secret" class="form-control line-input" type="text" name="channel_secret" placeholder="請輸入Line的 Channel Secret">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="chatbot_secret">Chatbot Secret</label>
+                        <input id="chatbot_secret" class="form-control line-input" type="text" name="chatbot_secret" placeholder="請輸入Line的 Chatbot Secret">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="chatbot_token">Chatbot Token</label>
+                        <input id="chatbot_token" class="form-control line-input" type="text" name="chatbot_token" placeholder="請輸入Line的 Chatbot Token">
+                    </div>
+                    <input type="hidden" name="push_message" value="close" disabled data-title="官方帳號傳送報名簽到審核訊息">
+
+                </div>
+            </div>
+        </details>
+        <div class="footer">
+            <button id="sumbit-activity-info" class="btn btn-blue" data-name="saveGameData">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save2" viewBox="0 0 16 16">
+                    <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v4.5h2a.5.5 0 0 1 .354.854l-2.5 2.5a.5.5 0 0 1-.708 0l-2.5-2.5A.5.5 0 0 1 5.5 6.5h2V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+                </svg>
+                <p>儲存設置</p>
+            </button>
+            <a id="go-back-my-activity" class="btn btn-gray" href="#activity">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+                </svg>
+                <p>返回</p>
+            </a>
+        </div>
+    </div>
+</main>
+
+<var class="variable d-none">
+    <var class="userID">{{.User.UserID}}</var>
+    <var class="token">{{.Token}}</var>
+    <var class="method">{{.Route.Method}}</var>
+    <var class="route-post">{{.Route.POST}}</var>
+    <var class="route-put">{{.Route.PUT}}</var>
+    <var class="route-back">{{.Route.Back}}</var>
+    <var class="people">{{.People}}</var>
+</var>
