@@ -154,92 +154,92 @@ const (
 	HILIVES_NET_URL      = "dev.hilives.net"
 
 	// LINE LOGIN、MESSAGE相關ID、SECRET
-	CHANNEL_ID     = "1656920628"
-	CHANNEL_SECRET = "19f076025659a5e50bccd931da4641d8"
-	CHATBOT_SECRET = "88d68c3fa9c25e99e6c777a791043a48"
-	CHATBOT_TOKEN  = "k6z4Z2jvoYdc75I801ZZUc+dicI+oZe+WezNBh1Wrk5E2+gUWiUeT2I7XEO44OycU8jnGwNsWsq2pHVb7EDndhurcltSlhLTfWtfDkiHLyL32g+2QoQwdtFfVRv/ar5MNwiNPhWEBZBArNLSfGY0FwdB04t89/1O/w1cDnyilFU="
+	CHANNEL_ID     = "xxx"
+	CHANNEL_SECRET = "xxx"
+	CHATBOT_SECRET = "xxx"
+	CHATBOT_TOKEN  = "xxx"
 
 	// facebook驗證參數
-	FACEBBOK_ID           = "814026164217592"
-	FACEBOOK_SECRET       = "e06412863dbb12daec68d54c0da47734"
-	FACEBOOK_REDIRECT_URL = "https://dev.hilives.net/v1/auth/callback"
+	FACEBBOK_ID           = "xxx"
+	FACEBOOK_SECRET       = "xxx"
+	FACEBOOK_REDIRECT_URL = "xxx"
 
 	// gmail驗證參數
-	GMAIL_ID           = "804432621213-vcs0h63r2uslcn9jeuutgsjokorvjl3k.apps.googleusercontent.com"
-	GMAIL_SECRET       = "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"
-	GMAIL_REDIRECT_URL = "https://dev.hilives.net/v1/auth/callback"
-	GMAIL              = "sales@hilives.net"
-	GMAIL_PASSWORD     = "kgdl nacn ltkd ycir"
+	GMAIL_ID           = "xxx"
+	GMAIL_SECRET       = "xxx"
+	GMAIL_REDIRECT_URL = "xxx"
+	GMAIL              = "xxx"
+	GMAIL_PASSWORD     = "xxx"
 	// gmail SMTP 服務器配置
-	GMAIL_SMTP_HOST = "smtp.gmail.com"
-	GMAIL_SMTP_PORT = "587"
+	GMAIL_SMTP_HOST = "xxx"
+	GMAIL_SMTP_PORT = "xxx"
 
 	// 活動是否存在(不會執行middleware function)
-	HILIVES_ACTIVITY_ISEXIST_LIFF_URL = "https://liff.line.me/1656920628-zJOEMMRl?activity_id=%s"
+	HILIVES_ACTIVITY_ISEXIST_LIFF_URL = "xxx"
 	// 報名簽到(不會執行middleware function)
-	HILIVES_APPLYSIGN_URL_LIFF_URL = "https://liff.line.me/1656920628-jwWm55v7?activity_id=%s&user_id=%s"
+	HILIVES_APPLYSIGN_URL_LIFF_URL = "xxx"
 	// 搖紅包
-	HILIVES_REDPACK_GAME_LIFF_URL = "https://liff.line.me/1656920628-ZXAlXXa7?activity_id=%s&game_id="
+	HILIVES_REDPACK_GAME_LIFF_URL = "xxx"
 	// 套紅包
-	HILIVES_ROPEPACK_GAME_LIFF_URL = "https://liff.line.me/1656920628-YW3mWWxl?activity_id=%s&game_id="
+	HILIVES_ROPEPACK_GAME_LIFF_URL = "xxx"
 	// 打地鼠
-	HILIVES_WHACK_MOLE_GAME_LIFF_URL = "https://liff.line.me/1656920628-Yoe0EEpy?activity_id=%s&game_id="
+	HILIVES_WHACK_MOLE_GAME_LIFF_URL = "xxx"
 	// 遊戲抽獎
-	HILIVES_LOTTERY_GAME_LIFF_URL = "https://liff.line.me/1656920628-n8RGYY8b?activity_id=%s&game_id="
+	HILIVES_LOTTERY_GAME_LIFF_URL = "xxx"
 	// 超級大富翁
-	HILIVES_MONOPOLY_GAME_LIFF_URL = "https://liff.line.me/1656920628-GXrJ22qw?activity_id=%s&game_id="
+	HILIVES_MONOPOLY_GAME_LIFF_URL = "xxx"
 	// 提問區
-	HILIVES_QUESTION_LIFF_URL = "https://liff.line.me/1656920628-WOvQqqJ1?activity_id=%s"
+	HILIVES_QUESTION_LIFF_URL = "xxx"
 	// 快問快答
-	HILIVES_QA_GAME_LIFF_URL = "https://liff.line.me/1656920628-Rq90oo8G?activity_id=%s&game_id="
+	HILIVES_QA_GAME_LIFF_URL = "xxx"
 	// 拔河遊戲
-	HILIVES_TUGOFWAR_GAME_LIFF_URL = "https://liff.line.me/1656920628-dP3k2250?activity_id=%s&game_id="
+	HILIVES_TUGOFWAR_GAME_LIFF_URL = "xxx"
 	// 賓果遊戲
-	HILIVES_BINGO_GAME_LIFF_URL = "https://liff.line.me/1656920628-5rAD11ME?activity_id=%s&game_id="
+	HILIVES_BINGO_GAME_LIFF_URL = "xxx"
 	// QRcode(手機玩家端使用)
-	HILIVES_QRCODE_LIFF_URL = "https://liff.line.me/1656920628-yYgRWWd5?activity_id=%s"
+	HILIVES_QRCODE_LIFF_URL = "xxx"
 	// LINE richmenu
-	HILIVES_LINE_RICHMENU_LIFF_URL = "https://liff.line.me/1656920628-5ZWdGGBo?action=%s"
+	HILIVES_LINE_RICHMENU_LIFF_URL = "xxx"
 	// 簽名牆
-	HILIVES_SIGNNAME_LIFF_URL = "https://liff.line.me/1656920628-x7dzooDR?activity_id=%s"
+	HILIVES_SIGNNAME_LIFF_URL = "xxx"
 	// 扭蛋機遊戲
-	HILIVES_GACHAMACHINE_GAME_LIFF_URL = "https://liff.line.me/1656920628-08N9rr6Q?activity_id=%s&game_id="
+	HILIVES_GACHAMACHINE_GAME_LIFF_URL = "xxx"
 	// 投票遊戲
-	HILIVES_VOTE_GAME_LIFF_URL = "https://liff.line.me/1656920628-Ra4MbbBo?activity_id=%s&game_id="
+	HILIVES_VOTE_GAME_LIFF_URL = "xxx"
 
 	// Redis相關配置
-	REDIS_ENGINE = "hilives"
-	REDIS_HOST   = "10.12.225.3"
-	REDIS_EXPIRE = "86400" //86400
-	REDIS_PORT   = "6379"
+	REDIS_ENGINE = "xxx"
+	REDIS_HOST   = "xxx"
+	REDIS_EXPIRE = "xxx" //86400
+	REDIS_PORT   = "xxx"
 
 	// Mysql相關配置
-	MYSQL_ENGINE   = "hilives"
-	MYSQL_HOST     = "10.12.224.11" // 35.221.150.128
-	MYSQL_PORT     = "3306"
-	MYSQL_USER     = "hilives"
-	MYSQL_PASSWORD = "Cco@53383499"
-	MYSQL_NAME     = "hilive_dev"
+	MYSQL_ENGINE   = "xxx"
+	MYSQL_HOST     = "xxx" // 35.221.150.128
+	MYSQL_PORT     = "xxx"
+	MYSQL_USER     = "xxx"
+	MYSQL_PASSWORD = "xxx"
+	MYSQL_NAME     = "xxx"
 	// SHOW VARIABLES LIKE 'max_connections'; 目前值為4030
 	MYSQL_MAXOPENCON = 4000
 	MYSQL_MAXIDLECON = 2000
-	MYSQL_DRIVER     = "mysql"
+	MYSQL_DRIVER     = "xxx"
 
 	// mongodb相關配置
-	MONGO_ENGINE   = "hilives"
-	MONGO_HOST     = "hilives002.jadard7.mongodb.net"
-	MONGO_PORT     = "27017"
-	MONGO_USER     = "hilives_dev"
-	MONGO_PASSWORD = "Cco%4053383499"
-	MONGO_NAME     = "hilives_dev"
+	MONGO_ENGINE   = "xxx"
+	MONGO_HOST     = "xxx"
+	MONGO_PORT     = "xxx"
+	MONGO_USER     = "xxx"
+	MONGO_PASSWORD = "xxx"
+	MONGO_NAME     = "xxx"
 
 	// 測試區
 
 	// 手機驗證碼
-	ACCOUNT_SID = "ACc80317eb45de47031773d4afdad4252e"
-	AUTH_TOKEN  = "6d7349e4bb734eb142916bf4832374a1"
-	SERVICE_SID = "VA9d864fb293777afe046b5d8e26ad862e"
-	PHONE       = "+18596966103"
+	ACCOUNT_SID = "xxx"
+	AUTH_TOKEN  = "xxx"
+	SERVICE_SID = "xxx"
+	PHONE       = "xxx"
 
 	// 檔案引擎配置
 	FILE_ENGINE = "hilives"
