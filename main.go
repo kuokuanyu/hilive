@@ -8,7 +8,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql" // mysql引擎
 )
-
+test
 // @title Hilives API 文檔
 // @version 1.0
 // @description Hilives 平台
