@@ -8,7 +8,6 @@ import (
 
 	_ "github.com/go-sql-driver/mysql" // mysql引擎
 )
-888888888
 
 // @title Hilives API 文檔
 // @version 1.0
